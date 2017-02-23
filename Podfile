@@ -1,15 +1,19 @@
-platform :ios, '9.0'
-
 target 'WD Content' do
-  use_frameworks!
-
-  # Pods for WD Content
-
+	platform :ios, '9.0'
+	
+    pod 'SVProgressHUD'
+    pod 'AFNetworking'
+    pod 'SDWebImage'
+    
+    pod 'AMSlideMenu'
+    pod 'IQKeyboardManager'
 end
 
 target 'WD Content TV' do
-  use_frameworks!
-
-  # Pods for WD Content TV
-
+	platform :tvos, '9.0'
+	
+    pod 'SVProgressHUD'
+    pod 'AFNetworking'
+    pod 'SDWebImage'
+    
 end
