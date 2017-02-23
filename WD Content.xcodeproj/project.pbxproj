@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21331E1E5ED869002F267D /* AppDelegate.swift */; };
+		2C2133211E5ED869002F267D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2133201E5ED869002F267D /* ViewController.swift */; };
+		2C2133241E5ED869002F267D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133221E5ED869002F267D /* Main.storyboard */; };
+		2C2133261E5ED869002F267D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133251E5ED869002F267D /* Assets.xcassets */; };
+		2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133271E5ED869002F267D /* LaunchScreen.storyboard */; };
+		2C21335F1E5EDF13002F267D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21335E1E5EDF13002F267D /* AppDelegate.swift */; };
+		2C2133611E5EDF13002F267D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2133601E5EDF13002F267D /* ViewController.swift */; };
+		2C2133641E5EDF13002F267D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133621E5EDF13002F267D /* Main.storyboard */; };
+		2C2133661E5EDF13002F267D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133651E5EDF13002F267D /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2C21331B1E5ED868002F267D /* WD Content.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WD Content.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C21331E1E5ED869002F267D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2C2133201E5ED869002F267D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C2133231E5ED869002F267D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C2133251E5ED869002F267D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C2133281E5ED869002F267D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2C21332A1E5ED869002F267D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C21335C1E5EDF13002F267D /* WD Content TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WD Content TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C21335E1E5EDF13002F267D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2C2133601E5EDF13002F267D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C2133631E5EDF13002F267D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C2133651E5EDF13002F267D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C2133671E5EDF13002F267D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2C2133181E5ED867002F267D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C2133591E5EDF13002F267D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C2133121E5ED867002F267D = {
+			isa = PBXGroup;
+			children = (
+				2C21331D1E5ED868002F267D /* WD Content */,
+				2C21335D1E5EDF13002F267D /* WD Content TV */,
+				2C21331C1E5ED868002F267D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2C21331C1E5ED868002F267D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C21331B1E5ED868002F267D /* WD Content.app */,
+				2C21335C1E5EDF13002F267D /* WD Content TV.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2C21331D1E5ED868002F267D /* WD Content */ = {
+			isa = PBXGroup;
+			children = (
+				2C21331E1E5ED869002F267D /* AppDelegate.swift */,
+				2C2133201E5ED869002F267D /* ViewController.swift */,
+				2C2133561E5EDE09002F267D /* Resources */,
+			);
+			path = "WD Content";
+			sourceTree = "<group>";
+		};
+		2C2133561E5EDE09002F267D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C2133221E5ED869002F267D /* Main.storyboard */,
+				2C2133251E5ED869002F267D /* Assets.xcassets */,
+				2C2133271E5ED869002F267D /* LaunchScreen.storyboard */,
+				2C21332A1E5ED869002F267D /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2C21335D1E5EDF13002F267D /* WD Content TV */ = {
+			isa = PBXGroup;
+			children = (
+				2C21335E1E5EDF13002F267D /* AppDelegate.swift */,
+				2C2133601E5EDF13002F267D /* ViewController.swift */,
+				2C21336B1E5EDF38002F267D /* Resources */,
+			);
+			path = "WD Content TV";
+			sourceTree = "<group>";
+		};
+		2C21336B1E5EDF38002F267D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C2133621E5EDF13002F267D /* Main.storyboard */,
+				2C2133651E5EDF13002F267D /* Assets.xcassets */,
+				2C2133671E5EDF13002F267D /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2C21331A1E5ED867002F267D /* WD Content */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C21332D1E5ED869002F267D /* Build configuration list for PBXNativeTarget "WD Content" */;
+			buildPhases = (
+				2C2133171E5ED867002F267D /* Sources */,
+				2C2133181E5ED867002F267D /* Frameworks */,
+				2C2133191E5ED867002F267D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WD Content";
+			productName = "WD Content";
+			productReference = 2C21331B1E5ED868002F267D /* WD Content.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2C21335B1E5EDF13002F267D /* WD Content TV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C2133681E5EDF13002F267D /* Build configuration list for PBXNativeTarget "WD Content TV" */;
+			buildPhases = (
+				2C2133581E5EDF13002F267D /* Sources */,
+				2C2133591E5EDF13002F267D /* Frameworks */,
+				2C21335A1E5EDF13002F267D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WD Content TV";
+			productName = "WD Content TV";
+			productReference = 2C21335C1E5EDF13002F267D /* WD Content TV.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2C2133131E5ED867002F267D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "V-Channel";
+				TargetAttributes = {
+					2C21331A1E5ED867002F267D = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7TSVKXZ79P;
+						ProvisioningStyle = Manual;
+					};
+					2C21335B1E5EDF13002F267D = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7TSVKXZ79P;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 2C2133161E5ED867002F267D /* Build configuration list for PBXProject "WD Content" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2C2133121E5ED867002F267D;
+			productRefGroup = 2C21331C1E5ED868002F267D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2C21331A1E5ED867002F267D /* WD Content */,
+				2C21335B1E5EDF13002F267D /* WD Content TV */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2C2133191E5ED867002F267D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */,
+				2C2133261E5ED869002F267D /* Assets.xcassets in Resources */,
+				2C2133241E5ED869002F267D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C21335A1E5EDF13002F267D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C2133661E5EDF13002F267D /* Assets.xcassets in Resources */,
+				2C2133641E5EDF13002F267D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C2133171E5ED867002F267D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C2133211E5ED869002F267D /* ViewController.swift in Sources */,
+				2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C2133581E5EDF13002F267D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C2133611E5EDF13002F267D /* ViewController.swift in Sources */,
+				2C21335F1E5EDF13002F267D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2C2133221E5ED869002F267D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C2133231E5ED869002F267D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2C2133271E5ED869002F267D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C2133281E5ED869002F267D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2C2133621E5EDF13002F267D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C2133631E5EDF13002F267D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2C21332B1E5ED869002F267D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = Debug;
+		};
+		2C21332C1E5ED869002F267D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = arm64;
+			};
+			name = Release;
+		};
+		2C21332E1E5ED869002F267D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				INFOPLIST_FILE = "WD Content/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4ac5fd34-405d-4969-b1cd-1be9d645fc19";
+				PROVISIONING_PROFILE_SPECIFIER = "WD Content Development";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		2C21332F1E5ED869002F267D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				INFOPLIST_FILE = "WD Content/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f42749f6-5441-469e-98ee-e7bc7e3bd041";
+				PROVISIONING_PROFILE_SPECIFIER = "WD Content AppStore";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		2C2133691E5EDF13002F267D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				INFOPLIST_FILE = "WD Content TV/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "beb9e78f-6384-41fd-8705-33f1b1183be8";
+				PROVISIONING_PROFILE_SPECIFIER = "WD Content TV Development";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		2C21336A1E5EDF13002F267D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				INFOPLIST_FILE = "WD Content TV/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f43ffcea-198b-419a-a30e-746f7ef187dc";
+				PROVISIONING_PROFILE_SPECIFIER = "WD Content TV AppStore";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2C2133161E5ED867002F267D /* Build configuration list for PBXProject "WD Content" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C21332B1E5ED869002F267D /* Debug */,
+				2C21332C1E5ED869002F267D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C21332D1E5ED869002F267D /* Build configuration list for PBXNativeTarget "WD Content" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C21332E1E5ED869002F267D /* Debug */,
+				2C21332F1E5ED869002F267D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C2133681E5EDF13002F267D /* Build configuration list for PBXNativeTarget "WD Content TV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C2133691E5EDF13002F267D /* Debug */,
+				2C21336A1E5EDF13002F267D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2C2133131E5ED867002F267D /* Project object */;
+}
