@@ -18,7 +18,7 @@ class SearchInfoController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		self.title = "Search Info"
+		setupTitle("Search Info")
 		SVProgressHUD.show()
 		searchFile = node!.name!
 		
@@ -81,7 +81,7 @@ class SearchInfoController: UITableViewController {
     }
 
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return section == 0 ? "movie title" : "found results"
+		return section == 0 ? "search" : "found results"
 	}
 	
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

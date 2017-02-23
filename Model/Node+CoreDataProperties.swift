@@ -17,15 +17,15 @@ extension Node {
     }
 
     @NSManaged public var isFile: Bool
+    @NSManaged public var lastAudioChannel: Int32
     @NSManaged public var name: String?
     @NSManaged public var path: String?
-    @NSManaged public var lastAudioChannel: Int16
-    @NSManaged public var wasViewed: Bool
     @NSManaged public var uid: String?
+    @NSManaged public var wasViewed: Bool
     @NSManaged public var childs: NSSet?
-    @NSManaged public var parent: Node?
-    @NSManaged public var info: MetaInfo?
     @NSManaged public var connection: Connection?
+    @NSManaged public var info: MetaInfo?
+    @NSManaged public var parent: Node?
 
 }
 

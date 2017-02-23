@@ -32,6 +32,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="chP-DH-jbH">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.88235294117647056" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="200" id="oE0-rC-4mF">
                             <size key="itemSize" width="200" height="280"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -58,15 +59,26 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="27"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="N4M-Ni-Rxn">
+                                            <rect key="frame" x="180" y="260" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="EAD-nX-N26"/>
+                                                <constraint firstAttribute="height" constant="40" id="KXl-1b-SIO"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="92k-IM-Jk8" secondAttribute="trailing" id="3n8-v3-712"/>
                                     <constraint firstAttribute="bottom" secondItem="92k-IM-Jk8" secondAttribute="bottom" id="RD7-ye-vrx"/>
+                                    <constraint firstAttribute="bottom" secondItem="N4M-Ni-Rxn" secondAttribute="bottom" constant="-20" id="Ssu-04-emL"/>
                                     <constraint firstItem="92k-IM-Jk8" firstAttribute="leading" secondItem="jNG-S6-Rsn" secondAttribute="leading" id="eE3-S1-QQ9"/>
+                                    <constraint firstAttribute="trailing" secondItem="N4M-Ni-Rxn" secondAttribute="trailing" constant="-20" id="uTd-g4-gMF"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="checkConstraint" destination="Ssu-04-emL" id="SCF-fH-Oog"/>
+                                    <outlet property="checkView" destination="N4M-Ni-Rxn" id="Md3-u9-z3Z"/>
                                     <outlet property="imageView" destination="Tor-Ep-oFC" id="sSp-pG-5qF"/>
                                     <outlet property="textConstraint" destination="RD7-ye-vrx" id="zfQ-Ab-Y1H"/>
                                     <outlet property="textView" destination="92k-IM-Jk8" id="e01-gD-RLf"/>
@@ -97,6 +109,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="66" sectionFooterHeight="66" id="t03-K0-oBq">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="V0D-Iw-m5I" id="hIb-yo-4La"/>
                             <outlet property="delegate" destination="V0D-Iw-m5I" id="HC5-iF-En4"/>
@@ -120,6 +133,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="66" sectionFooterHeight="66" id="ztI-go-gPb">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="KBd-Vq-w06" id="LBl-0B-rVX"/>
                             <outlet property="delegate" destination="KBd-Vq-w06" id="owZ-XU-wke"/>
@@ -188,7 +202,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="240" sectionHeaderHeight="7" sectionFooterHeight="7" id="uyq-ng-xRj">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="80" width="1920" height="240"/>
@@ -338,7 +352,7 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Oah-pa-GfI">
                                 <rect key="frame" x="320" y="140" width="1590" height="400"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="tIi-dw-uLs"/>
                                 </constraints>
@@ -352,8 +366,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WgA-Ku-nt7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="37"/>
+                                <color key="textColor" red="0.10980392156862745" green="0.30980392156862746" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qU-sa-5bg">
@@ -370,8 +384,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="zK2-P8-ehk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="37"/>
+                                <color key="textColor" red="0.10980392160000001" green="0.30980392159999998" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8K-QB-gho">
@@ -381,6 +395,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gW2-wQ-UzS" secondAttribute="trailing" constant="10" id="1Gc-Bk-9l7"/>
                             <constraint firstItem="gW2-wQ-UzS" firstAttribute="top" secondItem="Oah-pa-GfI" secondAttribute="bottom" constant="10" id="6Jv-UQ-J1Q"/>
@@ -416,7 +431,10 @@
             <point key="canvasLocation" x="3927" y="3413"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="check" width="40" height="40"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cMQ-Mh-HjY"/>
+        <segue reference="Xyf-BX-ST2"/>
     </inferredMetricsTieBreakers>
 </document>

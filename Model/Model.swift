@@ -19,6 +19,8 @@ class Model: NSObject {
     
     private override init() {
         super.init()
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("WDContentTV.sqlite")
+        try? FileManager.default.removeItem(at: url)
     }
     
     lazy var applicationDocumentsDirectory: URL = {

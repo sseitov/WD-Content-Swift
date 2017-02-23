@@ -26,7 +26,7 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		self.title = "Movie Info"
+		setupTitle("Movie Info")
 		
 		castConstraint.constant = 0
 		if info == nil && metainfo != nil {
@@ -71,7 +71,7 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 	
 	func showInfo() {
 		if metainfo != nil {
-			self.title = metainfo!.title
+			setupTitle(metainfo!.title!)
 			if metainfo!.poster != nil, let url = URL(string: metainfo!.poster!) {
 				imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
 			} else {
@@ -80,7 +80,7 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 			castView.text = metainfo!.cast
 			overviewView.text = metainfo!.overview
 		} else {
-			self.title = info!["title"] as? String
+			setupTitle(info!["title"] as! String)
 			if let path = posterPath(), let url = URL(string: path) {
 				imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
 			} else {
@@ -237,6 +237,9 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 		default:
 			break
 		}
+        cell.textLabel?.font = UIFont.condensedFont()
+        cell.textLabel?.textColor = UIColor.mainColor()
+        cell.detailTextLabel?.font = UIFont.mainFont()
 		return cell
 	}
 }

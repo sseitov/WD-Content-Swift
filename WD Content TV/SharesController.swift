@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SharesController: UICollectionViewController, UIGestureRecognizerDelegate {
+class SharesController: UICollectionViewController, UIGestureRecognizerDelegate, MovieControllerDelegate {
 
 	var parentNode:Node?
 	var nodes:[Node] = []
@@ -51,7 +51,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 	}
 	
 	func refresh() {
-		self.title = parentNode == nil ? "My Shares" : parentNode!.name!
+		setupTitle(parentNode == nil ? "My Shares" : parentNode!.name!)
 		nodes.removeAll()
 		SVProgressHUD.show(withStatus: "Refresh...")
 		DispatchQueue.global().async {
@@ -135,6 +135,18 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 	
 	// MARK: - Navigation
 	
+
+    func movie(_ path: String!, startWithAudio channel: Int32) {
+        if let node = Model.shared.node(byPath: path) {
+            node.wasViewed = true
+            node.lastAudioChannel = channel
+            Model.shared.saveContext()
+            if let index = nodes.index(of: node) {
+                collectionView?.reloadItems(at: [IndexPath(row: index, section: 0)])
+            }
+        }
+    }
+    
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDevice" {
 			let controller = segue.destination as! DeviceController
@@ -148,6 +160,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 				next.user = node.connection!.user!
 				next.password = node.connection!.password!
 				next.filePath = node.path!
+                next.delegate = self
 			}
 		} else if segue.identifier == "searchInfo" {
 			let nav = segue.destination as! UINavigationController

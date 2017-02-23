@@ -29,7 +29,7 @@ class AddShareController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		self.title = "Devices"
+		setupTitle("Devices")
 		serviceBrowser.delegate = self
 		serviceBrowser.searchForServices(ofType: "_smb._tcp.", inDomain: "local")
     }
@@ -37,13 +37,9 @@ class AddShareController: UITableViewController {
 	func updateInterface () {
 		for service in self.services {
 			if service.port == -1 {
-//				print("service \(service.name) of type \(service.type)" +
-//					" not yet resolved")
 				service.delegate = self
 				service.resolve(withTimeout:10)
 			} else {
-//				print("service \(service.name) of type \(service.type)," +
-//					"port \(service.port), addresses \(service.addresses)")
 				if let addresses = service.addresses {
 					var ips: String = ""
 					for address in addresses {
@@ -91,6 +87,9 @@ class AddShareController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = hosts[(indexPath as NSIndexPath).row].name
+        cell.textLabel?.font = UIFont.mainFont()
+        cell.textLabel?.textColor = UIColor.mainColor()
+        cell.textLabel?.textAlignment = .center
 		return cell
     }
 

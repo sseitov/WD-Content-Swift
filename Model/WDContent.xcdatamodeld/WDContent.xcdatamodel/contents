@@ -22,7 +22,7 @@
     </entity>
     <entity name="Node" representedClassName=".Node" syncable="YES">
         <attribute name="isFile" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="lastAudioChannel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastAudioChannel" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,8 +33,8 @@
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="childs" inverseEntity="Node" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MetaInfo" positionX="7" positionY="-343" width="128" height="208"/>
-        <element name="Node" positionX="-227" positionY="-360" width="128" height="193"/>
         <element name="Connection" positionX="-407" positionY="-396" width="128" height="118"/>
+        <element name="MetaInfo" positionX="7" positionY="-343" width="128" height="208"/>
+        <element name="Node" positionX="-227" positionY="-360" width="128" height="195"/>
     </elements>
 </model>

@@ -13,6 +13,7 @@
 #import "Util.h"
 #import "SMBConnection.h"
 #include <SVProgressHUD.h>
+//#import "WD_Content_TV-Swift.h"
 
 enum {
 	DecoderStillWorking,
@@ -155,7 +156,7 @@ extern "C" {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[SVProgressHUD dismiss];
 			if (success) {
-				if (audioChannels.count > 1) {
+                if (audioChannels.count > 1) {
 					UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
 																				   message:@"Choose audio channel"
 																			preferredStyle:UIAlertControllerStyleActionSheet];
@@ -231,7 +232,7 @@ extern "C" {
 	
 	// Retrieve stream information
 	avformat_find_stream_info(_mediaContext, NULL);
-	
+    
 	_audioIndex = -1;
 	_videoIndex = -1;
 	AVCodecContext* enc;
@@ -257,7 +258,7 @@ extern "C" {
 	}
 	
 	self.audioIndex = audioCahnnel;
- 
+    [self.delegate movie:self.filePath startWithAudio:audioCahnnel];
 	self.stopped = NO;
 	
 	[self start];

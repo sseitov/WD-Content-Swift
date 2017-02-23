@@ -20,7 +20,7 @@ class DeviceController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		self.title = target?.name
+		setupTitle(target!.name)
 
 		cashedConnection = Model.shared.getConnection(target!.host)
 		var connected = false
@@ -97,6 +97,9 @@ class DeviceController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = content[(indexPath as NSIndexPath).row].name
+        cell.textLabel?.font = UIFont.mainFont()
+        cell.textLabel?.textColor = UIColor.mainColor()
+        cell.textLabel?.textAlignment = .center
 		return cell
     }
 

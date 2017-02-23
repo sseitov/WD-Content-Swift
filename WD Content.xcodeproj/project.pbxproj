@@ -46,7 +46,6 @@
 		2C9549E21E5F4ACD00A23CC5 /* SearchInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DA1E5F4ACD00A23CC5 /* SearchInfoController.swift */; };
 		2C9549E31E5F4ACD00A23CC5 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */; };
 		2C9549E41E5F4ACD00A23CC5 /* SharesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */; };
-		2C9549E51E5F4ACD00A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DD1E5F4ACD00A23CC5 /* UIViewControllerExtensions.swift */; };
 		2C9549F61E5F4B8500A23CC5 /* AudioOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549E81E5F4B8500A23CC5 /* AudioOutput.mm */; };
 		2C9549F71E5F4B8500A23CC5 /* AudioRingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549EA1E5F4B8500A23CC5 /* AudioRingBuffer.mm */; };
 		2C9549F81E5F4B8500A23CC5 /* Decoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549EC1E5F4B8500A23CC5 /* Decoder.mm */; };
@@ -57,6 +56,14 @@
 		2C9549FE1E5F5A4900A23CC5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549FD1E5F5A4900A23CC5 /* AudioToolbox.framework */; };
 		2C954A001E5F5A6300A23CC5 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549FF1E5F5A6300A23CC5 /* libbz2.tbd */; };
 		2C954A021E5F5A7500A23CC5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C954A011E5F5A7500A23CC5 /* libz.tbd */; };
+		2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */; };
+		2C954A091E5F65CD00A23CC5 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */; };
+		2C954A0A1E5F65CD00A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */; };
+		2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */; };
+		2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */; };
+		2C954A0D1E5F65D600A23CC5 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */; };
+		2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */; };
+		2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */; };
 		2CC0D9551E5EFD6100254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9541E5EFD6100254181 /* CloudKit.framework */; };
 		2CC0D9571E5EFD6A00254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9561E5EFD6A00254181 /* CloudKit.framework */; };
 		2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9581E5EFDD500254181 /* WDContent.xcdatamodeld */; };
@@ -140,7 +147,6 @@
 		2C9549DA1E5F4ACD00A23CC5 /* SearchInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchInfoController.swift; sourceTree = "<group>"; };
 		2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesController.swift; sourceTree = "<group>"; };
-		2C9549DD1E5F4ACD00A23CC5 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		2C9549E71E5F4B8500A23CC5 /* AudioOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioOutput.h; path = Video/AudioOutput.h; sourceTree = "<group>"; };
 		2C9549E81E5F4B8500A23CC5 /* AudioOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioOutput.mm; path = Video/AudioOutput.mm; sourceTree = "<group>"; };
 		2C9549E91E5F4B8500A23CC5 /* AudioRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioRingBuffer.h; path = Video/AudioRingBuffer.h; sourceTree = "<group>"; };
@@ -159,6 +165,10 @@
 		2C9549FD1E5F5A4900A23CC5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		2C9549FF1E5F5A6300A23CC5 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/usr/lib/libbz2.tbd; sourceTree = DEVELOPER_DIR; };
 		2C954A011E5F5A7500A23CC5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Extensions/UIColorExtensions.swift; sourceTree = "<group>"; };
+		2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtensions.swift; path = Extensions/UIFontExtensions.swift; sourceTree = "<group>"; };
+		2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtensions.swift; path = Extensions/UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extensions/UIViewExtensions.swift; sourceTree = "<group>"; };
 		2CC0D9521E5EFD5000254181 /* WD Content.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content.entitlements"; sourceTree = "<group>"; };
 		2CC0D9531E5EFD5900254181 /* WD Content TV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content TV.entitlements"; sourceTree = "<group>"; };
 		2CC0D9541E5EFD6100254181 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -257,6 +267,7 @@
 		2C2133121E5ED867002F267D = {
 			isa = PBXGroup;
 			children = (
+				2C954A031E5F65AA00A23CC5 /* Extensions */,
 				2C9549A31E5F2B0800A23CC5 /* TMDB */,
 				2CC0D9921E5F105900254181 /* Samba */,
 				2CC0D9511E5EFD3200254181 /* Model */,
@@ -313,7 +324,6 @@
 				2C9549DA1E5F4ACD00A23CC5 /* SearchInfoController.swift */,
 				2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */,
 				2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */,
-				2C9549DD1E5F4ACD00A23CC5 /* UIViewControllerExtensions.swift */,
 				2C21336B1E5EDF38002F267D /* Resources */,
 			);
 			path = "WD Content TV";
@@ -370,6 +380,17 @@
 				2C9549F51E5F4B8500A23CC5 /* VideoOutput.mm */,
 			);
 			name = Video;
+			sourceTree = "<group>";
+		};
+		2C954A031E5F65AA00A23CC5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */,
+				2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */,
+				2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */,
+				2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		2CC0D9511E5EFD3200254181 /* Model */ = {
@@ -673,8 +694,12 @@
 				2CC0D9681E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */,
 				2CC0D9621E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9641E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
+				2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */,
 				2CC0D9A61E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
+				2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2CC0D96F1E5F01A900254181 /* Model.swift in Sources */,
+				2C954A0D1E5F65D600A23CC5 /* UIFontExtensions.swift in Sources */,
+				2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */,
 				2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */,
 				2CC0D9A21E5F107000254181 /* SMBFile.m in Sources */,
 				2CC0D96A1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
@@ -691,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C21335F1E5EDF13002F267D /* AppDelegate.swift in Sources */,
+				2C954A091E5F65CD00A23CC5 /* UIFontExtensions.swift in Sources */,
 				2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */,
 				2CC0D9691E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */,
 				2C9549DE1E5F4ACD00A23CC5 /* AddShareController.swift in Sources */,
@@ -699,23 +725,25 @@
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
 				2C9549F91E5F4B8500A23CC5 /* MovieController.mm in Sources */,
+				2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */,
 				2CC0D9A71E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
 				2C9549F61E5F4B8500A23CC5 /* AudioOutput.mm in Sources */,
 				2CC0D9701E5F01A900254181 /* Model.swift in Sources */,
 				2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */,
 				2C9549E21E5F4ACD00A23CC5 /* SearchInfoController.swift in Sources */,
+				2C954A0A1E5F65CD00A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2CC0D9A31E5F107000254181 /* SMBFile.m in Sources */,
 				2CC0D96B1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
 				2C9549F71E5F4B8500A23CC5 /* AudioRingBuffer.mm in Sources */,
 				2CC0D9A11E5F107000254181 /* SMBConnection.m in Sources */,
 				2C9549FB1E5F4B8500A23CC5 /* Util.mm in Sources */,
+				2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */,
 				2C9549FA1E5F4B8500A23CC5 /* TextureItem.mm in Sources */,
 				2C9549E41E5F4ACD00A23CC5 /* SharesController.swift in Sources */,
 				2C9549F81E5F4B8500A23CC5 /* Decoder.mm in Sources */,
 				2CC0D95B1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
 				2CC0D9671E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */,
 				2C9549E31E5F4ACD00A23CC5 /* ShareCell.swift in Sources */,
-				2C9549E51E5F4ACD00A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2C9549FC1E5F4B8500A23CC5 /* VideoOutput.mm in Sources */,
 				2C9549DF1E5F4ACD00A23CC5 /* DeviceController.swift in Sources */,
 				2CC0D9A51E5F107000254181 /* TONetBIOSNameService.m in Sources */,
