@@ -7,5 +7,6 @@
 #import "TMDB.h"
 #import "ApiKeys.h"
 #import <SVProgressHUD.h>
-//#import <SDWebImage/SDWebImageManager.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <AMSlideMenuMainViewController.h>
+#import <AMSlideMenuLeftTableViewController.h>

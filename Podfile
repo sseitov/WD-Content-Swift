@@ -6,7 +6,6 @@ target 'WD Content' do
     pod 'SDWebImage'
     
     pod 'AMSlideMenu'
-    pod 'IQKeyboardManager'
 end
 
 target 'WD Content TV' do

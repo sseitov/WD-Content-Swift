@@ -492,6 +492,11 @@ extern "C" {
 	[_audio currentPTS:&currasp withTime:&currast];
 	if (currasp == AV_NOPTS_VALUE)
 		return;
+/*
+    int64_t now = getUptimeInMilliseconds();
+    int64_t xx = (now - currast) / 1000.0 * 90000.0;
+    currasp = currasp + xx;
+*/
 	int updated = 0;
 	int64_t pts  = [_screen updateWithPTS:currasp updated:&updated];
 	if (pts == AV_NOPTS_VALUE || updated == 0)

@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C11BD521E5F9C5A004A786F /* LeftMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11BD511E5F9C5A004A786F /* LeftMenuVC.swift */; };
+		2C11BD541E5F9C96004A786F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11BD531E5F9C96004A786F /* MainVC.swift */; };
 		2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21331E1E5ED869002F267D /* AppDelegate.swift */; };
-		2C2133211E5ED869002F267D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2133201E5ED869002F267D /* ViewController.swift */; };
 		2C2133241E5ED869002F267D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133221E5ED869002F267D /* Main.storyboard */; };
 		2C2133261E5ED869002F267D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133251E5ED869002F267D /* Assets.xcassets */; };
 		2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133271E5ED869002F267D /* LaunchScreen.storyboard */; };
@@ -64,6 +65,7 @@
 		2C954A0D1E5F65D600A23CC5 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */; };
 		2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */; };
 		2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */; };
+		2CA603EE1E600EF300335545 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA603ED1E600EF300335545 /* logo.png */; };
 		2CC0D9551E5EFD6100254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9541E5EFD6100254181 /* CloudKit.framework */; };
 		2CC0D9571E5EFD6A00254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9561E5EFD6A00254181 /* CloudKit.framework */; };
 		2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9581E5EFDD500254181 /* WDContent.xcdatamodeld */; };
@@ -103,9 +105,10 @@
 /* Begin PBXFileReference section */
 		11501F56CB5FC9471A87A990 /* Pods-WD Content TV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content TV.release.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content TV/Pods-WD Content TV.release.xcconfig"; sourceTree = "<group>"; };
 		1CBEADC5914F841116498502 /* Pods-WD Content.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content.release.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content/Pods-WD Content.release.xcconfig"; sourceTree = "<group>"; };
+		2C11BD511E5F9C5A004A786F /* LeftMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuVC.swift; sourceTree = "<group>"; };
+		2C11BD531E5F9C96004A786F /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		2C21331B1E5ED868002F267D /* WD Content.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WD Content.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C21331E1E5ED869002F267D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C2133201E5ED869002F267D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2C2133231E5ED869002F267D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C2133251E5ED869002F267D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C2133281E5ED869002F267D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 		2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtensions.swift; path = Extensions/UIFontExtensions.swift; sourceTree = "<group>"; };
 		2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtensions.swift; path = Extensions/UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extensions/UIViewExtensions.swift; sourceTree = "<group>"; };
+		2CA603ED1E600EF300335545 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		2CC0D9521E5EFD5000254181 /* WD Content.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content.entitlements"; sourceTree = "<group>"; };
 		2CC0D9531E5EFD5900254181 /* WD Content TV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content TV.entitlements"; sourceTree = "<group>"; };
 		2CC0D9541E5EFD6100254181 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -293,7 +297,8 @@
 			children = (
 				2CC0D9931E5F106F00254181 /* WD Content-Bridging-Header.h */,
 				2C21331E1E5ED869002F267D /* AppDelegate.swift */,
-				2C2133201E5ED869002F267D /* ViewController.swift */,
+				2C11BD511E5F9C5A004A786F /* LeftMenuVC.swift */,
+				2C11BD531E5F9C96004A786F /* MainVC.swift */,
 				2C2133561E5EDE09002F267D /* Resources */,
 			);
 			path = "WD Content";
@@ -302,6 +307,7 @@
 		2C2133561E5EDE09002F267D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2CA603ED1E600EF300335545 /* logo.png */,
 				2C2133221E5ED869002F267D /* Main.storyboard */,
 				2C2133251E5ED869002F267D /* Assets.xcassets */,
 				2C2133271E5ED869002F267D /* LaunchScreen.storyboard */,
@@ -315,7 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				2CC0D9941E5F107000254181 /* WD Content TV-Bridging-Header.h */,
-				2C9549E61E5F4B7100A23CC5 /* Video */,
+				2C9549E61E5F4B7100A23CC5 /* Movie Player */,
 				2C21335E1E5EDF13002F267D /* AppDelegate.swift */,
 				2C9549D61E5F4ACD00A23CC5 /* AddShareController.swift */,
 				2C9549D71E5F4ACD00A23CC5 /* DeviceController.swift */,
@@ -360,7 +366,7 @@
 			name = shaders;
 			sourceTree = "<group>";
 		};
-		2C9549E61E5F4B7100A23CC5 /* Video */ = {
+		2C9549E61E5F4B7100A23CC5 /* Movie Player */ = {
 			isa = PBXGroup;
 			children = (
 				2C9549E71E5F4B8500A23CC5 /* AudioOutput.h */,
@@ -379,7 +385,7 @@
 				2C9549F41E5F4B8500A23CC5 /* VideoOutput.h */,
 				2C9549F51E5F4B8500A23CC5 /* VideoOutput.mm */,
 			);
-			name = Video;
+			name = "Movie Player";
 			sourceTree = "<group>";
 		};
 		2C954A031E5F65AA00A23CC5 /* Extensions */ = {
@@ -571,6 +577,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA603EE1E600EF300335545 /* logo.png in Resources */,
 				2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */,
 				2C2133261E5ED869002F267D /* Assets.xcassets in Resources */,
 				2C2133241E5ED869002F267D /* Main.storyboard in Resources */,
@@ -688,7 +695,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C2133211E5ED869002F267D /* ViewController.swift in Sources */,
 				2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */,
 				2CC0D9A81E5F107000254181 /* TOSMBConstants.m in Sources */,
 				2CC0D9681E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */,
@@ -702,9 +708,11 @@
 				2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */,
 				2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */,
 				2CC0D9A21E5F107000254181 /* SMBFile.m in Sources */,
+				2C11BD541E5F9C96004A786F /* MainVC.swift in Sources */,
 				2CC0D96A1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
 				2CC0D9A01E5F107000254181 /* SMBConnection.m in Sources */,
 				2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
+				2C11BD521E5F9C5A004A786F /* LeftMenuVC.swift in Sources */,
 				2CC0D9661E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */,
 				2CC0D9A41E5F107000254181 /* TONetBIOSNameService.m in Sources */,
 				2CC0D96C1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */,

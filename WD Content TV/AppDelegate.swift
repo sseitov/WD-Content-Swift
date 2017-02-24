@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         TMDB.sharedInstance().apiKey = TMDB_API_KEY;
+        
+        SVProgressHUD.setDefaultStyle(.custom)
+        SVProgressHUD.setBackgroundColor(UIColor.mainColor())
+        SVProgressHUD.setForegroundColor(UIColor.white)
+        SVProgressHUD.setFont(UIFont.condensedFont())
+        
         return true
     }
 

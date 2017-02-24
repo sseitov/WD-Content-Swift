@@ -17,13 +17,15 @@ extension UIViewController {
     func setupTitle(_ text:String) {
 #if TV
     let label = UILabel(frame: CGRect(x: 0, y: 0, width: 800, height: 132))
+    label.textColor = UIColor.mainColor()
 #else
     let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
+    label.textColor = UIColor.white
 #endif
         label.font = UIFont.condensedFont()
         label.textAlignment = .center
         label.text = text
-        label.textColor = UIColor.mainColor()
+        
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         navigationItem.titleView = label

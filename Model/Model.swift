@@ -19,7 +19,11 @@ class Model: NSObject {
     
     private override init() {
         super.init()
+    #if TV
         let url = self.applicationDocumentsDirectory.appendingPathComponent("WDContentTV.sqlite")
+    #else
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("ContentModel.sqlite")
+    #endif
         try? FileManager.default.removeItem(at: url)
     }
     

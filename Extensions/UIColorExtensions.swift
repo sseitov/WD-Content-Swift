@@ -22,45 +22,19 @@ extension UIColor {
     }
     
     class func mainColor() -> UIColor {
-        return color(28, 79, 130, 1)
+        #if TV
+            return color(28, 79, 130, 1)
+        #else
+            return color(0, 113, 165, 1)
+        #endif
     }
     
     class func mainColor(_ alpha:Float) -> UIColor {
-        return color(28, 79, 130, alpha)
-    }
-    
-    class func mainColorOpaque() -> UIColor {
-        return color(69, 122, 160, 1)
-    }
-    
-    class func mainBlueColor() -> UIColor {
-        return color(0, 122, 255, 1)
-    }
-
-    class func errorColor() -> UIColor {
-        return color(255, 0, 0, 1)
-    }
-    
-    class func traceColor() -> UIColor {
-        return color(72, 160, 205, 1)
-    }
-    
-    func imageFromColor(_ size:CGSize, cornerRadius:CGFloat) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(self.cgColor);
-        context?.fill(rect);
-        
-        var image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        UIGraphicsBeginImageContext(size)
-        let path = UIBezierPath(roundedRect:rect, cornerRadius: cornerRadius)
-        path.addClip()
-        image?.draw(in: rect)
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
+        #if TV
+            return color(28, 79, 130, alpha)
+        #else
+            return color(0, 113, 165, alpha)
+        #endif
     }
     
 }
