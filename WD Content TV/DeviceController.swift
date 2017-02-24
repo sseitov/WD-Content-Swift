@@ -21,7 +21,9 @@ class DeviceController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupTitle(target!.name)
-
+    #if IOS
+        setupBackButton()
+    #endif
 		cashedConnection = Model.shared.getConnection(target!.host)
 		var connected = false
 		if cashedConnection != nil {
@@ -63,6 +65,9 @@ class DeviceController: UITableViewController {
 			textField.isSecureTextEntry = true
 			passwordField = textField
 		})
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+            self.goBack()
+        }))
 		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
 			if self.connection.connect(to: self.target!.host,
 			                           port: self.target!.port,
@@ -77,9 +82,6 @@ class DeviceController: UITableViewController {
 					self.goBack()
 				})
 			}
-		}))
-		alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-			self.goBack()
 		}))
 		present(alert, animated: true, completion: nil)
 	}
@@ -97,17 +99,28 @@ class DeviceController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = content[(indexPath as NSIndexPath).row].name
-        cell.textLabel?.font = UIFont.mainFont()
+        cell.textLabel?.font = UIFont.condensedFont()
         cell.textLabel?.textColor = UIColor.mainColor()
         cell.textLabel?.textAlignment = .center
 		return cell
     }
-
+    
+#if IOS
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+#endif
+    
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let folder = content[indexPath.row];
 		_ = Model.shared.addNode(folder, parent: nil, connection: cashedConnection!)
+    #if TV
 		dismiss(animated: true, completion: {
 			NotificationCenter.default.post(name: refreshNotification, object: nil)
 		})
+    #else
+        NotificationCenter.default.post(name: refreshNotification, object: nil)
+        self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
+    #endif
 	}
 }

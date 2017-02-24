@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeftMenuVC: AMSlideMenuLeftTableViewController {
+class RightMenuVC: AMSlideMenuRightTableViewController {
 
     @IBOutlet weak var titleItem: UINavigationItem!
     
@@ -22,12 +22,22 @@ class LeftMenuVC: AMSlideMenuLeftTableViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
         label.font = UIFont.condensedFont()
         label.textAlignment = .center
-        label.text = "My Shares"
+        label.text = "MY SHARES"
         label.textColor = UIColor.white
         titleItem.titleView = label
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refresh),
+                                               name: refreshNotification,
+                                               object: nil)
+
     }
 
-
+    func refresh() {
+        nodes = Model.shared.nodes(byRoot: nil)
+        tableView.reloadData()
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -46,25 +56,44 @@ class LeftMenuVC: AMSlideMenuLeftTableViewController {
             cell.textLabel?.text = "Empty list"
             cell.contentView.backgroundColor = UIColor.clear
             cell.backgroundColor = UIColor.clear
+            cell.imageView?.image = nil
         } else {
             cell.textLabel?.text = nodes[indexPath.row].name!
             cell.contentView.backgroundColor = UIColor.white
             cell.backgroundColor = UIColor.white
+            cell.imageView?.image = UIImage(named: "iosShare")
         }
         cell.textLabel?.font = UIFont.condensedFont()
         cell.textLabel?.textColor = UIColor.mainColor()
+        cell.textLabel?.textAlignment = .center
         cell.selectionStyle = .none
+        
         return cell
     }
     
-    // MARK: - Navigation
-
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "content" {
-            return nodes.count > 0
-        } else {
-            return true
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return nodes.count > 0
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            let node = nodes[indexPath.row]
+            Model.shared.deleteNode(node)
+            nodes.remove(at: indexPath.row)
+            if nodes.count > 0 {
+                tableView.deleteRows(at: [indexPath], with: .top)
+            } else {
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+            tableView.endUpdates()
         }
+    }
+    
+    // MARK: - Navigation
+    
+    @IBAction func unwindToMenu(_ segue: UIStoryboardSegue) {
+        mainVC.openRightMenu(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

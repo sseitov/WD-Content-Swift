@@ -29,7 +29,11 @@ class AddShareController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupTitle("Devices")
+    #if TV
+		setupTitle("DEVICES")
+    #else
+        setupTitle("ADD SHARE")
+    #endif
 		serviceBrowser.delegate = self
 		serviceBrowser.searchForServices(ofType: "_smb._tcp.", inDomain: "local")
     }
@@ -83,11 +87,20 @@ class AddShareController: UITableViewController {
 		return hosts.count
     }
 
-	
+    #if IOS
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "discovered devices"
+    }
+    #endif
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = hosts[(indexPath as NSIndexPath).row].name
-        cell.textLabel?.font = UIFont.mainFont()
+        cell.textLabel?.font = UIFont.condensedFont()
         cell.textLabel?.textColor = UIColor.mainColor()
         cell.textLabel?.textAlignment = .center
 		return cell
@@ -99,7 +112,7 @@ class AddShareController: UITableViewController {
 	
 	
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDevice" {
 			let controller = segue.destination as! DeviceController

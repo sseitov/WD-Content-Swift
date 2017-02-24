@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C11BD521E5F9C5A004A786F /* LeftMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11BD511E5F9C5A004A786F /* LeftMenuVC.swift */; };
+		2C11BD521E5F9C5A004A786F /* RightMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11BD511E5F9C5A004A786F /* RightMenuVC.swift */; };
 		2C11BD541E5F9C96004A786F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11BD531E5F9C96004A786F /* MainVC.swift */; };
 		2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21331E1E5ED869002F267D /* AppDelegate.swift */; };
 		2C2133241E5ED869002F267D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133221E5ED869002F267D /* Main.storyboard */; };
@@ -66,6 +66,8 @@
 		2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */; };
 		2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */; };
 		2CA603EE1E600EF300335545 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA603ED1E600EF300335545 /* logo.png */; };
+		2CA603EF1E601ABF00335545 /* AddShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549D61E5F4ACD00A23CC5 /* AddShareController.swift */; };
+		2CA603F01E601B3800335545 /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549D71E5F4ACD00A23CC5 /* DeviceController.swift */; };
 		2CC0D9551E5EFD6100254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9541E5EFD6100254181 /* CloudKit.framework */; };
 		2CC0D9571E5EFD6A00254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9561E5EFD6A00254181 /* CloudKit.framework */; };
 		2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9581E5EFDD500254181 /* WDContent.xcdatamodeld */; };
@@ -105,7 +107,7 @@
 /* Begin PBXFileReference section */
 		11501F56CB5FC9471A87A990 /* Pods-WD Content TV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content TV.release.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content TV/Pods-WD Content TV.release.xcconfig"; sourceTree = "<group>"; };
 		1CBEADC5914F841116498502 /* Pods-WD Content.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content.release.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content/Pods-WD Content.release.xcconfig"; sourceTree = "<group>"; };
-		2C11BD511E5F9C5A004A786F /* LeftMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuVC.swift; sourceTree = "<group>"; };
+		2C11BD511E5F9C5A004A786F /* RightMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightMenuVC.swift; sourceTree = "<group>"; };
 		2C11BD531E5F9C96004A786F /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		2C21331B1E5ED868002F267D /* WD Content.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WD Content.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C21331E1E5ED869002F267D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -297,7 +299,7 @@
 			children = (
 				2CC0D9931E5F106F00254181 /* WD Content-Bridging-Header.h */,
 				2C21331E1E5ED869002F267D /* AppDelegate.swift */,
-				2C11BD511E5F9C5A004A786F /* LeftMenuVC.swift */,
+				2C11BD511E5F9C5A004A786F /* RightMenuVC.swift */,
 				2C11BD531E5F9C96004A786F /* MainVC.swift */,
 				2C2133561E5EDE09002F267D /* Resources */,
 			);
@@ -705,14 +707,16 @@
 				2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2CC0D96F1E5F01A900254181 /* Model.swift in Sources */,
 				2C954A0D1E5F65D600A23CC5 /* UIFontExtensions.swift in Sources */,
+				2CA603F01E601B3800335545 /* DeviceController.swift in Sources */,
 				2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */,
 				2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */,
 				2CC0D9A21E5F107000254181 /* SMBFile.m in Sources */,
 				2C11BD541E5F9C96004A786F /* MainVC.swift in Sources */,
 				2CC0D96A1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
+				2CA603EF1E601ABF00335545 /* AddShareController.swift in Sources */,
 				2CC0D9A01E5F107000254181 /* SMBConnection.m in Sources */,
 				2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
-				2C11BD521E5F9C5A004A786F /* LeftMenuVC.swift in Sources */,
+				2C11BD521E5F9C5A004A786F /* RightMenuVC.swift in Sources */,
 				2CC0D9661E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */,
 				2CC0D9A41E5F107000254181 /* TONetBIOSNameService.m in Sources */,
 				2CC0D96C1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */,
@@ -905,6 +909,7 @@
 					"$(PROJECT_DIR)/libdsm",
 					"$(PROJECT_DIR)/ffmpeg/ios",
 				);
+				OTHER_SWIFT_FLAGS = "-DIOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4ac5fd34-405d-4969-b1cd-1be9d645fc19";
@@ -939,6 +944,7 @@
 					"$(PROJECT_DIR)/libdsm",
 					"$(PROJECT_DIR)/ffmpeg/ios",
 				);
+				OTHER_SWIFT_FLAGS = "-DIOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f42749f6-5441-469e-98ee-e7bc7e3bd041";

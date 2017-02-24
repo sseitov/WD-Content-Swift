@@ -15,20 +15,24 @@ class MainVC: AMSlideMenuMainViewController {
         self.isInitialStart = false
     }
 
-    override func initialIndexPathForLeftMenu() -> IndexPath! {
+    override func primaryMenu() -> AMPrimaryMenu {
+        return AMPrimaryMenuRight
+    }
+    
+    override func initialIndexPathForRightMenu() -> IndexPath! {
         return IndexPath(row: 0, section: 0)
     }
-
-    override func segueIdentifierForIndexPath(inLeftMenu indexPath: IndexPath!) -> String! {
+    
+    override func segueIdentifierForIndexPath(inRightMenu indexPath: IndexPath!) -> String! {
         let nodes = Model.shared.nodes(byRoot: nil)
         return nodes.count > 0 ? "content" : "shares"
     }
     
-    override func leftMenuWidth() -> CGFloat {
+    override func rightMenuWidth() -> CGFloat {
         return 260
     }
 
-    override func configureLeftMenuButton(_ button: UIButton!) {
+    override func configureRightMenuButton(_ button: UIButton!) {
         button.frame = CGRect(x: 0, y: 0, width: 25, height: 13)
         button.backgroundColor = UIColor.clear
         button.setImage(UIImage(named:"menuButton"), for: .normal)
@@ -52,11 +56,11 @@ class MainVC: AMSlideMenuMainViewController {
     }
 
     override func deepnessForLeftMenu() -> Bool {
-        return true
+        return false
     }
 
     override func deepnessForRightMenu() -> Bool {
-        return false
+        return true
     }
     
     override func maxDarknessWhileLeftMenu() -> CGFloat {
@@ -66,7 +70,7 @@ class MainVC: AMSlideMenuMainViewController {
     override func maxDarknessWhileRightMenu() -> CGFloat {
         return 0.5
     }
-    
+
     /*
     // MARK: - Navigation
 
