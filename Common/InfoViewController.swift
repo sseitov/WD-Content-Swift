@@ -8,13 +8,16 @@
 
 import UIKit
 
-class InfoViewController: UIViewController, UITableViewDataSource {
+class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var infoTable: UITableView!
     @IBOutlet weak var castView: UITextView!
     @IBOutlet weak var overviewView: UITextView!
     @IBOutlet weak var castConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
 	
 	var info:[String:Any]?
 	var imageBaseURL:String?
@@ -27,14 +30,29 @@ class InfoViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupTitle("Movie Info")
-		
+    #if IOS
+        setupBackButton()
+        if IS_PAD() {
+            imageWidthConstraint.constant = 200
+            imageHeightConstraint.constant = 240
+            tableHeightConstraint.constant = 240
+        }
+    #endif
 		castConstraint.constant = 0
 		if info == nil && metainfo != nil {
-			navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(self.clearInfo))
+            let btn = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(self.clearInfo))
+        #if IOS
+            btn.tintColor = UIColor.white
+        #endif
+			navigationItem.rightBarButtonItem = btn
 		}
 		
 		if info != nil, let uid = info!["id"] as? Int {
-			navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveInfo))
+            let btn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveInfo))
+        #if IOS
+            btn.tintColor = UIColor.white
+        #endif
+			navigationItem.rightBarButtonItem = btn
 			SVProgressHUD.show(withStatus: "Load Info...")
 			TMDB.sharedInstance().get(kMovieDBMovie, parameters: ["id" : "\(uid)"], block: { responseObject, error in
 				if let movieInfo = responseObject as? [String:Any] {
@@ -58,7 +76,8 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 		super.viewDidAppear(animated)
 		showInfo()
 	}
-	
+    
+#if TV
 	override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
 		if presses.first != nil && presses.first!.type == .menu {
 			if metainfo != nil {
@@ -68,7 +87,16 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 			}
 		}
 	}
-	
+#else
+    override func goBack() {
+        if metainfo != nil {
+            dismiss(animated: true, completion: nil)
+        } else {
+            _ = navigationController?.popViewController(animated: true)
+        }
+    }
+#endif
+    
 	func showInfo() {
 		if metainfo != nil {
 			setupTitle(metainfo!.title!)
@@ -91,9 +119,14 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 		}
 		infoTable.reloadData()
 		if castView.text != nil {
-			let castHeight = castView.text!.heightWithConstrainedWidth(width: castView.frame.width, font: castView.font!) + 40
-			let overviewHeight = overviewView.text!.heightWithConstrainedWidth(width: overviewView.frame.width, font: overviewView.font!) + 40
-			let height = self.view.frame.height - castView.frame.origin.y - overviewHeight - 80
+        #if IOS
+            let offset:CGFloat = 20
+        #else
+            let offset:CGFloat = 40
+        #endif
+			let castHeight = castView.text!.heightWithConstrainedWidth(width: castView.frame.width, font: castView.font!) + offset
+			let overviewHeight = overviewView.text!.heightWithConstrainedWidth(width: overviewView.frame.width, font: overviewView.font!) + offset
+			let height = self.view.frame.height - castView.frame.origin.y - overviewHeight - offset*2
 			castConstraint.constant = castHeight > height ? height : castHeight
 		}
 	}
@@ -202,25 +235,35 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 5
 	}
-	
+    
+#if IOS
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return IS_PAD() ? 44 : 30
+    }
+#endif
+    
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    #if TV
 		let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+    #else
+        var cell:UITableViewCell!
+        if IS_PAD() {
+            cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        } else {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        }
+    #endif
 		switch indexPath.row {
 		case 0:
 			cell.textLabel?.text = "Director"
 			cell.detailTextLabel?.text = metainfo != nil ? metainfo!.director : director()
 		case 1:
 			cell.textLabel?.text = "Release Date"
-			let formatter = DateFormatter()
-			formatter.dateFormat = "yyyy-MM-dd"
-			if let text = metainfo != nil ? metainfo!.release_date : info!["release_date"] as? String, let date = formatter.date(from: text) {
-				let yearFormatter = DateFormatter()
-				yearFormatter.dateStyle = .long
-				yearFormatter.timeStyle = .none
-				cell.detailTextLabel?.text = yearFormatter.string(from: date)
-			} else {
-				cell.detailTextLabel?.text = ""
-			}
+            if let text = metainfo != nil ? metainfo!.release_date : info!["release_date"] as? String {
+                cell.detailTextLabel?.text = releaseDate(text)
+            } else {
+                cell.detailTextLabel?.text = ""
+            }
 		case 2:
 			cell.textLabel?.text = "Runtime"
 			if let runtime = metainfo != nil ? metainfo!.runtime : runtime() {
@@ -237,9 +280,19 @@ class InfoViewController: UIViewController, UITableViewDataSource {
 		default:
 			break
 		}
-        cell.textLabel?.font = UIFont.condensedFont()
         cell.textLabel?.textColor = UIColor.mainColor()
+    #if TV
+        cell.textLabel?.font = UIFont.condensedFont()
         cell.detailTextLabel?.font = UIFont.mainFont()
+    #else
+        if IS_PAD() {
+            cell.textLabel?.font = UIFont.condensedFont(17)
+            cell.detailTextLabel?.font = UIFont.mainFont(15)
+        } else {
+            cell.textLabel?.font = UIFont.condensedFont(13)
+            cell.detailTextLabel?.font = UIFont.mainFont(10)
+        }
+    #endif
 		return cell
 	}
 }

@@ -8,9 +8,29 @@
 
 import UIKit
 
+#if IOS
+protocol SearchCellDelegate {
+    func fieldDidChanged(_ text:String?)
+}
+#endif
+
 class SearchCell: UITableViewCell, UITextFieldDelegate {
 
 	@IBOutlet weak var field: UITextField!
+#if IOS
+    var delegate:SearchCellDelegate?
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            textField.resignFirstResponder()
+            delegate?.fieldDidChanged(textField.text)
+            return false
+        } else {
+            return true
+        }
+    }
+
+#endif
 	
 }
 
@@ -30,7 +50,7 @@ class SearchResultCell: UITableViewCell {
                 title.textColor = UIColor.mainColor()
 			}
 			if let release_date = movie!["release_date"] as? String {
-				date.text = release_date
+				date.text = releaseDate(release_date)
                 date.font = UIFont.mainFont()
 			}
 			if let poster_url = movie!["poster_path"] as? String, imagesBaseURL != nil {

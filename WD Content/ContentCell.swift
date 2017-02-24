@@ -16,11 +16,27 @@ class ContentCell: UICollectionViewCell {
     var node:Node? {
         didSet {
             if node!.isFile {
-                nodeImage.image = UIImage(named: "file")
+                if node!.info == nil {
+                    nodeName.text = node!.name!
+                    nodeImage.image = UIImage(named: "file")
+                } else {
+                    let text = NSMutableAttributedString(string: node!.info!.title!,
+                                                         attributes: [NSFontAttributeName : UIFont.mainFont(15)])
+                    let dateText = " (\(year(node!.info!.release_date!)))"
+                    text.append(NSMutableAttributedString(string: dateText,
+                                                          attributes: [NSFontAttributeName : UIFont.condensedFont(15)]))
+                    nodeName.attributedText = text
+                    if node!.info!.poster != nil {
+                        let url = URL(string: node!.info!.poster!)
+                        nodeImage.sd_setImage(with: url, placeholderImage: UIImage(named: "file"))
+                    } else {
+                        nodeImage.image = UIImage(named: "file")
+                    }
+                }
             } else {
                 nodeImage.image = UIImage(named: "folder")
+                nodeName.text = node!.name
             }
-            nodeName.text = node!.name
         }
     }
 }

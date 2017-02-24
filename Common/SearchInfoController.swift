@@ -14,11 +14,14 @@ class SearchInfoController: UITableViewController {
 	var results:[Any] = []
 	
 	private var imagesBaseURL:String?
-	private var searchFile:String!
+	var searchFile:String!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupTitle("Search Info")
+    #if IOS
+        setupBackButton()
+    #endif
 		SVProgressHUD.show()
 		searchFile = node!.name!
 		
@@ -47,6 +50,12 @@ class SearchInfoController: UITableViewController {
 			}
 		})
     }
+    
+#if IOS
+    override func goBack() {
+        dismiss(animated: true, completion: nil)
+    }
+#endif
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -73,7 +82,7 @@ class SearchInfoController: UITableViewController {
 			}
 		})
 	}
-	
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,15 +94,25 @@ class SearchInfoController: UITableViewController {
 	}
 	
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if section == 0 {
-			return 1
-		} else {
-			return results.count
-		}
+        return section == 0 ? 1 : results.count
     }
+    
+#if IOS
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+#endif
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return indexPath.section == 0 ? 66 : 240
+    #if TV
+        return indexPath.section == 0 ? 66 : 240
+    #else
+        return indexPath.section == 0 ? 44 : 120
+    #endif
 	}
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,6 +120,9 @@ class SearchInfoController: UITableViewController {
 			let cell = tableView.dequeueReusableCell(withIdentifier: "searchField") as! SearchCell
 			cell.field.text = searchFile
 			cell.accessoryType = .none
+        #if IOS
+            cell.delegate = self
+        #endif
 			return cell
 		} else {
 			let cell = tableView.dequeueReusableCell(withIdentifier: "searchResult", for: indexPath) as! SearchResultCell
@@ -112,6 +134,7 @@ class SearchInfoController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.section == 0 {
+        #if TV
 			var nameField:UITextField?
 			let alert = UIAlertController(title: "Search Info", message: "Input title of movie:", preferredStyle: .alert)
 			alert.addTextField(configurationHandler: { textField in
@@ -126,6 +149,7 @@ class SearchInfoController: UITableViewController {
 			}))
 			alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 			present(alert, animated: true, completion: nil)
+        #endif
 		} else {
 			if let movie = results[indexPath.row] as? [String:Any] {
 				performSegue(withIdentifier: "editInfo", sender: movie)
@@ -143,5 +167,16 @@ class SearchInfoController: UITableViewController {
 			next.node = node
 		}
     }
-
 }
+
+#if IOS
+    extension SearchInfoController : SearchCellDelegate {
+        func fieldDidChanged(_ text:String?) {
+            if text != nil {
+                searchFile = text
+                tableView.reloadData()
+                search()
+            }
+        }
+    }
+#endif

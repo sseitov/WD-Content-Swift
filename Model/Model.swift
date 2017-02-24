@@ -13,6 +13,31 @@ func generateUDID() -> String {
     return UUID().uuidString
 }
 
+func releaseDate(_ text:String) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    if let date = formatter.date(from: text) {
+        let yearFormatter = DateFormatter()
+        yearFormatter.dateStyle = .long
+        yearFormatter.timeStyle = .none
+        return yearFormatter.string(from: date)
+    } else {
+        return ""
+    }
+}
+
+func year(_ text:String) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    if let date = formatter.date(from: text) {
+        let yearFormatter = DateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        return yearFormatter.string(from: date)
+    } else {
+        return ""
+    }
+}
+
 class Model: NSObject {
     
     static let shared = Model()

@@ -17,9 +17,18 @@ class ContentController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshNotify),
+                                               name: refreshNotification,
+                                               object: nil)
         refresh()
     }
 
+    func refreshNotify() {
+        collectionView.reloadData()
+    }
+    
     func refresh() {
         UIView.animate(withDuration: 0.2, animations: {
             self.collectionView.alpha = 0
@@ -50,16 +59,19 @@ class ContentController: UIViewController {
         }
     }
     
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "search" {
+            let nav = segue.destination as! UINavigationController
+            let next = nav.topViewController as! SearchInfoController
+            next.node = sender as? Node
+        } else if segue.identifier == "info" {
+            let nav = segue.destination as! UINavigationController
+            let next = nav.topViewController as! InfoViewController
+            next.metainfo = sender as? MetaInfo
+        }
     }
-    */
-
 }
 
 // MARK: - CollectionView
@@ -81,6 +93,12 @@ extension ContentController: UICollectionViewDataSource, UICollectionViewDelegat
         if !node.isFile {
             parentNode = node
             refresh()
+        } else {
+            if node.info != nil {
+                performSegue(withIdentifier: "info", sender: node.info)
+            } else {
+                performSegue(withIdentifier: "search", sender: node)
+            }
         }
     }
 }
