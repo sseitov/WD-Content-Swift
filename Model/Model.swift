@@ -145,7 +145,17 @@ class Model: NSObject {
                     }
                 }
             }
-            return nodes
+            return nodes.sorted(by: { node1, node2 in
+                if node1.isFile && node2.isFile {
+                    return node1.name! < node2.name!
+                } else if !node1.isFile && !node2.isFile {
+                    return node1.name! < node2.name!
+                } else if node1.isFile {
+                    return false
+                } else {
+                    return true
+                }
+            })
         } else {
             return []
         }

@@ -98,7 +98,20 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "content" {
-            
+            let nav = segue.destination as! UINavigationController
+            let next = nav.topViewController as! ContentController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                next.parentNode = nodes[indexPath.row]
+                UserDefaults.standard.set(indexPath.row, forKey: "lastShare")
+                UserDefaults.standard.synchronize()
+            } else {
+                let index = UserDefaults.standard.integer(forKey: "lastShare")
+                if index < nodes.count {
+                    next.parentNode = nodes[index]
+                } else {
+                    next.parentNode = nodes[0]
+                }
+            }
         }
     }
 

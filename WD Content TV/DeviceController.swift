@@ -25,30 +25,60 @@ class DeviceController: UITableViewController {
         setupBackButton()
     #endif
 		cashedConnection = Model.shared.getConnection(target!.host)
-		var connected = false
-		if cashedConnection != nil {
-			connected = connection.connect(to: cashedConnection!.ip!,
-			                   port: cashedConnection!.port,
-			                   user: cashedConnection!.user!,
-			                   password: cashedConnection?.password!)
-		} else {
-			connected = connection.connect(to: target!.host,
-			                               port: target!.port,
-			                               user: "",
-			                               password: "")
-		}
-		if !connected {
-			requestAuth()
-		} else {
-			if cashedConnection == nil {
-				cashedConnection = Model.shared.addConnection(ip: self.target!.host, port: self.target!.port, user: "", password: "")
-			}
-			content = self.connection.folderContents(at: "/") as! [SMBFile]
-			self.tableView.reloadData()
-		}
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        SVProgressHUD.show(withStatus: "Refresh...")
+        DispatchQueue.global().async {
+            var connected = false
+            if self.cashedConnection != nil {
+                connected = self.connection.connect(to: self.cashedConnection!.ip!,
+                                                    port: self.cashedConnection!.port,
+                                                    user: self.cashedConnection!.user!,
+                                                    password: self.cashedConnection?.password!)
+            } else {
+                connected = self.connection.connect(to: self.target!.host,
+                                                    port: self.target!.port,
+                                                    user: "",
+                                                    password: "")
+            }
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                if !connected {
+                    self.requestAuth()
+                } else {
+                    if self.cashedConnection == nil {
+                        self.cashedConnection = Model.shared.addConnection(ip: self.target!.host, port: self.target!.port, user: "", password: "")
+                    }
+                    self.content = self.connection.folderContents(at: "/") as! [SMBFile]
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
 	func requestAuth() {
+    #if IOS
+        let alert = PasswordInput.authDialog(title: target!.name, message: "Input credentials", cancelHandler: {
+            self.goBack()
+        }, acceptHandler: { (user, password) in
+            if self.connection.connect(to: self.target!.host,
+                                       port: self.target!.port,
+                                       user: user,
+                                       password: password) {
+                
+                self.cashedConnection = Model.shared.addConnection(ip: self.target!.host, port: self.target!.port, user: user, password: password)
+                self.content = self.connection.folderContents(at: "/") as! [SMBFile]
+                self.tableView.reloadData()
+            } else {
+                self.showMessage("Can not connect.", messageType: .error, messageHandler: {
+                    self.goBack()
+                })
+            }
+        })
+        alert?.show()
+    #else
 		let alert = UIAlertController(title: target?.name, message: "Input credentials", preferredStyle: .alert)
 		var userField:UITextField?
 		var passwordField:UITextField?
@@ -84,6 +114,7 @@ class DeviceController: UITableViewController {
 			}
 		}))
 		present(alert, animated: true, completion: nil)
+    #endif
 	}
 	
     // MARK: - Table view data source
