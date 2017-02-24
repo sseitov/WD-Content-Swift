@@ -60,7 +60,6 @@
 		2C954A0D1E5F65D600A23CC5 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */; };
 		2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */; };
 		2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */; };
-		2CA603EE1E600EF300335545 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA603ED1E600EF300335545 /* logo.png */; };
 		2CA603F41E604A4F00335545 /* ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F31E604A4F00335545 /* ContentController.swift */; };
 		2CA603F61E604D5700335545 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F51E604D5700335545 /* ContentCell.swift */; };
 		2CA604041E60674400335545 /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603FA1E60674400335545 /* LGAlertView.m */; };
@@ -185,7 +184,6 @@
 		2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtensions.swift; path = Extensions/UIFontExtensions.swift; sourceTree = "<group>"; };
 		2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtensions.swift; path = Extensions/UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extensions/UIViewExtensions.swift; sourceTree = "<group>"; };
-		2CA603ED1E600EF300335545 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		2CA603F31E604A4F00335545 /* ContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentController.swift; sourceTree = "<group>"; };
 		2CA603F51E604D5700335545 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		2CA603F91E60674400335545 /* LGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGAlertView.h; path = LGAlertSheet/LGAlertView.h; sourceTree = "<group>"; };
@@ -346,7 +344,6 @@
 		2C2133561E5EDE09002F267D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2CA603ED1E600EF300335545 /* logo.png */,
 				2C2133221E5ED869002F267D /* Main.storyboard */,
 				2C2133251E5ED869002F267D /* Assets.xcassets */,
 				2C2133271E5ED869002F267D /* LaunchScreen.storyboard */,
@@ -653,7 +650,6 @@
 			files = (
 				2CA604091E60674400335545 /* LGTextFieldAlertView.xib in Resources */,
 				2CA6040F1E60675A00335545 /* PasswordInput.xib in Resources */,
-				2CA603EE1E600EF300335545 /* logo.png in Resources */,
 				2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */,
 				2CA604071E60674400335545 /* LGProgressAlertView.xib in Resources */,
 				2CA604061E60674400335545 /* LGDecoratedAlertView.xib in Resources */,
