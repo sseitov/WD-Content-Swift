@@ -29,32 +29,27 @@ class DeviceController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        SVProgressHUD.show(withStatus: "Refresh...")
-        DispatchQueue.global().async {
-            var connected = false
-            if self.cashedConnection != nil {
-                connected = self.connection.connect(to: self.cashedConnection!.ip!,
+        if self.cashedConnection != nil {
+            SVProgressHUD.show(withStatus: "Refresh...")
+            DispatchQueue.global().async {
+                let connected = self.connection.connect(to: self.cashedConnection!.ip!,
                                                     port: self.cashedConnection!.port,
                                                     user: self.cashedConnection!.user!,
                                                     password: self.cashedConnection?.password!)
-            } else {
-                connected = self.connection.connect(to: self.target!.host,
-                                                    port: self.target!.port,
-                                                    user: "",
-                                                    password: "")
-            }
-            DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
-                if !connected {
-                    self.requestAuth()
-                } else {
-                    if self.cashedConnection == nil {
-                        self.cashedConnection = Model.shared.addConnection(ip: self.target!.host, port: self.target!.port, user: "", password: "")
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    if !connected {
+                        self.showMessage("Can not connect to \(self.cashedConnection!.ip!)", messageType: .error, messageHandler: {
+                            self.requestAuth()
+                        })
+                    } else {
+                        self.content = self.connection.folderContents(at: "/") as! [SMBFile]
+                        self.tableView.reloadData()
                     }
-                    self.content = self.connection.folderContents(at: "/") as! [SMBFile]
-                    self.tableView.reloadData()
                 }
             }
+        } else {
+            requestAuth()
         }
     }
     
@@ -63,18 +58,38 @@ class DeviceController: UITableViewController {
         let alert = PasswordInput.authDialog(title: target!.name, message: "Input credentials", cancelHandler: {
             self.goBack()
         }, acceptHandler: { (user, password) in
-            if self.connection.connect(to: self.target!.host,
-                                       port: self.target!.port,
-                                       user: user,
-                                       password: password) {
-                
-                self.cashedConnection = Model.shared.addConnection(ip: self.target!.host, port: self.target!.port, user: user, password: password)
-                self.content = self.connection.folderContents(at: "/") as! [SMBFile]
-                self.tableView.reloadData()
-            } else {
-                self.showMessage("Can not connect.", messageType: .error, messageHandler: {
-                    self.goBack()
-                })
+            SVProgressHUD.show(withStatus: "Connect...")
+            DispatchQueue.global().async {
+                let connected = self.connection.connect(to: self.target!.host,
+                                                        port: self.target!.port,
+                                                        user: user,
+                                                        password: password)
+                DispatchQueue.main.async {
+                    if connected {
+                        Model.shared.createConnection(ip: self.target!.host,
+                                                      port: self.target!.port,
+                                                      user: user,
+                                                      password: password,
+                                                      result:
+                            { cashed in
+                                SVProgressHUD.dismiss()
+                                if cashed == nil {
+                                    self.showMessage("Can not create connection.", messageType: .error, messageHandler: {
+                                        self.goBack()
+                                    })
+                                } else {
+                                    self.cashedConnection = cashed
+                                    self.content = self.connection.folderContents(at: "/") as! [SMBFile]
+                                    self.tableView.reloadData()
+                                }
+                        })
+                    } else {
+                        SVProgressHUD.dismiss()
+                        self.showMessage("Can not connect.", messageType: .error, messageHandler: {
+                            self.goBack()
+                        })
+                    }
+                }
             }
         })
         alert?.show()

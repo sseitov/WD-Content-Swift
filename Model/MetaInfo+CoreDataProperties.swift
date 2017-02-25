@@ -2,7 +2,7 @@
 //  MetaInfo+CoreDataProperties.swift
 //  WD Content
 //
-//  Created by Сергей Сейтов on 23.02.17.
+//  Created by Сергей Сейтов on 25.02.17.
 //  Copyright © 2017 V-Channel. All rights reserved.
 //
 
@@ -25,7 +25,10 @@ extension MetaInfo {
     @NSManaged public var release_date: String?
     @NSManaged public var runtime: String?
     @NSManaged public var title: String?
-    @NSManaged public var uid: String?
+    @NSManaged public var path: String?
+    @NSManaged public var recordName: String?
+    @NSManaged public var zoneName: String?
+    @NSManaged public var ownerName: String?
     @NSManaged public var node: Node?
 
 }

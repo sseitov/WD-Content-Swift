@@ -54,13 +54,18 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate,
 		setupTitle(parentNode == nil ? "My Shares" : parentNode!.name!)
 		nodes.removeAll()
 		SVProgressHUD.show(withStatus: "Refresh...")
-		DispatchQueue.global().async {
-			self.nodes = Model.shared.nodes(byRoot: self.parentNode)
-			DispatchQueue.main.async {
-				SVProgressHUD.dismiss()
-				self.collectionView?.reloadData()
-			}
-		}
+        Model.shared.refreshConnections({ _ error in
+            if error != nil {
+                self.showMessage("Cloud refresh error: \(error!)", messageType: .information)
+            }
+            self.nodes = Model.shared.nodes(byRoot: self.parentNode)
+            DispatchQueue.global().async {
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.collectionView?.reloadData()
+                }
+            }
+        })
 	}
 
     // MARK: UICollectionViewDataSource

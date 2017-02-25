@@ -25,7 +25,8 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
         label.text = "MY SHARES"
         label.textColor = UIColor.white
         titleItem.titleView = label
-        
+
+        refresh()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.refresh),
                                                name: refreshNotification,
@@ -34,8 +35,15 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
     }
 
     func refresh() {
-        nodes = Model.shared.nodes(byRoot: nil)
-        tableView.reloadData()
+        SVProgressHUD.show(withStatus: "Refresh...")
+        Model.shared.refreshConnections({ error in
+            SVProgressHUD.dismiss()
+            if error != nil {
+                self.showMessage("Cloud refresh error: \(error!)", messageType: .information)
+            }
+            self.nodes = Model.shared.nodes(byRoot: nil)
+            self.tableView.reloadData()
+        })
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

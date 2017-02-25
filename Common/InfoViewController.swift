@@ -109,7 +109,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			overviewView.text = metainfo!.overview
 		} else {
 			setupTitle(info!["title"] as! String)
-			if let path = posterPath(), let url = URL(string: path) {
+			if let url = URL(string: posterPath()) {
 				imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
 			} else {
 				imageView.image = UIImage(named: "movie")
@@ -132,53 +132,86 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	func clearInfo() {
-		metainfo!.node!.info = nil
-		Model.shared.clearInfo(metainfo!)
-		NotificationCenter.default.post(name: refreshNotification, object: nil)
-		dismiss(animated: true, completion: nil)
+        SVProgressHUD.show(withStatus: "Clear...")
+        Model.shared.clearInfo(metainfo!.node!, result: { error in
+            SVProgressHUD.dismiss()
+            if error != nil {
+                self.showMessage("Cloud clear error: \(error!)", messageType: .information, messageHandler: {
+                    self.dismiss(animated: true, completion: nil)
+                })
+            } else {
+                NotificationCenter.default.post(name: refreshNotification, object: nil)
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
 	}
 	
 	func saveInfo() {
-		let uid = info!["id"] as? Int
-		
-		metainfo = Model.shared.createInfo("\(uid)")
-		metainfo?.title = info!["title"] as? String
-		metainfo?.overview = info!["overview"] as? String
-		metainfo?.release_date = info!["release_date"] as? String
-		metainfo?.poster = posterPath()
-		metainfo?.runtime = runtime()
-		metainfo?.rating = rating()
-		metainfo?.genre = genres()
-		metainfo?.cast = cast()
-		metainfo?.director = director()
-		
-		if node!.info != nil {
-			Model.shared.clearInfo(node!.info!)
-		}
-		node?.info = metainfo
-		metainfo?.node = node
-		Model.shared.saveContext()
-		NotificationCenter.default.post(name: refreshNotification, object: nil)
-		dismiss(animated: true, completion: nil)
+        SVProgressHUD.show(withStatus: "Save...")
+        Model.shared.setInfoForNode(node!,
+                                    title: title(),
+                                    overview: overview(),
+                                    release_date: release_date(),
+                                    poster: posterPath(),
+                                    runtime: runtime(),
+                                    rating: rating(),
+                                    genre: genres(),
+                                    cast: cast(),
+                                    director: director(),
+                                    result:
+            { error in
+                if error != nil {
+                    self.showMessage("Cloud save error: \(error!)", messageType: .information, messageHandler: {
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                } else {
+                    NotificationCenter.default.post(name: refreshNotification, object: nil)
+                    self.dismiss(animated: true, completion: nil)
+                }
+        })
 	}
-	
-	private func posterPath() -> String? {
+    
+    private func title() -> String {
+        if let val = info!["title"] as? String {
+            return val
+        } else {
+            return ""
+        }
+    }
+    
+    private func overview() -> String {
+        if let val = info!["overview"] as? String {
+            return val
+        } else {
+            return ""
+        }
+    }
+    
+    private func release_date() -> String {
+        if let val = info!["release_date"] as? String {
+            return val
+        } else {
+            return ""
+        }
+    }
+
+	private func posterPath() -> String {
 		if let posterPath = info!["poster_path"] as? String {
 			return "\(imageBaseURL!)\(posterPath)"
 		} else {
-			return nil;
+			return "";
 		}
 	}
 	
-	private func runtime() -> String? {
+	private func runtime() -> String {
 		if movieInfo != nil, let runtime = movieInfo!["runtime"] as? Int {
 			return "\(runtime)"
 		} else {
-			return nil
+			return ""
 		}
 	}
 	
-	private func genres() -> String? {
+	private func genres() -> String {
 		if movieInfo != nil, let genresArr = movieInfo!["genres"] as? [Any] {
 			var genres:[String] = []
 			for item in genresArr {
@@ -188,19 +221,19 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			}
 			return genres.joined(separator: ", ")
 		} else {
-			return nil
+			return ""
 		}
 	}
 	
-	private func rating() -> String? {
+	private func rating() -> String {
 		if movieInfo != nil, let popularity = movieInfo!["vote_average"] as? Double {
 			return "\(popularity)"
 		} else {
-			return nil
+			return ""
 		}
 	}
 
-	private func cast() -> String? {
+	private func cast() -> String {
 		if credits != nil, let castArr = credits!["cast"] as? [Any] {
 			var cast:[String] = []
 			for item in castArr {
@@ -210,11 +243,11 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			}
 			return cast.joined(separator: ", ")
 		} else {
-			return nil
+			return ""
 		}
 	}
 	
-	private func director() -> String? {
+	private func director() -> String {
 		if credits != nil, let crewArr =  credits!["crew"] as? [Any] {
 			var director:[String] = []
 			for item in crewArr {
@@ -224,7 +257,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			}
 			return director.joined(separator: ", ")
 		} else {
-			return nil
+			return ""
 		}
 	}
 

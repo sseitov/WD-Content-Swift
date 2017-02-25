@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 func generateUDID() -> String {
     return UUID().uuidString
@@ -42,8 +43,16 @@ class Model: NSObject {
     
     static let shared = Model()
     
+    var userInfo: UserInfo?
+    var publicDB: CKDatabase?
+
     private override init() {
         super.init()
+        
+        let container = CKContainer.default()
+        publicDB = container.publicCloudDatabase
+        userInfo = UserInfo(container: container)
+
     #if TV
         let url = self.applicationDocumentsDirectory.appendingPathComponent("WDContentTV.sqlite")
     #else
@@ -94,21 +103,83 @@ class Model: NSObject {
         }
     }
     
-    // MARK: - Connection table
-    
-    func addConnection(ip:String, port:Int32, user:String, password:String) -> Connection {
-        var connection = getConnection(ip)
-        if connection == nil {
-            connection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: managedObjectContext) as? Connection
-            connection!.ip = ip
+    @objc func refreshConnections(_ result: @escaping(Error?) -> ()) {
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "Connection", predicate: predicate)
+        
+        publicDB!.perform(query, inZoneWith: nil) { [unowned self] results, error in
+            
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    print("Cloud Query Error - Refresh: \(error)")
+                    result(error)
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                for record in results! {
+                    self.addConnection(record)
+                }
+                result(nil)
+            }
         }
-        connection!.port = port
-        connection!.user = user
-        connection!.password = password
-        saveContext()
-        return connection!
     }
     
+    // MARK: - Connection table
+    
+    func addConnection(_ record:CKRecord) {
+        if let ip = record["ip"] as? String {
+            var connection = getConnection(ip)
+            if connection == nil {
+                connection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: managedObjectContext) as? Connection
+                connection!.ip = ip
+                if let port = record["port"] as? String, let portNum = Int(port), let user = record["user"] as? String, let password = record["password"] as? String {
+                    
+                    connection!.recordName = record.recordID.recordName
+                    connection!.zoneName = record.recordID.zoneID.zoneName
+                    connection!.ownerName = record.recordID.zoneID.ownerName
+                    connection!.port = Int32(portNum)
+                    connection!.user = user
+                    connection!.password = password
+                    saveContext()
+                }
+            }
+        }
+    }
+
+    func createConnection(ip:String, port:Int32, user:String, password:String, result: @escaping(Connection?) -> ()) {
+        
+        if let connection = getConnection(ip) {
+            result(connection)
+        }
+        
+        let record = CKRecord(recordType: "Connection")
+        record.setValue(ip, forKey: "ip")
+        record.setValue("\(port)", forKey: "port")
+        record.setValue(user, forKey: "user")
+        record.setValue(password, forKey: "password")
+        
+        publicDB!.save(record, completionHandler: { cloudRecord, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    result(nil)
+                } else {
+                    let connection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: self.managedObjectContext) as! Connection
+                    connection.recordName = cloudRecord!.recordID.recordName
+                    connection.zoneName = cloudRecord!.recordID.zoneID.zoneName
+                    connection.ownerName = cloudRecord!.recordID.zoneID.ownerName
+                    connection.ip = ip
+                    connection.port = port
+                    connection.user = user
+                    connection.password = password
+                    self.saveContext()
+                    result(connection)
+                }
+            }
+        })
+    }
+
     func getConnection(_ address:String) -> Connection? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
         fetchRequest.predicate = NSPredicate(format: "ip == %@", address)
@@ -203,33 +274,119 @@ class Model: NSObject {
                 deleteNode(child)
             }
         }
+        clearInfoForNode(node)
         managedObjectContext.delete(node)
         saveContext()
     }
     
     // MARK: - MetaInfo table
     
-    func createInfo(_ uid:String) -> MetaInfo {
-        var info = getInfo(uid)
-        if info == nil {
-            info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: managedObjectContext) as? MetaInfo
-            info!.uid = uid
-        }
-        return info!
-    }
-    
-    func getInfo(_ uid:String) -> MetaInfo? {
+    func getInfo(_ path:String) -> MetaInfo? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MetaInfo")
-        fetchRequest.predicate = NSPredicate(format: "uid == %@", uid)
+        fetchRequest.predicate = NSPredicate(format: "path == %@", path)
         if let info = try? managedObjectContext.fetch(fetchRequest).first as? MetaInfo {
             return info
         } else {
             return nil
         }
     }
+
+    func setInfoForNode(_ node:Node,
+                        title:String,
+                        overview:String,
+                        release_date:String,
+                        poster:String,
+                        runtime:String,
+                        rating:String,
+                        genre:String,
+                        cast:String,
+                        director:String,
+                        result: @escaping(Error?) -> ()
+        )
+    {
+        let record = CKRecord(recordType: "MetaInfo")
+        record.setValue(node.path!, forKey: "path")
+        record.setValue(cast, forKey: "cast")
+        record.setValue(director, forKey: "director")
+        record.setValue(genre, forKey: "genre")
+        record.setValue(overview, forKey: "overview")
+        record.setValue(poster, forKey: "poster")
+        record.setValue(rating, forKey: "rating")
+        record.setValue(release_date, forKey: "release_date")
+        record.setValue(runtime, forKey: "runtime")
+        record.setValue(title, forKey: "title")
+        
+        publicDB!.save(record, completionHandler: { cloudRecord, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    result(error)
+                } else {
+                    self.clearInfoForNode(node)
+                    var info = self.getInfo(node.path!)
+                    if info == nil {
+                        info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: self.managedObjectContext) as? MetaInfo
+                        info!.path = node.path!
+                    }
+                    info!.recordName = cloudRecord!.recordID.recordName
+                    info!.zoneName = cloudRecord!.recordID.zoneID.zoneName
+                    info!.ownerName = cloudRecord!.recordID.zoneID.ownerName
+                    info!.title = title
+                    info!.overview = overview
+                    info!.release_date = release_date
+                    info!.poster = poster
+                    info!.runtime = runtime
+                    info!.rating = rating
+                    info!.genre = genre
+                    info!.cast = cast
+                    info!.director = director
+                    
+                    info!.node = node
+                    node.info = info
+                    self.saveContext()
+                    
+                    result(nil)
+                }
+            }
+        })
+    }
     
-    func clearInfo(_ info:MetaInfo) {
-        managedObjectContext.delete(info)
+    func clearInfoForNode(_ node:Node) {
+        if node.info == nil {
+            return
+        }
+        managedObjectContext.delete(node.info!)
+        node.info = nil
+        saveContext()
+        
+        let recordZoneID = CKRecordZoneID(zoneName: node.info!.zoneName!, ownerName: node.info!.ownerName!)
+        let recordID = CKRecordID(recordName: node.info!.recordName!, zoneID: recordZoneID)
+        publicDB!.delete(withRecordID: recordID, completionHandler: { record, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    print(error!)
+                }
+            }
+        })
+    }
+    
+    func clearInfo(_ forNode:Node, result: @escaping(Error?) -> ()) {
+        if forNode.info == nil {
+            result(nil)
+            return
+        }
+        
+        let recordZoneID = CKRecordZoneID(zoneName: forNode.info!.zoneName!, ownerName: forNode.info!.ownerName!)
+        let recordID = CKRecordID(recordName: forNode.info!.recordName!, zoneID: recordZoneID)
+        publicDB!.delete(withRecordID: recordID, completionHandler: { record, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    result(error)
+                } else {
+                    self.clearInfoForNode(forNode)
+                    result(nil)
+                }
+            }
+        })
     }
 
 }
