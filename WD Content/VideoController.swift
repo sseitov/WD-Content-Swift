@@ -90,7 +90,8 @@ class VideoController: UIViewController, DemuxerDelegate {
         layoutScreen()
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         layoutScreen()
     }
     
