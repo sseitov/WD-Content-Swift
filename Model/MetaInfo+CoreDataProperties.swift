@@ -29,6 +29,7 @@ extension MetaInfo {
     @NSManaged public var recordName: String?
     @NSManaged public var zoneName: String?
     @NSManaged public var ownerName: String?
+    @NSManaged public var modificationDate: NSDate?
     @NSManaged public var node: Node?
 
 }

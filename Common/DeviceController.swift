@@ -8,8 +8,6 @@
 
 import UIKit
 
-let refreshNotification = Notification.Name("REFRESH")
-
 class DeviceController: UITableViewController {
 
 	var target:ServiceHost?

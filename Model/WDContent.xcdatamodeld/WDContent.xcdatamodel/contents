@@ -14,6 +14,7 @@
         <attribute name="cast" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="director" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="genre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="overview" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
@@ -40,7 +41,7 @@
     </entity>
     <elements>
         <element name="Connection" positionX="-407" positionY="-396" width="128" height="165"/>
-        <element name="MetaInfo" positionX="7" positionY="-343" width="128" height="255"/>
+        <element name="MetaInfo" positionX="7" positionY="-343" width="128" height="270"/>
         <element name="Node" positionX="-227" positionY="-360" width="128" height="195"/>
     </elements>
 </model>

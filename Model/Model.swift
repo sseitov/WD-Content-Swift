@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 import CloudKit
 
+let refreshNotification = Notification.Name("REFRESH")
+let refreshNodeNotification = Notification.Name("REFRESH_NODE")
+
 func generateUDID() -> String {
     return UUID().uuidString
 }
@@ -304,8 +307,9 @@ class Model: NSObject {
                         result: @escaping(Error?) -> ()
         )
     {
+        let path = "\(node.connection!.ip!)//\(node.path!)"
         let record = CKRecord(recordType: "MetaInfo")
-        record.setValue(node.path!, forKey: "path")
+        record.setValue(path, forKey: "path")
         record.setValue(cast, forKey: "cast")
         record.setValue(director, forKey: "director")
         record.setValue(genre, forKey: "genre")
@@ -315,6 +319,7 @@ class Model: NSObject {
         record.setValue(release_date, forKey: "release_date")
         record.setValue(runtime, forKey: "runtime")
         record.setValue(title, forKey: "title")
+        record.setValue(Date(), forKey: "updated")
         
         publicDB!.save(record, completionHandler: { cloudRecord, error in
             DispatchQueue.main.async {
@@ -322,11 +327,12 @@ class Model: NSObject {
                     result(error)
                 } else {
                     self.clearInfoForNode(node)
-                    var info = self.getInfo(node.path!)
+                    var info = self.getInfo(path)
                     if info == nil {
                         info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: self.managedObjectContext) as? MetaInfo
-                        info!.path = node.path!
+                        info!.path = path
                     }
+                    info!.modificationDate = NSDate()
                     info!.recordName = cloudRecord!.recordID.recordName
                     info!.zoneName = cloudRecord!.recordID.zoneID.zoneName
                     info!.ownerName = cloudRecord!.recordID.zoneID.ownerName
@@ -350,6 +356,52 @@ class Model: NSObject {
         })
     }
     
+    func updateInfoForNode(_ node:Node) {
+        let predicate = NSPredicate(format: "path == %@", node.path!)
+        let query = CKQuery(recordType: "MetaInfo", predicate: predicate)
+        
+        publicDB!.perform(query, inZoneWith: nil, completionHandler: { records, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    print(error!)
+                } else if records != nil, let record = records!.first {
+                    if node.info != nil {
+                        if let date = node.info!.modificationDate as Date? {
+                            if let recordDate = record.modificationDate, recordDate > date {
+                                print("actual date")
+                                return
+                            }
+                        }
+                    }
+                    self.clearInfoForNode(node)
+                    var info = self.getInfo(record["path"] as! String)
+                    if info == nil {
+                        info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: self.managedObjectContext) as? MetaInfo
+                        info!.path = record["path"] as? String
+                    }
+                    info!.modificationDate = record.modificationDate != nil ? record.modificationDate as NSDate? : record.creationDate as NSDate?
+                    info!.recordName = record.recordID.recordName
+                    info!.zoneName = record.recordID.zoneID.zoneName
+                    info!.ownerName = record.recordID.zoneID.ownerName
+                    info!.title = record["title"] as? String
+                    info!.overview = record["overview"] as? String
+                    info!.release_date = record["release_date"] as? String
+                    info!.poster = record["poster"] as? String
+                    info!.runtime = record["runtime"] as? String
+                    info!.rating = record["rating"] as? String
+                    info!.genre = record["genre"] as? String
+                    info!.cast = record["cast"] as? String
+                    info!.director = record["director"] as? String
+                    
+                    info!.node = node
+                    node.info = info
+                    self.saveContext()
+                    NotificationCenter.default.post(name: refreshNodeNotification, object: node)
+                }
+            }
+        })
+    }
+    
     func clearInfoForNode(_ node:Node) {
         if node.info == nil {
             return
@@ -357,16 +409,6 @@ class Model: NSObject {
         managedObjectContext.delete(node.info!)
         node.info = nil
         saveContext()
-        
-        let recordZoneID = CKRecordZoneID(zoneName: node.info!.zoneName!, ownerName: node.info!.ownerName!)
-        let recordID = CKRecordID(recordName: node.info!.recordName!, zoneID: recordZoneID)
-        publicDB!.delete(withRecordID: recordID, completionHandler: { record, error in
-            DispatchQueue.main.async {
-                if error != nil {
-                    print(error!)
-                }
-            }
-        })
     }
     
     func clearInfo(_ forNode:Node, result: @escaping(Error?) -> ()) {
