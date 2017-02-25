@@ -31,6 +31,7 @@ class ShareCell: UICollectionViewCell {
 						imageView.image = UIImage(named: "movie")
 					}
 				}
+                Model.shared.updateInfoForNode(node!)
 			} else {
 				textView.text = node!.name!
                 if node!.parent == nil {

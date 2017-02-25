@@ -21,17 +21,16 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate,
 		                                       selector: #selector(self.refresh),
 		                                       name: refreshNotification,
 		                                       object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshNode(notyfy:)),
+                                               name: refreshNodeNotification,
+                                               object: nil)
 		
 		let longTap = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongTap(tap:)))
 		longTap.delegate = self
 		collectionView?.addGestureRecognizer(longTap)
 		
-		nodes = Model.shared.nodes(byRoot: nil)
-		if parentNode == nil && nodes.count == 0 {
-			performSegue(withIdentifier: "addShare", sender: nil)
-		} else {
-			refresh()
-		}
+        refresh()
     }
 
 	func pressLongTap(tap:UILongPressGestureRecognizer) {
@@ -50,22 +49,38 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate,
 		}
 	}
 	
+    func refreshNode(notyfy:Notification) {
+        if let node = notyfy.object as? Node {
+            if let index = nodes.index(of: node) {
+                collectionView?.reloadItems(at: [IndexPath(row: index, section: 0)])
+            }
+        }
+    }
+    
 	func refresh() {
-		setupTitle(parentNode == nil ? "My Shares" : parentNode!.name!)
-		nodes.removeAll()
-		SVProgressHUD.show(withStatus: "Refresh...")
-        Model.shared.refreshConnections({ _ error in
-            if error != nil {
-                self.showMessage("Cloud refresh error: \(error!)", messageType: .information)
-            }
-            self.nodes = Model.shared.nodes(byRoot: self.parentNode)
-            DispatchQueue.global().async {
-                DispatchQueue.main.async {
+		setupTitle(parentNode == nil ? "MY SHARES" : parentNode!.name!)
+        if parentNode == nil {
+            nodes = Model.shared.nodes(byRoot: nil)
+            if nodes.count == 0 {
+                SVProgressHUD.show(withStatus: "Refresh...")
+                Model.shared.refreshConnections({ error in
                     SVProgressHUD.dismiss()
-                    self.collectionView?.reloadData()
-                }
+                    self.nodes = Model.shared.nodes(byRoot: nil)
+                    if self.nodes.count == 0 {
+                        self.performSegue(withIdentifier: "addShare", sender: nil)
+                    } else {
+                        self.collectionView?.reloadData()
+                    }
+                })
+            } else {
+                self.collectionView?.reloadData()
             }
-        })
+        } else {
+            nodes.removeAll()
+            self.nodes = Model.shared.nodes(byRoot: self.parentNode)
+            self.collectionView?.reloadData()
+        }
+        
 	}
 
     // MARK: UICollectionViewDataSource

@@ -112,19 +112,39 @@ class DeviceController: UITableViewController {
             self.goBack()
         }))
 		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
-			if self.connection.connect(to: self.target!.host,
-			                           port: self.target!.port,
-			                           user: userField!.text!,
-			                           password: passwordField!.text!) {
-				
-				self.cashedConnection = Model.shared.addConnection(ip: self.target!.host, port: self.target!.port, user: userField!.text!, password: passwordField!.text!)
-				self.content = self.connection.folderContents(at: "/") as! [SMBFile]
-				self.tableView.reloadData()
-			} else {
-				self.showMessage("Can not connect.", messageType: .error, messageHandler: {
-					self.goBack()
-				})
-			}
+            SVProgressHUD.show(withStatus: "Connect...")
+            DispatchQueue.global().async {
+                let connected = self.connection.connect(to: self.target!.host,
+                                                        port: self.target!.port,
+                                                        user: userField!.text!,
+                                                        password: passwordField!.text!)
+                DispatchQueue.main.async {
+                    if connected {
+                        Model.shared.createConnection(ip: self.target!.host,
+                                                      port: self.target!.port,
+                                                      user: userField!.text!,
+                                                      password: passwordField!.text!,
+                                                      result:
+                            { cashed in
+                                SVProgressHUD.dismiss()
+                                if cashed == nil {
+                                    self.showMessage("Can not create connection.", messageType: .error, messageHandler: {
+                                        self.goBack()
+                                    })
+                                } else {
+                                    self.cashedConnection = cashed
+                                    self.content = self.connection.folderContents(at: "/") as! [SMBFile]
+                                    self.tableView.reloadData()
+                                }
+                        })
+                    } else {
+                        SVProgressHUD.dismiss()
+                        self.showMessage("Can not connect.", messageType: .error, messageHandler: {
+                            self.goBack()
+                        })
+                    }
+                }
+            }
 		}))
 		present(alert, animated: true, completion: nil)
     #endif
@@ -143,7 +163,7 @@ class DeviceController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = content[(indexPath as NSIndexPath).row].name
-        cell.textLabel?.font = UIFont.condensedFont()
+        cell.textLabel?.font = UIFont.mainFont()
         cell.textLabel?.textColor = UIColor.mainColor()
         cell.textLabel?.textAlignment = .center
 		return cell

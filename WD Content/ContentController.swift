@@ -22,6 +22,10 @@ class ContentController: UIViewController {
                                                selector: #selector(self.refreshNotify),
                                                name: refreshNotification,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshNode(notyfy:)),
+                                               name: refreshNodeNotification,
+                                               object: nil)
         refresh()
     }
 
@@ -29,6 +33,14 @@ class ContentController: UIViewController {
         collectionView.reloadData()
     }
     
+    func refreshNode(notyfy:Notification) {
+        if let node = notyfy.object as? Node, node.parent == parentNode {
+            if let index = nodes.index(of: node) {
+                collectionView?.reloadItems(at: [IndexPath(row: index, section: 0)])
+            }
+        }
+    }
+
     func refresh() {
         UIView.animate(withDuration: 0.2, animations: {
             self.collectionView.alpha = 0

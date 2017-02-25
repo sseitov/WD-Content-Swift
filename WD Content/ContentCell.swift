@@ -33,6 +33,7 @@ class ContentCell: UICollectionViewCell {
                         nodeImage.image = UIImage(named: "file")
                     }
                 }
+                Model.shared.updateInfoForNode(node!)
             } else {
                 nodeImage.image = UIImage(named: "folder")
                 nodeName.text = node!.name

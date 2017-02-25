@@ -160,6 +160,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                     director: director(),
                                     result:
             { error in
+                SVProgressHUD.dismiss()
                 if error != nil {
                     self.showMessage("Cloud save error: \(error!)", messageType: .information, messageHandler: {
                         self.dismiss(animated: true, completion: nil)

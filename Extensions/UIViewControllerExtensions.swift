@@ -15,13 +15,13 @@ enum MessageType {
 extension UIViewController {
     
     func setupTitle(_ text:String) {
-#if TV
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 800, height: 132))
-    label.textColor = UIColor.mainColor()
-#else
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
-    label.textColor = UIColor.white
-#endif
+    #if TV
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 800, height: 132))
+        label.textColor = UIColor.mainColor()
+    #else
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
+        label.textColor = UIColor.white
+    #endif
         label.font = UIFont.condensedFont()
         label.textAlignment = .center
         label.text = text
@@ -42,6 +42,8 @@ extension UIViewController {
     
     // MARK: - alerts
     
+#if TV
+    
     func showMessage(_ error:String, messageType:MessageType, messageHandler: (() -> ())? = nil) {
         var title:String = ""
         switch messageType {
@@ -60,5 +62,25 @@ extension UIViewController {
         }))
         present(alert, animated: true, completion: nil)
     }
+#else
 
+    func showMessage(_ error:String, messageType:MessageType, messageHandler: (() -> ())? = nil) {
+        var title:String = ""
+        switch messageType {
+        case .success:
+            title = "Success"
+        case .information:
+            title = "Information"
+        default:
+            title = "Error"
+        }
+        let alert = LGAlertView.decoratedAlert(withTitle:title, message: error, cancelButtonTitle: "OK", cancelButtonBlock: { alert in
+            if messageHandler != nil {
+                messageHandler!()
+            }
+        })
+        alert!.titleLabel.textColor = messageType == .error ? UIColor.red : UIColor.mainColor()
+        alert?.show()
+    }
+#endif
 }

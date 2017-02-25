@@ -357,7 +357,8 @@ class Model: NSObject {
     }
     
     func updateInfoForNode(_ node:Node) {
-        let predicate = NSPredicate(format: "path == %@", node.path!)
+        let path = "\(node.connection!.ip!)//\(node.path!)"
+        let predicate = NSPredicate(format: "path == %@", path)
         let query = CKQuery(recordType: "MetaInfo", predicate: predicate)
         
         publicDB!.perform(query, inZoneWith: nil, completionHandler: { records, error in
@@ -366,9 +367,8 @@ class Model: NSObject {
                     print(error!)
                 } else if records != nil, let record = records!.first {
                     if node.info != nil {
-                        if let date = node.info!.modificationDate as Date? {
-                            if let recordDate = record.modificationDate, recordDate > date {
-                                print("actual date")
+                        if let date = node.info!.modificationDate as Date?, let recordDate = record.modificationDate {
+                            if recordDate >= date { // actual date
                                 return
                             }
                         }

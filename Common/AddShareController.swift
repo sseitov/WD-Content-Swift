@@ -100,7 +100,7 @@ class AddShareController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = hosts[(indexPath as NSIndexPath).row].name
-        cell.textLabel?.font = UIFont.condensedFont()
+        cell.textLabel?.font = UIFont.mainFont()
         cell.textLabel?.textColor = UIColor.mainColor()
         cell.textLabel?.textAlignment = .center
 		return cell
