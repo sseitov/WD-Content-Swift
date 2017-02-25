@@ -70,6 +70,10 @@ class ContentController: UIViewController {
             let nav = segue.destination as! UINavigationController
             let next = nav.topViewController as! InfoViewController
             next.metainfo = sender as? MetaInfo
+        } else if segue.identifier == "movie" {
+            let nav = segue.destination as! UINavigationController
+            let next = nav.topViewController as! VideoController
+            next.node = sender as? Node
         }
     }
 }
@@ -94,11 +98,18 @@ extension ContentController: UICollectionViewDataSource, UICollectionViewDelegat
             parentNode = node
             refresh()
         } else {
-            if node.info != nil {
-                performSegue(withIdentifier: "info", sender: node.info)
-            } else {
-                performSegue(withIdentifier: "search", sender: node)
-            }
+            let alert = ActionSheet.create(title: "Choose Action", actions: ["Preview movie", "Show Info"],
+                                           handler1: {
+                                            self.performSegue(withIdentifier: "movie", sender: node)
+            },
+                                           handler2: {
+                                            if node.info != nil {
+                                                self.performSegue(withIdentifier: "info", sender: node.info)
+                                            } else {
+                                                self.performSegue(withIdentifier: "search", sender: node)
+                                            }
+            })
+            alert?.show()
         }
     }
 }

@@ -240,6 +240,7 @@
                         <outlet property="collectionView" destination="NBS-Es-yBg" id="NwO-ho-rYe"/>
                         <segue destination="klY-Xg-8IB" kind="presentation" identifier="search" id="bBC-YH-p8K"/>
                         <segue destination="fFh-Wo-brx" kind="presentation" identifier="info" id="xHn-lf-Whv"/>
+                        <segue destination="Z2I-Wa-kGE" kind="presentation" identifier="movie" modalTransitionStyle="flipHorizontal" id="xcV-yO-iit"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ahK-55-ZAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -386,6 +387,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMJ-AQ-GNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2919" y="1332"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aaV-Tr-FUB">
+            <objects>
+                <navigationController id="Z2I-Wa-kGE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="XIG-eD-ebE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ugl-lo-6M6" kind="relationship" relationship="rootViewController" id="tUg-lx-vI7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zqJ-xG-NH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3323" y="518"/>
+        </scene>
+        <!--Video Controller-->
+        <scene sceneID="jXP-YY-tKY">
+            <objects>
+                <viewController id="Ugl-lo-6M6" customClass="VideoController" customModule="WD_Content" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BJO-gD-qtV"/>
+                        <viewControllerLayoutGuide type="bottom" id="WdL-rD-daV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g2a-ob-wtT">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="mBk-2L-CNN">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="kce-yY-gmn">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="finish" destination="Ugl-lo-6M6" id="J6p-BA-iGc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Audio" id="bik-uB-OLo">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="changeAudio" destination="Ugl-lo-6M6" id="Lk9-N6-cKa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ak-cT-nvS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4114" y="518"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="hIY-0D-p5s">

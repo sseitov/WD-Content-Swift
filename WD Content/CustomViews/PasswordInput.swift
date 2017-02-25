@@ -28,7 +28,9 @@ class PasswordInput: LGAlertView, TextFieldContainerDelegate {
             textInput.cancelButtonBlock = { alert in
                 cancelHandler!()
             }
-
+            textInput.otherButtonBlock = { alert in
+                textInput.returnCredentials()
+            }
             textInput.handler = acceptHandler
             
             textInput.userField.delegate = textInput
@@ -56,12 +58,16 @@ class PasswordInput: LGAlertView, TextFieldContainerDelegate {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardDidChangeFrame, object: nil)
     }
     
+    func returnCredentials() {
+        handler!(userField.text(), passwordField.text())
+        dismiss()
+    }
+    
     func textDone(_ sender:TextFieldContainer, text:String?) {
         if sender == userField {
             passwordField.activate(true)
         } else {
-            handler!(userField.text(), passwordField.text())
-            dismiss()
+            returnCredentials()
         }
     }
     
