@@ -47,13 +47,13 @@ class Model: NSObject {
     static let shared = Model()
     
     var userInfo: UserInfo?
-    var publicDB: CKDatabase?
+    var cloudDB: CKDatabase?
 
     private override init() {
         super.init()
         
         let container = CKContainer.default()
-        publicDB = container.publicCloudDatabase
+        cloudDB = container.privateCloudDatabase
         userInfo = UserInfo(container: container)
 
     #if TV
@@ -110,7 +110,7 @@ class Model: NSObject {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Connection", predicate: predicate)
         
-        publicDB!.perform(query, inZoneWith: nil) { [unowned self] results, error in
+        cloudDB!.perform(query, inZoneWith: nil) { [unowned self] results, error in
             
             guard error == nil else {
                 DispatchQueue.main.async {
@@ -163,7 +163,7 @@ class Model: NSObject {
         record.setValue(user, forKey: "user")
         record.setValue(password, forKey: "password")
         
-        publicDB!.save(record, completionHandler: { cloudRecord, error in
+        cloudDB!.save(record, completionHandler: { cloudRecord, error in
             DispatchQueue.main.async {
                 if error != nil {
                     result(nil)
@@ -321,7 +321,7 @@ class Model: NSObject {
         record.setValue(title, forKey: "title")
         record.setValue(Date(), forKey: "updated")
         
-        publicDB!.save(record, completionHandler: { cloudRecord, error in
+        cloudDB!.save(record, completionHandler: { cloudRecord, error in
             DispatchQueue.main.async {
                 if error != nil {
                     result(error)
@@ -361,7 +361,7 @@ class Model: NSObject {
         let predicate = NSPredicate(format: "path == %@", path)
         let query = CKQuery(recordType: "MetaInfo", predicate: predicate)
         
-        publicDB!.perform(query, inZoneWith: nil, completionHandler: { records, error in
+        cloudDB!.perform(query, inZoneWith: nil, completionHandler: { records, error in
             DispatchQueue.main.async {
                 if error != nil {
                     print(error!)
@@ -419,7 +419,7 @@ class Model: NSObject {
         
         let recordZoneID = CKRecordZoneID(zoneName: forNode.info!.zoneName!, ownerName: forNode.info!.ownerName!)
         let recordID = CKRecordID(recordName: forNode.info!.recordName!, zoneID: recordZoneID)
-        publicDB!.delete(withRecordID: recordID, completionHandler: { record, error in
+        cloudDB!.delete(withRecordID: recordID, completionHandler: { record, error in
             DispatchQueue.main.async {
                 if error != nil {
                     result(error)

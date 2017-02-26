@@ -1,5 +1,5 @@
 target 'WD Content' do
-	platform :ios, '9.0'
+    platform :ios, '9.0'
 	
     pod 'SVProgressHUD'
     pod 'AFNetworking'
@@ -9,7 +9,7 @@ target 'WD Content' do
 end
 
 target 'WD Content TV' do
-	platform :tvos, '9.0'
+    platform :tvos, '10.0'
 	
     pod 'SVProgressHUD'
     pod 'AFNetworking'
