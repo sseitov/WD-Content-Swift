@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AMSlideMenu
 
 class MainVC: AMSlideMenuMainViewController {
 

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AMSlideMenu
+import SVProgressHUD
 
 class RightMenuVC: AMSlideMenuRightTableViewController {
 

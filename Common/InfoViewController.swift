@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 

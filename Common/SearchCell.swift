@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 #if IOS
 protocol SearchCellDelegate {

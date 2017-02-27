@@ -295,19 +295,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xBm-jP-DuP">
-                                            <rect key="frame" x="10" y="5" width="100" height="34"/>
+                                            <rect key="frame" x="10" y="5" width="100" height="33"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="aV7-JE-pun"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJT-NS-10Y">
-                                            <rect key="frame" x="110" y="5" width="177" height="14"/>
+                                            <rect key="frame" x="110" y="5" width="177" height="13"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7c-pj-46e">
-                                            <rect key="frame" x="110" y="19" width="177" height="20"/>
+                                            <rect key="frame" x="110" y="18" width="177" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="4nA-zW-3TE"/>
                                             </constraints>
@@ -398,44 +398,50 @@
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Ugl-lo-6M6" kind="relationship" relationship="rootViewController" id="tUg-lx-vI7"/>
+                        <segue destination="gj1-bC-bqI" kind="relationship" relationship="rootViewController" id="4L0-hN-lAW"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zqJ-xG-NH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3323" y="518"/>
         </scene>
-        <!--Video Controller-->
-        <scene sceneID="jXP-YY-tKY">
+        <!--Video Player-->
+        <scene sceneID="RqF-qo-uV8">
             <objects>
-                <viewController id="Ugl-lo-6M6" customClass="VideoController" customModule="WD_Content" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gj1-bC-bqI" customClass="VideoPlayer" customModule="WD_Content" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BJO-gD-qtV"/>
-                        <viewControllerLayoutGuide type="bottom" id="WdL-rD-daV"/>
+                        <viewControllerLayoutGuide type="top" id="7z4-oM-Fw1"/>
+                        <viewControllerLayoutGuide type="bottom" id="kYH-rY-c4c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="g2a-ob-wtT">
+                    <view key="view" contentMode="scaleToFill" id="WGh-5P-Sc1">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzT-pm-3Jx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kYH-rY-c4c" firstAttribute="top" secondItem="wzT-pm-3Jx" secondAttribute="bottom" id="Oc6-HQ-HGg"/>
+                            <constraint firstItem="wzT-pm-3Jx" firstAttribute="leading" secondItem="WGh-5P-Sc1" secondAttribute="leading" id="c6u-Z0-bJL"/>
+                            <constraint firstAttribute="trailing" secondItem="wzT-pm-3Jx" secondAttribute="trailing" id="kKK-pi-Vyz"/>
+                            <constraint firstItem="wzT-pm-3Jx" firstAttribute="top" secondItem="7z4-oM-Fw1" secondAttribute="bottom" id="wdl-zG-EqZ"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mBk-2L-CNN">
-                        <barButtonItem key="leftBarButtonItem" title="Done" id="kce-yY-gmn">
+                    <navigationItem key="navigationItem" id="Iqy-sm-Qyc">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="zNa-TB-tg6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="finish" destination="Ugl-lo-6M6" id="J6p-BA-iGc"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Audio" id="bik-uB-OLo">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="changeAudio" destination="Ugl-lo-6M6" id="Lk9-N6-cKa"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="movieView" destination="wzT-pm-3Jx" id="gpe-tp-mY2"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ak-cT-nvS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xpL-9f-fx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4114" y="518"/>
+            <point key="canvasLocation" x="4246.875" y="517.6056338028169"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="hIY-0D-p5s">

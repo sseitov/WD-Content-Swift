@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 func IS_PAD() -> Bool {
     return UIDevice.current.userInterfaceIdiom == .pad

@@ -37,4 +37,6 @@ xcuserdata/
 Pods/
 Podfile.lock
 
+MobileVLCKit.framework
+TVVLCKit.framework
 TMDB/ApiKeys.h

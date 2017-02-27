@@ -20,56 +20,13 @@
 		2C2AF5021E6184D9008DBD26 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AF5001E6184D9008DBD26 /* UserInfo.swift */; };
 		2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9471E60D2A300F44E56 /* ActionSheet.swift */; };
 		2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C80B9481E60D2A300F44E56 /* ActionSheet.xib */; };
-		2C80B9541E60D5E500F44E56 /* AudioDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B94F1E60D5E500F44E56 /* AudioDecoder.mm */; };
-		2C80B9551E60D5E500F44E56 /* AudioOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9511E60D5E500F44E56 /* AudioOutput.mm */; };
-		2C80B9561E60D5E500F44E56 /* AudioRingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9531E60D5E500F44E56 /* AudioRingBuffer.mm */; };
-		2C80B95B1E60D5FE00F44E56 /* VideoUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9571E60D5FE00F44E56 /* VideoUtility.c */; };
-		2C80B95C1E60D5FE00F44E56 /* VTDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B95A1E60D5FE00F44E56 /* VTDecoder.mm */; };
-		2C80B9641E60D61200F44E56 /* Decoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B95F1E60D61200F44E56 /* Decoder.mm */; };
-		2C80B9651E60D61200F44E56 /* Demuxer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9611E60D61200F44E56 /* Demuxer.mm */; };
-		2C80B9681E60D94500F44E56 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B9671E60D94500F44E56 /* AudioToolbox.framework */; };
-		2C80B96A1E60D97700F44E56 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B9691E60D97700F44E56 /* libz.tbd */; };
-		2C80B96E1E60D9B700F44E56 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B96D1E60D9B700F44E56 /* CoreMedia.framework */; };
 		2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */; };
-		2C80B9711E60D9F500F44E56 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B9701E60D9F500F44E56 /* VideoToolbox.framework */; };
-		2C80B9731E60DAF100F44E56 /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9721E60DAF100F44E56 /* VideoController.swift */; };
-		2C80B9751E60F3C000F44E56 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B9741E60F3C000F44E56 /* libbz2.tbd */; };
 		2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549A61E5F2B1800A23CC5 /* TMDB.m */; };
 		2C9549A91E5F32D100A23CC5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549A81E5F32D100A23CC5 /* libiconv.tbd */; };
 		2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549A61E5F2B1800A23CC5 /* TMDB.m */; };
 		2C9549AC1E5F3CD300A23CC5 /* libtasnl_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549AB1E5F3CD300A23CC5 /* libtasnl_ios.a */; };
-		2C9549B51E5F499200A23CC5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549AD1E5F499200A23CC5 /* libavcodec.a */; };
-		2C9549B61E5F499200A23CC5 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549AE1E5F499200A23CC5 /* libavdevice.a */; };
-		2C9549B71E5F499200A23CC5 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549AF1E5F499200A23CC5 /* libavfilter.a */; };
-		2C9549B81E5F499200A23CC5 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549B01E5F499200A23CC5 /* libavformat.a */; };
-		2C9549B91E5F499200A23CC5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549B11E5F499200A23CC5 /* libavutil.a */; };
-		2C9549BA1E5F499200A23CC5 /* libfdk-aac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549B21E5F499200A23CC5 /* libfdk-aac.a */; };
-		2C9549BB1E5F499200A23CC5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549B31E5F499200A23CC5 /* libswresample.a */; };
-		2C9549BC1E5F499200A23CC5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549B41E5F499200A23CC5 /* libswscale.a */; };
-		2C9549C71E5F49A700A23CC5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549BD1E5F49A700A23CC5 /* libavcodec.a */; };
-		2C9549C81E5F49A700A23CC5 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549BE1E5F49A700A23CC5 /* libavdevice.a */; };
-		2C9549C91E5F49A700A23CC5 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549BF1E5F49A700A23CC5 /* libavfilter.a */; };
-		2C9549CA1E5F49A700A23CC5 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549C01E5F49A700A23CC5 /* libavformat.a */; };
-		2C9549CB1E5F49A700A23CC5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549C11E5F49A700A23CC5 /* libavutil.a */; };
-		2C9549CC1E5F49A700A23CC5 /* libfdk-aac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549C21E5F49A700A23CC5 /* libfdk-aac.a */; };
-		2C9549CD1E5F49A700A23CC5 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549C31E5F49A700A23CC5 /* libpostproc.a */; };
-		2C9549CE1E5F49A700A23CC5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549C41E5F49A700A23CC5 /* libswresample.a */; };
-		2C9549CF1E5F49A700A23CC5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549C51E5F49A700A23CC5 /* libswscale.a */; };
-		2C9549D01E5F49A700A23CC5 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549C61E5F49A700A23CC5 /* libx264.a */; };
-		2C9549D41E5F4A7500A23CC5 /* YUVShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C9549D21E5F4A7500A23CC5 /* YUVShader.fsh */; };
-		2C9549D51E5F4A7500A23CC5 /* YUVShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C9549D31E5F4A7500A23CC5 /* YUVShader.vsh */; };
 		2C9549E31E5F4ACD00A23CC5 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */; };
 		2C9549E41E5F4ACD00A23CC5 /* SharesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */; };
-		2C9549F61E5F4B8500A23CC5 /* AudioOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549E81E5F4B8500A23CC5 /* AudioOutput.mm */; };
-		2C9549F71E5F4B8500A23CC5 /* AudioRingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549EA1E5F4B8500A23CC5 /* AudioRingBuffer.mm */; };
-		2C9549F81E5F4B8500A23CC5 /* Decoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549EC1E5F4B8500A23CC5 /* Decoder.mm */; };
-		2C9549F91E5F4B8500A23CC5 /* MovieController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549EE1E5F4B8500A23CC5 /* MovieController.mm */; };
-		2C9549FA1E5F4B8500A23CC5 /* TextureItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549F11E5F4B8500A23CC5 /* TextureItem.mm */; };
-		2C9549FB1E5F4B8500A23CC5 /* Util.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549F31E5F4B8500A23CC5 /* Util.mm */; };
-		2C9549FC1E5F4B8500A23CC5 /* VideoOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549F51E5F4B8500A23CC5 /* VideoOutput.mm */; };
-		2C9549FE1E5F5A4900A23CC5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549FD1E5F5A4900A23CC5 /* AudioToolbox.framework */; };
-		2C954A001E5F5A6300A23CC5 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549FF1E5F5A6300A23CC5 /* libbz2.tbd */; };
-		2C954A021E5F5A7500A23CC5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C954A011E5F5A7500A23CC5 /* libz.tbd */; };
 		2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */; };
 		2C954A091E5F65CD00A23CC5 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */; };
 		2C954A0A1E5F65CD00A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */; };
@@ -133,8 +90,19 @@
 		2CC0D9B31E5F120100254181 /* libtansl_tvos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9B11E5F120100254181 /* libtansl_tvos.a */; };
 		2CC0D9B61E5F121800254181 /* libdsm_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9B41E5F121800254181 /* libdsm_ios.a */; };
 		2CC0D9B91E5F12D100254181 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9B81E5F12D100254181 /* libiconv.tbd */; };
-		509E2D482B21FBF6CFC3902B /* libPods-WD Content TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EBF3B751987E884F8272F8 /* libPods-WD Content TV.a */; };
-		B8F3A742B901461EB6B09A25 /* libPods-WD Content.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 600421526FEC21BB7FA1CAA5 /* libPods-WD Content.a */; };
+		2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
+		2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
+		2CCC86F01E62D2A6000CC894 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CCC86EF1E62D2A6000CC894 /* AVFoundation.framework */; };
+		2CD9EF651E63210200E5F8DF /* MobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF641E63210200E5F8DF /* MobileVLCKit.framework */; };
+		2CD9EF671E63211000E5F8DF /* TVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF661E63211000E5F8DF /* TVVLCKit.framework */; };
+		2CD9EF691E6321FC00E5F8DF /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */; };
+		2CD9EF6B1E63221500E5F8DF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF6A1E63221500E5F8DF /* libc++.tbd */; };
+		2CD9EF6D1E63223400E5F8DF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */; };
+		2CD9EF6F1E6322F500E5F8DF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF6E1E6322F500E5F8DF /* libc++.tbd */; };
+		2CD9EF711E63236B00E5F8DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF701E63236B00E5F8DF /* AudioToolbox.framework */; };
+		2CD9EF731E63237E00E5F8DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF721E63237E00E5F8DF /* AudioToolbox.framework */; };
+		482D70A3D5314EC745E9891A /* Pods_WD_Content_TV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7DB5D9F0700699E453EE01 /* Pods_WD_Content_TV.framework */; };
+		8DA998C81B9F7A300F9B196A /* Pods_WD_Content.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B99507DC87FCE29ED3D2682 /* Pods_WD_Content.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,73 +124,14 @@
 		2C2AF5001E6184D9008DBD26 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = Model/UserInfo.swift; sourceTree = "<group>"; };
 		2C80B9471E60D2A300F44E56 /* ActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionSheet.swift; path = CustomViews/ActionSheet.swift; sourceTree = "<group>"; };
 		2C80B9481E60D2A300F44E56 /* ActionSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActionSheet.xib; path = CustomViews/ActionSheet.xib; sourceTree = "<group>"; };
-		2C80B94E1E60D5E500F44E56 /* AudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioDecoder.h; path = MoviePlayer/Audio/AudioDecoder.h; sourceTree = "<group>"; };
-		2C80B94F1E60D5E500F44E56 /* AudioDecoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioDecoder.mm; path = MoviePlayer/Audio/AudioDecoder.mm; sourceTree = "<group>"; };
-		2C80B9501E60D5E500F44E56 /* AudioOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioOutput.h; path = MoviePlayer/Audio/AudioOutput.h; sourceTree = "<group>"; };
-		2C80B9511E60D5E500F44E56 /* AudioOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioOutput.mm; path = MoviePlayer/Audio/AudioOutput.mm; sourceTree = "<group>"; };
-		2C80B9521E60D5E500F44E56 /* AudioRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioRingBuffer.h; path = MoviePlayer/Audio/AudioRingBuffer.h; sourceTree = "<group>"; };
-		2C80B9531E60D5E500F44E56 /* AudioRingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioRingBuffer.mm; path = MoviePlayer/Audio/AudioRingBuffer.mm; sourceTree = "<group>"; };
-		2C80B9571E60D5FE00F44E56 /* VideoUtility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VideoUtility.c; path = MoviePlayer/Video/VideoUtility.c; sourceTree = "<group>"; };
-		2C80B9581E60D5FE00F44E56 /* VideoUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoUtility.h; path = MoviePlayer/Video/VideoUtility.h; sourceTree = "<group>"; };
-		2C80B9591E60D5FE00F44E56 /* VTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTDecoder.h; path = MoviePlayer/Video/VTDecoder.h; sourceTree = "<group>"; };
-		2C80B95A1E60D5FE00F44E56 /* VTDecoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VTDecoder.mm; path = MoviePlayer/Video/VTDecoder.mm; sourceTree = "<group>"; };
-		2C80B95D1E60D61200F44E56 /* ConditionLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConditionLock.h; path = MoviePlayer/ConditionLock.h; sourceTree = "<group>"; };
-		2C80B95E1E60D61200F44E56 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = MoviePlayer/Decoder.h; sourceTree = "<group>"; };
-		2C80B95F1E60D61200F44E56 /* Decoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Decoder.mm; path = MoviePlayer/Decoder.mm; sourceTree = "<group>"; };
-		2C80B9601E60D61200F44E56 /* Demuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Demuxer.h; path = MoviePlayer/Demuxer.h; sourceTree = "<group>"; };
-		2C80B9611E60D61200F44E56 /* Demuxer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Demuxer.mm; path = MoviePlayer/Demuxer.mm; sourceTree = "<group>"; };
-		2C80B9671E60D94500F44E56 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		2C80B9691E60D97700F44E56 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		2C80B96D1E60D9B700F44E56 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		2C80B9701E60D9F500F44E56 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		2C80B9721E60DAF100F44E56 /* VideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
-		2C80B9741E60F3C000F44E56 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		2C9549A41E5F2B1800A23CC5 /* ApiKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApiKeys.h; path = TMDB/ApiKeys.h; sourceTree = "<group>"; };
 		2C9549A51E5F2B1800A23CC5 /* TMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDB.h; path = TMDB/TMDB.h; sourceTree = "<group>"; };
 		2C9549A61E5F2B1800A23CC5 /* TMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDB.m; path = TMDB/TMDB.m; sourceTree = "<group>"; };
 		2C9549A81E5F32D100A23CC5 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		2C9549AB1E5F3CD300A23CC5 /* libtasnl_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtasnl_ios.a; path = libdsm/libtasnl_ios.a; sourceTree = "<group>"; };
-		2C9549AD1E5F499200A23CC5 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ffmpeg/ios/libavcodec.a; sourceTree = "<group>"; };
-		2C9549AE1E5F499200A23CC5 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ffmpeg/ios/libavdevice.a; sourceTree = "<group>"; };
-		2C9549AF1E5F499200A23CC5 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ffmpeg/ios/libavfilter.a; sourceTree = "<group>"; };
-		2C9549B01E5F499200A23CC5 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ffmpeg/ios/libavformat.a; sourceTree = "<group>"; };
-		2C9549B11E5F499200A23CC5 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ffmpeg/ios/libavutil.a; sourceTree = "<group>"; };
-		2C9549B21E5F499200A23CC5 /* libfdk-aac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libfdk-aac.a"; path = "ffmpeg/ios/libfdk-aac.a"; sourceTree = "<group>"; };
-		2C9549B31E5F499200A23CC5 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ffmpeg/ios/libswresample.a; sourceTree = "<group>"; };
-		2C9549B41E5F499200A23CC5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ffmpeg/ios/libswscale.a; sourceTree = "<group>"; };
-		2C9549BD1E5F49A700A23CC5 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ffmpeg/tvos/libavcodec.a; sourceTree = "<group>"; };
-		2C9549BE1E5F49A700A23CC5 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ffmpeg/tvos/libavdevice.a; sourceTree = "<group>"; };
-		2C9549BF1E5F49A700A23CC5 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ffmpeg/tvos/libavfilter.a; sourceTree = "<group>"; };
-		2C9549C01E5F49A700A23CC5 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ffmpeg/tvos/libavformat.a; sourceTree = "<group>"; };
-		2C9549C11E5F49A700A23CC5 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ffmpeg/tvos/libavutil.a; sourceTree = "<group>"; };
-		2C9549C21E5F49A700A23CC5 /* libfdk-aac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libfdk-aac.a"; path = "ffmpeg/tvos/libfdk-aac.a"; sourceTree = "<group>"; };
-		2C9549C31E5F49A700A23CC5 /* libpostproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpostproc.a; path = ffmpeg/tvos/libpostproc.a; sourceTree = "<group>"; };
-		2C9549C41E5F49A700A23CC5 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ffmpeg/tvos/libswresample.a; sourceTree = "<group>"; };
-		2C9549C51E5F49A700A23CC5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ffmpeg/tvos/libswscale.a; sourceTree = "<group>"; };
-		2C9549C61E5F49A700A23CC5 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ffmpeg/tvos/libx264.a; sourceTree = "<group>"; };
-		2C9549D21E5F4A7500A23CC5 /* YUVShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = YUVShader.fsh; sourceTree = "<group>"; };
-		2C9549D31E5F4A7500A23CC5 /* YUVShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = YUVShader.vsh; sourceTree = "<group>"; };
 		2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesController.swift; sourceTree = "<group>"; };
-		2C9549E71E5F4B8500A23CC5 /* AudioOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioOutput.h; path = Video/AudioOutput.h; sourceTree = "<group>"; };
-		2C9549E81E5F4B8500A23CC5 /* AudioOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioOutput.mm; path = Video/AudioOutput.mm; sourceTree = "<group>"; };
-		2C9549E91E5F4B8500A23CC5 /* AudioRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioRingBuffer.h; path = Video/AudioRingBuffer.h; sourceTree = "<group>"; };
-		2C9549EA1E5F4B8500A23CC5 /* AudioRingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioRingBuffer.mm; path = Video/AudioRingBuffer.mm; sourceTree = "<group>"; };
-		2C9549EB1E5F4B8500A23CC5 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Decoder.h; path = Video/Decoder.h; sourceTree = "<group>"; };
-		2C9549EC1E5F4B8500A23CC5 /* Decoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Decoder.mm; path = Video/Decoder.mm; sourceTree = "<group>"; };
-		2C9549ED1E5F4B8500A23CC5 /* MovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovieController.h; path = Video/MovieController.h; sourceTree = "<group>"; };
-		2C9549EE1E5F4B8500A23CC5 /* MovieController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MovieController.mm; path = Video/MovieController.mm; sourceTree = "<group>"; };
-		2C9549EF1E5F4B8500A23CC5 /* SynchroQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynchroQueue.h; path = Video/SynchroQueue.h; sourceTree = "<group>"; };
-		2C9549F01E5F4B8500A23CC5 /* TextureItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureItem.h; path = Video/TextureItem.h; sourceTree = "<group>"; };
-		2C9549F11E5F4B8500A23CC5 /* TextureItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TextureItem.mm; path = Video/TextureItem.mm; sourceTree = "<group>"; };
-		2C9549F21E5F4B8500A23CC5 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = Video/Util.h; sourceTree = "<group>"; };
-		2C9549F31E5F4B8500A23CC5 /* Util.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Util.mm; path = Video/Util.mm; sourceTree = "<group>"; };
-		2C9549F41E5F4B8500A23CC5 /* VideoOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoOutput.h; path = Video/VideoOutput.h; sourceTree = "<group>"; };
-		2C9549F51E5F4B8500A23CC5 /* VideoOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VideoOutput.mm; path = Video/VideoOutput.mm; sourceTree = "<group>"; };
-		2C9549FD1E5F5A4900A23CC5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
-		2C9549FF1E5F5A6300A23CC5 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/usr/lib/libbz2.tbd; sourceTree = DEVELOPER_DIR; };
-		2C954A011E5F5A7500A23CC5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Extensions/UIColorExtensions.swift; sourceTree = "<group>"; };
 		2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtensions.swift; path = Extensions/UIFontExtensions.swift; sourceTree = "<group>"; };
 		2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtensions.swift; path = Extensions/UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -277,10 +186,20 @@
 		2CC0D9B11E5F120100254181 /* libtansl_tvos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtansl_tvos.a; path = libdsm/libtansl_tvos.a; sourceTree = "<group>"; };
 		2CC0D9B41E5F121800254181 /* libdsm_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdsm_ios.a; path = libdsm/libdsm_ios.a; sourceTree = "<group>"; };
 		2CC0D9B81E5F12D100254181 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayer.swift; path = Common/VideoPlayer.swift; sourceTree = "<group>"; };
+		2CCC86EF1E62D2A6000CC894 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		2CD9EF641E63210200E5F8DF /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileVLCKit.framework; sourceTree = "<group>"; };
+		2CD9EF661E63211000E5F8DF /* TVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TVVLCKit.framework; sourceTree = "<group>"; };
+		2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		2CD9EF6A1E63221500E5F8DF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		2CD9EF6E1E6322F500E5F8DF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		2CD9EF701E63236B00E5F8DF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2CD9EF721E63237E00E5F8DF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		3B99507DC87FCE29ED3D2682 /* Pods_WD_Content.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WD_Content.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B8EB8BEFADF777982312C79 /* Pods-WD Content TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content TV/Pods-WD Content TV.debug.xcconfig"; sourceTree = "<group>"; };
-		600421526FEC21BB7FA1CAA5 /* libPods-WD Content.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WD Content.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		642B394539105F19E127FC3D /* Pods-WD Content.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content/Pods-WD Content.debug.xcconfig"; sourceTree = "<group>"; };
-		86EBF3B751987E884F8272F8 /* libPods-WD Content TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WD Content TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F7DB5D9F0700699E453EE01 /* Pods_WD_Content_TV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WD_Content_TV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,25 +207,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C80B9751E60F3C000F44E56 /* libbz2.tbd in Frameworks */,
-				2C80B96A1E60D97700F44E56 /* libz.tbd in Frameworks */,
+				2CD9EF6B1E63221500E5F8DF /* libc++.tbd in Frameworks */,
 				2CC0D9B91E5F12D100254181 /* libiconv.tbd in Frameworks */,
-				2C9549B51E5F499200A23CC5 /* libavcodec.a in Frameworks */,
-				2C9549B61E5F499200A23CC5 /* libavdevice.a in Frameworks */,
-				2C9549B71E5F499200A23CC5 /* libavfilter.a in Frameworks */,
-				2C9549B81E5F499200A23CC5 /* libavformat.a in Frameworks */,
-				2C9549B91E5F499200A23CC5 /* libavutil.a in Frameworks */,
-				2C9549BA1E5F499200A23CC5 /* libfdk-aac.a in Frameworks */,
-				2C9549BB1E5F499200A23CC5 /* libswresample.a in Frameworks */,
-				2C9549BC1E5F499200A23CC5 /* libswscale.a in Frameworks */,
 				2C9549AC1E5F3CD300A23CC5 /* libtasnl_ios.a in Frameworks */,
 				2CC0D9B61E5F121800254181 /* libdsm_ios.a in Frameworks */,
-				2C80B9711E60D9F500F44E56 /* VideoToolbox.framework in Frameworks */,
+				2CD9EF6D1E63223400E5F8DF /* CoreMedia.framework in Frameworks */,
+				2CD9EF691E6321FC00E5F8DF /* VideoToolbox.framework in Frameworks */,
+				2CD9EF651E63210200E5F8DF /* MobileVLCKit.framework in Frameworks */,
 				2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */,
-				2C80B96E1E60D9B700F44E56 /* CoreMedia.framework in Frameworks */,
-				2C80B9681E60D94500F44E56 /* AudioToolbox.framework in Frameworks */,
+				2CD9EF711E63236B00E5F8DF /* AudioToolbox.framework in Frameworks */,
 				2CC0D9571E5EFD6A00254181 /* CloudKit.framework in Frameworks */,
-				B8F3A742B901461EB6B09A25 /* libPods-WD Content.a in Frameworks */,
+				8DA998C81B9F7A300F9B196A /* Pods_WD_Content.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,24 +225,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C954A021E5F5A7500A23CC5 /* libz.tbd in Frameworks */,
-				2C954A001E5F5A6300A23CC5 /* libbz2.tbd in Frameworks */,
+				2CD9EF6F1E6322F500E5F8DF /* libc++.tbd in Frameworks */,
 				2C9549A91E5F32D100A23CC5 /* libiconv.tbd in Frameworks */,
-				2C9549C71E5F49A700A23CC5 /* libavcodec.a in Frameworks */,
-				2C9549C81E5F49A700A23CC5 /* libavdevice.a in Frameworks */,
-				2C9549C91E5F49A700A23CC5 /* libavfilter.a in Frameworks */,
-				2C9549CA1E5F49A700A23CC5 /* libavformat.a in Frameworks */,
-				2C9549CB1E5F49A700A23CC5 /* libavutil.a in Frameworks */,
-				2C9549CC1E5F49A700A23CC5 /* libfdk-aac.a in Frameworks */,
-				2C9549CD1E5F49A700A23CC5 /* libpostproc.a in Frameworks */,
-				2C9549CE1E5F49A700A23CC5 /* libswresample.a in Frameworks */,
-				2C9549CF1E5F49A700A23CC5 /* libswscale.a in Frameworks */,
-				2C9549D01E5F49A700A23CC5 /* libx264.a in Frameworks */,
 				2CC0D9B21E5F120100254181 /* libdsm_tvos.a in Frameworks */,
 				2CC0D9B31E5F120100254181 /* libtansl_tvos.a in Frameworks */,
-				2C9549FE1E5F5A4900A23CC5 /* AudioToolbox.framework in Frameworks */,
+				2CD9EF671E63211000E5F8DF /* TVVLCKit.framework in Frameworks */,
+				2CCC86F01E62D2A6000CC894 /* AVFoundation.framework in Frameworks */,
+				2CD9EF731E63237E00E5F8DF /* AudioToolbox.framework in Frameworks */,
 				2CC0D9551E5EFD6100254181 /* CloudKit.framework in Frameworks */,
-				509E2D482B21FBF6CFC3902B /* libPods-WD Content TV.a in Frameworks */,
+				482D70A3D5314EC745E9891A /* Pods_WD_Content_TV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,13 +282,11 @@
 				2CC0D9931E5F106F00254181 /* WD Content-Bridging-Header.h */,
 				2CA603F71E60671E00335545 /* LGAlertView */,
 				2CA603F81E60672A00335545 /* CustomViews */,
-				2C80B94B1E60D5B200F44E56 /* Movie Player */,
 				2C21331E1E5ED869002F267D /* AppDelegate.swift */,
 				2C11BD511E5F9C5A004A786F /* RightMenuVC.swift */,
 				2C11BD531E5F9C96004A786F /* MainVC.swift */,
 				2CA603F31E604A4F00335545 /* ContentController.swift */,
 				2CA603F51E604D5700335545 /* ContentCell.swift */,
-				2C80B9721E60DAF100F44E56 /* VideoController.swift */,
 				2C2133561E5EDE09002F267D /* Resources */,
 			);
 			path = "WD Content";
@@ -408,7 +308,6 @@
 			isa = PBXGroup;
 			children = (
 				2CC0D9941E5F107000254181 /* WD Content TV-Bridging-Header.h */,
-				2C9549E61E5F4B7100A23CC5 /* Movie Player */,
 				2C21335E1E5EDF13002F267D /* AppDelegate.swift */,
 				2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */,
 				2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */,
@@ -420,51 +319,12 @@
 		2C21336B1E5EDF38002F267D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2C9549D11E5F4A6700A23CC5 /* shaders */,
 				2C2133621E5EDF13002F267D /* Main.storyboard */,
 				2C2133651E5EDF13002F267D /* Assets.xcassets */,
 				2C2133671E5EDF13002F267D /* Info.plist */,
 				2CC0D9531E5EFD5900254181 /* WD Content TV.entitlements */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		2C80B94B1E60D5B200F44E56 /* Movie Player */ = {
-			isa = PBXGroup;
-			children = (
-				2C80B94D1E60D5D100F44E56 /* Audio */,
-				2C80B94C1E60D5C800F44E56 /* Video */,
-				2C80B95D1E60D61200F44E56 /* ConditionLock.h */,
-				2C80B95E1E60D61200F44E56 /* Decoder.h */,
-				2C80B95F1E60D61200F44E56 /* Decoder.mm */,
-				2C80B9601E60D61200F44E56 /* Demuxer.h */,
-				2C80B9611E60D61200F44E56 /* Demuxer.mm */,
-			);
-			name = "Movie Player";
-			sourceTree = "<group>";
-		};
-		2C80B94C1E60D5C800F44E56 /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				2C80B9571E60D5FE00F44E56 /* VideoUtility.c */,
-				2C80B9581E60D5FE00F44E56 /* VideoUtility.h */,
-				2C80B9591E60D5FE00F44E56 /* VTDecoder.h */,
-				2C80B95A1E60D5FE00F44E56 /* VTDecoder.mm */,
-			);
-			name = Video;
-			sourceTree = "<group>";
-		};
-		2C80B94D1E60D5D100F44E56 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				2C80B94E1E60D5E500F44E56 /* AudioDecoder.h */,
-				2C80B94F1E60D5E500F44E56 /* AudioDecoder.mm */,
-				2C80B9501E60D5E500F44E56 /* AudioOutput.h */,
-				2C80B9511E60D5E500F44E56 /* AudioOutput.mm */,
-				2C80B9521E60D5E500F44E56 /* AudioRingBuffer.h */,
-				2C80B9531E60D5E500F44E56 /* AudioRingBuffer.mm */,
-			);
-			name = Audio;
 			sourceTree = "<group>";
 		};
 		2C9549A31E5F2B0800A23CC5 /* TMDB */ = {
@@ -475,37 +335,6 @@
 				2C9549A61E5F2B1800A23CC5 /* TMDB.m */,
 			);
 			name = TMDB;
-			sourceTree = "<group>";
-		};
-		2C9549D11E5F4A6700A23CC5 /* shaders */ = {
-			isa = PBXGroup;
-			children = (
-				2C9549D21E5F4A7500A23CC5 /* YUVShader.fsh */,
-				2C9549D31E5F4A7500A23CC5 /* YUVShader.vsh */,
-			);
-			name = shaders;
-			sourceTree = "<group>";
-		};
-		2C9549E61E5F4B7100A23CC5 /* Movie Player */ = {
-			isa = PBXGroup;
-			children = (
-				2C9549E71E5F4B8500A23CC5 /* AudioOutput.h */,
-				2C9549E81E5F4B8500A23CC5 /* AudioOutput.mm */,
-				2C9549E91E5F4B8500A23CC5 /* AudioRingBuffer.h */,
-				2C9549EA1E5F4B8500A23CC5 /* AudioRingBuffer.mm */,
-				2C9549EB1E5F4B8500A23CC5 /* Decoder.h */,
-				2C9549EC1E5F4B8500A23CC5 /* Decoder.mm */,
-				2C9549ED1E5F4B8500A23CC5 /* MovieController.h */,
-				2C9549EE1E5F4B8500A23CC5 /* MovieController.mm */,
-				2C9549EF1E5F4B8500A23CC5 /* SynchroQueue.h */,
-				2C9549F01E5F4B8500A23CC5 /* TextureItem.h */,
-				2C9549F11E5F4B8500A23CC5 /* TextureItem.mm */,
-				2C9549F21E5F4B8500A23CC5 /* Util.h */,
-				2C9549F31E5F4B8500A23CC5 /* Util.mm */,
-				2C9549F41E5F4B8500A23CC5 /* VideoOutput.h */,
-				2C9549F51E5F4B8500A23CC5 /* VideoOutput.mm */,
-			);
-			name = "Movie Player";
 			sourceTree = "<group>";
 		};
 		2C954A031E5F65AA00A23CC5 /* Extensions */ = {
@@ -557,6 +386,7 @@
 				2CA6041B1E60911200335545 /* SearchInfoController.swift */,
 				2CA604131E60906B00335545 /* AddShareController.swift */,
 				2CA604141E60906B00335545 /* DeviceController.swift */,
+				2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -598,43 +428,26 @@
 		37BE737A4CCEF1A81F1E6BFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C80B9741E60F3C000F44E56 /* libbz2.tbd */,
-				2C80B9701E60D9F500F44E56 /* VideoToolbox.framework */,
-				2C80B96D1E60D9B700F44E56 /* CoreMedia.framework */,
-				2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */,
-				2C80B9691E60D97700F44E56 /* libz.tbd */,
-				2C80B9671E60D94500F44E56 /* AudioToolbox.framework */,
-				2C954A011E5F5A7500A23CC5 /* libz.tbd */,
-				2C9549FF1E5F5A6300A23CC5 /* libbz2.tbd */,
-				2C9549FD1E5F5A4900A23CC5 /* AudioToolbox.framework */,
-				2C9549BD1E5F49A700A23CC5 /* libavcodec.a */,
-				2C9549BE1E5F49A700A23CC5 /* libavdevice.a */,
-				2C9549BF1E5F49A700A23CC5 /* libavfilter.a */,
-				2C9549C01E5F49A700A23CC5 /* libavformat.a */,
-				2C9549C11E5F49A700A23CC5 /* libavutil.a */,
-				2C9549C21E5F49A700A23CC5 /* libfdk-aac.a */,
-				2C9549C31E5F49A700A23CC5 /* libpostproc.a */,
-				2C9549C41E5F49A700A23CC5 /* libswresample.a */,
-				2C9549C51E5F49A700A23CC5 /* libswscale.a */,
-				2C9549C61E5F49A700A23CC5 /* libx264.a */,
-				2C9549AD1E5F499200A23CC5 /* libavcodec.a */,
-				2C9549AE1E5F499200A23CC5 /* libavdevice.a */,
-				2C9549AF1E5F499200A23CC5 /* libavfilter.a */,
-				2C9549B01E5F499200A23CC5 /* libavformat.a */,
-				2C9549B11E5F499200A23CC5 /* libavutil.a */,
-				2C9549B21E5F499200A23CC5 /* libfdk-aac.a */,
-				2C9549B31E5F499200A23CC5 /* libswresample.a */,
-				2C9549B41E5F499200A23CC5 /* libswscale.a */,
+				2CD9EF6E1E6322F500E5F8DF /* libc++.tbd */,
+				2CD9EF6A1E63221500E5F8DF /* libc++.tbd */,
 				2C9549A81E5F32D100A23CC5 /* libiconv.tbd */,
 				2CC0D9B81E5F12D100254181 /* libiconv.tbd */,
 				2CC0D9B41E5F121800254181 /* libdsm_ios.a */,
 				2C9549AB1E5F3CD300A23CC5 /* libtasnl_ios.a */,
 				2CC0D9B01E5F120100254181 /* libdsm_tvos.a */,
 				2CC0D9B11E5F120100254181 /* libtansl_tvos.a */,
+				2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */,
+				2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */,
+				2CD9EF661E63211000E5F8DF /* TVVLCKit.framework */,
+				2CD9EF641E63210200E5F8DF /* MobileVLCKit.framework */,
+				2CCC86EF1E62D2A6000CC894 /* AVFoundation.framework */,
+				2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */,
+				2CD9EF721E63237E00E5F8DF /* AudioToolbox.framework */,
+				2CD9EF701E63236B00E5F8DF /* AudioToolbox.framework */,
 				2CC0D9561E5EFD6A00254181 /* CloudKit.framework */,
 				2CC0D9541E5EFD6100254181 /* CloudKit.framework */,
-				600421526FEC21BB7FA1CAA5 /* libPods-WD Content.a */,
-				86EBF3B751987E884F8272F8 /* libPods-WD Content TV.a */,
+				3B99507DC87FCE29ED3D2682 /* Pods_WD_Content.framework */,
+				8F7DB5D9F0700699E453EE01 /* Pods_WD_Content_TV.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -763,10 +576,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C9549D41E5F4A7500A23CC5 /* YUVShader.fsh in Resources */,
 				2C2133661E5EDF13002F267D /* Assets.xcassets in Resources */,
 				2C2133641E5EDF13002F267D /* Main.storyboard in Resources */,
-				2C9549D51E5F4A7500A23CC5 /* YUVShader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,7 +681,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C80B9561E60D5E500F44E56 /* AudioRingBuffer.mm in Sources */,
 				2C2AF5011E6184D9008DBD26 /* UserInfo.swift in Sources */,
 				2CA604081E60674400335545 /* LGProgressView.m in Sources */,
 				2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */,
@@ -885,7 +695,6 @@
 				2CC0D9681E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */,
 				2CC0D9621E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9641E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
-				2C80B95B1E60D5FE00F44E56 /* VideoUtility.c in Sources */,
 				2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */,
 				2CA6040E1E60675A00335545 /* PasswordInput.swift in Sources */,
 				2CC0D9A61E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
@@ -895,23 +704,18 @@
 				2CA604151E60906B00335545 /* AddShareController.swift in Sources */,
 				2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */,
 				2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */,
+				2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */,
 				2CC0D9A21E5F107000254181 /* SMBFile.m in Sources */,
-				2C80B95C1E60D5FE00F44E56 /* VTDecoder.mm in Sources */,
 				2CA6041E1E60911200335545 /* SearchInfoController.swift in Sources */,
 				2C11BD541E5F9C96004A786F /* MainVC.swift in Sources */,
 				2CC0D96A1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
 				2CC0D9A01E5F107000254181 /* SMBConnection.m in Sources */,
 				2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
-				2C80B9541E60D5E500F44E56 /* AudioDecoder.mm in Sources */,
-				2C80B9641E60D61200F44E56 /* Decoder.mm in Sources */,
 				2C11BD521E5F9C5A004A786F /* RightMenuVC.swift in Sources */,
 				2CC0D9661E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */,
 				2CA603F61E604D5700335545 /* ContentCell.swift in Sources */,
 				2CA604161E60906B00335545 /* DeviceController.swift in Sources */,
-				2C80B9731E60DAF100F44E56 /* VideoController.swift in Sources */,
-				2C80B9551E60D5E500F44E56 /* AudioOutput.mm in Sources */,
 				2CC0D9A41E5F107000254181 /* TONetBIOSNameService.m in Sources */,
-				2C80B9651E60D61200F44E56 /* Demuxer.mm in Sources */,
 				2CC0D96C1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,29 +733,23 @@
 				2CA6041F1E60911700335545 /* InfoViewController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
-				2C9549F91E5F4B8500A23CC5 /* MovieController.mm in Sources */,
 				2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */,
 				2CC0D9A71E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
-				2C9549F61E5F4B8500A23CC5 /* AudioOutput.mm in Sources */,
 				2CC0D9701E5F01A900254181 /* Model.swift in Sources */,
 				2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */,
 				2C954A0A1E5F65CD00A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2CC0D9A31E5F107000254181 /* SMBFile.m in Sources */,
 				2CC0D96B1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
-				2C9549F71E5F4B8500A23CC5 /* AudioRingBuffer.mm in Sources */,
 				2CA604171E60907200335545 /* AddShareController.swift in Sources */,
 				2CC0D9A11E5F107000254181 /* SMBConnection.m in Sources */,
-				2C9549FB1E5F4B8500A23CC5 /* Util.mm in Sources */,
+				2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */,
 				2C2AF5021E6184D9008DBD26 /* UserInfo.swift in Sources */,
 				2CA604211E60911700335545 /* SearchInfoController.swift in Sources */,
 				2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */,
-				2C9549FA1E5F4B8500A23CC5 /* TextureItem.mm in Sources */,
 				2C9549E41E5F4ACD00A23CC5 /* SharesController.swift in Sources */,
-				2C9549F81E5F4B8500A23CC5 /* Decoder.mm in Sources */,
 				2CC0D95B1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
 				2CC0D9671E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */,
 				2C9549E31E5F4ACD00A23CC5 /* ShareCell.swift in Sources */,
-				2C9549FC1E5F4B8500A23CC5 /* VideoOutput.mm in Sources */,
 				2CC0D9A51E5F107000254181 /* TONetBIOSNameService.m in Sources */,
 				2CC0D96D1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */,
 			);
@@ -1091,6 +889,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "WD Content/WD Content.entitlements";
 				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libdsm/include",
@@ -1127,6 +930,11 @@
 				CODE_SIGN_ENTITLEMENTS = "WD Content/WD Content.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libdsm/include",
@@ -1162,6 +970,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "WD Content TV/WD Content TV.entitlements";
 				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libdsm/include",
@@ -1199,6 +1011,10 @@
 				CODE_SIGN_ENTITLEMENTS = "WD Content TV/WD Content TV.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7TSVKXZ79P;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libdsm/include",

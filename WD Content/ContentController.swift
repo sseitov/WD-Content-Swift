@@ -84,7 +84,7 @@ class ContentController: UIViewController {
             next.metainfo = sender as? MetaInfo
         } else if segue.identifier == "movie" {
             let nav = segue.destination as! UINavigationController
-            let next = nav.topViewController as! VideoController
+            let next = nav.topViewController as! VideoPlayer
             next.node = sender as? Node
         }
     }

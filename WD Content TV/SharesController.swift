@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SVProgressHUD
 
-class SharesController: UICollectionViewController, UIGestureRecognizerDelegate, MovieControllerDelegate {
+class SharesController: UICollectionViewController, UIGestureRecognizerDelegate {
 
 	var parentNode:Node?
 	var nodes:[Node] = []
@@ -173,15 +174,8 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate,
 			controller.target = sender as? ServiceHost
 		} else if segue.identifier == "showMovie" {
 			let nav = segue.destination as! UINavigationController
-			let next = nav.topViewController as! MovieController
-			if let node = sender as? Node {
-				next.host = node.connection!.ip!
-				next.port = node.connection!.port
-				next.user = node.connection!.user!
-				next.password = node.connection!.password!
-				next.filePath = node.path!
-                next.delegate = self
-			}
+			let next = nav.topViewController as! VideoPlayer
+            next.node = sender as? Node
 		} else if segue.identifier == "searchInfo" {
 			let nav = segue.destination as! UINavigationController
 			let next = nav.topViewController as! SearchInfoController

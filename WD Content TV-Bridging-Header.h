@@ -6,6 +6,4 @@
 #import "SMBFile.h"
 #import "TMDB.h"
 #import "ApiKeys.h"
-#import <SVProgressHUD.h>
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "MovieController.h"
+#import <TVVLCKit/TVVLCKit.h>

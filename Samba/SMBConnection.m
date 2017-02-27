@@ -260,5 +260,26 @@
 - (int)seekFile:(smb_fd)file offset:(off_t)offset whence:(int)whence {
 	return (int)smb_fseek(_session, file, offset, whence);
 }
+    
+- (bool)renameFile:(NSString*)oldPath newPath:(NSString*)newPath {
+    
+    //Connect to that share
+    NSString *shareName = [self shareNameFromPath:oldPath];
+    smb_tid treeID = 0;
+    smb_tree_connect(self.session, shareName.UTF8String, &treeID);
+    if (!treeID) {
+        return false;
+    }
+    NSString* old = [self filePathExcludingSharePathFromPath:oldPath];
+    old = [NSString stringWithFormat:@"\\%@", old];
+    old = [old stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
+    
+    NSString* new = [self filePathExcludingSharePathFromPath:newPath];
+    new = [NSString stringWithFormat:@"\\%@", new];
+    new = [new stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
+    
+    int err = smb_file_mv(_session, treeID, old.UTF8String, new.UTF8String);
+    return (err == 0);
+}
 
 @end

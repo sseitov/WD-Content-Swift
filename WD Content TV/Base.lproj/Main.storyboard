@@ -4,6 +4,7 @@
         <adaptation id="light"/>
     </device>
     <dependencies>
+        <deployment identifier="tvOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -126,6 +127,39 @@
             </objects>
             <point key="canvasLocation" x="6215" y="-1695"/>
         </scene>
+        <!--Video Player-->
+        <scene sceneID="F4a-vm-IDt">
+            <objects>
+                <viewController id="Zpw-qe-yUD" customClass="VideoPlayer" customModule="WD_Content_TV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CJz-5D-Da7"/>
+                        <viewControllerLayoutGuide type="bottom" id="t5e-mL-lHU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BMS-th-shH">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ooa-26-bJ9">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ooa-26-bJ9" firstAttribute="top" secondItem="BMS-th-shH" secondAttribute="top" id="C4g-oG-5pT"/>
+                            <constraint firstAttribute="trailing" secondItem="ooa-26-bJ9" secondAttribute="trailing" id="KGh-82-KTM"/>
+                            <constraint firstItem="t5e-mL-lHU" firstAttribute="top" secondItem="ooa-26-bJ9" secondAttribute="bottom" id="qnA-qg-opj"/>
+                            <constraint firstItem="ooa-26-bJ9" firstAttribute="leading" secondItem="BMS-th-shH" secondAttribute="leading" id="wH2-DX-GfU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="DPb-zz-EoS"/>
+                    <connections>
+                        <outlet property="movieView" destination="ooa-26-bJ9" id="qd5-4i-daR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qsf-T5-ZIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6215" y="-169"/>
+        </scene>
         <!--Device Controller-->
         <scene sceneID="qDG-78-gun">
             <objects>
@@ -169,31 +203,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="boC-0l-DfJ" kind="relationship" relationship="rootViewController" id="VZq-BJ-b77"/>
+                        <segue destination="Zpw-qe-yUD" kind="relationship" relationship="rootViewController" id="hfR-gG-JMt"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ztY-13-JFr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3927" y="-169"/>
-        </scene>
-        <!--Movie Controller-->
-        <scene sceneID="Z3A-Fg-cSG">
-            <objects>
-                <viewController id="boC-0l-DfJ" customClass="MovieController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6iI-oo-idN"/>
-                        <viewControllerLayoutGuide type="bottom" id="Yg3-O7-QTM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Gxn-d5-vTU">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="6iu-rI-1Sg"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VSZ-Ee-AOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6215" y="-169"/>
         </scene>
         <!--Search Info Controller-->
         <scene sceneID="55f-Tl-pHo">
