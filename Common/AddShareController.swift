@@ -12,7 +12,9 @@ class ServiceHost : NSObject {
 	var name:String = ""
 	var host:String = ""
 	var port:Int32 = 0
-	
+    var user:String = ""
+    var password:String = ""
+    
 	init(name:String, host:String, port:Int32) {
 		super.init()
 		self.name = name

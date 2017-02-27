@@ -7,7 +7,6 @@
 //
 
 #import "SMBConnection.h"
-#import "SMBFile.h"
 
 #import "TOSMBConstants.h"
 #import "TONetBIOSNameService.h"
@@ -18,10 +17,10 @@
 #import <bdsm/smb_stat.h>
 #import <arpa/inet.h>
 
-#if TV
-#include "WD_Content_TV-Swift.h"
-#else
+#if IOS
 #include "WD_Content-Swift.h"
+#else
+#include "WD_Content_TV-Swift.h"
 #endif
 
 @interface SMBConnection () {
@@ -88,7 +87,7 @@
 	return (_session != nil);
 }
 
-- (NSArray *)folderContentsAt:(NSString *)path
+- (NSArray *)folderContentsByRoot:(Node*)root
 {
     if (_session == nil) {
         return [NSMutableArray array];
@@ -97,7 +96,7 @@
     //If the path is nil, or '/', we'll be specifically requesting the
     //parent network share names as opposed to the actual file lists
     
-    if (path.length == 0 || [path isEqualToString:@"/"]) {
+    if (root == nil) {
         NSMutableArray *shareList = [NSMutableArray array];
         smb_share_list list;
         size_t shareCount = 0;
@@ -113,22 +112,20 @@
                 continue;
             
             NSString *shareNameString = [NSString stringWithCString:shareName encoding:NSUTF8StringEncoding];
-            SMBFile *share = [[SMBFile alloc] initWithShareName:shareNameString];
-            [shareList addObject:share];
+            [shareList addObject:shareNameString];
         }
         
         smb_share_list_destroy(list);
-        
-		return [shareList sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+        return [shareList sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     
     //-----------------------------------------------------------------------------
     
     //Replace any backslashes with forward slashes
-    path = [path stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
+    NSString* path = [root.filePath stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
     
     //Work out just the share name from the path (The first directory in the string)
-    NSString *shareName = [self shareNameFromPath:path];
+    NSString *shareName = [Node shareNameFromPath:path];
     
     //Connect to that share
     
@@ -141,7 +138,7 @@
     }
     
     //work out the remainder of the file path and create the search query
-    NSString *relativePath = [self filePathExcludingSharePathFromPath:path];
+    NSString *relativePath = [Node filePathExcludingSharePathFromPath:path];
     //prepend double backslashes
     relativePath = [NSString stringWithFormat:@"\\%@",relativePath];
     //replace any additional forward slashes with backslashes
@@ -180,11 +177,11 @@
         NSString* fileName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
         bool isDir = (smb_stat_get(item, SMB_STAT_ISDIR) != 0);
         if (isDir) {
-            SMBFile *file = [[SMBFile alloc] initWithName:fileName isDir:isDir parentDirectoryPath:path];
-            [fileList addObject:file];
+            Node* dir = [[Node alloc] initWithName:fileName isDir:isDir parent:root];
+            [fileList addObject:dir];
         } else {
             if ([Model isValidMediaTypeWithName:fileName]) {
-                SMBFile *file = [[SMBFile alloc] initWithName:fileName isDir:isDir parentDirectoryPath:path];
+                Node* file = [[Node alloc] initWithName:fileName isDir:isDir parent:root];
                 [fileList addObject:file];
             }
         }
@@ -200,60 +197,17 @@
 
 #pragma mark - String Parsing
 
-- (NSString *)shareNameFromPath:(NSString *)path
-{
-    path = [path copy];
-    
-    //Remove any potential slashes at the start
-    if ([[path substringToIndex:2] isEqualToString:@"//"]) {
-        path = [path substringFromIndex:2];
-    }
-    else if ([[path substringToIndex:1] isEqualToString:@"/"]) {
-        path = [path substringFromIndex:1];
-    }
-    
-    NSRange range = [path rangeOfString:@"/"];
-    
-    if (range.location != NSNotFound)
-        path = [path substringWithRange:NSMakeRange(0, range.location)];
-    
-    return path;
-}
-
-- (NSString *)filePathExcludingSharePathFromPath:(NSString *)path
-{
-    path = [path copy];
-    
-    //Remove any potential slashes at the start
-    if ([[path substringToIndex:2] isEqualToString:@"//"] || [[path substringToIndex:2] isEqualToString:@"\\\\"]) {
-        path = [path substringFromIndex:2];
-    }
-    else if ([[path substringToIndex:1] isEqualToString:@"/"] || [[path substringToIndex:1] isEqualToString:@"\\"]) {
-        path = [path substringFromIndex:1];
-    }
-    
-    NSRange range = [path rangeOfString:@"/"];
-    if (range.location == NSNotFound) {
-        range = [path rangeOfString:@"\\"];
-    }
-    
-    if (range.location != NSNotFound)
-        path = [path substringFromIndex:range.location+1];
-    
-    return path;
-}
-
 - (smb_fd)openFile:(NSString*)path {
 	smb_tid treeID = 0;
 	smb_fd fileID = 0;
 	
-	NSString *shareName = [self shareNameFromPath:path];
+    NSString *shareName = [Node shareNameFromPath:path];
 
 	smb_tree_connect(_session, shareName.UTF8String, &treeID);
 	if (!treeID)
 		return 0;
 	
-	NSString *formattedPath = [self filePathExcludingSharePathFromPath:path];
+    NSString *formattedPath = [Node filePathExcludingSharePathFromPath:path];
 	formattedPath = [NSString stringWithFormat:@"\\%@",formattedPath];
 	formattedPath = [formattedPath stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
 
@@ -276,17 +230,17 @@
 - (bool)renameFile:(NSString*)oldPath newPath:(NSString*)newPath {
     
     //Connect to that share
-    NSString *shareName = [self shareNameFromPath:oldPath];
+    NSString *shareName = [Node shareNameFromPath:oldPath];
     smb_tid treeID = 0;
     smb_tree_connect(self.session, shareName.UTF8String, &treeID);
     if (!treeID) {
         return false;
     }
-    NSString* old = [self filePathExcludingSharePathFromPath:oldPath];
+    NSString* old = [Node filePathExcludingSharePathFromPath:oldPath];
     old = [NSString stringWithFormat:@"\\%@", old];
     old = [old stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
     
-    NSString* new = [self filePathExcludingSharePathFromPath:newPath];
+    NSString* new = [Node filePathExcludingSharePathFromPath:newPath];
     new = [NSString stringWithFormat:@"\\%@", new];
     new = [new stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
     

@@ -3,7 +3,6 @@
 //
 
 #import "SMBConnection.h"
-#import "SMBFile.h"
 #import "TMDB.h"
 #import "ApiKeys.h"
 #import <TVVLCKit/TVVLCKit.h>

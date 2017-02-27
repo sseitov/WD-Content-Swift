@@ -134,7 +134,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func clearInfo() {
         SVProgressHUD.show(withStatus: "Clear...")
-        Model.shared.clearInfo(metainfo!.node!, result: { error in
+        Model.shared.clearInfo(metainfo!, result: { error in
             SVProgressHUD.dismiss()
             if error != nil {
                 self.showMessage("Cloud clear error: \(error!)", messageType: .information, messageHandler: {

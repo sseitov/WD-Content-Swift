@@ -57,6 +57,12 @@
 		2CA6041F1E60911700335545 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA604191E60911200335545 /* InfoViewController.swift */; };
 		2CA604201E60911700335545 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6041A1E60911200335545 /* SearchCell.swift */; };
 		2CA604211E60911700335545 /* SearchInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6041B1E60911200335545 /* SearchInfoController.swift */; };
+		2CAF5C881E6460C6005EA70C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAF5C871E6460C6005EA70C /* Node.swift */; };
+		2CAF5C891E6460C6005EA70C /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAF5C871E6460C6005EA70C /* Node.swift */; };
+		2CAF5C8C1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAF5C8A1E649BAD005EA70C /* Share+CoreDataClass.swift */; };
+		2CAF5C8D1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAF5C8A1E649BAD005EA70C /* Share+CoreDataClass.swift */; };
+		2CAF5C8E1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAF5C8B1E649BAD005EA70C /* Share+CoreDataProperties.swift */; };
+		2CAF5C8F1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAF5C8B1E649BAD005EA70C /* Share+CoreDataProperties.swift */; };
 		2CC0D9551E5EFD6100254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9541E5EFD6100254181 /* CloudKit.framework */; };
 		2CC0D9571E5EFD6A00254181 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9561E5EFD6A00254181 /* CloudKit.framework */; };
 		2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9581E5EFDD500254181 /* WDContent.xcdatamodeld */; };
@@ -65,20 +71,10 @@
 		2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D95C1E5F013A00254181 /* MetaInfo+CoreDataClass.swift */; };
 		2CC0D9641E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D95D1E5F013A00254181 /* MetaInfo+CoreDataProperties.swift */; };
 		2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D95D1E5F013A00254181 /* MetaInfo+CoreDataProperties.swift */; };
-		2CC0D9661E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D95E1E5F013A00254181 /* Connection+CoreDataClass.swift */; };
-		2CC0D9671E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D95E1E5F013A00254181 /* Connection+CoreDataClass.swift */; };
-		2CC0D9681E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D95F1E5F013A00254181 /* Connection+CoreDataProperties.swift */; };
-		2CC0D9691E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D95F1E5F013A00254181 /* Connection+CoreDataProperties.swift */; };
-		2CC0D96A1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9601E5F013A00254181 /* Node+CoreDataClass.swift */; };
-		2CC0D96B1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9601E5F013A00254181 /* Node+CoreDataClass.swift */; };
-		2CC0D96C1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9611E5F013A00254181 /* Node+CoreDataProperties.swift */; };
-		2CC0D96D1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9611E5F013A00254181 /* Node+CoreDataProperties.swift */; };
 		2CC0D96F1E5F01A900254181 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D96E1E5F01A900254181 /* Model.swift */; };
 		2CC0D9701E5F01A900254181 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D96E1E5F01A900254181 /* Model.swift */; };
 		2CC0D9A01E5F107000254181 /* SMBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9961E5F107000254181 /* SMBConnection.m */; };
 		2CC0D9A11E5F107000254181 /* SMBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9961E5F107000254181 /* SMBConnection.m */; };
-		2CC0D9A21E5F107000254181 /* SMBFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9981E5F107000254181 /* SMBFile.m */; };
-		2CC0D9A31E5F107000254181 /* SMBFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D9981E5F107000254181 /* SMBFile.m */; };
 		2CC0D9A41E5F107000254181 /* TONetBIOSNameService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99A1E5F107000254181 /* TONetBIOSNameService.m */; };
 		2CC0D9A51E5F107000254181 /* TONetBIOSNameService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99A1E5F107000254181 /* TONetBIOSNameService.m */; };
 		2CC0D9A61E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99C1E5F107000254181 /* TONetBIOSNameServiceEntry.m */; };
@@ -152,6 +148,9 @@
 		2CA604191E60911200335545 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoViewController.swift; path = Common/InfoViewController.swift; sourceTree = "<group>"; };
 		2CA6041A1E60911200335545 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = Common/SearchCell.swift; sourceTree = "<group>"; };
 		2CA6041B1E60911200335545 /* SearchInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchInfoController.swift; path = Common/SearchInfoController.swift; sourceTree = "<group>"; };
+		2CAF5C871E6460C6005EA70C /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Node.swift; path = Model/Node.swift; sourceTree = "<group>"; };
+		2CAF5C8A1E649BAD005EA70C /* Share+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Share+CoreDataClass.swift"; path = "Model/Share+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2CAF5C8B1E649BAD005EA70C /* Share+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Share+CoreDataProperties.swift"; path = "Model/Share+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CC0D9521E5EFD5000254181 /* WD Content.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content.entitlements"; sourceTree = "<group>"; };
 		2CC0D9531E5EFD5900254181 /* WD Content TV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content TV.entitlements"; sourceTree = "<group>"; };
 		2CC0D9541E5EFD6100254181 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -159,17 +158,11 @@
 		2CC0D9591E5EFDD500254181 /* WDContent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WDContent.xcdatamodel; sourceTree = "<group>"; };
 		2CC0D95C1E5F013A00254181 /* MetaInfo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MetaInfo+CoreDataClass.swift"; path = "Model/MetaInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2CC0D95D1E5F013A00254181 /* MetaInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MetaInfo+CoreDataProperties.swift"; path = "Model/MetaInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2CC0D95E1E5F013A00254181 /* Connection+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Connection+CoreDataClass.swift"; path = "Model/Connection+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2CC0D95F1E5F013A00254181 /* Connection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Connection+CoreDataProperties.swift"; path = "Model/Connection+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2CC0D9601E5F013A00254181 /* Node+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Node+CoreDataClass.swift"; path = "Model/Node+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2CC0D9611E5F013A00254181 /* Node+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Node+CoreDataProperties.swift"; path = "Model/Node+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CC0D96E1E5F01A900254181 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
 		2CC0D9931E5F106F00254181 /* WD Content-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WD Content-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		2CC0D9941E5F107000254181 /* WD Content TV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WD Content TV-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		2CC0D9951E5F107000254181 /* SMBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMBConnection.h; path = Samba/SMBConnection.h; sourceTree = "<group>"; };
 		2CC0D9961E5F107000254181 /* SMBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMBConnection.m; path = Samba/SMBConnection.m; sourceTree = "<group>"; };
-		2CC0D9971E5F107000254181 /* SMBFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMBFile.h; path = Samba/SMBFile.h; sourceTree = "<group>"; };
-		2CC0D9981E5F107000254181 /* SMBFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMBFile.m; path = Samba/SMBFile.m; sourceTree = "<group>"; };
 		2CC0D9991E5F107000254181 /* TONetBIOSNameService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TONetBIOSNameService.h; path = Samba/TONetBIOSNameService.h; sourceTree = "<group>"; };
 		2CC0D99A1E5F107000254181 /* TONetBIOSNameService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TONetBIOSNameService.m; path = Samba/TONetBIOSNameService.m; sourceTree = "<group>"; };
 		2CC0D99B1E5F107000254181 /* TONetBIOSNameServiceEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TONetBIOSNameServiceEntry.h; path = Samba/TONetBIOSNameServiceEntry.h; sourceTree = "<group>"; };
@@ -397,14 +390,13 @@
 			isa = PBXGroup;
 			children = (
 				2CC0D9581E5EFDD500254181 /* WDContent.xcdatamodeld */,
+				2CAF5C8A1E649BAD005EA70C /* Share+CoreDataClass.swift */,
+				2CAF5C8B1E649BAD005EA70C /* Share+CoreDataProperties.swift */,
 				2CC0D95C1E5F013A00254181 /* MetaInfo+CoreDataClass.swift */,
 				2CC0D95D1E5F013A00254181 /* MetaInfo+CoreDataProperties.swift */,
-				2CC0D95E1E5F013A00254181 /* Connection+CoreDataClass.swift */,
-				2CC0D95F1E5F013A00254181 /* Connection+CoreDataProperties.swift */,
-				2CC0D9601E5F013A00254181 /* Node+CoreDataClass.swift */,
-				2CC0D9611E5F013A00254181 /* Node+CoreDataProperties.swift */,
 				2C2AF5001E6184D9008DBD26 /* UserInfo.swift */,
 				2CC0D96E1E5F01A900254181 /* Model.swift */,
+				2CAF5C871E6460C6005EA70C /* Node.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -415,8 +407,6 @@
 				2CAF5C861E641A47005EA70C /* NetBIOS */,
 				2CC0D9951E5F107000254181 /* SMBConnection.h */,
 				2CC0D9961E5F107000254181 /* SMBConnection.m */,
-				2CC0D9971E5F107000254181 /* SMBFile.h */,
-				2CC0D9981E5F107000254181 /* SMBFile.m */,
 			);
 			name = Samba;
 			sourceTree = "<group>";
@@ -679,12 +669,13 @@
 				2CA6041D1E60911200335545 /* SearchCell.swift in Sources */,
 				2CA604111E60679500335545 /* TextFieldContainer.swift in Sources */,
 				2CA604041E60674400335545 /* LGAlertView.m in Sources */,
+				2CAF5C881E6460C6005EA70C /* Node.swift in Sources */,
 				2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */,
+				2CAF5C8C1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,
 				2CA6040B1E60674400335545 /* NSPointerArray+AbstractionHelpers.m in Sources */,
 				2CA6041C1E60911200335545 /* InfoViewController.swift in Sources */,
 				2CA603F41E604A4F00335545 /* ContentController.swift in Sources */,
 				2CC0D9A81E5F107000254181 /* TOSMBConstants.m in Sources */,
-				2CC0D9681E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */,
 				2CC0D9621E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9641E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
 				2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */,
@@ -697,18 +688,15 @@
 				2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */,
 				2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */,
 				2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */,
-				2CC0D9A21E5F107000254181 /* SMBFile.m in Sources */,
 				2CA6041E1E60911200335545 /* SearchInfoController.swift in Sources */,
 				2C11BD541E5F9C96004A786F /* MainVC.swift in Sources */,
-				2CC0D96A1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
 				2CC0D9A01E5F107000254181 /* SMBConnection.m in Sources */,
 				2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
 				2C11BD521E5F9C5A004A786F /* RightMenuVC.swift in Sources */,
-				2CC0D9661E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */,
 				2CA603F61E604D5700335545 /* ContentCell.swift in Sources */,
 				2CA604161E60906B00335545 /* DeviceController.swift in Sources */,
 				2CC0D9A41E5F107000254181 /* TONetBIOSNameService.m in Sources */,
-				2CC0D96C1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */,
+				2CAF5C8E1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,7 +709,6 @@
 				2C954A091E5F65CD00A23CC5 /* UIFontExtensions.swift in Sources */,
 				2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */,
 				2CA604181E60907200335545 /* DeviceController.swift in Sources */,
-				2CC0D9691E5F013A00254181 /* Connection+CoreDataProperties.swift in Sources */,
 				2CA6041F1E60911700335545 /* InfoViewController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
@@ -730,20 +717,19 @@
 				2CC0D9701E5F01A900254181 /* Model.swift in Sources */,
 				2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */,
 				2C954A0A1E5F65CD00A23CC5 /* UIViewControllerExtensions.swift in Sources */,
-				2CC0D9A31E5F107000254181 /* SMBFile.m in Sources */,
-				2CC0D96B1E5F013A00254181 /* Node+CoreDataClass.swift in Sources */,
 				2CA604171E60907200335545 /* AddShareController.swift in Sources */,
 				2CC0D9A11E5F107000254181 /* SMBConnection.m in Sources */,
 				2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */,
 				2C2AF5021E6184D9008DBD26 /* UserInfo.swift in Sources */,
 				2CA604211E60911700335545 /* SearchInfoController.swift in Sources */,
 				2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */,
+				2CAF5C8D1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,
+				2CAF5C891E6460C6005EA70C /* Node.swift in Sources */,
+				2CAF5C8F1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */,
 				2C9549E41E5F4ACD00A23CC5 /* SharesController.swift in Sources */,
 				2CC0D95B1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
-				2CC0D9671E5F013A00254181 /* Connection+CoreDataClass.swift in Sources */,
 				2C9549E31E5F4ACD00A23CC5 /* ShareCell.swift in Sources */,
 				2CC0D9A51E5F107000254181 /* TONetBIOSNameService.m in Sources */,
-				2CC0D96D1E5F013A00254181 /* Node+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,6 +872,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"IOS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Samba/libdsm",
@@ -922,6 +913,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"IOS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Samba/libdsm",
@@ -955,6 +951,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"TV=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -991,6 +992,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"TV=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

@@ -14,11 +14,11 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
 
     @IBOutlet weak var titleItem: UINavigationItem!
     
-    var nodes:[Node] = []
+    var shares:[Share] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        nodes = Model.shared.nodes(byRoot: nil)
+        shares = Model.shared.allShares()
         navigationController?.navigationBar.tintColor = UIColor.mainColor()
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
@@ -38,12 +38,12 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
 
     func refresh() {
         SVProgressHUD.show(withStatus: "Refresh...")
-        Model.shared.refreshConnections({ error in
+        Model.shared.refreshShares({ error in
             SVProgressHUD.dismiss()
             if error != nil {
                 self.showMessage("Cloud refresh error: \(error!)", messageType: .information)
             }
-            self.nodes = Model.shared.nodes(byRoot: nil)
+            self.shares = Model.shared.allShares()
             self.tableView.reloadData()
         })
     }
@@ -53,7 +53,7 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nodes.count == 0 ? 1 : nodes.count
+        return shares.count == 0 ? 1 : shares.count
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -62,13 +62,13 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        if nodes.count == 0 {
+        if shares.count == 0 {
             cell.textLabel?.text = "Empty list"
             cell.contentView.backgroundColor = UIColor.clear
             cell.backgroundColor = UIColor.clear
             cell.imageView?.image = nil
         } else {
-            cell.textLabel?.text = nodes[indexPath.row].name!
+            cell.textLabel?.text = shares[indexPath.row].name!
             cell.contentView.backgroundColor = UIColor.white
             cell.backgroundColor = UIColor.white
             cell.imageView?.image = UIImage(named: "iosShare")
@@ -82,21 +82,25 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return nodes.count > 0
+        return shares.count > 0
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.beginUpdates()
-            let node = nodes[indexPath.row]
-            Model.shared.deleteNode(node)
-            nodes.remove(at: indexPath.row)
-            if nodes.count > 0 {
-                tableView.deleteRows(at: [indexPath], with: .top)
-            } else {
-                tableView.reloadRows(at: [indexPath], with: .fade)
-            }
-            tableView.endUpdates()
+            Model.shared.deleteShare(shares[indexPath.row], result: { error in
+                if error == nil {
+                    tableView.beginUpdates()
+                    self.shares.remove(at: indexPath.row)
+                    if self.shares.count > 0 {
+                        tableView.deleteRows(at: [indexPath], with: .top)
+                    } else {
+                        tableView.reloadRows(at: [indexPath], with: .fade)
+                    }
+                    tableView.endUpdates()
+                } else {
+                    self.showMessage("Can not delete share.", messageType: .error)
+                }
+            })
         }
     }
     
@@ -111,15 +115,15 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
             let nav = segue.destination as! UINavigationController
             let next = nav.topViewController as! ContentController
             if let indexPath = tableView.indexPathForSelectedRow {
-                next.parentNode = nodes[indexPath.row]
+                next.parentNode = Node(share: shares[indexPath.row])
                 UserDefaults.standard.set(indexPath.row, forKey: "lastShare")
                 UserDefaults.standard.synchronize()
             } else {
                 let index = UserDefaults.standard.integer(forKey: "lastShare")
-                if index < nodes.count {
-                    next.parentNode = nodes[index]
+                if index < shares.count {
+                    next.parentNode = Node(share: shares[index])
                 } else {
-                    next.parentNode = nodes[0]
+                    next.parentNode = Node(share: shares[0])
                 }
             }
         }

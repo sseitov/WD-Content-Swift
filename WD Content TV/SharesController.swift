@@ -38,9 +38,8 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		if tap.state == .began {
 			if focusedIndexPath != nil, focusedIndexPath!.row > 0 {
 				let node = nodes[focusedIndexPath!.row - 1]
-				let alert = UIAlertController(title: "Attention!", message: "Do you want to delete \(node.name!)", preferredStyle: .alert)
+				let alert = UIAlertController(title: "Attention!", message: "Do you want to delete \(node.name)", preferredStyle: .alert)
 				alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-					Model.shared.deleteNode(node)
 					self.nodes.remove(at: self.focusedIndexPath!.row - 1)
 					self.collectionView?.deleteItems(at: [self.focusedIndexPath!])
 				}))
@@ -59,17 +58,21 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
     }
     
 	func refresh() {
-		setupTitle(parentNode == nil ? "MY SHARES" : parentNode!.name!)
+		setupTitle(parentNode == nil ? "MY SHARES" : parentNode!.name)
         if parentNode == nil {
-            nodes = Model.shared.nodes(byRoot: nil)
-            if nodes.count == 0 {
+            var shares = Model.shared.nodes(byRoot: nil) as! [String]
+            if shares.count == 0 {
                 SVProgressHUD.show(withStatus: "Refresh...")
-                Model.shared.refreshConnections({ error in
+                Model.shared.refreshShares({ error in
                     SVProgressHUD.dismiss()
-                    self.nodes = Model.shared.nodes(byRoot: nil)
-                    if self.nodes.count == 0 {
+                    shares = Model.shared.nodes(byRoot: nil) as! [String]
+                    if shares.count == 0 {
                         self.performSegue(withIdentifier: "addShare", sender: nil)
                     } else {
+                        self.nodes.removeAll()
+                        for share in shares {
+                            self.nodes.append(Node(share: share))
+                        }
                         self.collectionView?.reloadData()
                     }
                 })
@@ -77,8 +80,11 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
                 self.collectionView?.reloadData()
             }
         } else {
-            nodes.removeAll()
-            self.nodes = Model.shared.nodes(byRoot: self.parentNode)
+            self.nodes = Model.shared.nodes(byRoot: self.parentNode) as! [Node]
+            for node in self.nodes {
+                node.parent = parentNode
+                node.info = Model.shared.getInfoForNode(node)
+            }
             self.collectionView?.reloadData()
         }
         
@@ -128,7 +134,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 			performSegue(withIdentifier: "addShare", sender: nil)
 		} else  {
 			let node = parentNode == nil ? nodes[indexPath.row-1] : nodes[indexPath.row]
-			if node.isFile {
+			if !node.directory {
 				let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 				alert.addAction(UIAlertAction(title: "Preview moview", style: .default, handler: { _ in
 					self.performSegue(withIdentifier: "showMovie", sender: node)
@@ -159,8 +165,6 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 
     func movie(_ path: String!, startWithAudio channel: Int32) {
         if let node = Model.shared.node(byPath: path) {
-            node.wasViewed = true
-            node.lastAudioChannel = channel
             Model.shared.saveContext()
             if let index = nodes.index(of: node) {
                 collectionView?.reloadItems(at: [IndexPath(row: index, section: 0)])

@@ -46,8 +46,14 @@ class ContentController: UIViewController {
             self.collectionView.alpha = 0
             self.navigationItem.titleView?.alpha = 0
         }, completion: { _ in
-            self.setupTitle(self.parentNode!.name!)
-            self.nodes = Model.shared.nodes(byRoot: self.parentNode)
+            self.setupTitle(self.parentNode!.name)
+            self.nodes.removeAll()
+            self.nodes = Model.shared.nodes(byRoot: self.parentNode!)
+            for node in self.nodes {
+                node.parent = self.parentNode
+                node.share = self.parentNode!.share
+                node.info = Model.shared.getInfoForNode(node)
+            }
             self.collectionView.reloadData()
             if self.parentNode!.parent == nil {
                 self.navigationItem.setLeftBarButton(nil, animated: false)
@@ -106,7 +112,7 @@ extension ContentController: UICollectionViewDataSource, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let node = nodes[indexPath.row]
-        if !node.isFile {
+        if node.directory {
             parentNode = node
             refresh()
         } else {

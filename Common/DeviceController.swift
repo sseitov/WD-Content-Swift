@@ -14,8 +14,8 @@ class DeviceController: UITableViewController {
 	var target:ServiceHost?
 	
 	private var connection = SMBConnection()
-	private var cashedConnection:Connection?
-	private var content:[SMBFile] = []
+	private var cashedShare:Share?
+	private var shares:[String] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,26 +23,28 @@ class DeviceController: UITableViewController {
     #if IOS
         setupBackButton()
     #endif
-		cashedConnection = Model.shared.getConnection(target!.host)
+		cashedShare = Model.shared.getShareByIp(target!.host)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if self.cashedConnection != nil {
+        if self.cashedShare != nil {
             SVProgressHUD.show(withStatus: "Refresh...")
             DispatchQueue.global().async {
-                let connected = self.connection.connect(to: self.cashedConnection!.ip!,
-                                                    port: self.cashedConnection!.port,
-                                                    user: self.cashedConnection!.user!,
-                                                    password: self.cashedConnection?.password!)
+                let connected = self.connection.connect(to: self.cashedShare!.ip!,
+                                                    port: self.cashedShare!.port,
+                                                    user: self.cashedShare!.user!,
+                                                    password: self.cashedShare?.password!)
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
                     if !connected {
-                        self.showMessage("Can not connect to \(self.cashedConnection!.ip!)", messageType: .error, messageHandler: {
+                        self.showMessage("Can not connect to \(self.cashedShare!.ip!)", messageType: .error, messageHandler: {
                             self.requestAuth()
                         })
                     } else {
-                        self.content = self.connection.folderContents(at: "/") as! [SMBFile]
+                        self.target?.user = self.cashedShare!.user!
+                        self.target?.password = self.cashedShare!.password!
+                        self.shares = self.connection.folderContents(byRoot: nil) as! [String]
                         self.tableView.reloadData()
                     }
                 }
@@ -64,26 +66,13 @@ class DeviceController: UITableViewController {
                                                         user: user,
                                                         password: password)
                 DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
                     if connected {
-                        Model.shared.createConnection(ip: self.target!.host,
-                                                      port: self.target!.port,
-                                                      user: user,
-                                                      password: password,
-                                                      result:
-                            { cashed in
-                                SVProgressHUD.dismiss()
-                                if cashed == nil {
-                                    self.showMessage("Can not create connection.", messageType: .error, messageHandler: {
-                                        self.goBack()
-                                    })
-                                } else {
-                                    self.cashedConnection = cashed
-                                    self.content = self.connection.folderContents(at: "/") as! [SMBFile]
-                                    self.tableView.reloadData()
-                                }
-                        })
+                        self.target?.user = user
+                        self.target?.password = password
+                        self.shares = self.connection.folderContents(byRoot: nil) as! [String]
+                        self.tableView.reloadData()
                     } else {
-                        SVProgressHUD.dismiss()
                         self.showMessage("Can not connect.", messageType: .error, messageHandler: {
                             self.goBack()
                         })
@@ -120,26 +109,13 @@ class DeviceController: UITableViewController {
                                                         user: userField!.text!,
                                                         password: passwordField!.text!)
                 DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
                     if connected {
-                        Model.shared.createConnection(ip: self.target!.host,
-                                                      port: self.target!.port,
-                                                      user: userField!.text!,
-                                                      password: passwordField!.text!,
-                                                      result:
-                            { cashed in
-                                SVProgressHUD.dismiss()
-                                if cashed == nil {
-                                    self.showMessage("Can not create connection.", messageType: .error, messageHandler: {
-                                        self.goBack()
-                                    })
-                                } else {
-                                    self.cashedConnection = cashed
-                                    self.content = self.connection.folderContents(at: "/") as! [SMBFile]
-                                    self.tableView.reloadData()
-                                }
-                        })
+                        self.target?.user = userField!.text!
+                        self.target?.password = passwordField!.text!
+                        self.shares = self.connection.folderContents(byRoot: nil) as! [String]
+                        self.tableView.reloadData()
                     } else {
-                        SVProgressHUD.dismiss()
                         self.showMessage("Can not connect.", messageType: .error, messageHandler: {
                             self.goBack()
                         })
@@ -158,12 +134,12 @@ class DeviceController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return content.count
+        return shares.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-		cell.textLabel!.text = content[(indexPath as NSIndexPath).row].name
+		cell.textLabel!.text = shares[(indexPath as NSIndexPath).row]
         cell.textLabel?.font = UIFont.mainFont()
         cell.textLabel?.textColor = UIColor.mainColor()
         cell.textLabel?.textAlignment = .center
@@ -177,15 +153,18 @@ class DeviceController: UITableViewController {
 #endif
     
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let folder = content[indexPath.row];
-		_ = Model.shared.addNode(folder, parent: nil, connection: cashedConnection!)
-    #if TV
-		dismiss(animated: true, completion: {
-			NotificationCenter.default.post(name: refreshNotification, object: nil)
-		})
-    #else
-        NotificationCenter.default.post(name: refreshNotification, object: nil)
-        self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
-    #endif
+		let share = shares[indexPath.row];
+        SVProgressHUD.show(withStatus: "Add...")
+        Model.shared.createShare(name: share, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
+            SVProgressHUD.dismiss()
+        #if TV
+            self.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: refreshNotification, object: nil)
+            })
+        #else
+            NotificationCenter.default.post(name: refreshNotification, object: nil)
+            self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
+        #endif
+        })
 	}
 }

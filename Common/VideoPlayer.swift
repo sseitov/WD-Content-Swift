@@ -48,7 +48,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, VLCMediaDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let urlStr = "smb://\(self.node!.connection!.user!):\(self.node!.connection!.password!)@\(self.node!.connection!.ip!)\(self.node!.path!)"
+        let urlStr = "smb://\(self.node!.share!.user!):\(self.node!.share!.password!)@\(self.node!.share!.ip!)\(self.node!.filePath)"
         let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         if let url = URL(string: urlStrCode!) {
             self.mediaPlayer.media = VLCMedia(url: url)

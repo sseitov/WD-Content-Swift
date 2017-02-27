@@ -112,7 +112,7 @@ func generateUDID() -> String {
         }
     }
     
-    @objc func refreshConnections(_ result: @escaping(Error?) -> ()) {
+    @objc func refreshShares(_ result: @escaping(Error?) -> ()) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Connection", predicate: predicate)
         
@@ -128,42 +128,44 @@ func generateUDID() -> String {
             
             DispatchQueue.main.async {
                 for record in results! {
-                    self.addConnection(record)
+                    self.addShare(record)
                 }
                 result(nil)
             }
         }
     }
     
-    // MARK: - Connection table
+    // MARK: - Share table
     
-    func addConnection(_ record:CKRecord) {
-        if let ip = record["ip"] as? String {
-            var connection = getConnection(ip)
-            if connection == nil {
-                connection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: managedObjectContext) as? Connection
-                connection!.ip = ip
+    func addShare(_ record:CKRecord) {
+        if let ip = record["ip"] as? String, let name = record["name"] as? String {
+            var share = getShare(ip: ip, name: name)
+            if share == nil {
+                share = NSEntityDescription.insertNewObject(forEntityName: "Share", into: managedObjectContext) as? Share
+                share!.ip = ip
+                share!.name = name
                 if let port = record["port"] as? String, let portNum = Int(port), let user = record["user"] as? String, let password = record["password"] as? String {
                     
-                    connection!.recordName = record.recordID.recordName
-                    connection!.zoneName = record.recordID.zoneID.zoneName
-                    connection!.ownerName = record.recordID.zoneID.ownerName
-                    connection!.port = Int32(portNum)
-                    connection!.user = user
-                    connection!.password = password
+                    share!.recordName = record.recordID.recordName
+                    share!.zoneName = record.recordID.zoneID.zoneName
+                    share!.ownerName = record.recordID.zoneID.ownerName
+                    share!.port = Int32(portNum)
+                    share!.user = user
+                    share!.password = password
                     saveContext()
                 }
             }
         }
     }
 
-    func createConnection(ip:String, port:Int32, user:String, password:String, result: @escaping(Connection?) -> ()) {
+    func createShare(name:String, ip:String, port:Int32, user:String, password:String, result: @escaping(Share?) -> ()) {
         
-        if let connection = getConnection(ip) {
+        if let connection = getShare(ip:ip, name:name) {
             result(connection)
         }
         
         let record = CKRecord(recordType: "Connection")
+        record.setValue(name, forKey: "name")
         record.setValue(ip, forKey: "ip")
         record.setValue("\(port)", forKey: "port")
         record.setValue(user, forKey: "user")
@@ -174,88 +176,85 @@ func generateUDID() -> String {
                 if error != nil {
                     result(nil)
                 } else {
-                    let connection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: self.managedObjectContext) as! Connection
-                    connection.recordName = cloudRecord!.recordID.recordName
-                    connection.zoneName = cloudRecord!.recordID.zoneID.zoneName
-                    connection.ownerName = cloudRecord!.recordID.zoneID.ownerName
-                    connection.ip = ip
-                    connection.port = port
-                    connection.user = user
-                    connection.password = password
+                    let share = NSEntityDescription.insertNewObject(forEntityName: "Share", into: self.managedObjectContext) as! Share
+                    share.recordName = cloudRecord!.recordID.recordName
+                    share.zoneName = cloudRecord!.recordID.zoneID.zoneName
+                    share.ownerName = cloudRecord!.recordID.zoneID.ownerName
+                    share.name = name
+                    share.ip = ip
+                    share.port = port
+                    share.user = user
+                    share.password = password
                     self.saveContext()
-                    result(connection)
+                    result(share)
                 }
             }
         })
     }
-
-    func getConnection(_ address:String) -> Connection? {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
-        fetchRequest.predicate = NSPredicate(format: "ip == %@", address)
-        if let connection = try? managedObjectContext.fetch(fetchRequest).first as? Connection {
-            return connection
+    
+    func deleteShare(_ share:Share, result: @escaping(Error?) -> ()) {
+        let recordZoneID = CKRecordZoneID(zoneName: share.zoneName!, ownerName: share.ownerName!)
+        let recordID = CKRecordID(recordName: share.recordName!, zoneID: recordZoneID)
+        cloudDB!.delete(withRecordID: recordID, completionHandler: { record, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    result(error)
+                } else {
+                    self.managedObjectContext.delete(share)
+                    result(nil)
+                }
+            }
+        })
+    }
+    
+    func getShareByIp(_ ip:String) -> Share? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Share")
+        fetchRequest.predicate = NSPredicate(format: "ip == %@", ip)
+        if let share = try? managedObjectContext.fetch(fetchRequest).first as? Share {
+            return share
         } else {
             return nil
         }
     }
     
-    // MARK: - Node table
-    
-    func addNode(_ file:SMBFile, parent:Node?, connection:Connection? = nil) -> Node {
-        let node = NSEntityDescription.insertNewObject(forEntityName: "Node", into: managedObjectContext) as! Node
-        node.uid = generateUDID()
-        if file.directory {
-            node.name = file.name
+    func getShare(ip:String, name:String) -> Share? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Share")
+        let pred1 = NSPredicate(format: "ip == %@", ip)
+        let pred2 = NSPredicate(format: "name == %@", name)
+        fetchRequest.predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [pred1, pred2])
+        if let share = try? managedObjectContext.fetch(fetchRequest).first as? Share {
+            return share
         } else {
-            node.name = (file.name as NSString).deletingPathExtension
+            return nil
         }
-        node.path = file.filePath
-        node.isFile = !file.directory
-        if parent != nil {
-            node.parent = parent
-            parent?.addToChilds(node)
-            node.connection = parent!.connection
-            parent!.connection?.addToNodes(node)
-        } else {
-            node.parent = nil
-            node.connection = connection
-            connection?.addToNodes(node)
-        }
-        saveContext()
-        return node
     }
     
-    func nodes(byRoot:Node?) -> [Node] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Node")
-        if byRoot != nil {
-            fetchRequest.predicate = NSPredicate(format: "parent.uid == %@", byRoot!.uid!)
+    func allShares() -> [Share] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Share")
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        if let share = try? managedObjectContext.fetch(fetchRequest) as! [Share] {
+            return share
         } else {
-            fetchRequest.predicate = NSPredicate(format: "parent == NULL")
+            return []
         }
-        let descr1 = NSSortDescriptor(key: "isFile", ascending: true)
-        let descr2 = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [descr1, descr2]
-        
-        if var nodes = try? managedObjectContext.fetch(fetchRequest) as! [Node] {
-            if nodes.count == 0 && byRoot != nil {
-                let connection = SMBConnection()
-                if connection.connect(to: byRoot!.connection!.ip!,
-                                      port: byRoot!.connection!.port,
-                                      user: byRoot!.connection!.user!,
-                                      password: byRoot!.connection!.password!) {
-                    let content = connection.folderContents(at: byRoot!.path!) as! [SMBFile]
-                    for file in content {
-                        let node = addNode(file, parent: byRoot)
-                        nodes.append(node)
-                    }
-                }
-            }
-            return nodes.sorted(by: { node1, node2 in
-                if node1.isFile && node2.isFile {
-                    return node1.name! < node2.name!
-                } else if !node1.isFile && !node2.isFile {
-                    return node1.name! < node2.name!
-                } else if node1.isFile {
+    }
+    
+    // MARK: - Node table
+
+    func nodes(byRoot:Node) -> [Node] {
+        let connection = SMBConnection()
+        if connection.connect(to: byRoot.share!.ip!,
+                              port: byRoot.share!.port,
+                              user: byRoot.share!.user!,
+                              password: byRoot.share!.password!) {
+            let content = connection.folderContents(byRoot: byRoot) as! [Node]
+            return content.sorted(by: { node1, node2 in
+                if !node1.directory && !node2.directory {
+                    return node1.name < node2.name
+                } else if node1.directory && node2.directory {
+                    return node1.name < node2.name
+                } else if !node1.directory {
                     return false
                 } else {
                     return true
@@ -265,7 +264,7 @@ func generateUDID() -> String {
             return []
         }
     }
-    
+
     func node(byPath:String) -> Node? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Node")
         fetchRequest.predicate = NSPredicate(format: "path == %@", byPath)
@@ -276,23 +275,11 @@ func generateUDID() -> String {
         }
     }
     
-    func deleteNode(_ node:Node) {
-        node.connection?.removeFromNodes(node)
-        if let childs = node.childs?.allObjects as? [Node] {
-            for child in childs {
-                deleteNode(child)
-            }
-        }
-        clearInfoForNode(node)
-        managedObjectContext.delete(node)
-        saveContext()
-    }
-    
     // MARK: - MetaInfo table
     
-    func getInfo(_ path:String) -> MetaInfo? {
+    func getInfoForNode(_ node:Node) -> MetaInfo? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MetaInfo")
-        fetchRequest.predicate = NSPredicate(format: "path == %@", path)
+        fetchRequest.predicate = NSPredicate(format: "path == %@", node.filePath)
         if let info = try? managedObjectContext.fetch(fetchRequest).first as? MetaInfo {
             return info
         } else {
@@ -313,9 +300,8 @@ func generateUDID() -> String {
                         result: @escaping(Error?) -> ()
         )
     {
-        let path = "\(node.connection!.ip!)//\(node.path!)"
         let record = CKRecord(recordType: "MetaInfo")
-        record.setValue(path, forKey: "path")
+        record.setValue(node.filePath, forKey: "path")
         record.setValue(cast, forKey: "cast")
         record.setValue(director, forKey: "director")
         record.setValue(genre, forKey: "genre")
@@ -332,11 +318,10 @@ func generateUDID() -> String {
                 if error != nil {
                     result(error)
                 } else {
-                    self.clearInfoForNode(node)
-                    var info = self.getInfo(path)
+                    var info = self.getInfoForNode(node)
                     if info == nil {
                         info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: self.managedObjectContext) as? MetaInfo
-                        info!.path = path
+                        info!.path = node.filePath
                     }
                     info!.modificationDate = NSDate()
                     info!.recordName = cloudRecord!.recordID.recordName
@@ -352,8 +337,6 @@ func generateUDID() -> String {
                     info!.cast = cast
                     info!.director = director
                     
-                    info!.node = node
-                    node.info = info
                     self.saveContext()
                     
                     result(nil)
@@ -363,8 +346,7 @@ func generateUDID() -> String {
     }
     
     func updateInfoForNode(_ node:Node) {
-        let path = "\(node.connection!.ip!)//\(node.path!)"
-        let predicate = NSPredicate(format: "path == %@", path)
+        let predicate = NSPredicate(format: "path == %@", node.filePath)
         let query = CKQuery(recordType: "MetaInfo", predicate: predicate)
         
         cloudDB!.perform(query, inZoneWith: nil, completionHandler: { records, error in
@@ -379,8 +361,7 @@ func generateUDID() -> String {
                             }
                         }
                     }
-                    self.clearInfoForNode(node)
-                    var info = self.getInfo(record["path"] as! String)
+                    var info = self.getInfoForNode(node)
                     if info == nil {
                         info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: self.managedObjectContext) as? MetaInfo
                         info!.path = record["path"] as? String
@@ -399,8 +380,6 @@ func generateUDID() -> String {
                     info!.cast = record["cast"] as? String
                     info!.director = record["director"] as? String
                     
-                    info!.node = node
-                    node.info = info
                     self.saveContext()
                     NotificationCenter.default.post(name: refreshNodeNotification, object: node)
                 }
@@ -408,29 +387,14 @@ func generateUDID() -> String {
         })
     }
     
-    func clearInfoForNode(_ node:Node) {
-        if node.info == nil {
-            return
-        }
-        managedObjectContext.delete(node.info!)
-        node.info = nil
-        saveContext()
-    }
-    
-    func clearInfo(_ forNode:Node, result: @escaping(Error?) -> ()) {
-        if forNode.info == nil {
-            result(nil)
-            return
-        }
-        
-        let recordZoneID = CKRecordZoneID(zoneName: forNode.info!.zoneName!, ownerName: forNode.info!.ownerName!)
-        let recordID = CKRecordID(recordName: forNode.info!.recordName!, zoneID: recordZoneID)
+    func clearInfo(_ info:MetaInfo, result: @escaping(Error?) -> ()) {
+        let recordZoneID = CKRecordZoneID(zoneName: info.zoneName!, ownerName: info.ownerName!)
+        let recordID = CKRecordID(recordName: info.recordName!, zoneID: recordZoneID)
         cloudDB!.delete(withRecordID: recordID, completionHandler: { record, error in
             DispatchQueue.main.async {
                 if error != nil {
                     result(error)
                 } else {
-                    self.clearInfoForNode(forNode)
                     result(nil)
                 }
             }

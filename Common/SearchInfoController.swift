@@ -24,7 +24,7 @@ class SearchInfoController: UITableViewController {
         setupBackButton()
     #endif
 		SVProgressHUD.show()
-		searchFile = node!.name!
+		searchFile = node!.name
 		
 		TMDB.sharedInstance().get(kMovieDBConfiguration, parameters: nil, block: { result, err in
 			SVProgressHUD.dismiss()

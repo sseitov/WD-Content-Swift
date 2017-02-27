@@ -18,9 +18,9 @@ class ShareCell: UICollectionViewCell {
 
 	var node:Node? {
 		didSet {
-			if node!.isFile {
+			if !node!.directory {
 				if node!.info == nil {
-					textView.text = node!.name!
+					textView.text = node!.name
 					imageView.image = UIImage(named: "movie")
 				} else {
 					textView.text = node!.info!.title!
@@ -33,7 +33,7 @@ class ShareCell: UICollectionViewCell {
 				}
                 Model.shared.updateInfoForNode(node!)
 			} else {
-				textView.text = node!.name!
+				textView.text = node!.name
                 if node!.parent == nil {
                     imageView.image = UIImage(named: "share")
                 } else {
@@ -45,7 +45,7 @@ class ShareCell: UICollectionViewCell {
 	}
 	
     private func checked() -> Bool {
-        return node != nil && node!.isFile && node!.wasViewed
+        return false
     }
     
 	override func awakeFromNib() {

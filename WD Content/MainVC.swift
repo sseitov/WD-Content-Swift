@@ -25,8 +25,8 @@ class MainVC: AMSlideMenuMainViewController {
     }
     
     override func segueIdentifierForIndexPath(inRightMenu indexPath: IndexPath!) -> String! {
-        let nodes = Model.shared.nodes(byRoot: nil)
-        return nodes.count > 0 ? "content" : "shares"
+        let shares = Model.shared.allShares()
+        return shares.count > 0 ? "content" : "shares"
     }
     
     override func rightMenuWidth() -> CGFloat {

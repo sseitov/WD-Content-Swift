@@ -15,9 +15,9 @@ class ContentCell: UICollectionViewCell {
 
     var node:Node? {
         didSet {
-            if node!.isFile {
+            if !node!.directory {
                 if node!.info == nil {
-                    nodeName.text = node!.name!
+                    nodeName.text = node!.name
                     nodeImage.image = UIImage(named: "file")
                 } else {
                     let text = NSMutableAttributedString(string: node!.info!.title!,
