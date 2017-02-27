@@ -24,7 +24,6 @@
 		2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549A61E5F2B1800A23CC5 /* TMDB.m */; };
 		2C9549A91E5F32D100A23CC5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549A81E5F32D100A23CC5 /* libiconv.tbd */; };
 		2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549A61E5F2B1800A23CC5 /* TMDB.m */; };
-		2C9549AC1E5F3CD300A23CC5 /* libtasnl_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549AB1E5F3CD300A23CC5 /* libtasnl_ios.a */; };
 		2C9549E31E5F4ACD00A23CC5 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */; };
 		2C9549E41E5F4ACD00A23CC5 /* SharesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */; };
 		2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */; };
@@ -86,9 +85,6 @@
 		2CC0D9A71E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99C1E5F107000254181 /* TONetBIOSNameServiceEntry.m */; };
 		2CC0D9A81E5F107000254181 /* TOSMBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99F1E5F107000254181 /* TOSMBConstants.m */; };
 		2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99F1E5F107000254181 /* TOSMBConstants.m */; };
-		2CC0D9B21E5F120100254181 /* libdsm_tvos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9B01E5F120100254181 /* libdsm_tvos.a */; };
-		2CC0D9B31E5F120100254181 /* libtansl_tvos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9B11E5F120100254181 /* libtansl_tvos.a */; };
-		2CC0D9B61E5F121800254181 /* libdsm_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9B41E5F121800254181 /* libdsm_ios.a */; };
 		2CC0D9B91E5F12D100254181 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC0D9B81E5F12D100254181 /* libiconv.tbd */; };
 		2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
 		2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
@@ -129,7 +125,6 @@
 		2C9549A51E5F2B1800A23CC5 /* TMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDB.h; path = TMDB/TMDB.h; sourceTree = "<group>"; };
 		2C9549A61E5F2B1800A23CC5 /* TMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDB.m; path = TMDB/TMDB.m; sourceTree = "<group>"; };
 		2C9549A81E5F32D100A23CC5 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
-		2C9549AB1E5F3CD300A23CC5 /* libtasnl_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtasnl_ios.a; path = libdsm/libtasnl_ios.a; sourceTree = "<group>"; };
 		2C9549DB1E5F4ACD00A23CC5 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		2C9549DC1E5F4ACD00A23CC5 /* SharesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesController.swift; sourceTree = "<group>"; };
 		2C954A041E5F65CD00A23CC5 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Extensions/UIColorExtensions.swift; sourceTree = "<group>"; };
@@ -182,9 +177,6 @@
 		2CC0D99D1E5F107000254181 /* TONetBIOSNameServiceEntryPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TONetBIOSNameServiceEntryPrivate.h; path = Samba/TONetBIOSNameServiceEntryPrivate.h; sourceTree = "<group>"; };
 		2CC0D99E1E5F107000254181 /* TOSMBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOSMBConstants.h; path = Samba/TOSMBConstants.h; sourceTree = "<group>"; };
 		2CC0D99F1E5F107000254181 /* TOSMBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TOSMBConstants.m; path = Samba/TOSMBConstants.m; sourceTree = "<group>"; };
-		2CC0D9B01E5F120100254181 /* libdsm_tvos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdsm_tvos.a; path = libdsm/libdsm_tvos.a; sourceTree = "<group>"; };
-		2CC0D9B11E5F120100254181 /* libtansl_tvos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtansl_tvos.a; path = libdsm/libtansl_tvos.a; sourceTree = "<group>"; };
-		2CC0D9B41E5F121800254181 /* libdsm_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdsm_ios.a; path = libdsm/libdsm_ios.a; sourceTree = "<group>"; };
 		2CC0D9B81E5F12D100254181 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayer.swift; path = Common/VideoPlayer.swift; sourceTree = "<group>"; };
 		2CCC86EF1E62D2A6000CC894 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -209,8 +201,6 @@
 			files = (
 				2CD9EF6B1E63221500E5F8DF /* libc++.tbd in Frameworks */,
 				2CC0D9B91E5F12D100254181 /* libiconv.tbd in Frameworks */,
-				2C9549AC1E5F3CD300A23CC5 /* libtasnl_ios.a in Frameworks */,
-				2CC0D9B61E5F121800254181 /* libdsm_ios.a in Frameworks */,
 				2CD9EF6D1E63223400E5F8DF /* CoreMedia.framework in Frameworks */,
 				2CD9EF691E6321FC00E5F8DF /* VideoToolbox.framework in Frameworks */,
 				2CD9EF651E63210200E5F8DF /* MobileVLCKit.framework in Frameworks */,
@@ -227,8 +217,6 @@
 			files = (
 				2CD9EF6F1E6322F500E5F8DF /* libc++.tbd in Frameworks */,
 				2C9549A91E5F32D100A23CC5 /* libiconv.tbd in Frameworks */,
-				2CC0D9B21E5F120100254181 /* libdsm_tvos.a in Frameworks */,
-				2CC0D9B31E5F120100254181 /* libtansl_tvos.a in Frameworks */,
 				2CD9EF671E63211000E5F8DF /* TVVLCKit.framework in Frameworks */,
 				2CCC86F01E62D2A6000CC894 /* AVFoundation.framework in Frameworks */,
 				2CD9EF731E63237E00E5F8DF /* AudioToolbox.framework in Frameworks */,
@@ -432,10 +420,6 @@
 				2CD9EF6A1E63221500E5F8DF /* libc++.tbd */,
 				2C9549A81E5F32D100A23CC5 /* libiconv.tbd */,
 				2CC0D9B81E5F12D100254181 /* libiconv.tbd */,
-				2CC0D9B41E5F121800254181 /* libdsm_ios.a */,
-				2C9549AB1E5F3CD300A23CC5 /* libtasnl_ios.a */,
-				2CC0D9B01E5F120100254181 /* libdsm_tvos.a */,
-				2CC0D9B11E5F120100254181 /* libtansl_tvos.a */,
 				2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */,
 				2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */,
 				2CD9EF661E63211000E5F8DF /* TVVLCKit.framework */,
@@ -825,7 +809,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -870,7 +854,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -896,17 +880,12 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm/include",
-					"$(PROJECT_DIR)/ffmpeg/include",
+					"$(PROJECT_DIR)/Samba/libdsm",
 				);
 				INFOPLIST_FILE = "WD Content/Info.plist";
-				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 10.2;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm",
-					"$(PROJECT_DIR)/ffmpeg/ios",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-DIOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -937,17 +916,12 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm/include",
-					"$(PROJECT_DIR)/ffmpeg/include",
+					"$(PROJECT_DIR)/Samba/libdsm",
 				);
 				INFOPLIST_FILE = "WD Content/Info.plist";
-				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 10.2;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm",
-					"$(PROJECT_DIR)/ffmpeg/ios",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-DIOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -976,16 +950,11 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm/include",
-					"$(PROJECT_DIR)/ffmpeg/include",
+					"$(PROJECT_DIR)/Samba/libdsm",
 				);
 				INFOPLIST_FILE = "WD Content TV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm",
-					"$(PROJECT_DIR)/ffmpeg/tvos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -DTV";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1017,16 +986,11 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm/include",
-					"$(PROJECT_DIR)/ffmpeg/include",
+					"$(PROJECT_DIR)/Samba/libdsm",
 				);
 				INFOPLIST_FILE = "WD Content TV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/libdsm",
-					"$(PROJECT_DIR)/ffmpeg/tvos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -DTV";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
