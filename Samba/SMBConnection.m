@@ -18,7 +18,11 @@
 #import <bdsm/smb_stat.h>
 #import <arpa/inet.h>
 
-//#define SAMBA_PORT  445
+#if TV
+#include "WD_Content_TV-Swift.h"
+#else
+#include "WD_Content-Swift.h"
+#endif
 
 @interface SMBConnection () {
 }
@@ -173,9 +177,17 @@
         if (name[0] == '.')
             continue;
 		
-        SMBFile *file = [[SMBFile alloc] initWithStat:item parentDirectoryPath:path];
-		if (file.isValidFileType)
-			[fileList addObject:file];
+        NSString* fileName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
+        bool isDir = (smb_stat_get(item, SMB_STAT_ISDIR) != 0);
+        if (isDir) {
+            SMBFile *file = [[SMBFile alloc] initWithName:fileName isDir:isDir parentDirectoryPath:path];
+            [fileList addObject:file];
+        } else {
+            if ([Model isValidMediaTypeWithName:fileName]) {
+                SMBFile *file = [[SMBFile alloc] initWithName:fileName isDir:isDir parentDirectoryPath:path];
+                [fileList addObject:file];
+            }
+        }
     }
     smb_stat_list_destroy(statList);
     smb_tree_disconnect(self.session, shareID);

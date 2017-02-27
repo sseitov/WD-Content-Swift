@@ -17,10 +17,11 @@
 - (void)disconnect;
 - (bool)isConnected;
 - (NSArray *)folderContentsAt:(NSString *)path;
+/*
 - (smb_fd)openFile:(NSString*)path;
 - (void)closeFile:(smb_fd)file;
 - (int)readFile:(smb_fd)file buffer:(void*)buffer size:(size_t)size;
 - (int)seekFile:(smb_fd)file offset:(off_t)offset whence:(int)whence;
 - (bool)renameFile:(NSString*)oldPath newPath:(NSString*)newPath;
-
+*/
 @end

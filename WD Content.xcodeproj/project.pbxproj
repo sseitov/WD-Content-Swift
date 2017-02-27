@@ -379,6 +379,20 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		2CAF5C861E641A47005EA70C /* NetBIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2CC0D9991E5F107000254181 /* TONetBIOSNameService.h */,
+				2CC0D99A1E5F107000254181 /* TONetBIOSNameService.m */,
+				2CC0D99B1E5F107000254181 /* TONetBIOSNameServiceEntry.h */,
+				2CC0D99C1E5F107000254181 /* TONetBIOSNameServiceEntry.m */,
+				2CC0D99D1E5F107000254181 /* TONetBIOSNameServiceEntryPrivate.h */,
+				2CC0D99E1E5F107000254181 /* TOSMBConstants.h */,
+				2CC0D99F1E5F107000254181 /* TOSMBConstants.m */,
+			);
+			name = NetBIOS;
+			sourceTree = "<group>";
+		};
 		2CC0D9511E5EFD3200254181 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,17 +412,11 @@
 		2CC0D9921E5F105900254181 /* Samba */ = {
 			isa = PBXGroup;
 			children = (
+				2CAF5C861E641A47005EA70C /* NetBIOS */,
 				2CC0D9951E5F107000254181 /* SMBConnection.h */,
 				2CC0D9961E5F107000254181 /* SMBConnection.m */,
 				2CC0D9971E5F107000254181 /* SMBFile.h */,
 				2CC0D9981E5F107000254181 /* SMBFile.m */,
-				2CC0D9991E5F107000254181 /* TONetBIOSNameService.h */,
-				2CC0D99A1E5F107000254181 /* TONetBIOSNameService.m */,
-				2CC0D99B1E5F107000254181 /* TONetBIOSNameServiceEntry.h */,
-				2CC0D99C1E5F107000254181 /* TONetBIOSNameServiceEntry.m */,
-				2CC0D99D1E5F107000254181 /* TONetBIOSNameServiceEntryPrivate.h */,
-				2CC0D99E1E5F107000254181 /* TOSMBConstants.h */,
-				2CC0D99F1E5F107000254181 /* TOSMBConstants.m */,
 			);
 			name = Samba;
 			sourceTree = "<group>";

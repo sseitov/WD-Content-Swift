@@ -22,7 +22,7 @@ class ContentCell: UICollectionViewCell {
                 } else {
                     let text = NSMutableAttributedString(string: node!.info!.title!,
                                                          attributes: [NSFontAttributeName : UIFont.mainFont(15)])
-                    let dateText = " (\(year(node!.info!.release_date!)))"
+                    let dateText = " (\(Model.year(node!.info!.release_date!)))"
                     text.append(NSMutableAttributedString(string: dateText,
                                                           attributes: [NSFontAttributeName : UIFont.condensedFont(15)]))
                     nodeName.attributedText = text

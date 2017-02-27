@@ -295,7 +295,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		case 1:
 			cell.textLabel?.text = "Release Date"
             if let text = metainfo != nil ? metainfo!.release_date : info!["release_date"] as? String {
-                cell.detailTextLabel?.text = releaseDate(text)
+                cell.detailTextLabel?.text = Model.releaseDate(text)
             } else {
                 cell.detailTextLabel?.text = ""
             }

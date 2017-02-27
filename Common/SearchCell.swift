@@ -51,7 +51,7 @@ class SearchResultCell: UITableViewCell {
                 title.textColor = UIColor.mainColor()
 			}
 			if let release_date = movie!["release_date"] as? String {
-				date.text = releaseDate(release_date)
+				date.text = Model.releaseDate(release_date)
                 date.font = UIFont.mainFont()
 			}
 			if let poster_url = movie!["poster_path"] as? String, imagesBaseURL != nil {
