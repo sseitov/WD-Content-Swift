@@ -84,4 +84,12 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, VLCMediaDelegate {
         }
  */
     }
+    
+    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        if mediaPlayer.state == .stopped {
+            mediaPlayer.delegate = nil
+            mediaPlayer.stop()
+            dismiss(animated: true, completion: nil)
+        }
+    }
 }

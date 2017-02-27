@@ -35,6 +35,11 @@ import UIKit
         self.directory = isDir
     }
     
+    func dislayName() -> String {
+        let display = (name as NSString).deletingPathExtension
+        return display.replacingOccurrences(of: "_", with: " ", options: [], range: nil)
+    }
+    
     class func shareNameFromPath(_ path:String) -> String {
         var share = path as NSString
 

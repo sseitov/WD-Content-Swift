@@ -154,17 +154,21 @@ class DeviceController: UITableViewController {
     
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let share = shares[indexPath.row];
-        SVProgressHUD.show(withStatus: "Add...")
-        Model.shared.createShare(name: share, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
-            SVProgressHUD.dismiss()
-        #if TV
-            self.dismiss(animated: true, completion: {
-                NotificationCenter.default.post(name: refreshNotification, object: nil)
+        if Model.shared.getShare(ip: target!.host, name: share) != nil {
+            showMessage("\(share) already was added.", messageType: .information)
+        } else {
+            SVProgressHUD.show(withStatus: "Add...")
+            Model.shared.createShare(name: share, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
+                SVProgressHUD.dismiss()
+                #if TV
+                    self.dismiss(animated: true, completion: {
+                        NotificationCenter.default.post(name: refreshNotification, object: nil)
+                    })
+                #else
+                    NotificationCenter.default.post(name: refreshNotification, object: nil)
+                    self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
+                #endif
             })
-        #else
-            NotificationCenter.default.post(name: refreshNotification, object: nil)
-            self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
-        #endif
-        })
+        }
 	}
 }

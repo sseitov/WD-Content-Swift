@@ -141,7 +141,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     self.dismiss(animated: true, completion: nil)
                 })
             } else {
-                NotificationCenter.default.post(name: refreshNotification, object: nil)
+                NotificationCenter.default.post(name: refreshNodeNotification, object: self.node)
                 self.dismiss(animated: true, completion: nil)
             }
         })
@@ -167,7 +167,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         self.dismiss(animated: true, completion: nil)
                     })
                 } else {
-                    NotificationCenter.default.post(name: refreshNotification, object: nil)
+                    NotificationCenter.default.post(name: refreshNodeNotification, object: self.node)
                     self.dismiss(animated: true, completion: nil)
                 }
         })

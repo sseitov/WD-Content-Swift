@@ -16,8 +16,9 @@ class ContentCell: UICollectionViewCell {
     var node:Node? {
         didSet {
             if !node!.directory {
+                node?.info = Model.shared.getInfoForNode(node!)
                 if node!.info == nil {
-                    nodeName.text = node!.name
+                    nodeName.text = node!.dislayName()
                     nodeImage.image = UIImage(named: "file")
                 } else {
                     let text = NSMutableAttributedString(string: node!.info!.title!,
@@ -36,7 +37,7 @@ class ContentCell: UICollectionViewCell {
                 Model.shared.updateInfoForNode(node!)
             } else {
                 nodeImage.image = UIImage(named: "folder")
-                nodeName.text = node!.name
+                nodeName.text = node!.dislayName()
             }
         }
     }

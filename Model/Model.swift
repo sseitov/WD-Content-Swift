@@ -193,14 +193,19 @@ func generateUDID() -> String {
     }
     
     func deleteShare(_ share:Share, result: @escaping(Error?) -> ()) {
+
+        clearShareInfo(share)
+        
         let recordZoneID = CKRecordZoneID(zoneName: share.zoneName!, ownerName: share.ownerName!)
         let recordID = CKRecordID(recordName: share.recordName!, zoneID: recordZoneID)
+        
         cloudDB!.delete(withRecordID: recordID, completionHandler: { record, error in
             DispatchQueue.main.async {
                 if error != nil {
                     result(error)
                 } else {
                     self.managedObjectContext.delete(share)
+                    self.saveContext()
                     result(nil)
                 }
             }
@@ -301,6 +306,7 @@ func generateUDID() -> String {
         )
     {
         let record = CKRecord(recordType: "MetaInfo")
+        record.setValue(node.share!.ip!, forKey: "share")
         record.setValue(node.filePath, forKey: "path")
         record.setValue(cast, forKey: "cast")
         record.setValue(director, forKey: "director")
@@ -322,6 +328,7 @@ func generateUDID() -> String {
                     if info == nil {
                         info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: self.managedObjectContext) as? MetaInfo
                         info!.path = node.filePath
+                        info!.share = node.share!.ip!
                     }
                     info!.modificationDate = NSDate()
                     info!.recordName = cloudRecord!.recordID.recordName
@@ -365,6 +372,7 @@ func generateUDID() -> String {
                     if info == nil {
                         info = NSEntityDescription.insertNewObject(forEntityName: "MetaInfo", into: self.managedObjectContext) as? MetaInfo
                         info!.path = record["path"] as? String
+                        info!.share = record["share"] as? String
                     }
                     info!.modificationDate = record.modificationDate != nil ? record.modificationDate as NSDate? : record.creationDate as NSDate?
                     info!.recordName = record.recordID.recordName
@@ -395,10 +403,33 @@ func generateUDID() -> String {
                 if error != nil {
                     result(error)
                 } else {
+                    self.managedObjectContext.delete(info)
+                    self.saveContext()
                     result(nil)
                 }
             }
         })
     }
 
+    func clearShareInfo(_ share:Share) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MetaInfo")
+        fetchRequest.predicate = NSPredicate(format: "share == %@", share.ip!)
+        if let infos = try? managedObjectContext.fetch(fetchRequest) as! [MetaInfo] {
+            for info in infos {
+                self.managedObjectContext.delete(info)
+            }
+            self.saveContext()
+        }
+
+        let predicate = NSPredicate(format: "share == %@", share.ip!)
+        let query = CKQuery(recordType: "MetaInfo", predicate: predicate)
+        cloudDB!.perform(query, inZoneWith: nil) { [unowned self] results, error in
+            if error == nil {
+                for record in results! {
+                    self.cloudDB!.delete(withRecordID: record.recordID, completionHandler: { _, _ in
+                    })
+                }
+            }
+        }
+    }
 }

@@ -87,7 +87,9 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            SVProgressHUD.show(withStatus: "Delete...")
             Model.shared.deleteShare(shares[indexPath.row], result: { error in
+                SVProgressHUD.dismiss()
                 if error == nil {
                     tableView.beginUpdates()
                     self.shares.remove(at: indexPath.row)

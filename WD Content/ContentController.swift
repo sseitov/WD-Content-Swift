@@ -52,7 +52,6 @@ class ContentController: UIViewController {
             for node in self.nodes {
                 node.parent = self.parentNode
                 node.share = self.parentNode!.share
-                node.info = Model.shared.getInfoForNode(node)
             }
             self.collectionView.reloadData()
             if self.parentNode!.parent == nil {
@@ -87,7 +86,8 @@ class ContentController: UIViewController {
         } else if segue.identifier == "info" {
             let nav = segue.destination as! UINavigationController
             let next = nav.topViewController as! InfoViewController
-            next.metainfo = sender as? MetaInfo
+            next.node = sender as? Node
+            next.metainfo = next.node!.info
         } else if segue.identifier == "movie" {
             let nav = segue.destination as! UINavigationController
             let next = nav.topViewController as! VideoPlayer
@@ -122,7 +122,7 @@ extension ContentController: UICollectionViewDataSource, UICollectionViewDelegat
             },
                                            handler2: {
                                             if node.info != nil {
-                                                self.performSegue(withIdentifier: "info", sender: node.info)
+                                                self.performSegue(withIdentifier: "info", sender: node)
                                             } else {
                                                 self.performSegue(withIdentifier: "search", sender: node)
                                             }
