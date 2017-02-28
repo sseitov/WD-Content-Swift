@@ -391,12 +391,17 @@
         <!--Navigation Controller-->
         <scene sceneID="aaV-Tr-FUB">
             <objects>
-                <navigationController id="Z2I-Wa-kGE" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="Z2I-Wa-kGE" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="XIG-eD-ebE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="H5j-2I-wbZ">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="gj1-bC-bqI" kind="relationship" relationship="rootViewController" id="4L0-hN-lAW"/>
                     </connections>
@@ -409,27 +414,6 @@
         <scene sceneID="RqF-qo-uV8">
             <objects>
                 <viewController id="gj1-bC-bqI" customClass="VideoPlayer" customModule="WD_Content" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7z4-oM-Fw1"/>
-                        <viewControllerLayoutGuide type="bottom" id="kYH-rY-c4c"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WGh-5P-Sc1">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzT-pm-3Jx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="kYH-rY-c4c" firstAttribute="top" secondItem="wzT-pm-3Jx" secondAttribute="bottom" id="Oc6-HQ-HGg"/>
-                            <constraint firstItem="wzT-pm-3Jx" firstAttribute="leading" secondItem="WGh-5P-Sc1" secondAttribute="leading" id="c6u-Z0-bJL"/>
-                            <constraint firstAttribute="trailing" secondItem="wzT-pm-3Jx" secondAttribute="trailing" id="kKK-pi-Vyz"/>
-                            <constraint firstItem="wzT-pm-3Jx" firstAttribute="top" secondItem="7z4-oM-Fw1" secondAttribute="bottom" id="wdl-zG-EqZ"/>
-                        </constraints>
-                    </view>
                     <navigationItem key="navigationItem" id="Iqy-sm-Qyc">
                         <barButtonItem key="leftBarButtonItem" title="Done" id="zNa-TB-tg6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -441,9 +425,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="movieView" destination="wzT-pm-3Jx" id="gpe-tp-mY2"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpL-9f-fx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -454,7 +435,7 @@
             <objects>
                 <tableViewController id="h9h-6f-ksh" customClass="TrackController" customModule="WD_Content" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="s2G-ic-jbd">
-                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <connections>
@@ -462,7 +443,11 @@
                             <outlet property="delegate" destination="h9h-6f-ksh" id="Qdq-v6-j0W"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="gbv-HI-1fY"/>
+                    <navigationItem key="navigationItem" id="gbv-HI-1fY">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="Fud-fh-K0F">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jxq-Nf-dc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -472,12 +457,16 @@
         <scene sceneID="gSm-15-mzq">
             <objects>
                 <navigationController id="PVM-De-bPV" sceneMemberID="viewController">
-                    <nil key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="BX0-1b-CnF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="taA-jl-CaV">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="h9h-6f-ksh" kind="relationship" relationship="rootViewController" id="MPn-KQ-tBh"/>
                     </connections>

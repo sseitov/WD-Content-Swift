@@ -8,21 +8,23 @@
 
 import UIKit
 
+protocol TrackControllerDelegate {
+    func didSelectTrack(_ track:Int32)
+}
+
 class TrackController: UITableViewController {
 
-    weak var player:VLCMediaPlayer?
+    var player:VLCMediaPlayer?
+    var delegate:TrackControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTitle("Select audio channel")
-        setupBackButton()
-        
-        player?.pause()
+        setupBackButton()        
     }
 
     override func goBack() {
-        player?.pause()
         dismiss(animated: true, completion: nil)
     }
 
@@ -32,14 +34,24 @@ class TrackController: UITableViewController {
         return 1
     }
 
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Int(player!.numberOfAudioTracks)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
         cell.textLabel?.text = (player!.audioTrackNames as! [String])[indexPath.row]
-        if indexPath.row == Int(player!.currentAudioTrackIndex) {
+        let index = (player!.audioTrackIndexes as! [Int32])[indexPath.row]
+        if index == player!.currentAudioTrackIndex {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -48,7 +60,7 @@ class TrackController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        player?.audioChannel = Int32(indexPath.row)
-        goBack()
+        let index = indexPath.row == 0 ? -1 : (player!.audioTrackIndexes as! [Int])[indexPath.row]
+        delegate?.didSelectTrack(Int32(index))
     }
 }

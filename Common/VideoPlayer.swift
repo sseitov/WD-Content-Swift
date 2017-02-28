@@ -9,20 +9,24 @@
 import UIKit
 import SVProgressHUD
 
-class VideoPlayer: UIViewController, VLCMediaPlayerDelegate {
+class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDelegate {
 
     @IBOutlet weak var movieView: UIView!
     
     var node:Node?
     
     private var mediaPlayer:VLCMediaPlayer!
-    private var barHidden = false
     private var buffering = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nodeTitle = node!.info != nil ? node!.info!.title! : node!.dislayName()
+        setupTitle(nodeTitle)
+        
     #if IOS
         setupBackButton()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
+        movieView.addGestureRecognizer(tap)
     #endif
 //        VLCLibrary.shared().debugLogging = true
         
@@ -30,10 +34,17 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate {
         mediaPlayer.delegate = self
         mediaPlayer.drawable = movieView
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
-        movieView.addGestureRecognizer(tap)
-        
-        navigationItem.rightBarButtonItem?.isEnabled = false
+        let urlStr = "smb://\(self.node!.share!.user!):\(self.node!.share!.password!)@\(self.node!.share!.ip!)\(self.node!.filePath)"
+        let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        if let url = URL(string: urlStrCode!) {
+            self.mediaPlayer.media = VLCMedia(url: url)
+            self.mediaPlayer.play()
+        } else {
+            self.showMessage("Can not open file.", messageType: .error, messageHandler: {
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
+
     }
     
 #if IOS
@@ -42,6 +53,18 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate {
         mediaPlayer.stop()
         dismiss(animated: true, completion: nil)
     }
+    
+    private var barHidden = false
+    private var firstTap = false
+    
+    func tapScreen() {
+        firstTap = true
+        barHidden = !barHidden
+        UIApplication.shared.setStatusBarHidden(barHidden, with: .slide)
+        navigationController?.setNavigationBarHidden(barHidden, animated: true)
+        navigationController?.setToolbarHidden(barHidden, animated: true)
+    }
+    
 #else
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         if presses.first != nil && presses.first!.type == .menu {
@@ -51,28 +74,6 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate {
         super.pressesBegan(presses, with: event)
     }
 #endif
-    
-    func tapScreen() {
-        barHidden = !barHidden
-        navigationController?.setNavigationBarHidden(barHidden, animated: true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let urlStr = "smb://\(self.node!.share!.user!):\(self.node!.share!.password!)@\(self.node!.share!.ip!)\(self.node!.filePath)"
-        let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
-        if let url = URL(string: urlStrCode!) {
-            self.mediaPlayer.media = VLCMedia(url: url)
-            self.mediaPlayer.play()
-            tapScreen()
-            navigationItem.rightBarButtonItem?.isEnabled = true
-        } else {
-            self.showMessage("Can not open file.", messageType: .error, messageHandler: {
-                self.dismiss(animated: true, completion: nil)
-            })
-        }
-    }
     
     private func printPlayerState(_ state:VLCMediaPlayerState) {
         switch state {
@@ -109,6 +110,15 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate {
         printPlayerState(mediaPlayer.state)
         printMediaState(mediaPlayer.media.state)
         switch mediaPlayer.state {
+        case .buffering:
+            if mediaPlayer.media.state == .playing {
+                SVProgressHUD.dismiss()
+                if !firstTap {
+                    tapScreen()
+                }
+            } else {
+                SVProgressHUD.show(withStatus: "Buffering...")
+            }
         case .stopped:
             mediaPlayer.delegate = nil
             mediaPlayer.stop()
@@ -120,11 +130,19 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate {
     
     // MARK: - Navigation
     
+    func didSelectTrack(_ track:Int32) {
+        dismiss(animated: true, completion: {
+            print("set audio track to \(track)")
+            self.mediaPlayer.currentAudioTrackIndex = track
+        })
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectTrack" {
             let nav = segue.destination as! UINavigationController
             let next = nav.topViewController as! TrackController
             next.player = mediaPlayer
+            next.delegate = self
         }
     }
 
