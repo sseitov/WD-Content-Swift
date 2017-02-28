@@ -12,6 +12,11 @@ import SVProgressHUD
 class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDelegate {
 
     @IBOutlet weak var movieView: UIView!
+    @IBOutlet weak var toolbarConstraint: NSLayoutConstraint!
+    @IBOutlet weak var positionSlider: UISlider!
+    @IBOutlet weak var sliderItem: UIBarButtonItem!
+    @IBOutlet weak var timeItem: UIBarButtonItem!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     var node:Node?
     
@@ -23,6 +28,10 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         let nodeTitle = node!.info != nil ? node!.info!.title! : node!.dislayName()
         setupTitle(nodeTitle)
         
+        positionSlider.addTarget(self, action: #selector(self.sliderBeganTracking(_:)), for: .touchDown)
+        let events = UIControlEvents.touchUpInside.union(UIControlEvents.touchUpOutside)
+        positionSlider.addTarget(self, action: #selector(self.sliderEndedTracking(_:)), for: events)
+
     #if IOS
         setupBackButton()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
@@ -33,7 +42,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         mediaPlayer = VLCMediaPlayer()
         mediaPlayer.delegate = self
         mediaPlayer.drawable = movieView
-        
+
         let urlStr = "smb://\(self.node!.share!.user!):\(self.node!.share!.password!)@\(self.node!.share!.ip!)\(self.node!.filePath)"
         let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         if let url = URL(string: urlStrCode!) {
@@ -47,12 +56,30 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sliderItem.width = view.frame.width - 100
+    }
+    
 #if IOS
     override func goBack() {
         mediaPlayer.delegate = nil
         mediaPlayer.stop()
         dismiss(animated: true, completion: nil)
     }
+#else
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        if presses.first != nil {
+            if presses.first!.type == .menu {    
+                mediaPlayer.delegate = nil
+                mediaPlayer.stop()
+            } else {
+                tapScreen()
+            }
+        }
+        super.pressesBegan(presses, with: event)
+    }
+#endif
     
     private var barHidden = false
     private var firstTap = false
@@ -60,21 +87,16 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     func tapScreen() {
         firstTap = true
         barHidden = !barHidden
+    #if IOS
         UIApplication.shared.setStatusBarHidden(barHidden, with: .slide)
+    #endif
         navigationController?.setNavigationBarHidden(barHidden, animated: true)
-        navigationController?.setToolbarHidden(barHidden, animated: true)
+        toolbarConstraint.constant = barHidden ? 0 : 44
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
-    
-#else
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        if presses.first != nil && presses.first!.type == .menu {
-            mediaPlayer.delegate = nil
-            mediaPlayer.stop()
-        }
-        super.pressesBegan(presses, with: event)
-    }
-#endif
-    
+
     private func printPlayerState(_ state:VLCMediaPlayerState) {
         switch state {
         case .error:
@@ -128,6 +150,36 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         }
     }
     
+    func mediaPlayerTimeChanged(_ aNotification: Notification!) {
+        if let t = Int32(mediaPlayer.remainingTime.minuteStringValue) {
+            let h = t/60
+            let m = t % 60
+            timeItem.title = String(format: "%d:%.2d", h, m)
+        }
+        positionSlider.value = mediaPlayer.position
+    }
+    
+    func sliderBeganTracking(_ slider: UISlider!) {
+        mediaPlayer.pause()
+    }
+    
+    func sliderEndedTracking(_ slider: UISlider!) {
+        mediaPlayer.position = slider.value
+        mediaPlayer.pause()
+    }
+    
+    @IBAction func playPause(_ sender: Any) {
+        mediaPlayer.pause()
+        let btn = mediaPlayer.isPlaying ?
+            UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(self.playPause(_:))) :
+            UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(self.playPause(_:)))
+        btn.tintColor = UIColor.white
+        var items = toolbar.items!
+        items.remove(at: 0)
+        items.insert(btn, at: 0)
+        toolbar.setItems(items, animated: true)
+    }
+
     // MARK: - Navigation
     
     func didSelectTrack(_ track:Int32) {

@@ -238,7 +238,6 @@
                     <navigationItem key="navigationItem" id="UAC-Yl-wEn"/>
                     <connections>
                         <outlet property="collectionView" destination="NBS-Es-yBg" id="NwO-ho-rYe"/>
-                        <segue destination="klY-Xg-8IB" kind="presentation" identifier="search" id="bBC-YH-p8K"/>
                         <segue destination="fFh-Wo-brx" kind="presentation" identifier="info" id="xHn-lf-Whv"/>
                         <segue destination="Z2I-Wa-kGE" kind="presentation" identifier="movie" modalTransitionStyle="flipHorizontal" id="xcV-yO-iit"/>
                     </connections>
@@ -346,30 +345,10 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="0kX-oD-zjk" kind="show" identifier="editInfo" id="MOp-fo-bxn"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAK-Sb-8lT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2107.5" y="2097.8873239436621"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="xb1-Iv-Kgc">
-            <objects>
-                <navigationController id="klY-Xg-8IB" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="85A-AB-kel">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Mm5-Nq-TZW" kind="relationship" relationship="rootViewController" id="bsv-jb-Tva"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SGL-MG-IOW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2109" y="1333"/>
+            <point key="canvasLocation" x="4247" y="1317"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="o4Z-KD-rVF">
@@ -386,21 +365,20 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMJ-AQ-GNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2919" y="1332"/>
+            <point key="canvasLocation" x="2498" y="1319"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aaV-Tr-FUB">
             <objects>
-                <navigationController toolbarHidden="NO" id="Z2I-Wa-kGE" sceneMemberID="viewController">
+                <navigationController id="Z2I-Wa-kGE" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="XIG-eD-ebE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="H5j-2I-wbZ">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" id="H5j-2I-wbZ">
                         <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="gj1-bC-bqI" kind="relationship" relationship="rootViewController" id="4L0-hN-lAW"/>
@@ -414,6 +392,57 @@
         <scene sceneID="RqF-qo-uV8">
             <objects>
                 <viewController id="gj1-bC-bqI" customClass="VideoPlayer" customModule="WD_Content" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ybe-gr-gBW"/>
+                        <viewControllerLayoutGuide type="bottom" id="Riq-Av-qtJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eau-lI-Kj8">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2RT-YV-neT">
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="hyu-S8-WxD"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="pause" id="XCF-wD-5xQ">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="playPause:" destination="gj1-bC-bqI" id="A90-pP-aUU"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="OU5-wm-ZT7">
+                                        <slider key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="DKR-pn-QaB">
+                                            <rect key="frame" x="41" y="7" width="200" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="maximumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </slider>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Gu8-aq-7dx"/>
+                                    <barButtonItem id="cp4-2s-yHe">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keV-7o-zyS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2RT-YV-neT" firstAttribute="leading" secondItem="eau-lI-Kj8" secondAttribute="leading" id="BdJ-eR-DIU"/>
+                            <constraint firstAttribute="trailing" secondItem="keV-7o-zyS" secondAttribute="trailing" id="EhB-4U-6VP"/>
+                            <constraint firstItem="keV-7o-zyS" firstAttribute="top" secondItem="ybe-gr-gBW" secondAttribute="bottom" id="HE4-uA-5H4"/>
+                            <constraint firstItem="2RT-YV-neT" firstAttribute="top" secondItem="keV-7o-zyS" secondAttribute="bottom" id="YVm-om-6JM"/>
+                            <constraint firstItem="keV-7o-zyS" firstAttribute="leading" secondItem="eau-lI-Kj8" secondAttribute="leading" id="cHb-d9-qGO"/>
+                            <constraint firstAttribute="trailing" secondItem="2RT-YV-neT" secondAttribute="trailing" id="eRU-Gl-9kr"/>
+                            <constraint firstItem="Riq-Av-qtJ" firstAttribute="top" secondItem="2RT-YV-neT" secondAttribute="bottom" id="y2U-YM-Xjm"/>
+                        </constraints>
+                    </view>
                     <navigationItem key="navigationItem" id="Iqy-sm-Qyc">
                         <barButtonItem key="leftBarButtonItem" title="Done" id="zNa-TB-tg6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -425,6 +454,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="movieView" destination="keV-7o-zyS" id="dot-fi-UxZ"/>
+                        <outlet property="positionSlider" destination="DKR-pn-QaB" id="Gqm-Ua-qmr"/>
+                        <outlet property="sliderItem" destination="OU5-wm-ZT7" id="BVA-SR-VPJ"/>
+                        <outlet property="timeItem" destination="cp4-2s-yHe" id="CT8-zU-ccs"/>
+                        <outlet property="toolbar" destination="2RT-YV-neT" id="APr-PX-G0B"/>
+                        <outlet property="toolbarConstraint" destination="hyu-S8-WxD" id="Ma3-m5-2HG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpL-9f-fx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -577,18 +614,16 @@
                         <outlet property="infoTable" destination="uXu-IC-bat" id="GGz-k1-JPJ"/>
                         <outlet property="overviewView" destination="wPO-sh-1Lu" id="vgg-I2-3kH"/>
                         <outlet property="tableHeightConstraint" destination="ew7-9m-jaK" id="IqN-Rl-SI7"/>
+                        <segue destination="Mm5-Nq-TZW" kind="show" identifier="searchInfo" id="NCW-vm-6EW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rN2-4z-tJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2917.5" y="2097.8873239436621"/>
+            <point key="canvasLocation" x="3323" y="1318"/>
         </scene>
     </scenes>
     <resources>
         <image name="add" width="27" height="27"/>
         <image name="back" width="22" height="22"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="MOp-fo-bxn"/>
-    </inferredMetricsTieBreakers>
 </document>
