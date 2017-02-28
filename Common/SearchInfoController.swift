@@ -9,13 +9,18 @@
 import UIKit
 import SVProgressHUD
 
+protocol SearchInfoDelegate {
+    func didFoundInfo(_ info:[String:Any], baseURL:String)
+}
+
 class SearchInfoController: UITableViewController {
 
 	var node:Node?
-	var results:[Any] = []
-	
+    var delegate:SearchInfoDelegate?
+    
 	private var imagesBaseURL:String?
 	var searchFile:String!
+    private var results:[Any] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +56,6 @@ class SearchInfoController: UITableViewController {
 			}
 		})
     }
-    
-#if IOS
-    override func goBack() {
-        dismiss(animated: true, completion: nil)
-    }
-#endif
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -153,21 +152,11 @@ class SearchInfoController: UITableViewController {
         #endif
 		} else {
 			if let movie = results[indexPath.row] as? [String:Any] {
-				performSegue(withIdentifier: "editInfo", sender: movie)
+                delegate?.didFoundInfo(movie, baseURL: imagesBaseURL!)
+                goBack()
 			}
 		}
 	}
-
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "editInfo" {
-			let next = segue.destination as! InfoViewController
-			next.imageBaseURL = imagesBaseURL
-			next.info = sender as? [String:Any]
-			next.node = node
-		}
-    }
 }
 
 #if IOS

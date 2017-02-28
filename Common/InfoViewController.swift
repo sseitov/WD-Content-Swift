@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SearchInfoDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var infoTable: UITableView!
@@ -19,11 +19,13 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
-	
-	var info:[String:Any]?
-	var imageBaseURL:String?
+    @IBOutlet weak var findButton: UIButton!
+    
 	var node:Node?
 	var metainfo:MetaInfo?
+
+    private var imageBaseURL:String?
+    private var info:[String:Any]?
 	
 	private var movieInfo:[String:Any]?
 	private var credits:[String:Any]?
@@ -31,6 +33,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupTitle("Movie Info")
+        findButton.setupBorder(UIColor.mainColor(), radius: 5)
     #if IOS
         setupBackButton()
         if IS_PAD() {
@@ -39,85 +42,75 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             tableHeightConstraint.constant = 240
         }
     #endif
-		castConstraint.constant = 0
-		if info == nil && metainfo != nil {
+        castConstraint.constant = 0
+        metainfo = node!.info
+		if metainfo != nil {
             let btn = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(self.clearInfo))
         #if IOS
             btn.tintColor = UIColor.white
         #endif
 			navigationItem.rightBarButtonItem = btn
 		}
-		
-		if info != nil, let uid = info!["id"] as? Int {
-            let btn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveInfo))
-        #if IOS
-            btn.tintColor = UIColor.white
-        #endif
-			navigationItem.rightBarButtonItem = btn
-			SVProgressHUD.show(withStatus: "Load Info...")
-			TMDB.sharedInstance().get(kMovieDBMovie, parameters: ["id" : "\(uid)"], block: { responseObject, error in
-				if let movieInfo = responseObject as? [String:Any] {
-					self.movieInfo = movieInfo
-					TMDB.sharedInstance().get(kMovieDBMovieCredits, parameters: ["id" : "\(uid)"], block: { response, error in
-						if let credits = response as? [String:Any] {
-							self.credits = credits
-						}
-						self.showInfo()
-						SVProgressHUD.dismiss()
-					})
-				} else {
-					self.showInfo()
-					SVProgressHUD.dismiss()
-				}
-			})
-		}
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		showInfo()
+        if info != nil, let uid = info!["id"] as? Int {
+            let btn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveInfo))
+            #if IOS
+                btn.tintColor = UIColor.white
+            #endif
+            navigationItem.rightBarButtonItem = btn
+            SVProgressHUD.show(withStatus: "Load Info...")
+            TMDB.sharedInstance().get(kMovieDBMovie, parameters: ["id" : "\(uid)"], block: { responseObject, error in
+                if let movieInfo = responseObject as? [String:Any] {
+                    self.movieInfo = movieInfo
+                    TMDB.sharedInstance().get(kMovieDBMovieCredits, parameters: ["id" : "\(uid)"], block: { response, error in
+                        if let credits = response as? [String:Any] {
+                            self.credits = credits
+                        }
+                        self.showInfo()
+                        SVProgressHUD.dismiss()
+                    })
+                } else {
+                    self.showInfo()
+                    SVProgressHUD.dismiss()
+                }
+            })
+        } else {
+            showInfo()
+        }
 	}
-    
+
+    override func goBack() {
+        dismiss(animated: true, completion: nil)
+    }
+
 #if TV
 	override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
 		if presses.first != nil && presses.first!.type == .menu {
-			if metainfo != nil {
-				dismiss(animated: true, completion: nil)
-			} else {
-				_ = navigationController?.popViewController(animated: true)
-			}
+            goBack()
 		}
 	}
-#else
-    override func goBack() {
-        if metainfo != nil {
-            dismiss(animated: true, completion: nil)
-        } else {
-            _ = navigationController?.popViewController(animated: true)
-        }
-    }
 #endif
     
 	func showInfo() {
-		if metainfo != nil {
-			setupTitle(metainfo!.title!)
-			if metainfo!.poster != nil, let url = URL(string: metainfo!.poster!) {
-				imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
-			} else {
-				imageView.image = UIImage(named: "movie")
-			}
-			castView.text = metainfo!.cast
-			overviewView.text = metainfo!.overview
-		} else {
-			setupTitle(info!["title"] as! String)
-			if let url = URL(string: posterPath()) {
-				imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
-			} else {
-				imageView.image = UIImage(named: "movie")
-			}
-			castView.text = cast()
-			overviewView.text = info!["overview"] as? String
-		}
+        setupTitle(title())
+        if let url = URL(string: posterPath()) {
+        #if TV
+            imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
+        #else
+            imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "file"))
+        #endif
+        } else {
+        #if TV
+            imageView.image = UIImage(named: "movie")
+        #else
+            imageView.image = UIImage(named: "file")
+        #endif
+        }
+        castView.text = cast()
+        overviewView.text = overview()
 		infoTable.reloadData()
 		if castView.text != nil {
         #if IOS
@@ -127,7 +120,10 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         #endif
 			let castHeight = castView.text!.heightWithConstrainedWidth(width: castView.frame.width, font: castView.font!) + offset
 			let overviewHeight = overviewView.text!.heightWithConstrainedWidth(width: overviewView.frame.width, font: overviewView.font!) + offset
-			let height = self.view.frame.height - castView.frame.origin.y - overviewHeight - offset*2
+			var height = self.view.frame.height - castView.frame.origin.y - overviewHeight - offset*2
+            if height < 120 {
+                height = 120
+            }
 			castConstraint.constant = castHeight > height ? height : castHeight
 		}
 	}
@@ -174,15 +170,19 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
     
     private func title() -> String {
-        if let val = info!["title"] as? String {
+        if metainfo != nil {
+            return metainfo!.title!
+        } else if info != nil, let val = info!["title"] as? String {
             return val
         } else {
-            return ""
+            return node!.dislayName()
         }
     }
     
     private func overview() -> String {
-        if let val = info!["overview"] as? String {
+        if metainfo != nil {
+            return metainfo!.overview!
+        } else if info != nil, let val = info!["overview"] as? String {
             return val
         } else {
             return ""
@@ -190,15 +190,19 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     private func release_date() -> String {
-        if let val = info!["release_date"] as? String {
-            return val
+        if metainfo != nil {
+            return metainfo!.release_date!
+        } else if info != nil, let val = info!["release_date"] as? String {
+            return Model.releaseDate(val)
         } else {
             return ""
         }
     }
 
 	private func posterPath() -> String {
-		if let posterPath = info!["poster_path"] as? String {
+        if metainfo != nil {
+            return metainfo!.poster!
+        } else if info != nil, let posterPath = info!["poster_path"] as? String {
 			return "\(imageBaseURL!)\(posterPath)"
 		} else {
 			return "";
@@ -206,15 +210,19 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	private func runtime() -> String {
-		if movieInfo != nil, let runtime = movieInfo!["runtime"] as? Int {
-			return "\(runtime)"
+        if metainfo != nil {
+            return "\(metainfo!.runtime!) min"
+        } else if movieInfo != nil, let runtime = movieInfo!["runtime"] as? Int {
+			return "\(runtime) min"
 		} else {
 			return ""
 		}
 	}
 	
 	private func genres() -> String {
-		if movieInfo != nil, let genresArr = movieInfo!["genres"] as? [Any] {
+        if metainfo != nil {
+            return metainfo!.genre!
+        } else if movieInfo != nil, let genresArr = movieInfo!["genres"] as? [Any] {
 			var genres:[String] = []
 			for item in genresArr {
 				if let genreItem = item as? [String:Any], let genre = genreItem["name"] as? String {
@@ -228,7 +236,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	private func rating() -> String {
-		if movieInfo != nil, let popularity = movieInfo!["vote_average"] as? Double {
+        if metainfo != nil {
+            return metainfo!.rating!
+        } else if movieInfo != nil, let popularity = movieInfo!["vote_average"] as? Double {
 			return "\(popularity)"
 		} else {
 			return ""
@@ -236,7 +246,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 
 	private func cast() -> String {
-		if credits != nil, let castArr = credits!["cast"] as? [Any] {
+        if metainfo != nil {
+            return metainfo!.cast!
+        } else if credits != nil, let castArr = credits!["cast"] as? [Any] {
 			var cast:[String] = []
 			for item in castArr {
 				if let casting = item as? [String:Any], let name = casting["name"] as? String {
@@ -250,7 +262,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	private func director() -> String {
-		if credits != nil, let crewArr =  credits!["crew"] as? [Any] {
+        if metainfo != nil {
+            return metainfo!.director!
+        } else if credits != nil, let crewArr =  credits!["crew"] as? [Any] {
 			var director:[String] = []
 			for item in crewArr {
 				if let crew = item as? [String:Any], let job = crew["job"] as? String, job == "Director", let name = crew["name"] as? String {
@@ -291,27 +305,19 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		switch indexPath.row {
 		case 0:
 			cell.textLabel?.text = "Director"
-			cell.detailTextLabel?.text = metainfo != nil ? metainfo!.director : director()
+			cell.detailTextLabel?.text = director()
 		case 1:
 			cell.textLabel?.text = "Release Date"
-            if let text = metainfo != nil ? metainfo!.release_date : info!["release_date"] as? String {
-                cell.detailTextLabel?.text = Model.releaseDate(text)
-            } else {
-                cell.detailTextLabel?.text = ""
-            }
+            cell.detailTextLabel?.text = release_date()
 		case 2:
 			cell.textLabel?.text = "Runtime"
-			if let runtime = metainfo != nil ? metainfo!.runtime : runtime() {
-				cell.detailTextLabel?.text = "\(runtime) min"
-			} else {
-				cell.detailTextLabel?.text = ""
-			}
+            cell.detailTextLabel?.text = runtime()
 		case 3:
 			cell.textLabel?.text = "Genres"
-			cell.detailTextLabel?.text = metainfo != nil ? metainfo!.genre : genres()
+			cell.detailTextLabel?.text = genres()
 		case 4:
 			cell.textLabel?.text = "Rating"
-			cell.detailTextLabel?.text = metainfo != nil ? metainfo!.rating : rating()
+			cell.detailTextLabel?.text = rating()
 		default:
 			break
 		}
@@ -330,6 +336,53 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     #endif
 		return cell
 	}
+    
+    
+    // MARK: - Navigation
+    
+    @IBAction func play(_ sender: Any) {
+        if info != nil {
+            SVProgressHUD.show(withStatus: "Save...")
+            Model.shared.setInfoForNode(node!,
+                                        title: title(),
+                                        overview: overview(),
+                                        release_date: release_date(),
+                                        poster: posterPath(),
+                                        runtime: runtime(),
+                                        rating: rating(),
+                                        genre: genres(),
+                                        cast: cast(),
+                                        director: director(),
+                                        result:
+                { error in
+                    SVProgressHUD.dismiss()
+                    if error == nil {
+                        NotificationCenter.default.post(name: refreshNodeNotification, object: self.node)
+                    }
+                    self.performSegue(withIdentifier: "play", sender: nil)
+            })
+        } else {
+            self.performSegue(withIdentifier: "play", sender: nil)
+        }
+    }
+    
+    func didFoundInfo(_ info:[String:Any], baseURL:String) {
+        imageBaseURL = baseURL
+        self.info = info
+        showInfo()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchInfo" {
+            let next = segue.destination as! SearchInfoController
+            next.node = node
+            next.delegate = self
+        } else if segue.identifier == "play" {
+            let next = segue.destination as! VideoPlayer
+            next.node = node
+        }
+    }
+
 }
 
 extension String {

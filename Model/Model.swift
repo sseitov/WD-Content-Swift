@@ -36,7 +36,8 @@ func generateUDID() -> String {
     
     class func year(_ text:String) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
         if let date = formatter.date(from: text) {
             let yearFormatter = DateFormatter()
             yearFormatter.dateFormat = "yyyy"

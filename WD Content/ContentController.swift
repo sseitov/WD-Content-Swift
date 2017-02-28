@@ -123,18 +123,7 @@ extension ContentController: UICollectionViewDataSource, UICollectionViewDelegat
             parentNode = node
             refresh()
         } else {
-            let alert = ActionSheet.create(title: "Choose Action", actions: ["Preview movie", "Show Info"],
-                                           handler1: {
-                                            self.performSegue(withIdentifier: "movie", sender: node)
-            },
-                                           handler2: {
-                                            if node.info != nil {
-                                                self.performSegue(withIdentifier: "info", sender: node)
-                                            } else {
-                                                self.performSegue(withIdentifier: "search", sender: node)
-                                            }
-            })
-            alert?.show()
+            self.performSegue(withIdentifier: "info", sender: node)
         }
     }
 }
