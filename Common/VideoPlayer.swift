@@ -9,24 +9,31 @@
 import UIKit
 import SVProgressHUD
 
-class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, VLCMediaDelegate {
+class VideoPlayer: UIViewController, VLCMediaPlayerDelegate {
 
     @IBOutlet weak var movieView: UIView!
     
     var node:Node?
     
-    var mediaPlayer:VLCMediaPlayer!
+    private var mediaPlayer:VLCMediaPlayer!
+    private var barHidden = false
+    private var buffering = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
     #if IOS
         setupBackButton()
     #endif
-        VLCLibrary.shared().debugLogging = true
+//        VLCLibrary.shared().debugLogging = true
         
         mediaPlayer = VLCMediaPlayer()
         mediaPlayer.delegate = self
         mediaPlayer.drawable = movieView
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
+        movieView.addGestureRecognizer(tap)
+        
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
 #if IOS
@@ -45,6 +52,11 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, VLCMediaDelegate {
     }
 #endif
     
+    func tapScreen() {
+        barHidden = !barHidden
+        navigationController?.setNavigationBarHidden(barHidden, animated: true)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -53,43 +65,67 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, VLCMediaDelegate {
         if let url = URL(string: urlStrCode!) {
             self.mediaPlayer.media = VLCMedia(url: url)
             self.mediaPlayer.play()
+            tapScreen()
+            navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
             self.showMessage("Can not open file.", messageType: .error, messageHandler: {
                 self.dismiss(animated: true, completion: nil)
             })
         }
-/*
-        SVProgressHUD.show(withStatus: "Open...")
-        DispatchQueue.global().async {
-            var url:URL?
-            if self.node!.path!.contains(" ") {
-                let newPath:String? = self.node!.path!.replacingOccurrences(of: " ", with: "_", options: [], range: nil)
-                let connection = SMBConnection()
-                if connection.connect(to: self.node!.connection!.ip!, port: self.node!.connection!.port, user: self.node!.connection!.user!, password: self.node!.connection!.password!) {
-                    
-                    if (connection.renameFile(self.node!.path!, newPath: newPath!)) {
-                        let urlStr = "smb://\(self.node!.connection!.user!):\(self.node!.connection!.password!)@\(self.node!.connection!.ip!)\(newPath!)"
-                        let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
-                        url = URL(string: urlStrCode!)
-                    }
-                }
-            } else {
-                let urlStr = "smb://\(self.node!.connection!.user!):\(self.node!.connection!.password!)@\(self.node!.connection!.ip!)\(self.node!.path!)"
-                let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
-                url = URL(string: urlStrCode!)
-            }
-            DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
-            }
-        }
- */
     }
     
+    private func printPlayerState(_ state:VLCMediaPlayerState) {
+        switch state {
+        case .error:
+            print("=============== error")
+        case .opening:
+            print("=============== opening")
+        case .buffering:
+            print("=============== buffering")
+        case .playing:
+            print("=============== playing")
+        case .paused:
+            print("=============== paused")
+        case .stopped:
+            print("=============== stopped")
+        case .ended:
+            print("=============== ended")
+        }
+    }
+    
+    private func printMediaState(_ state:VLCMediaState) {
+        switch state {
+        case .buffering:
+            print("=============== media buffering")
+        case .playing:
+            print("=============== media playing")
+        case .error:
+            print("=============== media error")
+        case .nothingSpecial:
+            print("=============== media nothingSpecial")
+        }
+    }
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        if mediaPlayer.state == .stopped {
+        printPlayerState(mediaPlayer.state)
+        printMediaState(mediaPlayer.media.state)
+        switch mediaPlayer.state {
+        case .stopped:
             mediaPlayer.delegate = nil
             mediaPlayer.stop()
             dismiss(animated: true, completion: nil)
+        default:
+            break
         }
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "selectTrack" {
+            let nav = segue.destination as! UINavigationController
+            let next = nav.topViewController as! TrackController
+            next.player = mediaPlayer
+        }
+    }
+
 }

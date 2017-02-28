@@ -434,6 +434,12 @@
                         <barButtonItem key="leftBarButtonItem" title="Done" id="zNa-TB-tg6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Audio" id="B9m-1W-EtW">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="PVM-De-bPV" kind="presentation" identifier="selectTrack" modalPresentationStyle="formSheet" id="3lS-cI-yfk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="movieView" destination="wzT-pm-3Jx" id="gpe-tp-mY2"/>
@@ -442,6 +448,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpL-9f-fx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4246.875" y="517.6056338028169"/>
+        </scene>
+        <!--Track Controller-->
+        <scene sceneID="dhB-Px-w6s">
+            <objects>
+                <tableViewController id="h9h-6f-ksh" customClass="TrackController" customModule="WD_Content" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="s2G-ic-jbd">
+                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="h9h-6f-ksh" id="z64-tB-HqH"/>
+                            <outlet property="delegate" destination="h9h-6f-ksh" id="Qdq-v6-j0W"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="gbv-HI-1fY"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jxq-Nf-dc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5987" y="518"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gSm-15-mzq">
+            <objects>
+                <navigationController id="PVM-De-bPV" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="BX0-1b-CnF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="h9h-6f-ksh" kind="relationship" relationship="rootViewController" id="MPn-KQ-tBh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cdb-C5-sG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5111" y="518"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="hIY-0D-p5s">

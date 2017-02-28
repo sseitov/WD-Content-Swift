@@ -20,7 +20,7 @@ class ShareCell: UICollectionViewCell {
 		didSet {
 			if !node!.directory {
 				if node!.info == nil {
-					textView.text = node!.name
+					textView.text = node!.dislayName()
 					imageView.image = UIImage(named: "movie")
 				} else {
 					textView.text = node!.info!.title!
@@ -33,7 +33,7 @@ class ShareCell: UICollectionViewCell {
 				}
                 Model.shared.updateInfoForNode(node!)
 			} else {
-				textView.text = node!.name
+				textView.text = node!.dislayName()
                 if node!.parent == nil {
                     imageView.image = UIImage(named: "share")
                 } else {

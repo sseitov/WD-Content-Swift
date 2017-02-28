@@ -34,6 +34,8 @@
 		2C954A0D1E5F65D600A23CC5 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */; };
 		2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */; };
 		2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */; };
+		2C9D1D201E65614100E6B882 /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D1D1F1E65614100E6B882 /* TrackController.swift */; };
+		2C9D1D211E65614100E6B882 /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D1D1F1E65614100E6B882 /* TrackController.swift */; };
 		2CA603F41E604A4F00335545 /* ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F31E604A4F00335545 /* ContentController.swift */; };
 		2CA603F61E604D5700335545 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F51E604D5700335545 /* ContentCell.swift */; };
 		2CA604041E60674400335545 /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603FA1E60674400335545 /* LGAlertView.m */; };
@@ -127,6 +129,7 @@
 		2C954A051E5F65CD00A23CC5 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtensions.swift; path = Extensions/UIFontExtensions.swift; sourceTree = "<group>"; };
 		2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtensions.swift; path = Extensions/UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extensions/UIViewExtensions.swift; sourceTree = "<group>"; };
+		2C9D1D1F1E65614100E6B882 /* TrackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackController.swift; path = Common/TrackController.swift; sourceTree = "<group>"; };
 		2CA603F31E604A4F00335545 /* ContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentController.swift; sourceTree = "<group>"; };
 		2CA603F51E604D5700335545 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		2CA603F91E60674400335545 /* LGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGAlertView.h; path = LGAlertSheet/LGAlertView.h; sourceTree = "<group>"; };
@@ -368,6 +371,7 @@
 				2CA604131E60906B00335545 /* AddShareController.swift */,
 				2CA604141E60906B00335545 /* DeviceController.swift */,
 				2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */,
+				2C9D1D1F1E65614100E6B882 /* TrackController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -395,8 +399,8 @@
 				2CC0D95C1E5F013A00254181 /* MetaInfo+CoreDataClass.swift */,
 				2CC0D95D1E5F013A00254181 /* MetaInfo+CoreDataProperties.swift */,
 				2C2AF5001E6184D9008DBD26 /* UserInfo.swift */,
-				2CC0D96E1E5F01A900254181 /* Model.swift */,
 				2CAF5C871E6460C6005EA70C /* Node.swift */,
+				2CC0D96E1E5F01A900254181 /* Model.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -688,6 +692,7 @@
 				2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */,
 				2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */,
 				2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */,
+				2C9D1D201E65614100E6B882 /* TrackController.swift in Sources */,
 				2CA6041E1E60911200335545 /* SearchInfoController.swift in Sources */,
 				2C11BD541E5F9C96004A786F /* MainVC.swift in Sources */,
 				2CC0D9A01E5F107000254181 /* SMBConnection.m in Sources */,
@@ -708,6 +713,7 @@
 				2CA604201E60911700335545 /* SearchCell.swift in Sources */,
 				2C954A091E5F65CD00A23CC5 /* UIFontExtensions.swift in Sources */,
 				2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */,
+				2C9D1D211E65614100E6B882 /* TrackController.swift in Sources */,
 				2CA604181E60907200335545 /* DeviceController.swift in Sources */,
 				2CA6041F1E60911700335545 /* InfoViewController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ContentController: UIViewController {
 
@@ -46,26 +47,32 @@ class ContentController: UIViewController {
             self.collectionView.alpha = 0
             self.navigationItem.titleView?.alpha = 0
         }, completion: { _ in
-            self.setupTitle(self.parentNode!.name)
+            self.setupTitle(self.parentNode!.dislayName())
             self.nodes.removeAll()
-            self.nodes = Model.shared.nodes(byRoot: self.parentNode!)
-            for node in self.nodes {
-                node.parent = self.parentNode
-                node.share = self.parentNode!.share
+            SVProgressHUD.show(withStatus: "Refresh...")
+            DispatchQueue.global().async {
+                self.nodes = Model.shared.nodes(byRoot: self.parentNode!)
+                for node in self.nodes {
+                    node.parent = self.parentNode
+                    node.share = self.parentNode!.share
+                }
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.collectionView.reloadData()
+                    if self.parentNode!.parent == nil {
+                        self.navigationItem.setLeftBarButton(nil, animated: false)
+                    } else {
+                        let btn = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(self.goBack))
+                        btn.tintColor = UIColor.white
+                        self.navigationItem.setLeftBarButton(btn, animated: false)
+                    }
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.navigationItem.titleView?.alpha = 1
+                        self.collectionView.alpha = 1
+                    }, completion: { _ in
+                    })
+                }
             }
-            self.collectionView.reloadData()
-            if self.parentNode!.parent == nil {
-                self.navigationItem.setLeftBarButton(nil, animated: false)
-            } else {
-                let btn = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(self.goBack))
-                btn.tintColor = UIColor.white
-                self.navigationItem.setLeftBarButton(btn, animated: false)
-            }
-            UIView.animate(withDuration: 0.4, animations: {
-                self.navigationItem.titleView?.alpha = 1
-                self.collectionView.alpha = 1
-            }, completion: { _ in
-            })
         })
     }
 
