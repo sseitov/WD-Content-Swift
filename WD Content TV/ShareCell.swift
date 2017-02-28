@@ -19,6 +19,7 @@ class ShareCell: UICollectionViewCell {
 	var node:Node? {
 		didSet {
 			if !node!.directory {
+                node?.info = Model.shared.getInfoForNode(node!)
 				if node!.info == nil {
 					textView.text = node!.dislayName()
 					imageView.image = UIImage(named: "movie")

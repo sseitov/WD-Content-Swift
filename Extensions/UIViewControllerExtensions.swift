@@ -14,10 +14,10 @@ enum MessageType {
 
 extension UIViewController {
     
-    func setupTitle(_ text:String) {
+    func setupTitle(_ text:String, color:UIColor = UIColor.mainColor()) {
     #if TV
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 800, height: 132))
-        label.textColor = UIColor.mainColor()
+        label.textColor = color
     #else
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
         label.textColor = UIColor.white

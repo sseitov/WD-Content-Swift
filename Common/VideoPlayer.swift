@@ -12,12 +12,13 @@ import SVProgressHUD
 class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDelegate {
 
     @IBOutlet weak var movieView: UIView!
+#if IOS
     @IBOutlet weak var toolbarConstraint: NSLayoutConstraint!
-    @IBOutlet weak var positionSlider: UISlider!
     @IBOutlet weak var sliderItem: UIBarButtonItem!
     @IBOutlet weak var timeItem: UIBarButtonItem!
+    @IBOutlet weak var positionSlider: UISlider!
     @IBOutlet weak var toolbar: UIToolbar!
-    
+#endif
     var node:Node?
     
     private var mediaPlayer:VLCMediaPlayer!
@@ -26,14 +27,14 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         let nodeTitle = node!.info != nil ? node!.info!.title! : node!.dislayName()
-        setupTitle(nodeTitle)
+        setupTitle(nodeTitle, color: UIColor.white)
+        setupBackButton()
         
+    #if IOS
         positionSlider.addTarget(self, action: #selector(self.sliderBeganTracking(_:)), for: .touchDown)
         let events = UIControlEvents.touchUpInside.union(UIControlEvents.touchUpOutside)
         positionSlider.addTarget(self, action: #selector(self.sliderEndedTracking(_:)), for: events)
-
-    #if IOS
-        setupBackButton()
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
         movieView.addGestureRecognizer(tap)
     #endif
@@ -58,26 +59,23 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+#if IOS
         sliderItem.width = view.frame.width - 100
+#endif
     }
     
-#if IOS
     override func goBack() {
         mediaPlayer.delegate = nil
         mediaPlayer.stop()
         dismiss(animated: true, completion: nil)
     }
-#else
+    
+#if TV
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        if presses.first != nil {
-            if presses.first!.type == .menu {    
-                mediaPlayer.delegate = nil
-                mediaPlayer.stop()
-            } else {
-                tapScreen()
-            }
-        }
-        super.pressesBegan(presses, with: event)
+    }
+    
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        tapScreen()
     }
 #endif
     
@@ -89,12 +87,12 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         barHidden = !barHidden
     #if IOS
         UIApplication.shared.setStatusBarHidden(barHidden, with: .slide)
-    #endif
-        navigationController?.setNavigationBarHidden(barHidden, animated: true)
         toolbarConstraint.constant = barHidden ? 0 : 44
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
         })
+    #endif
+        navigationController?.setNavigationBarHidden(barHidden, animated: true)
     }
 
     private func printPlayerState(_ state:VLCMediaPlayerState) {
@@ -149,7 +147,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             break
         }
     }
-    
+#if IOS
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
         if let t = Int32(mediaPlayer.remainingTime.minuteStringValue) {
             let h = t/60
@@ -179,6 +177,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         items.insert(btn, at: 0)
         toolbar.setItems(items, animated: true)
     }
+#endif
 
     // MARK: - Navigation
     

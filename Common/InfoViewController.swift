@@ -16,9 +16,11 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var castView: UITextView!
     @IBOutlet weak var overviewView: UITextView!
     @IBOutlet weak var castConstraint: NSLayoutConstraint!
+#if IOS
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
+#endif
     @IBOutlet weak var findButton: UIButton!
     
 	var node:Node?
@@ -33,13 +35,13 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupTitle("Movie Info")
-        findButton.setupBorder(UIColor.mainColor(), radius: 5)
     #if IOS
+        findButton.setupBorder(UIColor.mainColor(), radius: 5)
         setupBackButton()
         if IS_PAD() {
             imageWidthConstraint.constant = 200
             imageHeightConstraint.constant = 240
-            tableHeightConstraint.constant = 240
+            tableHeightConstraint.constant = 300
         }
     #endif
         castConstraint.constant = 0
@@ -323,7 +325,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
         cell.textLabel?.textColor = UIColor.mainColor()
     #if TV
-        cell.textLabel?.font = UIFont.condensedFont()
+        cell.textLabel?.font = UIFont.condensedFont(37)
         cell.detailTextLabel?.font = UIFont.mainFont()
     #else
         if IS_PAD() {

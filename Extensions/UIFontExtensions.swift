@@ -26,11 +26,13 @@ extension UIFont {
     #endif
     }
     
-    class func condensedFont(_ size:CGFloat = 17) -> UIFont {
     #if TV
-        return UIFont(name: "HelveticaNeue-CondensedBold", size: 47)!
-    #else
+    class func condensedFont(_ size:CGFloat = 47) -> UIFont {
         return UIFont(name: "HelveticaNeue-CondensedBold", size: size)!
-    #endif
     }
+    #else
+    class func condensedFont(_ size:CGFloat = 17) -> UIFont {
+        return UIFont(name: "HelveticaNeue-CondensedBold", size: size)!
+    }
+    #endif
 }

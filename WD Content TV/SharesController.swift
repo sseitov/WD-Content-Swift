@@ -48,9 +48,9 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 			}
 		}
 	}
-	
+
     func refreshNode(notyfy:Notification) {
-        if let node = notyfy.object as? Node {
+        if let node = notyfy.object as? Node, node.parent == parentNode {
             if let index = nodes.index(of: node) {
                 collectionView?.reloadItems(at: [IndexPath(row: index, section: 0)])
             }
@@ -58,14 +58,14 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
     }
     
 	func refresh() {
-		setupTitle(parentNode == nil ? "MY SHARES" : parentNode!.name)
+		setupTitle(parentNode == nil ? "MY SHARES" : parentNode!.dislayName())
         if parentNode == nil {
-            var shares = Model.shared.nodes(byRoot: nil) as! [String]
+            var shares = Model.shared.allShares()
             if shares.count == 0 {
                 SVProgressHUD.show(withStatus: "Refresh...")
                 Model.shared.refreshShares({ error in
                     SVProgressHUD.dismiss()
-                    shares = Model.shared.nodes(byRoot: nil) as! [String]
+                    shares = Model.shared.allShares()
                     if shares.count == 0 {
                         self.performSegue(withIdentifier: "addShare", sender: nil)
                     } else {
@@ -77,17 +77,21 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
                     }
                 })
             } else {
+                self.nodes.removeAll()
+                for share in shares {
+                    self.nodes.append(Node(share: share))
+                }
                 self.collectionView?.reloadData()
             }
         } else {
-            self.nodes = Model.shared.nodes(byRoot: self.parentNode) as! [Node]
+            self.nodes = Model.shared.nodes(byRoot: self.parentNode!)
             for node in self.nodes {
                 node.parent = parentNode
+                node.share = parentNode!.share
                 node.info = Model.shared.getInfoForNode(node)
             }
             self.collectionView?.reloadData()
         }
-        
 	}
 
     // MARK: UICollectionViewDataSource
@@ -135,19 +139,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		} else  {
 			let node = parentNode == nil ? nodes[indexPath.row-1] : nodes[indexPath.row]
 			if !node.directory {
-				let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-				alert.addAction(UIAlertAction(title: "Preview moview", style: .default, handler: { _ in
-					self.performSegue(withIdentifier: "showMovie", sender: node)
-				}))
-				alert.addAction(UIAlertAction(title: "Show info", style: .destructive, handler: { _ in
-					if node.info == nil {
-						self.performSegue(withIdentifier: "searchInfo", sender: node)
-					} else {
-						self.performSegue(withIdentifier: "info", sender: node.info!)
-					}
-				}))
-				alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-				present(alert, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "info", sender: node)
 			} else {
 				parentNode = node
 				refresh()
@@ -176,18 +168,10 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		if segue.identifier == "showDevice" {
 			let controller = segue.destination as! DeviceController
 			controller.target = sender as? ServiceHost
-		} else if segue.identifier == "showMovie" {
-			let nav = segue.destination as! UINavigationController
-			let next = nav.topViewController as! VideoPlayer
-            next.node = sender as? Node
-		} else if segue.identifier == "searchInfo" {
-			let nav = segue.destination as! UINavigationController
-			let next = nav.topViewController as! SearchInfoController
-			next.node = sender as? Node
 		} else if segue.identifier == "info" {
 			let nav = segue.destination as! UINavigationController
 			let next = nav.topViewController as! InfoViewController
-			next.metainfo = sender as? MetaInfo
+			next.node = sender as? Node
 		}
 	}
 
