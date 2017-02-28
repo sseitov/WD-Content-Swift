@@ -15,6 +15,7 @@
 #import <bdsm/smb_session.h>
 #import <bdsm/smb_share.h>
 #import <bdsm/smb_stat.h>
+#import <bdsm/smb_dir.h>
 #import <arpa/inet.h>
 
 #if IOS
@@ -87,6 +88,23 @@
 	return (_session != nil);
 }
 
+
+static NSString* relativePath(NSString* path)
+{
+    //work out the remainder of the file path and create the search query
+    NSString *relativePath = [Node filePathExcludingSharePathFromPath:path];
+    //prepend double backslashes
+    relativePath = [NSString stringWithFormat:@"\\%@",relativePath];
+    //replace any additional forward slashes with backslashes
+    relativePath = [relativePath stringByReplacingOccurrencesOfString:@"/" withString:@"\\"]; //replace forward slashes with backslashes
+    //append double backslash if we don't have one
+    if (![[relativePath substringFromIndex:relativePath.length-1] isEqualToString:@"\\"])
+        relativePath = [relativePath stringByAppendingString:@"\\"];
+    
+    //Add the wildcard symbol for everything in this folder
+    return [relativePath stringByAppendingString:@"*"]; //wildcard to search for all files
+}
+
 - (NSArray *)folderContentsByRoot:(Node*)root
 {
     if (_session == nil) {
@@ -138,20 +156,10 @@
     }
     
     //work out the remainder of the file path and create the search query
-    NSString *relativePath = [Node filePathExcludingSharePathFromPath:path];
-    //prepend double backslashes
-    relativePath = [NSString stringWithFormat:@"\\%@",relativePath];
-    //replace any additional forward slashes with backslashes
-    relativePath = [relativePath stringByReplacingOccurrencesOfString:@"/" withString:@"\\"]; //replace forward slashes with backslashes
-    //append double backslash if we don't have one
-    if (![[relativePath substringFromIndex:relativePath.length-1] isEqualToString:@"\\"])
-        relativePath = [relativePath stringByAppendingString:@"\\"];
-    
-    //Add the wildcard symbol for everything in this folder
-    relativePath = [relativePath stringByAppendingString:@"*"]; //wildcard to search for all files
+    NSString *relPath = relativePath(path);
     
     //Query for a list of files in this directory
-    smb_stat_list statList = smb_find(self.session, shareID, relativePath.UTF8String);
+    smb_stat_list statList = smb_find(self.session, shareID, relPath.UTF8String);
     size_t listCount = smb_stat_list_count(statList);
     if (listCount == 0) {
         return [NSArray array];
@@ -174,8 +182,22 @@
         if (name[0] == '.')
             continue;
 		
-        NSString* fileName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
         bool isDir = (smb_stat_get(item, SMB_STAT_ISDIR) != 0);
+        NSString* fileName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
+        if ([fileName containsString:@" "]) {
+            NSString* newFileName = [fileName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+            NSString* oldPath = [root.filePath stringByAppendingPathComponent:fileName];
+            NSString* newPath = [root.filePath stringByAppendingPathComponent:newFileName];
+            if (isDir) {
+                if ([self moveDir:shareID oldPath:oldPath newPath:newPath]) {
+                    fileName = newFileName;
+                }
+            } else {
+                if ([self moveFile:shareID oldPath:oldPath newPath:newPath]) {
+                    fileName = newFileName;
+                }
+            }
+        }
         if (isDir) {
             Node* dir = [[Node alloc] initWithName:fileName isDir:isDir parent:root];
             [fileList addObject:dir];
@@ -195,7 +217,7 @@
         return [fileList sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
 }
 
-#pragma mark - String Parsing
+#pragma mark - private methods
 
 - (smb_fd)openFile:(NSString*)path {
 	smb_tid treeID = 0;
@@ -226,16 +248,35 @@
 - (int)seekFile:(smb_fd)file offset:(off_t)offset whence:(int)whence {
 	return (int)smb_fseek(_session, file, offset, whence);
 }
-    
-- (bool)renameFile:(NSString*)oldPath newPath:(NSString*)newPath {
-    
-    //Connect to that share
-    NSString *shareName = [Node shareNameFromPath:oldPath];
-    smb_tid treeID = 0;
-    smb_tree_connect(self.session, shareName.UTF8String, &treeID);
-    if (!treeID) {
+
+- (bool)moveDir:(smb_tid)treeID oldPath:(NSString*)oldPath newPath:(NSString*)newPath
+{
+    NSString *newDir = [Node filePathExcludingSharePathFromPath:newPath];
+    newDir = [newDir stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
+    int err = smb_directory_create(_session, treeID, newDir.UTF8String);
+    if (err)
         return false;
+    
+    NSString *relPath = relativePath(oldPath);
+    smb_stat_list statList = smb_find(_session, treeID, relPath.UTF8String);
+    size_t listCount = smb_stat_list_count(statList);
+    for (NSInteger i = 0; i < listCount; i++) {
+        smb_stat item = smb_stat_list_at(statList, i);
+        const char* name = smb_stat_name(item);
+        NSString* oldName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
+        NSString* _oldPath = [oldPath stringByAppendingPathComponent:oldName];
+        NSString* _newPath = [newPath stringByAppendingPathComponent:oldName];
+        if (![self moveFile:treeID oldPath:_oldPath newPath:_newPath])
+            return false;
     }
+    
+    NSString *oldDir = [Node filePathExcludingSharePathFromPath:oldPath];
+    oldDir = [oldDir stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
+    return (smb_directory_rm(_session, treeID, oldDir.UTF8String) == 0);
+}
+
+- (bool)moveFile:(smb_tid)treeID oldPath:(NSString*)oldPath newPath:(NSString*)newPath
+{
     NSString* old = [Node filePathExcludingSharePathFromPath:oldPath];
     old = [NSString stringWithFormat:@"\\%@", old];
     old = [old stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
