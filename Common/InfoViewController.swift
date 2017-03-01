@@ -59,9 +59,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		super.viewDidAppear(animated)
         if info != nil, let uid = info!["id"] as? Int {
             let btn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveInfo))
-            #if IOS
-                btn.tintColor = UIColor.white
-            #endif
+        #if IOS
+            btn.tintColor = UIColor.white
+        #endif
             navigationItem.rightBarButtonItem = btn
             SVProgressHUD.show(withStatus: "Load Info...")
             TMDB.sharedInstance().get(kMovieDBMovie, parameters: ["id" : "\(uid)"], block: { responseObject, error in

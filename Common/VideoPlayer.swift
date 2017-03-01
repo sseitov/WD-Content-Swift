@@ -11,8 +11,8 @@ import SVProgressHUD
 
 class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDelegate {
 
-    @IBOutlet weak var movieView: UIView!
 #if IOS
+    @IBOutlet weak var movieView: UIView!
     @IBOutlet weak var toolbarConstraint: NSLayoutConstraint!
     @IBOutlet weak var sliderItem: UIBarButtonItem!
     @IBOutlet weak var timeItem: UIBarButtonItem!
@@ -42,7 +42,13 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         
         mediaPlayer = VLCMediaPlayer()
         mediaPlayer.delegate = self
+    #if IOS
         mediaPlayer.drawable = movieView
+    #else
+        mediaPlayer.drawable = self.view
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
+        self.view.addGestureRecognizer(tap)
+    #endif
 
         let urlStr = "smb://\(self.node!.share!.user!):\(self.node!.share!.password!)@\(self.node!.share!.ip!)\(self.node!.filePath)"
         let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
@@ -57,6 +63,13 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 
     }
     
+    deinit {
+    #if TV
+        mediaPlayer.delegate = nil
+        mediaPlayer.stop()
+    #endif
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 #if IOS
@@ -65,17 +78,19 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
     
     override func goBack() {
+    #if IOS
         mediaPlayer.delegate = nil
         mediaPlayer.stop()
         dismiss(animated: true, completion: nil)
+    #else
+        tapScreen()
+    #endif
     }
     
 #if TV
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-    }
-    
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         tapScreen()
+        super.pressesEnded(presses, with: event)
     }
 #endif
     
@@ -127,8 +142,8 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         }
     }
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        printPlayerState(mediaPlayer.state)
-        printMediaState(mediaPlayer.media.state)
+//        printPlayerState(mediaPlayer.state)
+//        printMediaState(mediaPlayer.media.state)
         switch mediaPlayer.state {
         case .buffering:
             if mediaPlayer.media.state == .playing {

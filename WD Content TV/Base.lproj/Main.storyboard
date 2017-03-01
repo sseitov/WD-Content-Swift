@@ -136,30 +136,16 @@
                     <view key="view" contentMode="scaleToFill" id="BMS-th-shH">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ooa-26-bJ9">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="ooa-26-bJ9" firstAttribute="top" secondItem="BMS-th-shH" secondAttribute="top" id="C4g-oG-5pT"/>
-                            <constraint firstAttribute="trailing" secondItem="ooa-26-bJ9" secondAttribute="trailing" id="KGh-82-KTM"/>
-                            <constraint firstItem="t5e-mL-lHU" firstAttribute="top" secondItem="ooa-26-bJ9" secondAttribute="bottom" id="qnA-qg-opj"/>
-                            <constraint firstItem="ooa-26-bJ9" firstAttribute="leading" secondItem="BMS-th-shH" secondAttribute="leading" id="wH2-DX-GfU"/>
-                        </constraints>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="DPb-zz-EoS">
-                        <barButtonItem key="leftBarButtonItem" title="Done" id="UyV-LL-x8z"/>
+                        <barButtonItem key="leftBarButtonItem" title="Hide" id="OfB-LN-Xkq"/>
                         <barButtonItem key="rightBarButtonItem" title="Audio Channel" id="stA-oJ-xYX">
                             <connections>
                                 <segue destination="HKH-9f-PrB" kind="presentation" identifier="selectTrack" modalPresentationStyle="pageSheet" id="UGe-8X-2fu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="movieView" destination="ooa-26-bJ9" id="qd5-4i-daR"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qsf-T5-ZIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

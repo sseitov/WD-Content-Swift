@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultStyle(.custom)
         SVProgressHUD.setBackgroundColor(UIColor.mainColor())
         SVProgressHUD.setForegroundColor(UIColor.white)
-        SVProgressHUD.setFont(UIFont.condensedFont())
+        SVProgressHUD.setFont(UIFont.condensedFont(37))
         
         return true
     }
