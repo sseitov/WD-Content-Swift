@@ -16,6 +16,8 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 	
 	private var focusedIndexPath:IndexPath?
 	
+    // MARK: Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 		NotificationCenter.default.addObserver(self,
@@ -33,20 +35,51 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		
         refresh()
     }
+    
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        if presses.first != nil && presses.first!.type == .menu {
+            if parentNode == nil {
+                super.pressesBegan(presses, with: event)
+            } else {
+                return
+            }
+        } else {
+            super.pressesBegan(presses, with: event)
+        }
+    }
+    
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        if presses.first != nil && presses.first!.type == .menu {
+            if parentNode != nil {
+                parentNode = parentNode!.parent
+                refresh()
+            } else {
+                super.pressesEnded(presses, with: event)
+            }
+        } else {
+            super.pressesEnded(presses, with: event)
+        }
+    }
 
 	func pressLongTap(tap:UILongPressGestureRecognizer) {
-		if tap.state == .began {
-			if focusedIndexPath != nil, focusedIndexPath!.row > 0 {
-				let node = nodes[focusedIndexPath!.row - 1]
-				let alert = UIAlertController(title: "Attention!", message: "Do you want to delete \(node.name)", preferredStyle: .alert)
-				alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-					self.nodes.remove(at: self.focusedIndexPath!.row - 1)
-					self.collectionView?.deleteItems(at: [self.focusedIndexPath!])
-				}))
-				alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-				present(alert, animated: true, completion: nil)
-			}
-		}
+        if parentNode == nil {
+            if tap.state == .began {
+                if focusedIndexPath != nil, focusedIndexPath!.row > 0 {
+                    let node = nodes[focusedIndexPath!.row - 1]
+                    let alert = UIAlertController(title: "Attention!", message: "Do you want to delete \(node.name)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                        SVProgressHUD.show(withStatus: "Delete...")
+                        Model.shared.deleteShare(node.share!, result: { _ in
+                            SVProgressHUD.dismiss()
+                            self.nodes.remove(at: self.focusedIndexPath!.row - 1)
+                            self.collectionView?.deleteItems(at: [self.focusedIndexPath!])
+                        })
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                }
+            }
+        }
 	}
 
     func refreshNode(notyfy:Notification) {
@@ -94,7 +127,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
         }
 	}
 
-    // MARK: UICollectionViewDataSource
+    // MARK: UICollectionView delegate
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -116,22 +149,6 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		}
         return cell
     }
-
-	override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-		if presses.first != nil && presses.first!.type == .menu {
-			if parentNode != nil {
-				parentNode = parentNode!.parent
-				refresh()
-			} else {
-				super.pressesEnded(presses, with: event)
-			}
-		}
-	}
-
-	override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-	}
-
-    // MARK: UICollectionViewDelegate
 	
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if parentNode == nil && indexPath.row == 0 {
