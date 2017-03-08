@@ -154,6 +154,7 @@
 		2CAF5C871E6460C6005EA70C /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Node.swift; path = Model/Node.swift; sourceTree = "<group>"; };
 		2CAF5C8A1E649BAD005EA70C /* Share+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Share+CoreDataClass.swift"; path = "Model/Share+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2CAF5C8B1E649BAD005EA70C /* Share+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Share+CoreDataProperties.swift"; path = "Model/Share+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CAFA1CF1E70538E00EDE1E6 /* WDContent 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WDContent 2.xcdatamodel"; sourceTree = "<group>"; };
 		2CC0D9521E5EFD5000254181 /* WD Content.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content.entitlements"; sourceTree = "<group>"; };
 		2CC0D9531E5EFD5900254181 /* WD Content TV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WD Content TV.entitlements"; sourceTree = "<group>"; };
 		2CC0D9541E5EFD6100254181 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -1060,9 +1061,10 @@
 		2CC0D9581E5EFDD500254181 /* WDContent.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CAFA1CF1E70538E00EDE1E6 /* WDContent 2.xcdatamodel */,
 				2CC0D9591E5EFDD500254181 /* WDContent.xcdatamodel */,
 			);
-			currentVersion = 2CC0D9591E5EFDD500254181 /* WDContent.xcdatamodel */;
+			currentVersion = 2CAFA1CF1E70538E00EDE1E6 /* WDContent 2.xcdatamodel */;
 			name = WDContent.xcdatamodeld;
 			path = Model/WDContent.xcdatamodeld;
 			sourceTree = "<group>";

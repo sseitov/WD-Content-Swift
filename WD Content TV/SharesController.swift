@@ -36,6 +36,11 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
         refresh()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        refresh()
+    }
+    
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         if presses.first != nil && presses.first!.type == .menu {
             if parentNode == nil {

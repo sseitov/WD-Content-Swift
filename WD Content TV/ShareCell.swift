@@ -18,6 +18,7 @@ class ShareCell: UICollectionViewCell {
 
 	var node:Node? {
 		didSet {
+            self.checkView.alpha = 0
 			if !node!.directory {
                 node?.info = Model.shared.getInfoForNode(node!)
 				if node!.info == nil {
@@ -31,6 +32,7 @@ class ShareCell: UICollectionViewCell {
 					} else {
 						imageView.image = UIImage(named: "movie")
 					}
+                    self.checkView.alpha = checked() ? 1 : 0
 				}
                 Model.shared.updateInfoForNode(node!)
 			} else {
@@ -41,12 +43,15 @@ class ShareCell: UICollectionViewCell {
                     imageView.image = UIImage(named: "sharedFolder")
                 }
 			}
-            self.checkView.alpha = checked() ? 1 : 0
 		}
 	}
-	
-    private func checked() -> Bool {
-        return false
+    
+    func checked() -> Bool {
+        if node != nil && !node!.directory && node!.info != nil {
+            return node!.info!.wasViewed
+        } else {
+            return false
+        }
     }
     
 	override func awakeFromNib() {
@@ -54,7 +59,6 @@ class ShareCell: UICollectionViewCell {
 		imageView.adjustsImageWhenAncestorFocused = false
 		imageView.clipsToBounds = false
 		textView.clipsToBounds = false
-		textView.alpha = 0.3
         self.checkView.alpha = 0
 	}
 	
@@ -65,7 +69,6 @@ class ShareCell: UICollectionViewCell {
                 if self.checked() {
                     self.checkConstraint.constant = -40
                 }
-				self.textView.alpha = 1.0
 				self.textConstraint.constant = -30
 				self.imageView.adjustsImageWhenAncestorFocused = true
 			}
@@ -73,7 +76,6 @@ class ShareCell: UICollectionViewCell {
                 if self.checked() {
                     self.checkConstraint.constant = -20
                 }
-				self.textView.alpha = 0.3
 				self.textConstraint.constant = 0
 				self.imageView.adjustsImageWhenAncestorFocused = false
 			}

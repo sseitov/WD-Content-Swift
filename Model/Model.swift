@@ -293,6 +293,25 @@ func generateUDID() -> String {
         }
     }
 
+    func setAudioChannel(_ info:MetaInfo, channel:Int) {
+        let recordZoneID = CKRecordZoneID(zoneName: info.zoneName!, ownerName: info.ownerName!)
+        let recordID = CKRecordID(recordName: info.recordName!, zoneID: recordZoneID)
+        cloudDB?.fetch(withRecordID: recordID, completionHandler: { record, error in
+            if error == nil && record != nil {
+                record!.setValue(Date(), forKey: "updated")
+                record!.setValue(Int(info.audioChannel), forKey: "audioChannel")
+                record!.setValue(Int(1), forKey: "wasViewed")
+                self.cloudDB!.save(record!, completionHandler: { _, error in
+                    DispatchQueue.main.async {
+                        info.audioChannel = Int32(channel)
+                        info.wasViewed = true
+                        self.saveContext()
+                    }
+                })
+            }
+        })
+    }
+    
     func setInfoForNode(_ node:Node,
                         title:String,
                         overview:String,
@@ -319,6 +338,8 @@ func generateUDID() -> String {
         record.setValue(runtime, forKey: "runtime")
         record.setValue(title, forKey: "title")
         record.setValue(Date(), forKey: "updated")
+        record.setValue(0, forKey: "audioChannel")
+        record.setValue(0, forKey: "wasViewed")
         
         cloudDB!.save(record, completionHandler: { cloudRecord, error in
             DispatchQueue.main.async {
@@ -344,7 +365,8 @@ func generateUDID() -> String {
                     info!.genre = genre
                     info!.cast = cast
                     info!.director = director
-                    
+                    info!.audioChannel = -1
+                    info!.wasViewed = false
                     self.saveContext()
                     
                     result(nil)
@@ -388,7 +410,17 @@ func generateUDID() -> String {
                     info!.genre = record["genre"] as? String
                     info!.cast = record["cast"] as? String
                     info!.director = record["director"] as? String
-                    
+                    if let channel = record["audioChannel"] as? Int {
+                        info!.audioChannel = Int32(channel)
+                    } else {
+                        info!.audioChannel = -1
+                    }
+                    if let wasVieved = record["wasViewed"] as? Int {
+                        info!.wasViewed = wasVieved != 0
+                    } else {
+                        info!.wasViewed = false
+                    }
+
                     self.saveContext()
                     NotificationCenter.default.post(name: refreshNodeNotification, object: node)
                 }
