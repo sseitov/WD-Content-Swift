@@ -303,6 +303,8 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         }
+        cell.backgroundColor = UIColor.clear
+        cell.detailTextLabel?.textColor = UIColor.black
     #endif
 		switch indexPath.row {
 		case 0:

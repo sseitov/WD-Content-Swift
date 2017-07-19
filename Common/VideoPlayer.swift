@@ -43,6 +43,9 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         setupBackButton()
         positionSlider.addTarget(self, action: #selector(self.sliderBeganTracking(_:)), for: .touchDown)
         let events = UIControlEvents.touchUpInside.union(UIControlEvents.touchUpOutside)
+        positionSlider.addTarget(self, action: #selector(self.sliderEndedTracking(_:)), for: events)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
+        movieView.addGestureRecognizer(tap)
     #else
         audioButton.isEnabled = false
         pauseButton.isEnabled = false
@@ -129,24 +132,66 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         navigationController?.setNavigationBarHidden(barHidden, animated: true)
     }
     
+    private func printPlayerState(_ state:VLCMediaPlayerState) {
+        switch state {
+        case .stopped:
+            print("!!!!! Player state: stopped")
+        case .opening:
+            print("!!!!! Player state: opening")
+        case .buffering:
+            print("!!!!! Player state: buffering")
+        case .ended:
+            print("!!!!! Player state: ended")
+        case .error:
+            print("!!!!! Player state: error")
+        case .playing:
+            print("!!!!! Player state: playing")
+        case .paused:
+            print("!!!!! Player state: paused")
+        }
+    }
+    
+    private func printMediaState(_ state:VLCMediaState) {
+        switch state {
+        case .nothingSpecial:
+            print("===== Media state: nothingSpecial")
+        case .buffering:
+            print("===== Media state: buffering")
+        case .playing:
+            print("===== Media state: playing")
+        case .error:
+            print("===== Media state: error")
+        }
+    }
+    
+    private func startBuffering() {
+        if !buffering {
+            buffering = true
+            SVProgressHUD.show(withStatus: "Buffering...")
+        }
+    }
+    
+    private func stopBuffering() {
+        if buffering {
+            buffering = false
+            SVProgressHUD.dismiss()
+            if !firstTap {
+                if self.node!.info != nil {
+                    if self.node!.info!.audioChannel >= 0 {
+                        self.mediaPlayer.currentAudioTrackIndex = self.node!.info!.audioChannel
+                    } else {
+                        Model.shared.setAudioChannel(self.node!.info!, channel: Int(self.mediaPlayer.currentAudioTrackIndex))
+                    }
+                }
+                tapScreen()
+            }
+        }
+    }
+    
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
         switch mediaPlayer.state {
         case .buffering:
-            if mediaPlayer.media.state == .playing {
-                SVProgressHUD.dismiss()
-                if !firstTap {
-                    if self.node!.info != nil {
-                        if self.node!.info!.audioChannel >= 0 {
-                            self.mediaPlayer.currentAudioTrackIndex = self.node!.info!.audioChannel
-                        } else {
-                            Model.shared.setAudioChannel(self.node!.info!, channel: Int(self.mediaPlayer.currentAudioTrackIndex))
-                        }
-                    }
-                    tapScreen()
-                }
-            } else {
-                SVProgressHUD.show(withStatus: "Buffering...")
-            }
+            startBuffering()
         case .stopped:
             mediaPlayer.delegate = nil
             mediaPlayer.stop()
@@ -157,6 +202,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
+        stopBuffering()
         if let t = Int32(mediaPlayer.remainingTime.minuteStringValue) {
             let h = t/60
             let m = t % 60
