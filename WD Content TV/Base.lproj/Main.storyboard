@@ -73,11 +73,13 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="92k-IM-Jk8" secondAttribute="trailing" id="3n8-v3-712"/>
                                     <constraint firstAttribute="bottom" secondItem="92k-IM-Jk8" secondAttribute="bottom" id="RD7-ye-vrx"/>
-                                    <constraint firstAttribute="bottom" secondItem="N4M-Ni-Rxn" secondAttribute="bottom" constant="240" id="Ssu-04-emL"/>
                                     <constraint firstItem="92k-IM-Jk8" firstAttribute="leading" secondItem="jNG-S6-Rsn" secondAttribute="leading" id="eE3-S1-QQ9"/>
+                                    <constraint firstItem="N4M-Ni-Rxn" firstAttribute="top" secondItem="jNG-S6-Rsn" secondAttribute="top" id="eql-MD-SOg"/>
                                     <constraint firstAttribute="trailing" secondItem="N4M-Ni-Rxn" secondAttribute="trailing" constant="-20" id="uTd-g4-gMF"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="checkLeftConstraint" destination="uTd-g4-gMF" id="gHq-ZX-51Q"/>
+                                    <outlet property="checkTopConstraint" destination="eql-MD-SOg" id="hbc-dF-8NT"/>
                                     <outlet property="checkView" destination="N4M-Ni-Rxn" id="Md3-u9-z3Z"/>
                                     <outlet property="imageView" destination="Tor-Ep-oFC" id="sSp-pG-5qF"/>
                                     <outlet property="textConstraint" destination="RD7-ye-vrx" id="zfQ-Ab-Y1H"/>

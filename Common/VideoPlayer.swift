@@ -90,6 +90,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     override func goBack() {
         mediaPlayer.delegate = nil
         mediaPlayer.stop()
+        SVProgressHUD.dismiss()
         dismiss(animated: true, completion: nil)
     }
     

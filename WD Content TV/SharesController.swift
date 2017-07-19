@@ -170,6 +170,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		} else  {
 			let node = parentNode == nil ? nodes[indexPath.row-1] : nodes[indexPath.row]
 			if !node.directory {
+                parentNode?.selectedIndexPath = indexPath
                 self.performSegue(withIdentifier: "info", sender: node)
 			} else {
 				parentNode = node

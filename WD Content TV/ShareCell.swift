@@ -14,7 +14,9 @@ class ShareCell: UICollectionViewCell {
 	@IBOutlet weak var textView: UILabel!
 	@IBOutlet weak var textConstraint: NSLayoutConstraint!
     @IBOutlet weak var checkView: UIImageView!
-
+    @IBOutlet weak var checkTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var checkLeftConstraint: NSLayoutConstraint!
+    
 	var node:Node? {
 		didSet {
             self.checkView.alpha = 0
@@ -65,10 +67,14 @@ class ShareCell: UICollectionViewCell {
 
 		coordinator.addCoordinatedAnimations({
 			if self.isFocused {
+                self.checkTopConstraint.constant = -20
+                self.checkLeftConstraint.constant = -30
 				self.textConstraint.constant = -30
 				self.imageView.adjustsImageWhenAncestorFocused = true
 			}
 			else {
+                self.checkTopConstraint.constant = 0
+                self.checkLeftConstraint.constant = -20
 				self.textConstraint.constant = 0
 				self.imageView.adjustsImageWhenAncestorFocused = false
 			}
