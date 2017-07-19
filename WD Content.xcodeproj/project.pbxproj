@@ -16,8 +16,6 @@
 		2C21335F1E5EDF13002F267D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21335E1E5EDF13002F267D /* AppDelegate.swift */; };
 		2C2133641E5EDF13002F267D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133621E5EDF13002F267D /* Main.storyboard */; };
 		2C2133661E5EDF13002F267D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C2133651E5EDF13002F267D /* Assets.xcassets */; };
-		2C2AF5011E6184D9008DBD26 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AF5001E6184D9008DBD26 /* UserInfo.swift */; };
-		2C2AF5021E6184D9008DBD26 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AF5001E6184D9008DBD26 /* UserInfo.swift */; };
 		2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9471E60D2A300F44E56 /* ActionSheet.swift */; };
 		2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C80B9481E60D2A300F44E56 /* ActionSheet.xib */; };
 		2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */; };
@@ -115,7 +113,6 @@
 		2C2133631E5EDF13002F267D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C2133651E5EDF13002F267D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C2133671E5EDF13002F267D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2C2AF5001E6184D9008DBD26 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = Model/UserInfo.swift; sourceTree = "<group>"; };
 		2C80B9471E60D2A300F44E56 /* ActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionSheet.swift; path = CustomViews/ActionSheet.swift; sourceTree = "<group>"; };
 		2C80B9481E60D2A300F44E56 /* ActionSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActionSheet.xib; path = CustomViews/ActionSheet.xib; sourceTree = "<group>"; };
 		2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -399,7 +396,6 @@
 				2CAF5C8B1E649BAD005EA70C /* Share+CoreDataProperties.swift */,
 				2CC0D95C1E5F013A00254181 /* MetaInfo+CoreDataClass.swift */,
 				2CC0D95D1E5F013A00254181 /* MetaInfo+CoreDataProperties.swift */,
-				2C2AF5001E6184D9008DBD26 /* UserInfo.swift */,
 				2CAF5C871E6460C6005EA70C /* Node.swift */,
 				2CC0D96E1E5F01A900254181 /* Model.swift */,
 			);
@@ -668,7 +664,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C2AF5011E6184D9008DBD26 /* UserInfo.swift in Sources */,
 				2CA604081E60674400335545 /* LGProgressView.m in Sources */,
 				2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */,
 				2CA6041D1E60911200335545 /* SearchCell.swift in Sources */,
@@ -727,7 +722,6 @@
 				2CA604171E60907200335545 /* AddShareController.swift in Sources */,
 				2CC0D9A11E5F107000254181 /* SMBConnection.m in Sources */,
 				2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */,
-				2C2AF5021E6184D9008DBD26 /* UserInfo.swift in Sources */,
 				2CA604211E60911700335545 /* SearchInfoController.swift in Sources */,
 				2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */,
 				2CAF5C8D1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,

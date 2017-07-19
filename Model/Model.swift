@@ -53,7 +53,6 @@ func generateUDID() -> String {
         return movieExtensions.contains(ext)
     }
     
-    var userInfo: UserInfo?
     var cloudDB: CKDatabase?
 
     private override init() {
@@ -61,7 +60,6 @@ func generateUDID() -> String {
         
         let container = CKContainer.default()
         cloudDB = container.privateCloudDatabase
-        userInfo = UserInfo(container: container)
 
     #if TV
         let url = self.applicationDocumentsDirectory.appendingPathComponent("WDContentTV.sqlite")
@@ -121,7 +119,7 @@ func generateUDID() -> String {
             
             guard error == nil else {
                 DispatchQueue.main.async {
-                    print("Cloud Query Error - Refresh: \(error)")
+                    print("Cloud Query Error - Refresh: \(error!.localizedDescription)")
                     result(error)
                 }
                 return

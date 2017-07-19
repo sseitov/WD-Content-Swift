@@ -9,16 +9,21 @@
 import UIKit
 import AMSlideMenu
 
-class MainVC: AMSlideMenuMainViewController {
+class MainVC: AMSlideMenuMainViewController, AMSlideMenuDelegate {
 
+    private var rightMenuIsOpened = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isInitialStart = false
+        self.slideMenuDelegate = self
     }
 
     override func primaryMenu() -> AMPrimaryMenu {
         return AMPrimaryMenuRight
     }
+    
+    // MARK: - Right menu
     
     override func initialIndexPathForRightMenu() -> IndexPath! {
         return IndexPath(row: 0, section: 0)
@@ -77,6 +82,37 @@ class MainVC: AMSlideMenuMainViewController {
     
     override func maxDarknessWhileRightMenu() -> CGFloat {
         return 0.5
+    }
+    
+    private func rightMenuFrame() -> CGRect {
+        return CGRect(x: self.view.bounds.size.width - rightMenuWidth(), y: 0, width: rightMenuWidth(), height: self.view.bounds.size.height)
+    }
+    
+    override func openRightMenu(animated: Bool) {
+        super.openRightMenu(animated: animated)
+        self.rightMenu.view.frame = rightMenuFrame()
+    }
+    
+    func rightMenuWillOpen() {
+        rightMenuIsOpened = true
+    }
+    
+    func rightMenuDidClose() {
+        rightMenuIsOpened = false
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if rightMenuIsOpened {
+            self.currentActiveNVC.view.alpha = 0
+            coordinator.animate(alongsideTransition: { (context: UIViewControllerTransitionCoordinatorContext) in
+                self.rightMenu.view.frame = self.rightMenuFrame()
+            }) { (context: UIViewControllerTransitionCoordinatorContext) in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.currentActiveNVC.view.alpha = 1
+                })
+            }
+        }
     }
 
     /*
