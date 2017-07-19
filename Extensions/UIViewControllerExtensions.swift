@@ -18,11 +18,12 @@ extension UIViewController {
     #if TV
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 800, height: 132))
         label.textColor = color
+        label.font = UIFont.mainFont()
     #else
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
         label.textColor = UIColor.white
-    #endif
         label.font = UIFont.condensedFont()
+    #endif
         label.textAlignment = .center
         label.text = text
         

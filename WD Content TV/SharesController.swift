@@ -15,7 +15,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 	var nodes:[Node] = []
 	
 	private var focusedIndexPath:IndexPath?
-	
+    
     // MARK: Life cycle
 
     override func viewDidLoad() {
@@ -96,7 +96,8 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
     }
     
 	func refresh() {
-		setupTitle(parentNode == nil ? "MY SHARES" : parentNode!.dislayName())
+        let text = parentNode == nil ? "MY SHARES" : parentNode!.dislayName()
+		setupTitle(text.uppercased(), color: UIColor.lightGray)
         if parentNode == nil {
             var shares = Model.shared.allShares()
             if shares.count == 0 {
@@ -134,6 +135,14 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 
     // MARK: UICollectionView delegate
 
+    override func indexPathForPreferredFocusedView(in collectionView: UICollectionView) -> IndexPath? {
+        if let index = parentNode?.selectedIndexPath {
+            return index
+        } else {
+            return nil
+        }
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -164,6 +173,9 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
                 self.performSegue(withIdentifier: "info", sender: node)
 			} else {
 				parentNode = node
+                if parentNode?.parent != nil {
+                    parentNode?.parent!.selectedIndexPath = indexPath
+                }
 				refresh()
 			}
 		}

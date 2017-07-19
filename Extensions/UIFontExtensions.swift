@@ -12,7 +12,7 @@ extension UIFont {
     
     class func mainFont(_ size:CGFloat = 15) -> UIFont {
     #if TV
-        return UIFont(name: "HelveticaNeue-Bold", size: 33)!
+        return UIFont(name: "HelveticaNeue-Bold", size: 37)!
     #else
         return UIFont(name: "HelveticaNeue", size: size)!
     #endif

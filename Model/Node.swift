@@ -16,7 +16,8 @@ import UIKit
     var parent:Node?
     var info:MetaInfo?
     var share:Share?
-    
+    var selectedIndexPath:IndexPath?
+
     init(share: Share) {
         super.init()
         
