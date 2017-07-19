@@ -63,6 +63,10 @@ class ContentController: UIViewController {
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
                     self.collectionView.reloadData()
+                    if let index = self.parentNode?.selectedIndexPath {
+                        self.collectionView.selectItem(at: index, animated: false, scrollPosition: .top)
+                    }
+
                     if self.parentNode!.parent == nil {
                         self.navigationItem.setLeftBarButton(nil, animated: false)
                     } else {
@@ -125,6 +129,9 @@ extension ContentController: UICollectionViewDataSource, UICollectionViewDelegat
         let node = nodes[indexPath.row]
         if node.directory {
             parentNode = node
+            if parentNode?.parent != nil {
+                parentNode?.parent!.selectedIndexPath = indexPath
+            }
             refresh()
         } else {
             self.performSegue(withIdentifier: "info", sender: node)
