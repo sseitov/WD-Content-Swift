@@ -179,8 +179,10 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
                 if self.node!.info != nil {
                     if self.node!.info!.audioChannel >= 0 {
                         self.mediaPlayer.currentAudioTrackIndex = self.node!.info!.audioChannel
+                        self.mediaPlayer.currentVideoSubTitleIndex = self.node!.info!.subtitleChannel
                     } else {
                         Model.shared.setAudioChannel(self.node!.info!, channel: Int(self.mediaPlayer.currentAudioTrackIndex))
+                        Model.shared.setSubtitleChannel(self.node!.info!, channel: Int(self.mediaPlayer.currentVideoSubTitleIndex))
                     }
                 }
                 tapScreen()
@@ -271,9 +273,8 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 
     // MARK: - Navigation
     
-    func didSelectTrack(_ track:Int32) {
+    func didSelectAudioTrack(_ track:Int32) {
         dismiss(animated: true, completion: {
-            print("set audio track to \(track)")
             if self.node!.info != nil {
                 Model.shared.setAudioChannel(self.node!.info!, channel: Int(track))
             }
@@ -281,6 +282,15 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         })
     }
 
+    func didSelectSubtitleChannel(_ channel: Int32) {
+        dismiss(animated: true, completion: {
+            if self.node!.info != nil {
+                Model.shared.setSubtitleChannel(self.node!.info!, channel: Int(channel))
+            }
+            self.mediaPlayer.currentVideoSubTitleIndex = channel
+        })
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectTrack" {
             let nav = segue.destination as! UINavigationController

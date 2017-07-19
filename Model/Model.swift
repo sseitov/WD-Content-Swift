@@ -310,6 +310,12 @@ func generateUDID() -> String {
         })
     }
     
+    func setSubtitleChannel(_ info:MetaInfo, channel:Int) {
+        info.subtitleChannel = Int32(channel)
+        info.wasViewed = true
+        self.saveContext()
+    }
+    
     func setInfoForNode(_ node:Node,
                         title:String,
                         overview:String,

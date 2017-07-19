@@ -83,7 +83,7 @@
         <scene sceneID="EJh-mi-5Va">
             <objects>
                 <navigationController id="OEP-4H-CvB" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ZXR-ik-zah">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="ZXR-ik-zah">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,7 +145,7 @@
         <scene sceneID="q0I-iB-TP2">
             <objects>
                 <navigationController id="dxi-Ml-9Uv" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="obe-C2-vIG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="obe-C2-vIG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -255,7 +255,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="AVR-9M-2Jg" customClass="SearchCell" customModule="WD_Content" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AVR-9M-2Jg" id="aJY-KN-tuQ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -286,7 +286,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="4dA-Lx-Sd7" customClass="SearchResultCell" customModule="WD_Content" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="100" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="99.5" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4dA-Lx-Sd7" id="Enc-yd-m0j">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -353,7 +353,7 @@
         <scene sceneID="o4Z-KD-rVF">
             <objects>
                 <navigationController id="fFh-Wo-brx" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="jsc-jp-trm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="jsc-jp-trm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -425,7 +425,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Done" id="zNa-TB-tg6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Audio" id="B9m-1W-EtW">
+                        <barButtonItem key="rightBarButtonItem" image="audio" id="B9m-1W-EtW">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="PVM-De-bPV" kind="presentation" identifier="selectTrack" modalPresentationStyle="formSheet" id="3lS-cI-yfk"/>
@@ -472,7 +472,7 @@
         <scene sceneID="gSm-15-mzq">
             <objects>
                 <navigationController id="PVM-De-bPV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="BX0-1b-CnF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="BX0-1b-CnF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -641,6 +641,7 @@
     </scenes>
     <resources>
         <image name="add" width="27" height="27"/>
+        <image name="audio" width="27" height="27"/>
         <image name="back" width="22" height="22"/>
         <image name="play" width="100" height="100"/>
     </resources>

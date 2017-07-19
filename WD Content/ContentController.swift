@@ -16,6 +16,10 @@ class ContentController: UIViewController {
     var parentNode:Node?
     var nodes:[Node] = []
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

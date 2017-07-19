@@ -2,7 +2,7 @@
 //  MetaInfo+CoreDataProperties.swift
 //  WD Content
 //
-//  Created by Сергей Сейтов on 08.03.17.
+//  Created by Sergey Seitov on 19.07.17.
 //  Copyright © 2017 V-Channel. All rights reserved.
 //
 
@@ -13,9 +13,10 @@ import CoreData
 extension MetaInfo {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MetaInfo> {
-        return NSFetchRequest<MetaInfo>(entityName: "MetaInfo");
+        return NSFetchRequest<MetaInfo>(entityName: "MetaInfo")
     }
 
+    @NSManaged public var audioChannel: Int32
     @NSManaged public var cast: String?
     @NSManaged public var director: String?
     @NSManaged public var genre: String?
@@ -30,8 +31,8 @@ extension MetaInfo {
     @NSManaged public var runtime: String?
     @NSManaged public var share: String?
     @NSManaged public var title: String?
-    @NSManaged public var zoneName: String?
-    @NSManaged public var audioChannel: Int32
     @NSManaged public var wasViewed: Bool
+    @NSManaged public var zoneName: String?
+    @NSManaged public var subtitleChannel: Int32
 
 }

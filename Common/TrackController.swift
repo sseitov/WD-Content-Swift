@@ -9,7 +9,8 @@
 import UIKit
 
 protocol TrackControllerDelegate {
-    func didSelectTrack(_ track:Int32)
+    func didSelectAudioTrack(_ track:Int32)
+    func didSelectSubtitleChannel(_ channel:Int32)
 }
 
 class TrackController: UITableViewController {
@@ -20,7 +21,7 @@ class TrackController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTitle("Select audio channel")
+        setupTitle("Audio channel and subtitles.")
         setupBackButton()        
     }
 
@@ -31,33 +32,48 @@ class TrackController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "audio channel" : "subtitles"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int(player!.numberOfAudioTracks)
+        return section == 0 ? Int(player!.numberOfAudioTracks) : Int(player!.numberOfSubtitlesTracks)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
-        cell.textLabel?.text = (player!.audioTrackNames as! [String])[indexPath.row]
-        let index = (player!.audioTrackIndexes as! [Int32])[indexPath.row]
-        if index == player!.currentAudioTrackIndex {
-            cell.accessoryType = .checkmark
+        if indexPath.section == 0 {
+            cell.textLabel?.text = (player!.audioTrackNames as! [String])[indexPath.row]
+            let index = (player!.audioTrackIndexes as! [Int32])[indexPath.row]
+            if index == player!.currentAudioTrackIndex {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
         } else {
-            cell.accessoryType = .none
+            cell.textLabel?.text = (player!.videoSubTitlesNames as! [String])[indexPath.row]
+            let index = (player!.videoSubTitlesIndexes as! [Int32])[indexPath.row]
+            if index == player!.currentVideoSubTitleIndex {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
         }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let index = indexPath.row == 0 ? -1 : (player!.audioTrackIndexes as! [Int])[indexPath.row]
-        delegate?.didSelectTrack(Int32(index))
+        if indexPath.section == 0 {
+            let index = indexPath.row == 0 ? -1 : (player!.audioTrackIndexes as! [Int])[indexPath.row]
+            delegate?.didSelectAudioTrack(Int32(index))
+        } else {
+            let index = indexPath.row == 0 ? -1 : (player!.videoSubTitlesIndexes as! [Int])[indexPath.row]
+            delegate?.didSelectSubtitleChannel(Int32(index))
+        }
     }
 }
