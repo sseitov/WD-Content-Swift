@@ -16,13 +16,12 @@ class ContentCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        cardView.setupBorder(UIColor.clear, radius: 20)
     }
     
     var node:Node? {
         didSet {
             if !node!.directory {
-                cardView.backgroundColor = UIColor.white
+                cardView.setupBorder(UIColor.black, radius: 20, width: 5)
                 node?.info = Model.shared.getInfoForNode(node!)
                 if node!.info == nil {
                     nodeName.text = node!.dislayName()
@@ -47,7 +46,7 @@ class ContentCell: UICollectionViewCell {
                 }
                 Model.shared.updateInfoForNode(node!)
             } else {
-                cardView.backgroundColor = UIColor.clear
+                cardView.setupBorder(UIColor.clear, radius: 20)
                 nodeImage.image = UIImage(named: "folder")
                 nodeName.attributedText = NSMutableAttributedString(string: node!.dislayName().uppercased(),
                                                      attributes: [NSFontAttributeName : UIFont.condensedFont(15)])
