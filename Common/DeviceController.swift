@@ -19,7 +19,7 @@ class DeviceController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupTitle(target!.name)
+		setupTitle(target!.name, color: UIColor.lightGray)
     #if IOS
         setupBackButton()
     #endif
@@ -141,7 +141,7 @@ class DeviceController: UITableViewController {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = shares[(indexPath as NSIndexPath).row]
         cell.textLabel?.font = UIFont.mainFont()
-        cell.textLabel?.textColor = UIColor.mainColor()
+        cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.textAlignment = .center
 		return cell
     }

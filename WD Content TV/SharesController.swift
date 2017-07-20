@@ -20,6 +20,7 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 		NotificationCenter.default.addObserver(self,
 		                                       selector: #selector(self.refresh),
 		                                       name: refreshNotification,
@@ -96,8 +97,6 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
     }
     
 	func refresh() {
-        let text = parentNode == nil ? "MY SHARES" : parentNode!.dislayName()
-		setupTitle(text.uppercased(), color: UIColor.lightGray)
         if parentNode == nil {
             var shares = Model.shared.allShares()
             if shares.count == 0 {
@@ -114,13 +113,13 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
                         }
                         self.collectionView?.reloadData()
                     }
+                    return
                 })
             } else {
                 self.nodes.removeAll()
                 for share in shares {
                     self.nodes.append(Node(share: share))
                 }
-                self.collectionView?.reloadData()
             }
         } else {
             self.nodes = Model.shared.nodes(byRoot: self.parentNode!)
@@ -129,8 +128,8 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
                 node.share = parentNode!.share
                 node.info = Model.shared.getInfoForNode(node)
             }
-            self.collectionView?.reloadData()
         }
+        self.collectionView?.reloadData()
 	}
 
     // MARK: UICollectionView delegate
@@ -156,10 +155,12 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "share", for: indexPath) as! ShareCell
 		if indexPath.row == 0 && parentNode == nil {
 			cell.imageView.image = UIImage(named: "addShare")
-			cell.textView.text = ""
+			cell.textView.text = "ADD SHARE"
+            cell.textView.textColor = UIColor.mainColor()
 		} else {
 			let node = parentNode == nil ? nodes[indexPath.row-1] : nodes[indexPath.row]
 			cell.node = node
+            cell.textView.textColor = UIColor.black
 		}
         return cell
     }

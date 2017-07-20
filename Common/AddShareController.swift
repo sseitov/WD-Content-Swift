@@ -32,7 +32,7 @@ class AddShareController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     #if TV
-		setupTitle("DEVICES")
+        setupTitle("DISCOVERED DEVICES", color:UIColor.lightGray)
     #else
         setupTitle("ADD SHARE")
     #endif
@@ -103,7 +103,7 @@ class AddShareController: UITableViewController {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = hosts[(indexPath as NSIndexPath).row].name
         cell.textLabel?.font = UIFont.mainFont()
-        cell.textLabel?.textColor = UIColor.mainColor()
+        cell.textLabel?.textColor = UIColor.black //.mainColor()
         cell.textLabel?.textAlignment = .center
 		return cell
     }

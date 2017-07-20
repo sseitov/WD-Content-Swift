@@ -47,10 +47,10 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         castConstraint.constant = 0
         metainfo = node!.info
 		if metainfo != nil {
-            let btn = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(self.clearInfo))
-        #if IOS
-            btn.tintColor = UIColor.white
-        #endif
+            let btn = UIBarButtonItem(title: "CLEAR", style: .plain, target: self, action: #selector(self.clearInfo))
+            #if IOS
+                btn.tintColor = UIColor.white
+            #endif
 			navigationItem.rightBarButtonItem = btn
 		}
     }
@@ -58,7 +58,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
         if info != nil, let uid = info!["id"] as? Int {
-            let btn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveInfo))
+            let btn = UIBarButtonItem(title: "SAVE", style: .plain, target: self, action: #selector(self.saveInfo))
         #if IOS
             btn.tintColor = UIColor.white
         #endif
@@ -97,7 +97,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 #endif
     
 	func showInfo() {
-        setupTitle(title())
+        setupTitle(title(), color: UIColor.black)
         if let url = URL(string: posterPath()) {
         #if TV
             imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
@@ -308,19 +308,19 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     #endif
 		switch indexPath.row {
 		case 0:
-			cell.textLabel?.text = "Director"
+			cell.textLabel?.text = "DIRECTOR"
 			cell.detailTextLabel?.text = director()
 		case 1:
-			cell.textLabel?.text = "Release Date"
+			cell.textLabel?.text = "RELEASE DATE"
             cell.detailTextLabel?.text = release_date()
 		case 2:
-			cell.textLabel?.text = "Runtime"
+			cell.textLabel?.text = "RUNTIME"
             cell.detailTextLabel?.text = runtime()
 		case 3:
-			cell.textLabel?.text = "Genres"
+			cell.textLabel?.text = "GENRES"
 			cell.detailTextLabel?.text = genres()
 		case 4:
-			cell.textLabel?.text = "Rating"
+			cell.textLabel?.text = "RATING"
 			cell.detailTextLabel?.text = rating()
 		default:
 			break

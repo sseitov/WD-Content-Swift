@@ -26,18 +26,19 @@ class ShareCell: UICollectionViewCell {
 					textView.text = node!.dislayName()
 					imageView.image = UIImage(named: "movie")
 				} else {
-					textView.text = node!.info!.title!
-					if node!.info!.poster != nil {
-						let url = URL(string: node!.info!.poster!)
-						imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
-					} else {
-						imageView.image = UIImage(named: "movie")
-					}
+                    let dateText = "\n(\(Model.year(node!.info!.release_date!)))"
+                    textView.text = node!.info!.title! + dateText
+                    if node!.info!.poster != nil {
+                        let url = URL(string: node!.info!.poster!)
+                        imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
+                    } else {
+                        imageView.image = UIImage(named: "movie")
+                    }
                     self.checkView.alpha = checked() ? 1 : 0
 				}
                 Model.shared.updateInfoForNode(node!)
 			} else {
-				textView.text = node!.dislayName()
+				textView.text = node!.dislayName().uppercased()
                 if node!.parent == nil {
                     imageView.image = UIImage(named: "share")
                 } else {
@@ -68,13 +69,13 @@ class ShareCell: UICollectionViewCell {
 		coordinator.addCoordinatedAnimations({
 			if self.isFocused {
                 self.checkTopConstraint.constant = -20
-                self.checkLeftConstraint.constant = -30
+                self.checkLeftConstraint.constant = 0
 				self.textConstraint.constant = -30
 				self.imageView.adjustsImageWhenAncestorFocused = true
 			}
 			else {
                 self.checkTopConstraint.constant = 0
-                self.checkLeftConstraint.constant = -20
+                self.checkLeftConstraint.constant = 40
 				self.textConstraint.constant = 0
 				self.imageView.adjustsImageWhenAncestorFocused = false
 			}
