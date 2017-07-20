@@ -41,7 +41,7 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
         Model.shared.refreshShares({ error in
             SVProgressHUD.dismiss()
             if error != nil {
-                self.showMessage("Cloud refresh error: \(error!)", messageType: .information)
+                self.showMessage("iCloud error: \(error!.localizedDescription)", messageType: .error)
             }
             self.shares = Model.shared.allShares()
             self.tableView.reloadData()

@@ -119,7 +119,7 @@ func generateUDID() -> String {
             
             guard error == nil else {
                 DispatchQueue.main.async {
-                    print("Cloud Query Error - Refresh: \(error!.localizedDescription)")
+                    print("iCloud Query Error - Refresh: \(error!.localizedDescription)")
                     result(error)
                 }
                 return

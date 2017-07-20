@@ -176,45 +176,58 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="b8f-ZX-M5n">
-                                    <size key="itemSize" width="160" height="160"/>
+                                    <size key="itemSize" width="160" height="230"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="my_cell" id="H3j-hr-aJl" customClass="ContentCell" customModule="WD_Content" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="160" height="180"/>
+                                        <rect key="frame" x="0.0" y="10" width="160" height="230"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="160" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="230"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZF-rP-Fcl">
-                                                    <rect key="frame" x="30" y="0.0" width="100" height="120"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qar-qn-SM3">
+                                                    <rect key="frame" x="5" y="5" width="150" height="220"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZF-rP-Fcl">
+                                                            <rect key="frame" x="25" y="10" width="100" height="120"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="100" id="QJz-qm-wNi"/>
+                                                                <constraint firstAttribute="height" constant="120" id="h2R-hn-V0E"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WDTVLiveHub" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDe-5g-Uf4">
+                                                            <rect key="frame" x="5" y="120" width="140" height="100"/>
+                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="4jC-O7-sKg"/>
-                                                        <constraint firstAttribute="height" constant="120" id="jFK-hW-1xJ"/>
+                                                        <constraint firstItem="qZF-rP-Fcl" firstAttribute="top" secondItem="qar-qn-SM3" secondAttribute="top" constant="10" id="R2A-Sb-Uom"/>
+                                                        <constraint firstAttribute="bottom" secondItem="YDe-5g-Uf4" secondAttribute="bottom" id="TBT-35-cS5"/>
+                                                        <constraint firstItem="qZF-rP-Fcl" firstAttribute="centerX" secondItem="qar-qn-SM3" secondAttribute="centerX" id="kUF-a8-DSu"/>
+                                                        <constraint firstItem="YDe-5g-Uf4" firstAttribute="top" secondItem="qZF-rP-Fcl" secondAttribute="bottom" constant="-10" id="m8w-kR-eX9"/>
+                                                        <constraint firstItem="YDe-5g-Uf4" firstAttribute="leading" secondItem="qar-qn-SM3" secondAttribute="leading" constant="5" id="snM-mI-3gp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="YDe-5g-Uf4" secondAttribute="trailing" constant="5" id="w6b-a4-Yoj"/>
                                                     </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WDTVLiveHub" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDe-5g-Uf4">
-                                                    <rect key="frame" x="10" y="120" width="140" height="60"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </view>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="qZF-rP-Fcl" firstAttribute="top" secondItem="H3j-hr-aJl" secondAttribute="top" id="DVv-JQ-Ce1"/>
-                                            <constraint firstItem="YDe-5g-Uf4" firstAttribute="centerX" secondItem="H3j-hr-aJl" secondAttribute="centerX" id="OQA-Vf-EbF"/>
-                                            <constraint firstAttribute="centerX" secondItem="qZF-rP-Fcl" secondAttribute="centerX" id="WbF-t9-QWg"/>
-                                            <constraint firstAttribute="bottom" secondItem="YDe-5g-Uf4" secondAttribute="bottom" id="Wbk-uy-upK"/>
-                                            <constraint firstItem="YDe-5g-Uf4" firstAttribute="leading" secondItem="H3j-hr-aJl" secondAttribute="leading" constant="10" id="ewC-F1-btY"/>
-                                            <constraint firstItem="YDe-5g-Uf4" firstAttribute="top" secondItem="qZF-rP-Fcl" secondAttribute="bottom" id="pFr-Ny-VjC"/>
-                                            <constraint firstAttribute="trailing" secondItem="YDe-5g-Uf4" secondAttribute="trailing" constant="10" id="sPL-jI-Ta4"/>
+                                            <constraint firstItem="qar-qn-SM3" firstAttribute="top" secondItem="H3j-hr-aJl" secondAttribute="top" constant="5" id="8Hk-og-Fhz"/>
+                                            <constraint firstAttribute="trailing" secondItem="qar-qn-SM3" secondAttribute="trailing" constant="5" id="FUy-PJ-E46"/>
+                                            <constraint firstItem="qar-qn-SM3" firstAttribute="leading" secondItem="H3j-hr-aJl" secondAttribute="leading" constant="5" id="q28-ac-XP8"/>
+                                            <constraint firstAttribute="bottom" secondItem="qar-qn-SM3" secondAttribute="bottom" constant="5" id="wON-4O-Xrx"/>
                                         </constraints>
-                                        <size key="customSize" width="160" height="180"/>
+                                        <size key="customSize" width="160" height="230"/>
                                         <connections>
+                                            <outlet property="cardView" destination="qar-qn-SM3" id="E43-iD-at7"/>
                                             <outlet property="nodeImage" destination="qZF-rP-Fcl" id="ZhI-tu-Vul"/>
                                             <outlet property="nodeName" destination="YDe-5g-Uf4" id="7UE-vm-J2y"/>
                                         </connections>
@@ -255,7 +268,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="AVR-9M-2Jg" customClass="SearchCell" customModule="WD_Content" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AVR-9M-2Jg" id="aJY-KN-tuQ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -286,7 +299,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="4dA-Lx-Sd7" customClass="SearchResultCell" customModule="WD_Content" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99.5" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="100" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4dA-Lx-Sd7" id="Enc-yd-m0j">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>

@@ -75,11 +75,12 @@ extension UIViewController {
         default:
             title = "Error"
         }
-        let alert = LGAlertView.decoratedAlert(withTitle:title, message: error, cancelButtonTitle: "OK", cancelButtonBlock: { alert in
+        let alert = LGAlertView.decoratedAlert(withTitle:title.uppercased(), message: error, cancelButtonTitle: "OK", cancelButtonBlock: { alert in
             if messageHandler != nil {
                 messageHandler!()
             }
         })
+        alert!.okButton.backgroundColor = messageType == .error ? UIColor.red : UIColor.mainColor()
         alert!.titleLabel.textColor = messageType == .error ? UIColor.red : UIColor.mainColor()
         alert?.show()
     }

@@ -64,7 +64,7 @@ class ContentController: UIViewController {
                     SVProgressHUD.dismiss()
                     self.collectionView.reloadData()
                     if let index = self.parentNode?.selectedIndexPath {
-                        self.collectionView.selectItem(at: index, animated: false, scrollPosition: .top)
+                        self.collectionView.selectItem(at: index, animated: false, scrollPosition: .centeredVertically)
                     }
 
                     if self.parentNode!.parent == nil {
