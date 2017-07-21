@@ -291,6 +291,11 @@ func generateUDID() -> String {
         }
     }
 
+    func setViewed(_ info:MetaInfo) {
+        info.wasViewed = true
+        self.saveContext()
+    }
+    
     func setAudioChannel(_ info:MetaInfo, channel:Int) {
         let recordZoneID = CKRecordZoneID(zoneName: info.zoneName!, ownerName: info.ownerName!)
         let recordID = CKRecordID(recordName: info.recordName!, zoneID: recordZoneID)
