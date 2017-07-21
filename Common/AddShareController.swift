@@ -32,7 +32,7 @@ class AddShareController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     #if TV
-        setupTitle("DISCOVERED DEVICES", color:UIColor.lightGray)
+        self.title = "DISCOVERED DEVICES"
     #else
         setupTitle("ADD STORAGE")
     #endif

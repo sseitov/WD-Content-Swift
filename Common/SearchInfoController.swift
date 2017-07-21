@@ -24,9 +24,11 @@ class SearchInfoController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupTitle("Search Info")
     #if IOS
+        setupTitle("Search Info")
         setupBackButton()
+    #else
+        self.title = "Search Info"
     #endif
 		SVProgressHUD.show()
 		searchFile = node!.dislayName()

@@ -34,6 +34,8 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		longTap.delegate = self
 		collectionView?.addGestureRecognizer(longTap)
 		
+        _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
+
         refresh()
     }
     
@@ -97,6 +99,8 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
     }
     
 	func refresh() {
+        let text = parentNode == nil ? "MY STORAGES" : parentNode!.dislayName()
+        self.title = text.uppercased()
         if parentNode == nil {
             var shares = Model.shared.allShares()
             if shares.count == 0 {
@@ -156,11 +160,9 @@ class SharesController: UICollectionViewController, UIGestureRecognizerDelegate 
 		if indexPath.row == 0 && parentNode == nil {
 			cell.imageView.image = UIImage(named: "addShare")
 			cell.textView.text = "ADD SHARE"
-            cell.textView.textColor = UIColor.mainColor()
 		} else {
 			let node = parentNode == nil ? nodes[indexPath.row-1] : nodes[indexPath.row]
 			cell.node = node
-            cell.textView.textColor = UIColor.black
 		}
         return cell
     }

@@ -33,7 +33,6 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="chP-DH-jbH">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.92549019607843142" green="0.88235294117647056" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="200" id="oE0-rC-4mF">
                             <size key="itemSize" width="360" height="320"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -55,12 +54,13 @@
                                                 <constraint firstAttribute="width" constant="200" id="cIs-u7-qCa"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="92k-IM-Jk8">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92k-IM-Jk8">
                                             <rect key="frame" x="0.0" y="200" width="360" height="120"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="120" id="L37-UH-Bc5"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="27"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="N4M-Ni-Rxn">
@@ -114,7 +114,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="66" sectionFooterHeight="66" id="t03-K0-oBq">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="dataSource" destination="V0D-Iw-m5I" id="hIb-yo-4La"/>
                             <outlet property="delegate" destination="V0D-Iw-m5I" id="HC5-iF-En4"/>
@@ -307,7 +307,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="66" sectionFooterHeight="66" id="ztI-go-gPb">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="dataSource" destination="KBd-Vq-w06" id="LBl-0B-rVX"/>
                             <outlet property="delegate" destination="KBd-Vq-w06" id="owZ-XU-wke"/>
@@ -338,12 +338,12 @@
         <scene sceneID="55f-Tl-pHo">
             <objects>
                 <tableViewController id="szS-Cd-zDi" customClass="SearchInfoController" customModule="WD_Content_TV" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="240" sectionHeaderHeight="7" sectionFooterHeight="7" id="uyq-ng-xRj">
+                    <tableView key="view" clipsSubviews="YES" alpha="0.94999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="240" sectionHeaderHeight="7" sectionFooterHeight="7" id="uyq-ng-xRj">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="80" width="1920" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sq4-35-VoD" id="efH-dT-O8v">
@@ -391,7 +391,7 @@
                                     <outlet property="title" destination="8HH-1l-UAE" id="edy-oa-nRc"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="rbd-wv-zLa" customClass="SearchCell" customModule="WD_Content_TV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="rbd-wv-zLa" customClass="SearchCell" customModule="WD_Content_TV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="334" width="1920" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rbd-wv-zLa" id="fek-BM-I6P">
@@ -500,7 +500,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Oah-pa-GfI">
                                 <rect key="frame" x="640" y="140" width="1260" height="400"/>
-                                <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="uj8-IE-jUa"/>
                                 </constraints>
@@ -515,7 +515,7 @@
                                     <constraint firstAttribute="height" constant="30" id="0PQ-M7-IFh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="37"/>
-                                <color key="textColor" red="0.10980392156862745" green="0.30980392156862746" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qU-sa-5bg">
@@ -533,7 +533,7 @@
                                     <constraint firstAttribute="height" constant="30" id="y5o-4B-rbC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="37"/>
-                                <color key="textColor" red="0.10980392160000001" green="0.30980392159999998" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8K-QB-gho">
@@ -543,7 +543,6 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.92549019610000005" green="0.88235294119999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="2qU-sa-5bg" firstAttribute="top" secondItem="gW2-wQ-UzS" secondAttribute="bottom" id="3IB-dc-art"/>
                             <constraint firstAttribute="trailing" secondItem="b8K-QB-gho" secondAttribute="trailing" constant="10" id="3Oi-aX-c45"/>

@@ -34,8 +34,8 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupTitle("Movie Info")
     #if IOS
+        setupTitle("Movie Info")
         findButton.setupBorder(UIColor.mainColor(), radius: 5)
         setupBackButton()
         if IS_PAD() {
@@ -43,6 +43,8 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             imageHeightConstraint.constant = 240
             tableHeightConstraint.constant = 300
         }
+    #else
+        _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
     #endif
         castConstraint.constant = 0
         metainfo = node!.info
@@ -97,7 +99,11 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 #endif
     
 	func showInfo() {
+    #if TV
+        self.title = title()
+    #else
         setupTitle(title(), color: UIColor.black)
+    #endif
         if let url = URL(string: posterPath()) {
         #if TV
             imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
@@ -325,11 +331,12 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		default:
 			break
 		}
-        cell.textLabel?.textColor = UIColor.mainColor()
     #if TV
+        cell.textLabel?.textColor = UIColor.white
         cell.textLabel?.font = UIFont.condensedFont(37)
         cell.detailTextLabel?.font = UIFont.mainFont()
     #else
+        cell.textLabel?.textColor = UIColor.mainColor()
         if IS_PAD() {
             cell.textLabel?.font = UIFont.condensedFont(17)
             cell.detailTextLabel?.font = UIFont.mainFont(15)

@@ -19,9 +19,11 @@ class DeviceController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupTitle(target!.name, color: UIColor.lightGray)
     #if IOS
+        setupTitle(target!.name, color: UIColor.lightGray)
         setupBackButton()
+    #else
+        self.title = target!.name
     #endif
 		cashedShare = Model.shared.getShareByIp(target!.host)
     }
