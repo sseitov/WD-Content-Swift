@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>UIAppFonts</key>
+    <array>
+        <string>CalibreWeb-Black.TTF</string>
+        <string>CalibreWeb-BlackItalic.TTF</string>
+        <string>CalibreWeb-Bold.TTF</string>
+        <string>CalibreWeb-BoldItalic.TTF</string>
+        <string>CalibreWeb-Italic.TTF</string>
+        <string>CalibreWeb-Light.TTF</string>
+        <string>CalibreWeb-LightItalic.TTF</string>
+        <string>CalibreWeb-Medium.TTF</string>
+        <string>CalibreWeb-MediumItalic.TTF</string>
+        <string>CalibreWeb-Regular.TTF</string>
+        <string>CalibreWeb-Semibold.TTF</string>
+        <string>CalibreWeb-SemiboldItalic.TTF</string>
+        <string>CalibreWeb-Thin.TTF</string>
+        <string>CalibreWeb-ThinItalic.TTF</string>
+    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

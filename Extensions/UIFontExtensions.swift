@@ -14,7 +14,7 @@ extension UIFont {
     #if TV
         return UIFont(name: "HelveticaNeue-Bold", size: 37)!
     #else
-        return UIFont(name: "HelveticaNeue", size: size)!
+        return UIFont(name: "CalibreWeb-Regular", size: size)!
     #endif
     }
     
@@ -22,7 +22,7 @@ extension UIFont {
     #if TV
         return UIFont(name: "HelveticaNeue-Thin", size: 27)!
     #else
-        return UIFont(name: "HelveticaNeue-Thin", size: size)!
+        return UIFont(name: "CalibreWeb-Light", size: size)!
     #endif
     }
     
@@ -32,7 +32,7 @@ extension UIFont {
     }
     #else
     class func condensedFont(_ size:CGFloat = 17) -> UIFont {
-        return UIFont(name: "HelveticaNeue-CondensedBold", size: size)!
+        return UIFont(name: "CalibreWeb-SemiBold", size: size)!
     }
     #endif
 }
