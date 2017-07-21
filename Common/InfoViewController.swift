@@ -31,7 +31,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	private var movieInfo:[String:Any]?
 	private var credits:[String:Any]?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupTitle("Movie Info")
@@ -47,7 +47,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         castConstraint.constant = 0
         metainfo = node!.info
 		if metainfo != nil {
-            let btn = UIBarButtonItem(title: "CLEAR", style: .plain, target: self, action: #selector(self.clearInfo))
+            let btn = UIBarButtonItem(title: "CLEAR INFO", style: .plain, target: self, action: #selector(self.clearInfo))
             #if IOS
                 btn.tintColor = UIColor.white
             #endif
@@ -58,7 +58,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
         if info != nil, let uid = info!["id"] as? Int {
-            let btn = UIBarButtonItem(title: "SAVE", style: .plain, target: self, action: #selector(self.saveInfo))
+            let btn = UIBarButtonItem(title: "SAVE INFO", style: .plain, target: self, action: #selector(self.saveInfo))
         #if IOS
             btn.tintColor = UIColor.white
         #endif

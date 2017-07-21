@@ -24,7 +24,7 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
         label.font = UIFont.condensedFont()
         label.textAlignment = .center
-        label.text = "MY SHARES"
+        label.text = "MY STORAGES"
         label.textColor = UIColor.white
         titleItem.titleView = label
 

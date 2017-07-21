@@ -16,12 +16,22 @@ class ContentController: UIViewController {
     var parentNode:Node?
     var nodes:[Node] = []
     
+    private var gradient:CAGradientLayer?
+ 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
+    private func gradientSize() -> CGSize {
+        let max = self.view.frame.size.width > self.view.frame.size.height ? self.view.frame.size.width : self.view.frame.size.height
+        return CGSize(width: max, height: max)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.collectionView.backgroundView = UIView()
+        gradient = self.collectionView.backgroundView?.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: gradientSize())
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.refreshNotify),
@@ -33,7 +43,7 @@ class ContentController: UIViewController {
                                                object: nil)
         refresh()
     }
-
+    
     func refreshNotify() {
         collectionView.reloadData()
     }

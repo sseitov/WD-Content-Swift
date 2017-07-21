@@ -25,16 +25,15 @@ extension UIColor {
         #if TV
             return color(28, 79, 130, 1)
         #else
-            return color(0, 113, 165, 1)
+            return color(38, 77, 93, 1)
         #endif
     }
     
     class func mainColor(_ alpha:Float) -> UIColor {
-        #if TV
-            return color(28, 79, 130, alpha)
-        #else
-            return color(0, 113, 165, alpha)
-        #endif
+        return UIColor.mainColor().withAlphaComponent(CGFloat(alpha))
     }
     
+    class func gradientColor() -> UIColor {
+        return color(142, 216, 220, 1)
+    }
 }

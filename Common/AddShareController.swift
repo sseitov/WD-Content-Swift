@@ -34,7 +34,7 @@ class AddShareController: UITableViewController {
     #if TV
         setupTitle("DISCOVERED DEVICES", color:UIColor.lightGray)
     #else
-        setupTitle("ADD SHARE")
+        setupTitle("ADD STORAGE")
     #endif
 		serviceBrowser.delegate = self
 		serviceBrowser.searchForServices(ofType: "_smb._tcp.", inDomain: "local")

@@ -127,4 +127,12 @@ extension UIView {
             return nil
         }
     }
+    
+    func setGradientBackground(top:UIColor, bottom:UIColor, size:CGSize) -> CAGradientLayer {
+        let gradient:CAGradientLayer = CAGradientLayer()
+        gradient.frame.size = size
+        gradient.colors = [top.cgColor, bottom.cgColor]
+        self.layer.insertSublayer(gradient, at: 0)
+        return gradient
+    }
 }

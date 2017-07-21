@@ -19,6 +19,7 @@
 		2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9471E60D2A300F44E56 /* ActionSheet.swift */; };
 		2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C80B9481E60D2A300F44E56 /* ActionSheet.xib */; };
 		2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */; };
+		2C9347FA1F21FE1200593EF2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9347F91F21FE1200593EF2 /* logo.png */; };
 		2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549A61E5F2B1800A23CC5 /* TMDB.m */; };
 		2C9549A91E5F32D100A23CC5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9549A81E5F32D100A23CC5 /* libiconv.tbd */; };
 		2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9549A61E5F2B1800A23CC5 /* TMDB.m */; };
@@ -116,6 +117,7 @@
 		2C80B9471E60D2A300F44E56 /* ActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionSheet.swift; path = CustomViews/ActionSheet.swift; sourceTree = "<group>"; };
 		2C80B9481E60D2A300F44E56 /* ActionSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActionSheet.xib; path = CustomViews/ActionSheet.xib; sourceTree = "<group>"; };
 		2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2C9347F91F21FE1200593EF2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = SOURCE_ROOT; };
 		2C9549A41E5F2B1800A23CC5 /* ApiKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApiKeys.h; path = TMDB/ApiKeys.h; sourceTree = "<group>"; };
 		2C9549A51E5F2B1800A23CC5 /* TMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDB.h; path = TMDB/TMDB.h; sourceTree = "<group>"; };
 		2C9549A61E5F2B1800A23CC5 /* TMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDB.m; path = TMDB/TMDB.m; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				2C2133251E5ED869002F267D /* Assets.xcassets */,
 				2C2133271E5ED869002F267D /* LaunchScreen.storyboard */,
 				2C21332A1E5ED869002F267D /* Info.plist */,
+				2C9347F91F21FE1200593EF2 /* logo.png */,
 				2CC0D9521E5EFD5000254181 /* WD Content.entitlements */,
 			);
 			name = Resources;
@@ -545,6 +548,7 @@
 			files = (
 				2CA604091E60674400335545 /* LGTextFieldAlertView.xib in Resources */,
 				2CA6040F1E60675A00335545 /* PasswordInput.xib in Resources */,
+				2C9347FA1F21FE1200593EF2 /* logo.png in Resources */,
 				2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */,
 				2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */,
 				2CA604071E60674400335545 /* LGProgressAlertView.xib in Resources */,
