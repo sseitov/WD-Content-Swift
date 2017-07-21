@@ -9,6 +9,14 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="CalibreWeb-Bold.TTF">
+            <string>CalibreWeb-Bold</string>
+        </array>
+        <array key="CalibreWeb-Medium.TTF">
+            <string>CalibreWeb-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--MainVC-->
         <scene sceneID="g16-c4-AQH">
@@ -202,7 +210,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WDTVLiveHub" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDe-5g-Uf4">
                                                             <rect key="frame" x="5" y="120" width="140" height="100"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" name="CalibreWeb-Medium" family="Calibre Web" pointSize="15"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -268,10 +276,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="AVR-9M-2Jg" customClass="SearchCell" customModule="WD_Content" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AVR-9M-2Jg" id="aJY-KN-tuQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kpV-bO-kLo">
@@ -299,10 +307,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="4dA-Lx-Sd7" customClass="SearchResultCell" customModule="WD_Content" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="100" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="99.5" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4dA-Lx-Sd7" id="Enc-yd-m0j">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xBm-jP-DuP">
@@ -538,7 +546,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="YhI-Ev-Efu"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="CalibreWeb-Medium" family="Calibre Web" pointSize="17"/>
                                         <state key="normal" title="FIND INFO">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -578,7 +586,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="cFC-K1-LHW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="CalibreWeb-Bold" family="Calibre Web" pointSize="17"/>
                                 <color key="textColor" red="0.14901960780000001" green="0.30196078430000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -596,7 +604,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DfB-AJ-PGl"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="CalibreWeb-Bold" family="Calibre Web" pointSize="17"/>
                                 <color key="textColor" red="0.14901960780000001" green="0.30196078430000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
