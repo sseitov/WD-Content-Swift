@@ -20,6 +20,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var overviewView: UITextView!
   
     private var selectedNode:Node?
+    private var selectedInfo:MetaInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,12 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         nodesTable?.addGestureRecognizer(longTap)
 
         nodesTable.remembersLastFocusedIndexPath = true
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshNode(notyfy:)),
+                                               name: refreshNodeNotification,
+                                               object: nil)
+
         refresh()
     }
 
@@ -72,14 +79,28 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                 self.nodesTable.reloadData()
                 if self.nodes.count > 0 {
                     self.selectedNode = self.nodes[0]
+                    self.selectedInfo = Model.shared.getInfoForNode(self.selectedNode!)
                 } else {
                     self.selectedNode = nil
+                    self.selectedInfo = nil
                 }
                 self.updateInfo()
             }
         }
     }
     
+    func refreshNode(notyfy:Notification) {
+        if let node = notyfy.object as? Node, node.parent == parentNode {
+            if let index = nodes.index(of: node) {
+                nodesTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                if node == selectedNode {
+                    selectedInfo = Model.shared.getInfoForNode(node)
+                    updateInfo()
+                }
+            }
+        }
+    }
+
     func pressLongTap(tap:UILongPressGestureRecognizer) {
         if tap.state == .began {
             if selectedNode != nil {
@@ -96,11 +117,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         if tableView == nodesTable {
             return nodes.count
         } else {
-            if selectedNode != nil && selectedNode!.info != nil {
-                return 5
-            } else {
-                return 0
-            }
+            return selectedInfo != nil ? 5 : 0
         }
     }
     
@@ -121,7 +138,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                         cell.textLabel?.text = node.dislayName()
                     }
                     if info.release_date != nil {
-                        cell.detailTextLabel?.text = Model.year(node.info!.release_date!)
+                        cell.detailTextLabel?.text = Model.year(info.release_date!)
                     } else {
                         cell.detailTextLabel?.text = ""
                     }
@@ -134,6 +151,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                     cell.textLabel?.text = node.dislayName()
                     cell.imageView?.image = nil
                     cell.detailTextLabel?.text = ""
+                    Model.shared.updateInfoForNode(node)
                 }
             }
         } else {
@@ -142,19 +160,19 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "DIRECTOR"
-                cell.detailTextLabel?.text = selectedNode?.info?.director
+                cell.detailTextLabel?.text = selectedInfo?.director
             case 1:
                 cell.textLabel?.text = "RELEASE"
-                cell.detailTextLabel?.text = selectedNode?.info?.release_date
+                cell.detailTextLabel?.text = selectedInfo?.release_date
             case 2:
                 cell.textLabel?.text = "RUNTIME"
-                cell.detailTextLabel?.text = selectedNode?.info?.runtime
+                cell.detailTextLabel?.text = selectedInfo?.runtime
             case 3:
                 cell.textLabel?.text = "GENRES"
-                cell.detailTextLabel?.text = selectedNode?.info?.genre
+                cell.detailTextLabel?.text = selectedInfo?.genre
             case 4:
                 cell.textLabel?.text = "RATING"
-                cell.detailTextLabel?.text = selectedNode?.info?.rating
+                cell.detailTextLabel?.text = selectedInfo?.rating
             default:
                 break
             }
@@ -162,9 +180,9 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         return cell
     }
 
-    private func posterURL(_ node:Node) -> URL? {
-        if node.info != nil, node.info!.poster != nil {
-            return URL(string: node.info!.poster!)
+    private func posterURL(_ info:MetaInfo) -> URL? {
+        if info.poster != nil {
+            return URL(string: info.poster!)
         } else {
             return nil;
         }
@@ -174,17 +192,19 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         if selectedNode != nil {
             if self.selectedNode!.directory {
                 self.cover.image = UIImage(named: "folderCover")
-            } else {
-                if let url = self.posterURL(self.selectedNode!) {
-                    self.cover.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
-                } else {
-                    self.cover.image = UIImage(named: "movie")
-                }
-            }
-            if selectedNode!.info != nil {
-                overviewView.text = selectedNode?.info?.overview
-            } else {
                 overviewView.text = ""
+            } else {
+                if selectedInfo != nil {
+                    if let url = self.posterURL(selectedInfo!) {
+                        self.cover.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
+                    } else {
+                        self.cover.image = UIImage(named: "movie")
+                    }
+                    overviewView.text = selectedInfo!.overview
+                } else {
+                    self.cover.image = nil
+                    overviewView.text = ""
+                }
             }
         } else {
             self.cover.image = nil
@@ -197,8 +217,10 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         if tableView == nodesTable {
             if let index = context.nextFocusedIndexPath {
                 selectedNode = nodes[index.row]
+                selectedInfo = Model.shared.getInfoForNode(selectedNode!)
             } else {
                 selectedNode = nil
+                selectedInfo = nil
             }
             updateInfo()
         }
@@ -266,6 +288,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                                 if saveError != nil {
                                     self.showMessage(saveError!.localizedDescription, messageType: .error)
                                 } else {
+                                    self.selectedInfo = Model.shared.getInfoForNode(node)
                                     self.updateInfo()
                                     self.nodesTable.reloadData()
                                 }
@@ -278,6 +301,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                         if saveError != nil {
                             self.showMessage(saveError!.localizedDescription, messageType: .error)
                         } else {
+                            self.selectedInfo = Model.shared.getInfoForNode(node)
                             self.updateInfo()
                             self.nodesTable.reloadData()
                         }
