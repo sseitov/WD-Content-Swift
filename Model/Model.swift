@@ -376,6 +376,7 @@ func generateUDID() -> String {
                     info!.director = director
                     info!.audioChannel = -1
                     info!.wasViewed = false
+                    node.info = info
                     self.saveContext()
                     
                     result(nil)

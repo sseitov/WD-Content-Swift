@@ -16,11 +16,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var castView: UITextView!
     @IBOutlet weak var overviewView: UITextView!
     @IBOutlet weak var castConstraint: NSLayoutConstraint!
-#if IOS
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
-#endif
     @IBOutlet weak var findButton: UIButton!
     
 	var node:Node?
@@ -34,7 +32,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    #if IOS
+        
         setupTitle("Movie Info")
         findButton.setupBorder(UIColor.mainColor(), radius: 5)
         setupBackButton()
@@ -43,9 +41,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             imageHeightConstraint.constant = 240
             tableHeightConstraint.constant = 300
         }
-    #else
-        _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
-    #endif
+        
         castConstraint.constant = 0
         metainfo = node!.info
 		if metainfo != nil {
@@ -61,9 +57,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		super.viewDidAppear(animated)
         if info != nil, let uid = info!["id"] as? Int {
             let btn = UIBarButtonItem(title: "SAVE INFO", style: .plain, target: self, action: #selector(self.saveInfo))
-        #if IOS
             btn.tintColor = UIColor.white
-        #endif
             navigationItem.rightBarButtonItem = btn
             SVProgressHUD.show(withStatus: "Load Info...")
             TMDB.sharedInstance().get(kMovieDBMovie, parameters: ["id" : "\(uid)"], block: { responseObject, error in
@@ -89,21 +83,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func goBack() {
         dismiss(animated: true, completion: nil)
     }
-
-#if TV
-	override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-		if presses.first != nil && presses.first!.type == .menu {
-            goBack()
-		}
-	}
-#endif
     
 	func showInfo() {
-    #if TV
-        self.title = title()
-    #else
         setupTitle(title(), color: UIColor.black)
-    #endif
         if let url = URL(string: posterPath()) {
         #if TV
             imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
@@ -121,11 +103,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         overviewView.text = overview()
 		infoTable.reloadData()
 		if castView.text != nil {
-        #if IOS
             let offset:CGFloat = 20
-        #else
-            let offset:CGFloat = 40
-        #endif
 			let castHeight = castView.text!.heightWithConstrainedWidth(width: castView.frame.width, font: castView.font!) + offset
 			let overviewHeight = overviewView.text!.heightWithConstrainedWidth(width: overviewView.frame.width, font: overviewView.font!) + offset
 			var height = self.view.frame.height - castView.frame.origin.y - overviewHeight - offset*2
@@ -293,16 +271,11 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		return 5
 	}
     
-#if IOS
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return IS_PAD() ? 44 : 30
     }
-#endif
     
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    #if TV
-		let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-    #else
         var cell:UITableViewCell!
         if IS_PAD() {
             cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
@@ -311,7 +284,6 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         cell.backgroundColor = UIColor.clear
         cell.detailTextLabel?.textColor = UIColor.black
-    #endif
 		switch indexPath.row {
 		case 0:
 			cell.textLabel?.text = "DIRECTOR"
@@ -331,11 +303,6 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		default:
 			break
 		}
-    #if TV
-        cell.textLabel?.textColor = UIColor.white
-        cell.textLabel?.font = UIFont.condensedFont(37)
-        cell.detailTextLabel?.font = UIFont.mainFont()
-    #else
         cell.textLabel?.textColor = UIColor.mainColor()
         if IS_PAD() {
             cell.textLabel?.font = UIFont.condensedFont(17)
@@ -344,7 +311,6 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.textLabel?.font = UIFont.condensedFont(13)
             cell.detailTextLabel?.font = UIFont.mainFont(10)
         }
-    #endif
 		return cell
 	}
     

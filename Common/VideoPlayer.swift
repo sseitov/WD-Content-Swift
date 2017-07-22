@@ -66,7 +66,9 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         if let url = URL(string: urlStrCode!) {
             self.mediaPlayer.media = VLCMedia(url: url)
             self.mediaPlayer.play()
-            Model.shared.setViewed(self.node!.info!)
+            if self.node!.info != nil {
+                Model.shared.setViewed(self.node!.info!)
+            }
         } else {
             self.showMessage("Can not open file.", messageType: .error, messageHandler: {
                 self.dismiss(animated: true, completion: nil)
