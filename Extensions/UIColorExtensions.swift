@@ -22,11 +22,7 @@ extension UIColor {
     }
     
     class func mainColor() -> UIColor {
-        #if TV
-            return color(28, 79, 130, 1)
-        #else
-            return color(38, 77, 93, 1)
-        #endif
+        return color(38, 77, 93, 1)
     }
     
     class func mainColor(_ alpha:Float) -> UIColor {

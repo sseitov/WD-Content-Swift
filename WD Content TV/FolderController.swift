@@ -9,22 +9,22 @@
 import UIKit
 import SVProgressHUD
 
-class FolderController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, SearchInfoDelegate {
+class FolderController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, SearchInfoDelegate, NodeCellDelegate {
 
     var parentNode:Node?
     var nodes:[Node] = []
 
-    @IBOutlet weak var cover: UIImageView!
     @IBOutlet weak var nodesTable: UITableView!
-    @IBOutlet weak var infoTable: UITableView!
-    @IBOutlet weak var overviewView: UITextView!
-  
-    private var selectedNode:Node?
-    private var selectedInfo:MetaInfo?
+    @IBOutlet weak var coverView: CoverView!
+    @IBOutlet weak var infoView: InfoView!
     
+    private var focusedNode:Node?
+    
+    // MARK: -
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
         
         let backTap = UITapGestureRecognizer(target: self, action: #selector(self.goBack))
@@ -34,17 +34,12 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         let longTap = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongTap(tap:)))
         longTap.delegate = self
         nodesTable?.addGestureRecognizer(longTap)
-
+        
         nodesTable.remembersLastFocusedIndexPath = true
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.refreshNode(notyfy:)),
-                                               name: refreshNodeNotification,
-                                               object: nil)
-
         refresh()
     }
-
+    
     override func goBack() {
         if parentNode?.parent != nil {
             parentNode = parentNode!.parent
@@ -54,9 +49,12 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        nodesTable.reloadData()
+    func pressLongTap(tap:UILongPressGestureRecognizer) {
+        if tap.state == .began {
+            if focusedNode != nil, !focusedNode!.directory {
+                self.performSegue(withIdentifier: "info", sender: focusedNode)
+            }
+        }
     }
     
     func refresh() {
@@ -64,7 +62,8 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         
         SVProgressHUD.show(withStatus: "Refresh...")
         self.nodes = []
-        self.cover.image = nil
+        self.infoView.node = nil
+        self.coverView.node = nil
         self.nodesTable.reloadData()
         
         DispatchQueue.global().async {
@@ -77,187 +76,61 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 self.nodesTable.reloadData()
-                if self.nodes.count > 0 {
-                    self.selectedNode = self.nodes[0]
-                    self.selectedInfo = Model.shared.getInfoForNode(self.selectedNode!)
-                } else {
-                    self.selectedNode = nil
-                    self.selectedInfo = nil
+                if self.parentNode?.selectedIndexPath  == nil && self.nodes.count > 0 {
+                    self.focusedNode = self.nodes[0]
                 }
-                self.updateInfo()
             }
         }
     }
     
-    func refreshNode(notyfy:Notification) {
-        if let node = notyfy.object as? Node, node.parent == parentNode {
-            if let index = nodes.index(of: node) {
-                nodesTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-                if node == selectedNode {
-                    selectedInfo = Model.shared.getInfoForNode(node)
-                    updateInfo()
-                }
-            }
-        }
-    }
-
-    func pressLongTap(tap:UILongPressGestureRecognizer) {
-        if tap.state == .began {
-            if selectedNode != nil {
-                if !selectedNode!.directory {
-                    self.performSegue(withIdentifier: "info", sender: selectedNode)
-                }
-            }
-        }
-    }
-
-    // MARK: UITableView delegate
-
+    // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == nodesTable {
-            return nodes.count
-        } else {
-            return selectedInfo != nil ? 5 : 0
-        }
+        return nodes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        if tableView == nodesTable {
-            let node = nodes[indexPath.row]
-            cell.textLabel?.numberOfLines = 0
-            if node.directory {
-                cell.textLabel?.text = node.dislayName().uppercased()
-                cell.imageView?.image = UIImage(named: "folder")
-                cell.detailTextLabel?.text = ""
-            } else {
-                if let info = Model.shared.getInfoForNode(node) {
-                    if info.title != nil {
-                        cell.textLabel?.text = info.title
-                    } else {
-                        cell.textLabel?.text = node.dislayName()
-                    }
-                    if info.release_date != nil {
-                        cell.detailTextLabel?.text = Model.year(info.release_date!)
-                    } else {
-                        cell.detailTextLabel?.text = ""
-                    }
-                    if info.wasViewed {
-                        cell.imageView?.image = UIImage(named: "checked")
-                    } else {
-                        cell.imageView?.image = UIImage(named: "unchecked")
-                    }
-                } else {
-                    cell.textLabel?.text = node.dislayName()
-                    cell.imageView?.image = nil
-                    cell.detailTextLabel?.text = ""
-                    Model.shared.updateInfoForNode(node)
-                }
-            }
-        } else {
-            cell.textLabel?.textColor = UIColor.white
-            cell.detailTextLabel?.numberOfLines = 0
-            switch indexPath.row {
-            case 0:
-                cell.textLabel?.text = "DIRECTOR"
-                cell.detailTextLabel?.text = selectedInfo?.director
-            case 1:
-                cell.textLabel?.text = "RELEASE"
-                cell.detailTextLabel?.text = selectedInfo?.release_date
-            case 2:
-                cell.textLabel?.text = "RUNTIME"
-                cell.detailTextLabel?.text = selectedInfo?.runtime
-            case 3:
-                cell.textLabel?.text = "GENRES"
-                cell.detailTextLabel?.text = selectedInfo?.genre
-            case 4:
-                cell.textLabel?.text = "RATING"
-                cell.detailTextLabel?.text = selectedInfo?.rating
-            default:
-                break
-            }
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "node", for: indexPath) as! NodeCell
+        cell.node = nodes[indexPath.row]
+        cell.delegate = self
         return cell
     }
-
-    private func posterURL(_ info:MetaInfo) -> URL? {
-        if info.poster != nil {
-            return URL(string: info.poster!)
-        } else {
-            return nil;
-        }
-    }
-
-    private func updateInfo() {
-        if selectedNode != nil {
-            if self.selectedNode!.directory {
-                self.cover.image = UIImage(named: "folderCover")
-                overviewView.text = ""
-            } else {
-                if selectedInfo != nil {
-                    if let url = self.posterURL(selectedInfo!) {
-                        self.cover.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
-                    } else {
-                        self.cover.image = UIImage(named: "movie")
-                    }
-                    overviewView.text = selectedInfo!.overview
-                } else {
-                    self.cover.image = nil
-                    overviewView.text = ""
-                }
-            }
-        } else {
-            self.cover.image = nil
-            overviewView.text = ""
-        }
-        infoTable.reloadData()
-    }
     
-    func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
-        if tableView == nodesTable {
-            if let index = context.nextFocusedIndexPath {
-                selectedNode = nodes[index.row]
-                selectedInfo = Model.shared.getInfoForNode(selectedNode!)
-            } else {
-                selectedNode = nil
-                selectedInfo = nil
-            }
-            updateInfo()
-        }
-        return true
-    }
+    // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == nodesTable {
-            tableView.deselectRow(at: indexPath, animated: false)
-            let node = nodes[indexPath.row]
-            if node.directory {
-                parentNode = node
-                if parentNode?.parent != nil {
-                    parentNode?.parent!.selectedIndexPath = indexPath
-                }
-                refresh()
-            } else {
-                parentNode?.selectedIndexPath = indexPath
-                self.performSegue(withIdentifier: "play", sender: node)
+        let node = nodes[indexPath.row]
+        if node.directory {
+            parentNode = node
+            if parentNode?.parent != nil {
+                parentNode?.parent!.selectedIndexPath = indexPath
             }
+            refresh()
+        } else {
+            parentNode?.selectedIndexPath = indexPath
+            self.performSegue(withIdentifier: "play", sender: node)
         }
     }
-
+    
     func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
-        if tableView == nodesTable {
-            if let index = parentNode?.selectedIndexPath {
-                return index
-            } else {
-                return nil
-            }
+        if let index = parentNode?.selectedIndexPath {
+            return index
         } else {
             return nil
         }
     }
     
-    // MARK: - Navigation
+    func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
+        if let index = context.nextFocusedIndexPath {
+            focusedNode = nodes[index.row]
+        } else {
+            focusedNode = nil
+        }
+        return true
+    }
 
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "play" {
             let nav = segue.destination as! UINavigationController
@@ -271,11 +144,18 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    // MARK: - Update Info
+    // MARK: - NodeCellDelegate
+    
+    func didUpdateInfo(_ node:Node) {
+        self.infoView.node = node
+        self.coverView.node = node
+    }
+
+    // MARK: - SearchDelegate
     
     func didFoundInfo(_ info:[String:Any], baseURL:String) {
         dismiss(animated: true, completion: {
-            if let node = self.selectedNode {
+            if let node = self.focusedNode {
                 SVProgressHUD.show(withStatus: "Update...")
                 if node.info != nil {
                     Model.shared.clearInfo(node.info!, result: { error in
@@ -288,8 +168,6 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                                 if saveError != nil {
                                     self.showMessage(saveError!.localizedDescription, messageType: .error)
                                 } else {
-                                    self.selectedInfo = Model.shared.getInfoForNode(node)
-                                    self.updateInfo()
                                     self.nodesTable.reloadData()
                                 }
                             })
@@ -301,8 +179,6 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                         if saveError != nil {
                             self.showMessage(saveError!.localizedDescription, messageType: .error)
                         } else {
-                            self.selectedInfo = Model.shared.getInfoForNode(node)
-                            self.updateInfo()
                             self.nodesTable.reloadData()
                         }
                     })
@@ -367,7 +243,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             })
         }
     }
-
+    
     private func name(_ node:Node, info:[String:Any]) -> String {
         if let val = info["title"] as? String {
             return val
@@ -443,7 +319,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             return ""
         }
     }
-
+    
     private func director(_ credits:[String:Any]?) -> String {
         if credits != nil, let crewArr =  credits!["crew"] as? [Any] {
             var director:[String] = []
@@ -458,4 +334,126 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
 
+/*
+    private var selectedNode:Node?
+    private var selectedInfo:MetaInfo?
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        nodesTable.reloadData()
+    }
+    
+
+    // MARK: UITableView delegate
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == nodesTable {
+            return nodes.count
+        } else {
+            return selectedInfo != nil ? 5 : 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == nodesTable {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "node", for: indexPath) as! NodeCell
+            cell.node = nodes[indexPath.row]
+            return cell
+
+            let node = nodes[indexPath.row]
+            cell.textLabel?.numberOfLines = 0
+            if node.directory {
+                cell.textLabel?.text = node.dislayName().uppercased()
+                cell.imageView?.image = UIImage(named: "folder")
+                cell.detailTextLabel?.text = ""
+            } else {
+                if let info = Model.shared.getInfoForNode(node) {
+                    if info.title != nil {
+                        cell.textLabel?.text = info.title
+                    } else {
+                        cell.textLabel?.text = node.dislayName()
+                    }
+                    if info.release_date != nil {
+                        cell.detailTextLabel?.text = Model.year(info.release_date!)
+                    } else {
+                        cell.detailTextLabel?.text = ""
+                    }
+                    if info.wasViewed {
+                        cell.imageView?.image = UIImage(named: "checked")
+                    } else {
+                        cell.imageView?.image = UIImage(named: "unchecked")
+                    }
+                } else {
+                    cell.textLabel?.text = node.dislayName()
+                    cell.imageView?.image = nil
+                    cell.detailTextLabel?.text = ""
+                    Model.shared.updateInfoForNode(node)
+                }
+            }
+ 
+        } else {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.textLabel?.textColor = UIColor.white
+            cell.detailTextLabel?.numberOfLines = 0
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "DIRECTOR"
+                cell.detailTextLabel?.text = selectedInfo?.director
+            case 1:
+                cell.textLabel?.text = "RELEASE"
+                cell.detailTextLabel?.text = selectedInfo?.release_date
+            case 2:
+                cell.textLabel?.text = "RUNTIME"
+                cell.detailTextLabel?.text = selectedInfo?.runtime
+            case 3:
+                cell.textLabel?.text = "GENRES"
+                cell.detailTextLabel?.text = selectedInfo?.genre
+            case 4:
+                cell.textLabel?.text = "RATING"
+                cell.detailTextLabel?.text = selectedInfo?.rating
+            default:
+                break
+            }
+            return cell
+        }
+    }
+
+    private func posterURL(_ info:MetaInfo) -> URL? {
+        if info.poster != nil {
+            return URL(string: info.poster!)
+        } else {
+            return nil;
+        }
+    }
+
+    private func updateInfo() {
+        if selectedNode != nil {
+            if self.selectedNode!.directory {
+                self.cover.image = UIImage(named: "folderCover")
+                overviewView.text = ""
+            } else {
+                if selectedInfo != nil {
+                    if let url = self.posterURL(selectedInfo!) {
+                        self.cover.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
+                    } else {
+                        self.cover.image = UIImage(named: "movie")
+                    }
+                    overviewView.text = selectedInfo!.overview
+                } else {
+                    self.cover.image = nil
+                    overviewView.text = ""
+                }
+            }
+        } else {
+            self.cover.image = nil
+            overviewView.text = ""
+        }
+        infoTable.reloadData()
+    }
+
+    
+    
+*/
 }

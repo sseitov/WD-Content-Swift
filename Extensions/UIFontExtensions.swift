@@ -10,21 +10,25 @@ import UIKit
 
 extension UIFont {
     
-    class func mainFont(_ size:CGFloat = 15) -> UIFont {
     #if TV
-        return UIFont(name: "HelveticaNeue-Bold", size: 37)!
+    class func mainFont(_ size:CGFloat = 37) -> UIFont {
+        return UIFont(name: "HelveticaNeue-Bold", size: size)!
+    }
     #else
+    class func mainFont(_ size:CGFloat = 37) -> UIFont {
         return UIFont(name: "CalibreWeb-Regular", size: size)!
-    #endif
     }
+    #endif
     
-    class func thinFont(_ size:CGFloat = 15) -> UIFont {
     #if TV
-        return UIFont(name: "HelveticaNeue-Thin", size: 27)!
-    #else
-        return UIFont(name: "CalibreWeb-Light", size: size)!
-    #endif
+    class func thinFont(_ size:CGFloat = 27) -> UIFont {
+        return UIFont(name: "HelveticaNeue", size: size)!
     }
+    #else
+    class func thinFont(_ size:CGFloat = 15) -> UIFont {
+        return UIFont(name: "CalibreWeb-Light", size: size)!
+    }
+    #endif
     
     #if TV
     class func condensedFont(_ size:CGFloat = 47) -> UIFont {

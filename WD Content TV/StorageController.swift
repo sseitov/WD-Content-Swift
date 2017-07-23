@@ -16,7 +16,7 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "MY STORAGES"
+        self.title = "MOVIE STORAGES"
         
         _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
         
@@ -54,7 +54,7 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
     
     func pressLongTap(tap:UILongPressGestureRecognizer) {
         if tap.state == .began {
-            if focusedIndexPath != nil {
+            if focusedIndexPath != nil && focusedIndexPath!.row < shares.count {
                 let share = shares[focusedIndexPath!.row]
                 let alert = UIAlertController(title: "Attention!", message: "Do you want to delete \(share.name!)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in

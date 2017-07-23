@@ -10,9 +10,7 @@ import UIKit
 
 class StorageCell: UICollectionViewCell {
     
-    @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var nameView: UILabel!
-    @IBOutlet weak var textConstraint: NSLayoutConstraint!
     
     var name:String? {
         didSet {
@@ -20,19 +18,41 @@ class StorageCell: UICollectionViewCell {
         }
     }
     
+    override var canBecomeFocused : Bool {
+        return true
+    }
+    
+    func becomeFocusedUsingAnimationCoordinator(_ coordinator: UIFocusAnimationCoordinator) {
+        coordinator.addCoordinatedAnimations({ () -> Void in
+            self.nameView.textColor = UIColor.white
+            self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            self.layer.shadowColor = UIColor.black.cgColor
+            self.layer.shadowOffset = CGSize(width: 10, height: 50)
+            self.layer.shadowOpacity = 0.5
+            self.layer.shadowRadius = 20
+        }) { () -> Void in
+        }
+    }
+    
+    func resignFocusUsingAnimationCoordinator(_ coordinator: UIFocusAnimationCoordinator) {
+        coordinator.addCoordinatedAnimations({ () -> Void in
+            self.nameView.textColor = UIColor.black
+            self.transform = CGAffineTransform.identity
+            self.layer.shadowColor = nil
+            self.layer.shadowOffset = CGSize.zero
+        }) { () -> Void in
+        }
+    }
+    
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
         
-        coordinator.addCoordinatedAnimations({
-            if self.isFocused {
-                self.image.adjustsImageWhenAncestorFocused = true
-                self.nameView.textColor = UIColor.white
-                self.textConstraint.constant = -30
-            } else {
-                self.image.adjustsImageWhenAncestorFocused = false
-                self.nameView.textColor = UIColor.black
-                self.textConstraint.constant = 2
-            }
-        }, completion: nil)
+        guard let nextFocusedView = context.nextFocusedView else { return }
         
+        if nextFocusedView == self {
+            self.becomeFocusedUsingAnimationCoordinator(coordinator)
+        } else {
+            self.resignFocusUsingAnimationCoordinator(coordinator)
+        }
     }
 }

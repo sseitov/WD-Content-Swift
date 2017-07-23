@@ -39,7 +39,7 @@ class SearchInfoController: UITableViewController {
 				if let config = result as? [String:Any] {
 					if let imagesConfig = config["images"] as? [String:Any] {
 						if let url = imagesConfig["base_url"] as? String {
-							self.imagesBaseURL = "\(url)w185"
+                            self.imagesBaseURL = "\(url)w500"
 						} else {
 							self.showMessage("Can not connect to TMDB", messageType: .error, messageHandler: {
 								_ = self.navigationController?.popViewController(animated: true)

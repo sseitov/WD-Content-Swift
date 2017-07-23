@@ -108,6 +108,9 @@
 		2CD9EF6F1E6322F500E5F8DF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF6E1E6322F500E5F8DF /* libc++.tbd */; };
 		2CD9EF711E63236B00E5F8DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF701E63236B00E5F8DF /* AudioToolbox.framework */; };
 		2CD9EF731E63237E00E5F8DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF721E63237E00E5F8DF /* AudioToolbox.framework */; };
+		2CF124AE1F247C57006ADAC7 /* NodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124AD1F247C57006ADAC7 /* NodeCell.swift */; };
+		2CF124B01F24A02C006ADAC7 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124AF1F24A02C006ADAC7 /* InfoView.swift */; };
+		2CF124B21F24A044006ADAC7 /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124B11F24A044006ADAC7 /* CoverView.swift */; };
 		482D70A3D5314EC745E9891A /* Pods_WD_Content_TV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7DB5D9F0700699E453EE01 /* Pods_WD_Content_TV.framework */; };
 		8DA998C81B9F7A300F9B196A /* Pods_WD_Content.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B99507DC87FCE29ED3D2682 /* Pods_WD_Content.framework */; };
 /* End PBXBuildFile section */
@@ -214,6 +217,9 @@
 		2CD9EF701E63236B00E5F8DF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2CD9EF721E63237E00E5F8DF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		2CDF06BE1F1F407C003583FF /* WDContent 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WDContent 3.xcdatamodel"; sourceTree = "<group>"; };
+		2CF124AD1F247C57006ADAC7 /* NodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeCell.swift; sourceTree = "<group>"; };
+		2CF124AF1F24A02C006ADAC7 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		2CF124B11F24A044006ADAC7 /* CoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverView.swift; sourceTree = "<group>"; };
 		3B99507DC87FCE29ED3D2682 /* Pods_WD_Content.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WD_Content.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B8EB8BEFADF777982312C79 /* Pods-WD Content TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content TV/Pods-WD Content TV.debug.xcconfig"; sourceTree = "<group>"; };
 		642B394539105F19E127FC3D /* Pods-WD Content.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content/Pods-WD Content.debug.xcconfig"; sourceTree = "<group>"; };
@@ -329,6 +335,9 @@
 				2C3C266D1F233025000B82AF /* StorageController.swift */,
 				2C3C266F1F233051000B82AF /* StorageCell.swift */,
 				2C3C26711F2348E4000B82AF /* FolderController.swift */,
+				2CF124AD1F247C57006ADAC7 /* NodeCell.swift */,
+				2CF124AF1F24A02C006ADAC7 /* InfoView.swift */,
+				2CF124B11F24A044006ADAC7 /* CoverView.swift */,
 				2C21336B1E5EDF38002F267D /* Resources */,
 			);
 			path = "WD Content TV";
@@ -784,10 +793,12 @@
 				2CA604181E60907200335545 /* DeviceController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
+				2CF124B21F24A044006ADAC7 /* CoverView.swift in Sources */,
 				2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */,
 				2CC0D9A71E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
 				2CC0D9701E5F01A900254181 /* Model.swift in Sources */,
 				2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */,
+				2CF124AE1F247C57006ADAC7 /* NodeCell.swift in Sources */,
 				2C954A0A1E5F65CD00A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2CA604171E60907200335545 /* AddShareController.swift in Sources */,
 				2CC0D9A11E5F107000254181 /* SMBConnection.m in Sources */,
@@ -795,6 +806,7 @@
 				2CA604211E60911700335545 /* SearchInfoController.swift in Sources */,
 				2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */,
 				2CAF5C8D1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,
+				2CF124B01F24A02C006ADAC7 /* InfoView.swift in Sources */,
 				2CAF5C891E6460C6005EA70C /* Node.swift in Sources */,
 				2C3C26701F233051000B82AF /* StorageCell.swift in Sources */,
 				2CAF5C8F1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */,
