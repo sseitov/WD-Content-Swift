@@ -61,7 +61,15 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         mediaPlayer.delegate = self
         mediaPlayer.drawable = movieView
         
-        let urlStr = "smb://\(self.node!.share!.user!):\(self.node!.share!.password!)@\(self.node!.share!.ip!)\(self.node!.filePath)"
+        var user = self.node!.share!.user!
+        if user.isEmpty {
+            user = "guest"
+        }
+        var password = self.node!.share!.password!
+        if password.isEmpty {
+            password = "anonymous"
+        }
+        let urlStr = "smb://\(user):\(password)@\(self.node!.share!.ip!)\(self.node!.filePath)"
         let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         if let url = URL(string: urlStrCode!) {
             self.mediaPlayer.media = VLCMedia(url: url)

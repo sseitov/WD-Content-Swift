@@ -15,7 +15,7 @@ extension UIFont {
         return UIFont(name: "HelveticaNeue-Bold", size: size)!
     }
     #else
-    class func mainFont(_ size:CGFloat = 37) -> UIFont {
+    class func mainFont(_ size:CGFloat = 15) -> UIFont {
         return UIFont(name: "CalibreWeb-Regular", size: size)!
     }
     #endif
