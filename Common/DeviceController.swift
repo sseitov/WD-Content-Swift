@@ -24,6 +24,7 @@ class DeviceController: UITableViewController {
         setupBackButton()
     #else
         self.title = target!.name
+        self.view.backgroundColor = UIColor.white
     #endif
 		cashedShare = Model.shared.getShareByIp(target!.host)
     }
@@ -57,8 +58,9 @@ class DeviceController: UITableViewController {
     }
     
 	func requestAuth() {
+        let msg = "Input credentials.\nLeave fields empty if used anonymous connection."
     #if IOS
-        let alert = PasswordInput.authDialog(title: target!.name, message: "Input credentials", cancelHandler: {
+        let alert = PasswordInput.authDialog(title: target!.name, message: msg.uppercased(), cancelHandler: {
             self.goBack()
         }, acceptHandler: { (user, password) in
             SVProgressHUD.show(withStatus: "Connect...")
@@ -84,26 +86,23 @@ class DeviceController: UITableViewController {
         })
         alert?.show()
     #else
-		let alert = UIAlertController(title: target?.name, message: "Input credentials", preferredStyle: .alert)
+		let alert = UIAlertController(title: target?.name, message: msg.uppercased(), preferredStyle: .alert)
 		var userField:UITextField?
 		var passwordField:UITextField?
 		alert.addTextField(configurationHandler: { textField in
 			textField.keyboardType = .emailAddress
 			textField.textAlignment = .center
-			textField.placeholder = "user name"
+			textField.placeholder = "user name".uppercased()
 			userField = textField
 		})
 		alert.addTextField(configurationHandler: { textField in
 			textField.keyboardType = .default
 			textField.textAlignment = .center
-			textField.placeholder = "password"
+			textField.placeholder = "password".uppercased()
 			textField.isSecureTextEntry = true
 			passwordField = textField
 		})
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-            self.goBack()
-        }))
-		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+		alert.addAction(UIAlertAction(title: "Ok".uppercased(), style: .default, handler: { _ in
             SVProgressHUD.show(withStatus: "Connect...")
             DispatchQueue.global().async {
                 let connected = self.connection.connect(to: self.target!.host,
@@ -125,6 +124,9 @@ class DeviceController: UITableViewController {
                 }
             }
 		}))
+        alert.addAction(UIAlertAction(title: "Cancel".uppercased(), style: .destructive, handler: { _ in
+            self.goBack()
+        }))
 		present(alert, animated: true, completion: nil)
     #endif
 	}

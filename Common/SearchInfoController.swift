@@ -25,10 +25,10 @@ class SearchInfoController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     #if IOS
-        setupTitle("Search Info")
+        setupTitle("Search movie metadata")
         setupBackButton()
     #else
-        self.title = "Search Info"
+        self.title = "Search movie metadata".uppercased()
     #endif
 		SVProgressHUD.show()
 		searchFile = node!.dislayName()
@@ -138,18 +138,18 @@ class SearchInfoController: UITableViewController {
 		if indexPath.section == 0 {
         #if TV
 			var nameField:UITextField?
-			let alert = UIAlertController(title: "Search Info", message: "Input title of movie:", preferredStyle: .alert)
+			let alert = UIAlertController(title: "search movie metadata".uppercased(), message: "enter movie title:".uppercased(), preferredStyle: .alert)
 			alert.addTextField(configurationHandler: { textField in
 				textField.textAlignment = .center
 				textField.text = self.searchFile
 				nameField = textField
 			})
-			alert.addAction(UIAlertAction(title: "Search", style: .destructive, handler: { _ in
+			alert.addAction(UIAlertAction(title: "Search".uppercased(), style: .default, handler: { _ in
 				self.searchFile = nameField?.text
 				self.tableView.reloadData()
 				self.search()
 			}))
-			alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+			alert.addAction(UIAlertAction(title: "Cancel".uppercased(), style: .destructive, handler: nil))
 			present(alert, animated: true, completion: nil)
         #endif
 		} else {

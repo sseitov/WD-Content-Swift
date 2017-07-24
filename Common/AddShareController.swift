@@ -33,6 +33,7 @@ class AddShareController: UITableViewController {
         super.viewDidLoad()
     #if TV
         self.title = "DISCOVERED DEVICES"
+        self.view.backgroundColor = UIColor.white
     #else
         setupTitle("ADD STORAGE")
     #endif
