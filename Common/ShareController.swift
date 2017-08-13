@@ -11,7 +11,7 @@ import SVProgressHUD
 
 class ShareController: UITableViewController {
 
-    var target:ServiceHost?
+    var share:Share?
     var currentNode:Node?
     var connection:SMBConnection?
 
@@ -19,7 +19,7 @@ class ShareController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentNode?.parent = nil
+        currentNode = Node(share: share!)
     #if TV
         let backTap = UITapGestureRecognizer(target: self, action: #selector(self.goBack))
         backTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
@@ -30,7 +30,11 @@ class ShareController: UITableViewController {
 
     override func goBack() {
         if currentNode?.parent == nil {
-            super.goBack()
+            SVProgressHUD.show()
+            Model.shared.deleteShare(share!, result: { error in
+                SVProgressHUD.dismiss()
+                super.goBack()
+            })
         } else {
             currentNode = currentNode?.parent
             refresh()
@@ -83,6 +87,7 @@ class ShareController: UITableViewController {
     }
     
     @IBAction func createShare(_ sender: Any) {
+        print("\(currentNode!.filePath)")
         #if TV
             self.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: refreshNotification, object: nil)

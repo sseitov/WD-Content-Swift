@@ -26,7 +26,7 @@ import UIKit
         self.filePath = "//\(name)/"
         self.directory = true;
     }
-    
+/*
     init(name: String) {
         super.init()
         
@@ -34,7 +34,7 @@ import UIKit
         self.filePath = "//\(name)/"
         self.directory = true;
     }
-    
+*/    
     init(name:String, isDir:Bool, parent:Node) {
         super.init()
 

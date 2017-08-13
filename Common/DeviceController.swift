@@ -159,8 +159,14 @@ class DeviceController: UITableViewController {
 #endif
     
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let share = shares[indexPath.row];
-        performSegue(withIdentifier: "createShare", sender: share)
+        tableView.deselectRow(at: indexPath, animated: false)
+        let shareName = shares[indexPath.row];
+        SVProgressHUD.show()
+        Model.shared.createShare(name: shareName, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
+            SVProgressHUD.dismiss()
+            self.performSegue(withIdentifier: "createShare", sender: share)
+        })
+
 	}
     
     // MARK: - Navigation
@@ -168,11 +174,8 @@ class DeviceController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createShare" {
             let controller = segue.destination as! ShareController
-            controller.target = target
-            if let name = sender as? String {
-                controller.currentNode = Node(name: name)
-            }
             controller.connection = connection
+            controller.share = sender as? Share
         }
     }
 
