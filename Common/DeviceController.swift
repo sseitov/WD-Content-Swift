@@ -53,7 +53,9 @@ class DeviceController: UITableViewController {
                 }
             }
         } else {
-            requestAuth()
+            if !self.connection.isConnected() {
+                requestAuth()
+            }
         }
     }
     
@@ -143,7 +145,7 @@ class DeviceController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-		cell.textLabel!.text = shares[(indexPath as NSIndexPath).row]
+		cell.textLabel!.text = shares[indexPath.row]
         cell.textLabel?.font = UIFont.mainFont()
         cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.textAlignment = .center
@@ -158,21 +160,20 @@ class DeviceController: UITableViewController {
     
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let share = shares[indexPath.row];
-        if Model.shared.getShare(ip: target!.host, name: share) != nil {
-            showMessage("\(share) already was added.", messageType: .information)
-        } else {
-            SVProgressHUD.show(withStatus: "Add...")
-            Model.shared.createShare(name: share, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
-                SVProgressHUD.dismiss()
-                #if TV
-                    self.dismiss(animated: true, completion: {
-                        NotificationCenter.default.post(name: refreshNotification, object: nil)
-                    })
-                #else
-                    NotificationCenter.default.post(name: refreshNotification, object: nil)
-                    self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
-                #endif
-            })
-        }
+        performSegue(withIdentifier: "createShare", sender: share)
 	}
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "createShare" {
+            let controller = segue.destination as! ShareController
+            controller.target = target
+            if let name = sender as? String {
+                controller.currentNode = Node(name: name)
+            }
+            controller.connection = connection
+        }
+    }
+
 }

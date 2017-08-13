@@ -17,5 +17,6 @@
 - (void)disconnect;
 - (bool)isConnected;
 - (NSArray *)folderContentsByRoot:(Node*)root;
+- (NSArray *)foldersByRoot:(Node*)root;
 
 @end

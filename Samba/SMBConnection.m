@@ -107,6 +107,7 @@ static NSString* relativePath(NSString* path)
 
 - (NSArray *)folderContentsByRoot:(Node*)root
 {
+  
     if (_session == nil) {
         return [NSMutableArray array];
     }
@@ -149,9 +150,9 @@ static NSString* relativePath(NSString* path)
     
     //If not, make a new connection
     const char *cStringName = [shareName cStringUsingEncoding:NSUTF8StringEncoding];
-    smb_tid shareID = -1;
+    smb_tid shareID = 0;
     smb_tree_connect(self.session, cStringName, &shareID);
-    if (shareID < 0) {
+    if (shareID == 0) {
         return [NSArray array];
     }
     
@@ -206,6 +207,92 @@ static NSString* relativePath(NSString* path)
                 Node* file = [[Node alloc] initWithName:fileName isDir:isDir parent:root];
                 [fileList addObject:file];
             }
+        }
+    }
+    smb_stat_list_destroy(statList);
+    smb_tree_disconnect(self.session, shareID);
+    
+    if (fileList.count == 0)
+        return [NSArray array];
+    else
+        return [fileList sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+}
+
+- (NSArray *)foldersByRoot:(Node*)root
+{
+    
+    if (_session == nil) {
+        return [NSMutableArray array];
+    }
+    
+    if (root == nil) {
+        return [NSMutableArray array];
+    }
+    
+    //-----------------------------------------------------------------------------
+    
+    //Replace any backslashes with forward slashes
+    NSString* path = [root.filePath stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
+    
+    //Work out just the share name from the path (The first directory in the string)
+    NSString *shareName = [Node shareNameFromPath:path];
+    
+    //Connect to that share
+    
+    //If not, make a new connection
+    const char *cStringName = [shareName cStringUsingEncoding:NSUTF8StringEncoding];
+    smb_tid shareID = 0;
+    smb_tree_connect(self.session, cStringName, &shareID);
+    if (shareID == 0) {
+        return [NSArray array];
+    }
+    
+    //work out the remainder of the file path and create the search query
+    NSString *relPath = relativePath(path);
+    
+    //Query for a list of files in this directory
+    smb_stat_list statList = smb_find(self.session, shareID, relPath.UTF8String);
+    size_t listCount = smb_stat_list_count(statList);
+    if (listCount == 0) {
+        return [NSArray array];
+    }
+    
+    NSMutableArray *fileList = [NSMutableArray array];
+    
+    for (NSInteger i = 0; i < listCount; i++) {
+        smb_stat item = smb_stat_list_at(statList, i);
+        const char* name = smb_stat_name(item);
+        
+        if (strcmp(name, "$RECYCLE.BIN") == 0)
+            continue;
+        if (strcmp(name, "System Volume Information") == 0)
+            continue;
+        if (strstr(name, "HFS+ Private") != nil)
+            continue;
+        
+        //Skip hidden files
+        if (name[0] == '.')
+            continue;
+        
+        bool isDir = (smb_stat_get(item, SMB_STAT_ISDIR) != 0);
+        NSString* fileName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
+        if ([fileName containsString:@" "]) {
+            NSString* newFileName = [fileName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+            NSString* oldPath = [root.filePath stringByAppendingPathComponent:fileName];
+            NSString* newPath = [root.filePath stringByAppendingPathComponent:newFileName];
+            if (isDir) {
+                if ([self moveDir:shareID oldPath:oldPath newPath:newPath]) {
+                    fileName = newFileName;
+                }
+            } else {
+                if ([self moveFile:shareID oldPath:oldPath newPath:newPath]) {
+                    fileName = newFileName;
+                }
+            }
+        }
+        if (isDir) {
+            Node* file = [[Node alloc] initWithName:fileName isDir:isDir parent:root];
+            [fileList addObject:file];
         }
     }
     smb_stat_list_destroy(statList);

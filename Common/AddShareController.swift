@@ -104,7 +104,7 @@ class AddShareController: UITableViewController {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 		cell.textLabel!.text = hosts[(indexPath as NSIndexPath).row].name
         cell.textLabel?.font = UIFont.mainFont()
-        cell.textLabel?.textColor = UIColor.black //.mainColor()
+        cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.textAlignment = .center
 		return cell
     }

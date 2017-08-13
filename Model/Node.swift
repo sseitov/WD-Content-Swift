@@ -27,6 +27,14 @@ import UIKit
         self.directory = true;
     }
     
+    init(name: String) {
+        super.init()
+        
+        self.name = name
+        self.filePath = "//\(name)/"
+        self.directory = true;
+    }
+    
     init(name:String, isDir:Bool, parent:Node) {
         super.init()
 

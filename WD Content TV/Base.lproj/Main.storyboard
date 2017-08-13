@@ -329,10 +329,37 @@
                             <outlet property="delegate" destination="KBd-Vq-w06" id="owZ-XU-wke"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="RrP-Da-n96" kind="show" identifier="createShare" id="3wE-lj-L0U"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hN4-kj-Y37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9955" y="-4995"/>
+        </scene>
+        <!--Share Controller-->
+        <scene sceneID="hba-vc-uWF">
+            <objects>
+                <tableViewController id="RrP-Da-n96" customClass="ShareController" customModule="WD_Content_TV" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="66" sectionFooterHeight="66" id="L9b-Hu-sWB">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <connections>
+                            <outlet property="dataSource" destination="RrP-Da-n96" id="O71-9p-fN1"/>
+                            <outlet property="delegate" destination="RrP-Da-n96" id="SjO-Od-mGd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="weh-dy-SI7">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hl9-gj-ydi">
+                            <connections>
+                                <action selector="createShare:" destination="RrP-Da-n96" id="daF-NB-hkw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a7t-OV-53x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12131" y="-4995"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0gm-8a-336">
