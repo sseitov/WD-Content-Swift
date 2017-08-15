@@ -23,10 +23,14 @@ import UIKit
         
         self.share = share
         self.name = share.name!
-        self.filePath = "//\(name)/"
+        var path = share.path
+        if path == nil {
+            path = ""
+        }
+        self.filePath = "//\(name)/\(path!)"
         self.directory = true;
     }
-/*
+
     init(name: String) {
         super.init()
         
@@ -34,7 +38,7 @@ import UIKit
         self.filePath = "//\(name)/"
         self.directory = true;
     }
-*/    
+    
     init(name:String, isDir:Bool, parent:Node) {
         super.init()
 
@@ -45,8 +49,18 @@ import UIKit
     }
     
     func dislayName() -> String {
-        let display = (name as NSString).deletingPathExtension
-        return display.replacingOccurrences(of: "_", with: " ", options: [], range: nil)
+        if parent == nil {
+            let path = self.filePath.replacingOccurrences(of: "//\(name)/", with: "")
+            let comps = path.components(separatedBy: "/")
+            if let display = comps.last {
+                return display.replacingOccurrences(of: "_", with: " ", options: [], range: nil)
+            } else {
+                return name.replacingOccurrences(of: "_", with: " ", options: [], range: nil)
+            }
+        } else {
+            let display = (name as NSString).deletingPathExtension
+            return display.replacingOccurrences(of: "_", with: " ", options: [], range: nil)
+        }
     }
     
     class func shareNameFromPath(_ path:String) -> String {

@@ -26,11 +26,11 @@ class DeviceController: UITableViewController {
         self.title = target!.name
         self.view.backgroundColor = UIColor.white
     #endif
-		cashedShare = Model.shared.getShareByIp(target!.host)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        cashedShare = Model.shared.getShareByIp(target!.host)
         if self.cashedShare != nil {
             SVProgressHUD.show(withStatus: "Refresh...")
             DispatchQueue.global().async {
@@ -161,11 +161,7 @@ class DeviceController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let shareName = shares[indexPath.row];
-        SVProgressHUD.show()
-        Model.shared.createShare(name: shareName, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
-            SVProgressHUD.dismiss()
-            self.performSegue(withIdentifier: "createShare", sender: share)
-        })
+        self.performSegue(withIdentifier: "createShare", sender: shareName)
 
 	}
     
@@ -175,7 +171,8 @@ class DeviceController: UITableViewController {
         if segue.identifier == "createShare" {
             let controller = segue.destination as! ShareController
             controller.connection = connection
-            controller.share = sender as? Share
+            controller.target = target
+            controller.shareName = sender as? String
         }
     }
 

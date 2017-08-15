@@ -46,6 +46,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         positionSlider.addTarget(self, action: #selector(self.sliderEndedTracking(_:)), for: events)
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
         movieView.addGestureRecognizer(tap)
+        toolbar.backgroundColor = UIColor.mainColor()
     #else
         audioButton.isEnabled = false
         pauseButton.isEnabled = false

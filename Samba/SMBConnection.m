@@ -222,11 +222,11 @@ static NSString* relativePath(NSString* path)
 {
     
     if (_session == nil) {
-        return [NSMutableArray array];
+        return nil;
     }
     
     if (root == nil) {
-        return [NSMutableArray array];
+        return nil;
     }
     
     //-----------------------------------------------------------------------------
@@ -241,10 +241,9 @@ static NSString* relativePath(NSString* path)
     
     //If not, make a new connection
     const char *cStringName = [shareName cStringUsingEncoding:NSUTF8StringEncoding];
-    smb_tid shareID = 0;
-    smb_tree_connect(self.session, cStringName, &shareID);
-    if (shareID == 0) {
-        return [NSArray array];
+    smb_tid shareID = -1;
+    if (smb_tree_connect(self.session, cStringName, &shareID) != 0) {
+        return nil;
     }
     
     //work out the remainder of the file path and create the search query
@@ -254,7 +253,7 @@ static NSString* relativePath(NSString* path)
     smb_stat_list statList = smb_find(self.session, shareID, relPath.UTF8String);
     size_t listCount = smb_stat_list_count(statList);
     if (listCount == 0) {
-        return [NSArray array];
+        return nil;
     }
     
     NSMutableArray *fileList = [NSMutableArray array];
@@ -299,7 +298,7 @@ static NSString* relativePath(NSString* path)
     smb_tree_disconnect(self.session, shareID);
     
     if (fileList.count == 0)
-        return [NSArray array];
+        return nil;
     else
         return [fileList sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
 }

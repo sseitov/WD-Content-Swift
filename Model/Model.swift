@@ -138,11 +138,16 @@ func generateUDID() -> String {
     
     func addShare(_ record:CKRecord) {
         if let ip = record["ip"] as? String, let name = record["name"] as? String {
-            var share = getShare(ip: ip, name: name)
+            var path = record["path"] as? String
+            if path == nil {
+                path = ""
+            }
+            var share = getShare(ip: ip, name: name, path: path!)
             if share == nil {
                 share = NSEntityDescription.insertNewObject(forEntityName: "Share", into: managedObjectContext) as? Share
                 share!.ip = ip
                 share!.name = name
+                share!.path = path
                 if let port = record["port"] as? String, let portNum = Int(port), let user = record["user"] as? String, let password = record["password"] as? String {
                     
                     share!.recordName = record.recordID.recordName
@@ -157,14 +162,15 @@ func generateUDID() -> String {
         }
     }
 
-    func createShare(name:String, ip:String, port:Int32, user:String, password:String, result: @escaping(Share?) -> ()) {
+    func createShare(name:String, path:String, ip:String, port:Int32, user:String, password:String, result: @escaping(Share?) -> ()) {
         
-        if let connection = getShare(ip:ip, name:name) {
+        if let connection = getShare(ip:ip, name:name, path:path) {
             result(connection)
         }
         
         let record = CKRecord(recordType: "Connection")
         record.setValue(name, forKey: "name")
+        record.setValue(path, forKey: "path")
         record.setValue(ip, forKey: "ip")
         record.setValue("\(port)", forKey: "port")
         record.setValue(user, forKey: "user")
@@ -180,6 +186,7 @@ func generateUDID() -> String {
                     share.zoneName = cloudRecord!.recordID.zoneID.zoneName
                     share.ownerName = cloudRecord!.recordID.zoneID.ownerName
                     share.name = name
+                    share.path = path
                     share.ip = ip
                     share.port = port
                     share.user = user
@@ -221,11 +228,12 @@ func generateUDID() -> String {
         }
     }
     
-    func getShare(ip:String, name:String) -> Share? {
+    func getShare(ip:String, name:String, path: String) -> Share? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Share")
         let pred1 = NSPredicate(format: "ip == %@", ip)
         let pred2 = NSPredicate(format: "name == %@", name)
-        fetchRequest.predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [pred1, pred2])
+        let pred3 = NSPredicate(format: "path == %@", path)
+        fetchRequest.predicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [pred1, pred2, pred3])
         if let share = try? managedObjectContext.fetch(fetchRequest).first as? Share {
             return share
         } else {

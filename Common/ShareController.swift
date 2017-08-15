@@ -11,30 +11,27 @@ import SVProgressHUD
 
 class ShareController: UITableViewController {
 
-    var share:Share?
-    var currentNode:Node?
     var connection:SMBConnection?
+    var target:ServiceHost?
+    var shareName:String?
 
+    private var currentNode:Node?
     private var folders:[Node] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentNode = Node(share: share!)
     #if TV
         let backTap = UITapGestureRecognizer(target: self, action: #selector(self.goBack))
         backTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
         self.view.addGestureRecognizer(backTap)
     #endif
+        currentNode = Node(name: shareName!)
         refresh()
     }
 
     override func goBack() {
         if currentNode?.parent == nil {
-            SVProgressHUD.show()
-            Model.shared.deleteShare(share!, result: { error in
-                SVProgressHUD.dismiss()
-                super.goBack()
-            })
+            super.goBack()
         } else {
             currentNode = currentNode?.parent
             refresh()
@@ -50,7 +47,11 @@ class ShareController: UITableViewController {
             self.view.backgroundColor = UIColor.white
         #endif
         
-        folders = connection?.folders(byRoot: currentNode) as! [Node]
+        if let ff = connection?.folders(byRoot: currentNode) as? [Node] {
+            folders = ff
+        } else {
+            folders = []
+        }
         for folder in folders {
             folder.parent = currentNode
         }
@@ -87,25 +88,23 @@ class ShareController: UITableViewController {
     }
     
     @IBAction func createShare(_ sender: Any) {
-        print("\(currentNode!.filePath)")
-        #if TV
-            self.dismiss(animated: true, completion: {
-                NotificationCenter.default.post(name: refreshNotification, object: nil)
-            })
-        #else
-            NotificationCenter.default.post(name: refreshNotification, object: nil)
-            self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
-        #endif
-/*
-        if Model.shared.getShare(ip: target!.host, name: share!) != nil {
-            showMessage("\(share!) already was added.", messageType: .information)
+        let path = currentNode!.filePath.replacingOccurrences(of: "//\(shareName!)//", with: "")
+        if Model.shared.getShare(ip: target!.host, name: shareName!, path: path) != nil {
+            showMessage("\(shareName!) already was added.", messageType: .information)
         } else {
             SVProgressHUD.show(withStatus: "Add...")
-            Model.shared.createShare(name: share!, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
+            Model.shared.createShare(name: shareName!, path: path, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in
                 SVProgressHUD.dismiss()
+                #if TV
+                    self.dismiss(animated: true, completion: {
+                        NotificationCenter.default.post(name: refreshNotification, object: nil)
+                    })
+                #else
+                    NotificationCenter.default.post(name: refreshNotification, object: nil)
+                    self.navigationController?.performSegue(withIdentifier: "unwindToMenu", sender: self)
+                #endif
             })
         }
- */
     }
 
 }

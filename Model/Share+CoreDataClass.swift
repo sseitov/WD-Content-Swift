@@ -12,4 +12,16 @@ import CoreData
 
 public class Share: NSManagedObject {
 
+    func displayName() -> String {
+        if path == nil || path! == "" {
+            return name!
+        } else {
+            let comps = path!.components(separatedBy: "//")
+            if let title = comps.last {
+                return title
+            } else {
+                return name!
+            }
+        }
+    }
 }

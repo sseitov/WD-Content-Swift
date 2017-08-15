@@ -2,7 +2,7 @@
 //  Share+CoreDataProperties.swift
 //  WD Content
 //
-//  Created by Сергей Сейтов on 28.02.17.
+//  Created by Сергей Сейтов on 15.08.17.
 //  Copyright © 2017 V-Channel. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import CoreData
 extension Share {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Share> {
-        return NSFetchRequest<Share>(entityName: "Share");
+        return NSFetchRequest<Share>(entityName: "Share")
     }
 
     @NSManaged public var ip: String?
@@ -24,5 +24,6 @@ extension Share {
     @NSManaged public var recordName: String?
     @NSManaged public var user: String?
     @NSManaged public var zoneName: String?
+    @NSManaged public var path: String?
 
 }

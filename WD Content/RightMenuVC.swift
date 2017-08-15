@@ -68,7 +68,9 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
             cell.backgroundColor = UIColor.clear
             cell.imageView?.image = nil
         } else {
-            cell.textLabel?.text = shares[indexPath.row].name!
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.lineBreakMode = .byWordWrapping
+            cell.textLabel?.text = shares[indexPath.row].displayName()
             cell.contentView.backgroundColor = UIColor.white
             cell.backgroundColor = UIColor.white
             cell.imageView?.image = UIImage(named: "iosShare")
