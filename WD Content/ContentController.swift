@@ -63,6 +63,7 @@ class ContentController: UIViewController {
         }, completion: { _ in
             self.setupTitle(self.parentNode!.dislayName())
             self.nodes.removeAll()
+            
             SVProgressHUD.show(withStatus: "Refresh...")
             DispatchQueue.global().async {
                 self.nodes = Model.shared.nodes(byRoot: self.parentNode!)

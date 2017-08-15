@@ -210,7 +210,7 @@ static NSString* relativePath(NSString* path)
         }
     }
     smb_stat_list_destroy(statList);
-    smb_tree_disconnect(self.session, shareID);
+//    smb_tree_disconnect(_session, shareID);
     
     if (fileList.count == 0)
         return [NSArray array];
@@ -295,7 +295,7 @@ static NSString* relativePath(NSString* path)
         }
     }
     smb_stat_list_destroy(statList);
-    smb_tree_disconnect(self.session, shareID);
+//    smb_tree_disconnect(self.session, shareID);
     
     if (fileList.count == 0)
         return nil;
