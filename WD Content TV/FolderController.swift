@@ -67,17 +67,24 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         self.nodesTable.reloadData()
         
         DispatchQueue.global().async {
-            self.nodes = Model.shared.nodes(byRoot: self.parentNode!)
-            for node in self.nodes {
-                node.parent = self.parentNode
-                node.share = self.parentNode!.share
-                node.info = Model.shared.getInfoForNode(node)
-            }
+            let nodes = Model.shared.nodes(byRoot: self.parentNode!)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
-                self.nodesTable.reloadData()
-                if self.parentNode?.selectedIndexPath  == nil && self.nodes.count > 0 {
-                    self.focusedNode = self.nodes[0]
+                if nodes.count > 0 {
+                    self.nodes = nodes
+                    for node in self.nodes {
+                        node.parent = self.parentNode
+                        node.share = self.parentNode!.share
+                        node.info = Model.shared.getInfoForNode(node)
+                    }
+                    self.nodesTable.reloadData()
+                    if self.parentNode?.selectedIndexPath  == nil && self.nodes.count > 0 {
+                        self.focusedNode = self.nodes[0]
+                    }
+                } else {
+                    self.showMessage("Folder not contains movies.".uppercased(), messageType: .information, messageHandler: {
+                        self.goBack()
+                    })
                 }
             }
         }

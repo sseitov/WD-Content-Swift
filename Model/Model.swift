@@ -245,8 +245,10 @@ func generateUDID() -> String {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Share")
         let sort = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sort]
-        if let share = try? managedObjectContext.fetch(fetchRequest) as! [Share] {
-            return share
+        if let shares = try? managedObjectContext.fetch(fetchRequest) as! [Share] {
+            return shares.sorted(by: { share1, share2 in
+                return share1.displayName() < share2.displayName()
+            })
         } else {
             return []
         }

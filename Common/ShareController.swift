@@ -11,7 +11,6 @@ import SVProgressHUD
 
 class ShareController: UITableViewController {
 
-    var connection:SMBConnection?
     var target:ServiceHost?
     var shareName:String?
 
@@ -46,16 +45,31 @@ class ShareController: UITableViewController {
             self.title = currentNode!.name
             self.view.backgroundColor = UIColor.white
         #endif
-        
-        if let ff = connection?.folders(byRoot: currentNode) as? [Node] {
-            folders = ff
-        } else {
-            folders = []
+
+        SVProgressHUD.show()
+        DispatchQueue.global().async {
+            let connection = SMBConnection()
+            let connected = connection.connect(to: self.target!.host,
+                                               port: self.target!.port,
+                                               user: self.target!.user,
+                                               password: self.target!.password)
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                if connected {
+                    if let ff = connection.folders(byRoot: self.currentNode) as? [Node] {
+                        self.folders = ff
+                    } else {
+                        self.folders = []
+                    }
+                    for folder in self.folders {
+                        folder.parent = self.currentNode
+                    }
+                    self.tableView.reloadData()
+                } else {
+                    self.showMessage("connection error!".uppercased(), messageType: .error)
+                }
+            }
         }
-        for folder in folders {
-            folder.parent = currentNode
-        }
-        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -88,9 +102,9 @@ class ShareController: UITableViewController {
     }
     
     @IBAction func createShare(_ sender: Any) {
-        let path = currentNode!.filePath.replacingOccurrences(of: "//\(shareName!)//", with: "")
+        let path = currentNode!.filePath.replacingOccurrences(of: "//\(shareName!)/", with: "")
         if Model.shared.getShare(ip: target!.host, name: shareName!, path: path) != nil {
-            showMessage("\(shareName!) already was added.", messageType: .information)
+            showMessage("This folder was already added.", messageType: .information)
         } else {
             SVProgressHUD.show(withStatus: "Add...")
             Model.shared.createShare(name: shareName!, path: path, ip: target!.host, port: target!.port, user: target!.user, password: target!.password, result: { share in

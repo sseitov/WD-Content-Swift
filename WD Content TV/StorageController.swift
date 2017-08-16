@@ -16,7 +16,7 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "MOVIE STORAGES"
+        self.title = "MOVIES"
         
         _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
         
@@ -84,7 +84,7 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "storage", for: indexPath) as! StorageCell
-        cell.name = shares[indexPath.row].name!.uppercased()
+        cell.name = shares[indexPath.row].displayName().uppercased()
         return cell
     }
     

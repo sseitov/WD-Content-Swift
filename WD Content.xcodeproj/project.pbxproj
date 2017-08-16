@@ -19,6 +19,8 @@
 		2C3C266E1F233025000B82AF /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C266D1F233025000B82AF /* StorageController.swift */; };
 		2C3C26701F233051000B82AF /* StorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C266F1F233051000B82AF /* StorageCell.swift */; };
 		2C3C26721F2348E4000B82AF /* FolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C26711F2348E4000B82AF /* FolderController.swift */; };
+		2C6E51831F4393DE000A9255 /* MobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6E51821F4393DE000A9255 /* MobileVLCKit.framework */; };
+		2C6E51851F4393EF000A9255 /* TVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6E51841F4393EF000A9255 /* TVVLCKit.framework */; };
 		2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9471E60D2A300F44E56 /* ActionSheet.swift */; };
 		2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C80B9481E60D2A300F44E56 /* ActionSheet.xib */; };
 		2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */; };
@@ -100,8 +102,6 @@
 		2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
 		2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
 		2CCC86F01E62D2A6000CC894 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CCC86EF1E62D2A6000CC894 /* AVFoundation.framework */; };
-		2CD9EF651E63210200E5F8DF /* MobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF641E63210200E5F8DF /* MobileVLCKit.framework */; };
-		2CD9EF671E63211000E5F8DF /* TVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF661E63211000E5F8DF /* TVVLCKit.framework */; };
 		2CD9EF691E6321FC00E5F8DF /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */; };
 		2CD9EF6B1E63221500E5F8DF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF6A1E63221500E5F8DF /* libc++.tbd */; };
 		2CD9EF6D1E63223400E5F8DF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */; };
@@ -136,6 +136,8 @@
 		2C3C266D1F233025000B82AF /* StorageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
 		2C3C266F1F233051000B82AF /* StorageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageCell.swift; sourceTree = "<group>"; };
 		2C3C26711F2348E4000B82AF /* FolderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderController.swift; sourceTree = "<group>"; };
+		2C6E51821F4393DE000A9255 /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileVLCKit.framework; sourceTree = "<group>"; };
+		2C6E51841F4393EF000A9255 /* TVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TVVLCKit.framework; sourceTree = "<group>"; };
 		2C80B9471E60D2A300F44E56 /* ActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionSheet.swift; path = CustomViews/ActionSheet.swift; sourceTree = "<group>"; };
 		2C80B9481E60D2A300F44E56 /* ActionSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActionSheet.xib; path = CustomViews/ActionSheet.xib; sourceTree = "<group>"; };
 		2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -211,8 +213,6 @@
 		2CC0D9B81E5F12D100254181 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayer.swift; path = Common/VideoPlayer.swift; sourceTree = "<group>"; };
 		2CCC86EF1E62D2A6000CC894 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		2CD9EF641E63210200E5F8DF /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileVLCKit.framework; sourceTree = "<group>"; };
-		2CD9EF661E63211000E5F8DF /* TVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TVVLCKit.framework; sourceTree = "<group>"; };
 		2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		2CD9EF6A1E63221500E5F8DF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -235,11 +235,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6E51831F4393DE000A9255 /* MobileVLCKit.framework in Frameworks */,
 				2CD9EF6B1E63221500E5F8DF /* libc++.tbd in Frameworks */,
 				2CC0D9B91E5F12D100254181 /* libiconv.tbd in Frameworks */,
 				2CD9EF6D1E63223400E5F8DF /* CoreMedia.framework in Frameworks */,
 				2CD9EF691E6321FC00E5F8DF /* VideoToolbox.framework in Frameworks */,
-				2CD9EF651E63210200E5F8DF /* MobileVLCKit.framework in Frameworks */,
 				2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */,
 				2CD9EF711E63236B00E5F8DF /* AudioToolbox.framework in Frameworks */,
 				2CC0D9571E5EFD6A00254181 /* CloudKit.framework in Frameworks */,
@@ -251,9 +251,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6E51851F4393EF000A9255 /* TVVLCKit.framework in Frameworks */,
 				2CD9EF6F1E6322F500E5F8DF /* libc++.tbd in Frameworks */,
 				2C9549A91E5F32D100A23CC5 /* libiconv.tbd in Frameworks */,
-				2CD9EF671E63211000E5F8DF /* TVVLCKit.framework in Frameworks */,
 				2CCC86F01E62D2A6000CC894 /* AVFoundation.framework in Frameworks */,
 				2CD9EF731E63237E00E5F8DF /* AudioToolbox.framework in Frameworks */,
 				2CC0D9551E5EFD6100254181 /* CloudKit.framework in Frameworks */,
@@ -485,14 +485,14 @@
 		37BE737A4CCEF1A81F1E6BFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C6E51841F4393EF000A9255 /* TVVLCKit.framework */,
+				2C6E51821F4393DE000A9255 /* MobileVLCKit.framework */,
 				2CD9EF6E1E6322F500E5F8DF /* libc++.tbd */,
 				2CD9EF6A1E63221500E5F8DF /* libc++.tbd */,
 				2C9549A81E5F32D100A23CC5 /* libiconv.tbd */,
 				2CC0D9B81E5F12D100254181 /* libiconv.tbd */,
 				2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */,
 				2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */,
-				2CD9EF661E63211000E5F8DF /* TVVLCKit.framework */,
-				2CD9EF641E63210200E5F8DF /* MobileVLCKit.framework */,
 				2CCC86EF1E62D2A6000CC894 /* AVFoundation.framework */,
 				2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */,
 				2CD9EF721E63237E00E5F8DF /* AudioToolbox.framework */,

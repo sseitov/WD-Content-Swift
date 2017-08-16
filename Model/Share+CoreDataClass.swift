@@ -18,7 +18,7 @@ public class Share: NSManagedObject {
         } else {
             let comps = path!.components(separatedBy: "//")
             if let title = comps.last {
-                return title
+                return title.replacingOccurrences(of: "_", with: " ", options: [], range: nil).replacingOccurrences(of: "/", with: "")
             } else {
                 return name!
             }

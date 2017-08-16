@@ -55,9 +55,9 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92k-IM-Jk8">
-                                            <rect key="frame" x="10" y="320" width="300" height="50"/>
+                                            <rect key="frame" x="10" y="280" width="300" height="90"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="euG-6v-9Ft"/>
+                                                <constraint firstAttribute="height" constant="90" id="euG-6v-9Ft"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                             <nil key="textColor"/>
@@ -610,7 +610,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="80" width="1920" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sq4-35-VoD" id="efH-dT-O8v">
@@ -658,7 +658,7 @@
                                     <outlet property="title" destination="8HH-1l-UAE" id="edy-oa-nRc"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="rbd-wv-zLa" customClass="SearchCell" customModule="WD_Content_TV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="rbd-wv-zLa" customClass="SearchCell" customModule="WD_Content_TV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="334" width="1920" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rbd-wv-zLa" id="fek-BM-I6P">

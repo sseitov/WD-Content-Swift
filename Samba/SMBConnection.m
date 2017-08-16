@@ -150,7 +150,7 @@ static NSString* relativePath(NSString* path)
     
     //If not, make a new connection
     const char *cStringName = [shareName cStringUsingEncoding:NSUTF8StringEncoding];
-    smb_tid shareID = 0;
+    smb_tid shareID = -1;
     smb_tree_connect(self.session, cStringName, &shareID);
     if (shareID == 0) {
         return [NSArray array];
@@ -210,7 +210,7 @@ static NSString* relativePath(NSString* path)
         }
     }
     smb_stat_list_destroy(statList);
-//    smb_tree_disconnect(_session, shareID);
+    smb_tree_disconnect(_session, shareID);
     
     if (fileList.count == 0)
         return [NSArray array];
@@ -295,7 +295,7 @@ static NSString* relativePath(NSString* path)
         }
     }
     smb_stat_list_destroy(statList);
-//    smb_tree_disconnect(self.session, shareID);
+    smb_tree_disconnect(self.session, shareID);
     
     if (fileList.count == 0)
         return nil;

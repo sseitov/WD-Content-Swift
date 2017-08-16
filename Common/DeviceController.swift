@@ -170,7 +170,6 @@ class DeviceController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createShare" {
             let controller = segue.destination as! ShareController
-            controller.connection = connection
             controller.target = target
             controller.shareName = sender as? String
         }

@@ -17,9 +17,7 @@ class NodeCell: UITableViewCell {
     var node:Node? {
         didSet {
             updateInfo()
-            if node?.info == nil {
-                Model.shared.updateInfoForNode(node!)
-            }
+            Model.shared.updateInfoForNode(node!)
         }
     }
     

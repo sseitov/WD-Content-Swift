@@ -55,7 +55,7 @@ extension UIViewController {
         default:
             title = "Error"
         }
-        let alert = UIAlertController(title: title, message: error, preferredStyle: .alert)
+        let alert = UIAlertController(title: title.uppercased(), message: error, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
             if messageHandler != nil {
                 messageHandler!()

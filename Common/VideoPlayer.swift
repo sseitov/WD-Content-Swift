@@ -71,6 +71,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             password = "anonymous"
         }
         let urlStr = "smb://\(user):\(password)@\(self.node!.share!.ip!)\(self.node!.filePath)"
+        print(urlStr)
         let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         if let url = URL(string: urlStrCode!) {
             self.mediaPlayer.media = VLCMedia(url: url)
@@ -210,6 +211,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         case .stopped:
             mediaPlayer.delegate = nil
             mediaPlayer.stop()
+            SVProgressHUD.dismiss()
             dismiss(animated: true, completion: nil)
         default:
             break
