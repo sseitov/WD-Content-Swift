@@ -113,6 +113,18 @@ class AddShareController: UITableViewController {
 		performSegue(withIdentifier: "showDevice", sender: hosts[indexPath.row])
 	}
 	
+    @IBAction func addManual(_ sender: Any) {
+        let ask = HostInput.hostDialog(cancelHandler: {
+        }, acceptHandler: { host, port in
+            if let num = Int32(port) {
+                let info = ServiceHost(name: "", host: host, port: num)
+                self.performSegue(withIdentifier: "showDevice", sender: info)
+            } else {
+                self.showMessage("Invalid port number.", messageType: .error)
+            }
+        })
+        ask?.show()
+    }
 	
     // MARK: - Navigation
     

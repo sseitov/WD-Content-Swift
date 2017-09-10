@@ -21,6 +21,8 @@
 		2C3C26721F2348E4000B82AF /* FolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C26711F2348E4000B82AF /* FolderController.swift */; };
 		2C6E51831F4393DE000A9255 /* MobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6E51821F4393DE000A9255 /* MobileVLCKit.framework */; };
 		2C6E51851F4393EF000A9255 /* TVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6E51841F4393EF000A9255 /* TVVLCKit.framework */; };
+		2C7DE8FE1F654E0F001AEB5B /* HostInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DE8FC1F654E0F001AEB5B /* HostInput.swift */; };
+		2C7DE8FF1F654E0F001AEB5B /* HostInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7DE8FD1F654E0F001AEB5B /* HostInput.xib */; };
 		2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9471E60D2A300F44E56 /* ActionSheet.swift */; };
 		2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C80B9481E60D2A300F44E56 /* ActionSheet.xib */; };
 		2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */; };
@@ -138,6 +140,8 @@
 		2C3C26711F2348E4000B82AF /* FolderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderController.swift; sourceTree = "<group>"; };
 		2C6E51821F4393DE000A9255 /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileVLCKit.framework; sourceTree = "<group>"; };
 		2C6E51841F4393EF000A9255 /* TVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TVVLCKit.framework; sourceTree = "<group>"; };
+		2C7DE8FC1F654E0F001AEB5B /* HostInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostInput.swift; path = CustomViews/HostInput.swift; sourceTree = "<group>"; };
+		2C7DE8FD1F654E0F001AEB5B /* HostInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HostInput.xib; path = CustomViews/HostInput.xib; sourceTree = "<group>"; };
 		2C80B9471E60D2A300F44E56 /* ActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionSheet.swift; path = CustomViews/ActionSheet.swift; sourceTree = "<group>"; };
 		2C80B9481E60D2A300F44E56 /* ActionSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActionSheet.xib; path = CustomViews/ActionSheet.xib; sourceTree = "<group>"; };
 		2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -426,6 +430,8 @@
 				2CA604101E60679500335545 /* TextFieldContainer.swift */,
 				2CA6040C1E60675A00335545 /* PasswordInput.swift */,
 				2CA6040D1E60675A00335545 /* PasswordInput.xib */,
+				2C7DE8FC1F654E0F001AEB5B /* HostInput.swift */,
+				2C7DE8FD1F654E0F001AEB5B /* HostInput.xib */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 				2C9348151F224EA400593EF2 /* CalibreWeb-SemiboldItalic.TTF in Resources */,
 				2C9347FA1F21FE1200593EF2 /* logo.png in Resources */,
 				2C9348141F224EA400593EF2 /* CalibreWeb-Semibold.TTF in Resources */,
+				2C7DE8FF1F654E0F001AEB5B /* HostInput.xib in Resources */,
 				2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */,
 				2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */,
 				2CA604071E60674400335545 /* LGProgressAlertView.xib in Resources */,
@@ -803,6 +810,7 @@
 				2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
 				2C11BD521E5F9C5A004A786F /* RightMenuVC.swift in Sources */,
 				2CA603F61E604D5700335545 /* ContentCell.swift in Sources */,
+				2C7DE8FE1F654E0F001AEB5B /* HostInput.swift in Sources */,
 				2CA604161E60906B00335545 /* DeviceController.swift in Sources */,
 				2CC0D9A41E5F107000254181 /* TONetBIOSNameService.m in Sources */,
 				2CAF5C8E1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */,
@@ -1002,8 +1010,8 @@
 				OTHER_SWIFT_FLAGS = "-DIOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4ac5fd34-405d-4969-b1cd-1be9d645fc19";
-				PROVISIONING_PROFILE_SPECIFIER = "WD Content Development";
+				PROVISIONING_PROFILE = "f0cb82bd-4469-4a90-8d16-3536bbcdb6a8";
+				PROVISIONING_PROFILE_SPECIFIER = "v-Cinema Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1045,8 +1053,8 @@
 				OTHER_SWIFT_FLAGS = "-DIOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f42749f6-5441-469e-98ee-e7bc7e3bd041";
-				PROVISIONING_PROFILE_SPECIFIER = "WD Content AppStore";
+				PROVISIONING_PROFILE = "c8012e60-8866-4736-8e93-4ef64c8bcb00";
+				PROVISIONING_PROFILE_SPECIFIER = "v-Cinema AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 10.0;

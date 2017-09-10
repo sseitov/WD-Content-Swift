@@ -10,26 +10,26 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view alpha="0.0" contentMode="scaleToFill" id="pQ4-Tu-ume" customClass="PasswordInput" customModule="WD_Content" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="pQ4-Tu-ume" customClass="HostInput" customModule="WD_Content" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Waz-U0-RYG" userLabel="containerView">
-                    <rect key="frame" x="20" y="178" width="280" height="257.5"/>
+                    <rect key="frame" x="20" y="186" width="280" height="240.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Account Email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAR-Op-t0F" userLabel="titleLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Host Manually" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAR-Op-t0F" userLabel="titleLabel">
                             <rect key="frame" x="20" y="20" width="240" height="20.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="highlightedColor" red="0.0" green="0.4431372549" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This account is already taken.  Try another one?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehq-GU-MVV" userLabel="messageLabel">
-                            <rect key="frame" x="20" y="55.5" width="240" height="35"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehq-GU-MVV" userLabel="messageLabel">
+                            <rect key="frame" x="20" y="55.5" width="240" height="17.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czl-4E-4NL" userLabel="cancelButton">
-                            <rect key="frame" x="20" y="197.5" width="112.5" height="36"/>
+                            <rect key="frame" x="20" y="198" width="112.5" height="36"/>
                             <color key="backgroundColor" red="0.51372549020000002" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="W4K-af-m6G"/>
@@ -49,7 +49,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sm-bZ-T6f" userLabel="otherButton">
-                            <rect key="frame" x="147.5" y="197.5" width="112.5" height="36"/>
+                            <rect key="frame" x="147.5" y="198" width="112.5" height="36"/>
                             <color key="backgroundColor" red="0.0" green="0.44313725490196076" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="OK">
@@ -66,7 +66,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnQ-8e-BHo" customClass="TextFieldContainer" customModule="WD_Content" customModuleProvider="target">
-                            <rect key="frame" x="20" y="103.5" width="240" height="36"/>
+                            <rect key="frame" x="20" y="86" width="240" height="36"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -80,8 +80,13 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Port" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdy-q8-Z2A" userLabel="messageLabel">
+                            <rect key="frame" x="20" y="122" width="240" height="17.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuY-5n-Hrj" customClass="TextFieldContainer" customModule="WD_Content" customModuleProvider="target">
-                            <rect key="frame" x="20" y="143.5" width="240" height="36"/>
+                            <rect key="frame" x="20" y="140" width="240" height="36"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="VDc-h9-nYe"/>
@@ -91,26 +96,30 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ZuY-5n-Hrj" secondAttribute="trailing" constant="20" id="0VF-1m-BXN"/>
+                        <constraint firstAttribute="trailing" secondItem="sdy-q8-Z2A" secondAttribute="trailing" constant="20" id="0hh-nw-L4I"/>
                         <constraint firstAttribute="centerX" secondItem="ehq-GU-MVV" secondAttribute="centerX" id="0ka-fL-XFl"/>
                         <constraint firstItem="czl-4E-4NL" firstAttribute="height" secondItem="7Sm-bZ-T6f" secondAttribute="height" id="7AY-gV-IMX"/>
                         <constraint firstItem="zAR-Op-t0F" firstAttribute="width" secondItem="tnQ-8e-BHo" secondAttribute="width" id="Bh8-Nf-Nz5"/>
                         <constraint firstItem="zAR-Op-t0F" firstAttribute="trailing" secondItem="7Sm-bZ-T6f" secondAttribute="trailing" id="F6d-02-L6E"/>
                         <constraint firstItem="ZuY-5n-Hrj" firstAttribute="leading" secondItem="Waz-U0-RYG" secondAttribute="leading" constant="20" id="IeU-iO-Kjf"/>
+                        <constraint firstItem="sdy-q8-Z2A" firstAttribute="leading" secondItem="Waz-U0-RYG" secondAttribute="leading" constant="20" id="Jia-lZ-z0f"/>
                         <constraint firstItem="zAR-Op-t0F" firstAttribute="width" secondItem="ehq-GU-MVV" secondAttribute="width" id="Qfb-SH-cuS"/>
-                        <constraint firstItem="ZuY-5n-Hrj" firstAttribute="top" secondItem="tnQ-8e-BHo" secondAttribute="bottom" constant="4" id="RFb-1K-Dyv"/>
+                        <constraint firstItem="ZuY-5n-Hrj" firstAttribute="top" secondItem="tnQ-8e-BHo" secondAttribute="bottom" constant="18" id="RFb-1K-Dyv"/>
                         <constraint firstItem="czl-4E-4NL" firstAttribute="width" secondItem="7Sm-bZ-T6f" secondAttribute="width" id="TiL-Sh-lvl"/>
                         <constraint firstItem="zAR-Op-t0F" firstAttribute="leading" secondItem="Waz-U0-RYG" secondAttribute="leading" constant="20" id="Ufb-8A-BGH"/>
                         <constraint firstAttribute="centerX" secondItem="tnQ-8e-BHo" secondAttribute="centerX" id="VXb-2J-mrm"/>
                         <constraint firstAttribute="width" constant="280" id="bBg-LW-mxt"/>
                         <constraint firstItem="ehq-GU-MVV" firstAttribute="top" secondItem="zAR-Op-t0F" secondAttribute="bottom" constant="15" id="bIy-YP-VQs"/>
+                        <constraint firstItem="ZuY-5n-Hrj" firstAttribute="top" secondItem="sdy-q8-Z2A" secondAttribute="bottom" constant="0.5" id="dE5-gK-eBg"/>
                         <constraint firstItem="czl-4E-4NL" firstAttribute="centerY" secondItem="7Sm-bZ-T6f" secondAttribute="centerY" id="du9-Vx-IWr"/>
                         <constraint firstAttribute="trailing" secondItem="zAR-Op-t0F" secondAttribute="trailing" constant="20" id="fr2-Jc-8yS"/>
                         <constraint firstItem="tnQ-8e-BHo" firstAttribute="height" secondItem="czl-4E-4NL" secondAttribute="height" id="k5b-pd-4KB"/>
-                        <constraint firstAttribute="bottom" secondItem="czl-4E-4NL" secondAttribute="bottom" constant="24" id="lmD-4o-zen"/>
+                        <constraint firstAttribute="bottom" secondItem="czl-4E-4NL" secondAttribute="bottom" constant="6.5" id="lmD-4o-zen"/>
                         <constraint firstItem="tnQ-8e-BHo" firstAttribute="top" secondItem="ehq-GU-MVV" secondAttribute="bottom" constant="13" id="lmm-il-bET"/>
                         <constraint firstItem="czl-4E-4NL" firstAttribute="leading" secondItem="zAR-Op-t0F" secondAttribute="leading" id="nsk-Wr-fmo"/>
+                        <constraint firstItem="sdy-q8-Z2A" firstAttribute="top" secondItem="tnQ-8e-BHo" secondAttribute="bottom" id="q4x-G2-4jc"/>
                         <constraint firstItem="7Sm-bZ-T6f" firstAttribute="leading" secondItem="czl-4E-4NL" secondAttribute="trailing" constant="15" id="rEc-v4-mtD"/>
-                        <constraint firstItem="czl-4E-4NL" firstAttribute="top" secondItem="tnQ-8e-BHo" secondAttribute="bottom" constant="58.5" id="x53-1B-q6h"/>
+                        <constraint firstItem="czl-4E-4NL" firstAttribute="top" secondItem="tnQ-8e-BHo" secondAttribute="bottom" constant="76" id="x53-1B-q6h"/>
                         <constraint firstItem="zAR-Op-t0F" firstAttribute="top" secondItem="Waz-U0-RYG" secondAttribute="top" constant="20" id="zr0-Ko-Hp8"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -130,12 +139,12 @@
                 <outlet property="containerView" destination="Waz-U0-RYG" id="ftF-ge-aFk"/>
                 <outlet property="containerViewCenterXOffset" destination="b6c-7d-nST" id="gLc-p3-WRZ"/>
                 <outlet property="containerViewCenterYOffset" destination="mAC-qW-Mdq" id="BnU-TO-nnJ"/>
+                <outlet property="hostField" destination="tnQ-8e-BHo" id="d4K-Yy-dPs"/>
                 <outlet property="messageLabel" destination="ehq-GU-MVV" id="cfo-bj-z9N"/>
                 <outlet property="messageLabelTopSpaceToTitleLabel" destination="bIy-YP-VQs" id="KMc-lJ-6dQ"/>
                 <outlet property="otherButton" destination="7Sm-bZ-T6f" id="QxE-r7-3AT"/>
-                <outlet property="passwordField" destination="ZuY-5n-Hrj" id="lDL-ZU-7xs"/>
+                <outlet property="portField" destination="ZuY-5n-Hrj" id="t41-bu-en6"/>
                 <outlet property="titleLabel" destination="zAR-Op-t0F" id="MAQ-WU-bPs"/>
-                <outlet property="userField" destination="tnQ-8e-BHo" id="dlw-g1-1I3"/>
             </connections>
             <point key="canvasLocation" x="341" y="403"/>
         </view>
