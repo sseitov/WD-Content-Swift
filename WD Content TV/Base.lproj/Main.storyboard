@@ -119,7 +119,13 @@
                             <outlet property="delegate" destination="V0D-Iw-m5I" id="HC5-iF-En4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="jVA-Nk-2oT"/>
+                    <navigationItem key="navigationItem" id="jVA-Nk-2oT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="etm-Yp-YBe">
+                            <connections>
+                                <action selector="addManual:" destination="V0D-Iw-m5I" id="D0d-aI-xzE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="KBd-Vq-w06" kind="show" identifier="showDevice" id="Oia-Mw-F4L">
                             <nil key="action"/>
@@ -210,7 +216,7 @@
                                             <action selector="forward:" destination="Zpw-qe-yUD" eventType="primaryActionTriggered" id="ZIA-ax-yvp"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="242 min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlz-V1-fQp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlz-V1-fQp">
                                         <rect key="frame" x="1500" y="20" width="200" height="88"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="88" id="O2S-Hk-TLw"/>
@@ -610,7 +616,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="80" width="1920" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sq4-35-VoD" id="efH-dT-O8v">
@@ -658,7 +664,7 @@
                                     <outlet property="title" destination="8HH-1l-UAE" id="edy-oa-nRc"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="rbd-wv-zLa" customClass="SearchCell" customModule="WD_Content_TV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="rbd-wv-zLa" customClass="SearchCell" customModule="WD_Content_TV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="334" width="1920" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rbd-wv-zLa" id="fek-BM-I6P">

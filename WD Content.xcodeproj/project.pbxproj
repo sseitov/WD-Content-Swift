@@ -1093,8 +1093,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -DTV";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "beb9e78f-6384-41fd-8705-33f1b1183be8";
-				PROVISIONING_PROFILE_SPECIFIER = "WD Content TV Development";
+				PROVISIONING_PROFILE = "bec6d1ab-e715-4dc4-88a2-733e8ecc6151";
+				PROVISIONING_PROFILE_SPECIFIER = "v-Cinema TV Development";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content TV-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1135,8 +1135,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -DTV";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f43ffcea-198b-419a-a30e-746f7ef187dc";
-				PROVISIONING_PROFILE_SPECIFIER = "WD Content TV AppStore";
+				PROVISIONING_PROFILE = "87e7706c-ef6f-4416-903b-249532031900";
+				PROVISIONING_PROFILE_SPECIFIER = "v-Cinema TV AppStore";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content TV-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

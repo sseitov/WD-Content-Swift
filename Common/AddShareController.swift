@@ -114,6 +114,7 @@ class AddShareController: UITableViewController {
 	}
 	
     @IBAction func addManual(_ sender: Any) {
+    #if IOS
         let ask = HostInput.hostDialog(cancelHandler: {
         }, acceptHandler: { host, port in
             if let num = Int32(port) {
@@ -124,6 +125,36 @@ class AddShareController: UITableViewController {
             }
         })
         ask?.show()
+    #else
+        let alert = UIAlertController(title: "Add host manually".uppercased(), message: "Enter IP address / Port".uppercased(), preferredStyle: .alert)
+        var hostField:UITextField?
+        var portField:UITextField?
+        alert.addTextField(configurationHandler: { textField in
+            textField.keyboardType = .numbersAndPunctuation
+            textField.textAlignment = .center
+            textField.placeholder = "XXX.XXX.XXX.XXX".uppercased()
+            hostField = textField
+        })
+        alert.addTextField(configurationHandler: { textField in
+            textField.keyboardType = .numbersAndPunctuation
+            textField.textAlignment = .center
+            textField.text = "445"
+            textField.placeholder = "port".uppercased()
+            portField = textField
+        })
+        alert.addAction(UIAlertAction(title: "ADD".uppercased(), style: .default, handler: { _ in
+            if let hosttext = hostField?.text, let porttext = portField?.text, let num = Int32(porttext) {
+                let info = ServiceHost(name: "", host: hosttext, port: num)
+                self.performSegue(withIdentifier: "showDevice", sender: info)
+            } else {
+                self.showMessage("Invalid port number.", messageType: .error)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel".uppercased(), style: .destructive, handler: { _ in
+            self.goBack()
+        }))
+        present(alert, animated: true, completion: nil)
+    #endif
     }
 	
     // MARK: - Navigation

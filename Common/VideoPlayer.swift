@@ -33,6 +33,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     
     private var mediaPlayer:VLCMediaPlayer!
     private var buffering = false
+    private var position:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         if let url = URL(string: urlStrCode!) {
             self.mediaPlayer.media = VLCMedia(url: url)
             self.mediaPlayer.play()
+            self.position = 0
             if self.node!.info != nil {
                 Model.shared.setViewed(self.node!.info!)
             }
@@ -220,20 +222,17 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
         stopBuffering()
-        if let t = Int32(mediaPlayer.remainingTime.minuteStringValue) {
-            let h = t/60
-            let m = t % 60
-        #if IOS
-            timeItem.title = String(format: "%d:%.2d", h, m)
-        #else
-            movieTime.text = String(format: "%d:%.2d", h, m)
-        #endif
+        let sec = mediaPlayer.time.value.intValue / 1000
+        if self.position < sec {
+            self.position = sec
+            #if IOS
+                timeItem.title = mediaPlayer.remainingTime.stringValue
+                positionSlider.value = mediaPlayer.position
+            #else
+                movieTime.text = mediaPlayer.remainingTime.stringValue
+                movieProgress.progress = mediaPlayer.position
+            #endif
         }
-    #if IOS
-        positionSlider.value = mediaPlayer.position
-    #else
-        movieProgress.progress = mediaPlayer.position
-    #endif
     }
 
 #if IOS
@@ -287,7 +286,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 #endif
 
     // MARK: - Navigation
-    
+
     func didSelectAudioTrack(_ track:Int32) {
         dismiss(animated: true, completion: {
             if self.node!.info != nil {
