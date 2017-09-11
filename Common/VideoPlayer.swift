@@ -241,6 +241,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
     
     func sliderEndedTracking(_ slider: UISlider!) {
+        self.position = 0
         mediaPlayer.position = slider.value
         mediaPlayer.pause()
     }
@@ -263,6 +264,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         } else {
             mediaPlayer.position = 0
         }
+        self.position = 0
     }
     
     @IBAction func forward(_ sender: UIButton) {
@@ -271,6 +273,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         } else {
             mediaPlayer.position = 1
         }
+        self.position = 0
     }
     
     @IBAction func pause(_ sender: UIButton) {
