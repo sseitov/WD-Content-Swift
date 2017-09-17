@@ -356,7 +356,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             next.delegate = self
         } else if segue.identifier == "play" {
             let next = segue.destination as! VideoPlayer
-            next.node = node
+            next.nodes = [node!]
         }
     }
 

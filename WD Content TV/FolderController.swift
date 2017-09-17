@@ -51,8 +51,24 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func pressLongTap(tap:UILongPressGestureRecognizer) {
         if tap.state == .began {
-            if focusedNode != nil, !focusedNode!.directory {
-                self.performSegue(withIdentifier: "info", sender: focusedNode)
+            if focusedNode != nil {
+                if focusedNode!.directory {
+                    SVProgressHUD.show()
+                    DispatchQueue.global().async {
+                        let nodes = Model.shared.nodes(byRoot: self.focusedNode!)
+                        for node in nodes {
+                            node.parent = self.parentNode
+                            node.share = self.parentNode!.share
+                            node.info = Model.shared.getInfoForNode(node)
+                        }
+                        DispatchQueue.main.async {
+                            SVProgressHUD.dismiss()
+                            self.performSegue(withIdentifier: "play", sender: nodes)
+                        }
+                    }
+                } else {
+                    self.performSegue(withIdentifier: "info", sender: focusedNode)
+                }
             }
         }
     }
@@ -115,7 +131,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             refresh()
         } else {
             parentNode?.selectedIndexPath = indexPath
-            self.performSegue(withIdentifier: "play", sender: node)
+            self.performSegue(withIdentifier: "play", sender: [node])
         }
     }
     
@@ -142,7 +158,9 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         if segue.identifier == "play" {
             let nav = segue.destination as! UINavigationController
             let next = nav.topViewController as! VideoPlayer
-            next.node = sender as? Node
+            if let nodes = sender as? [Node] {
+                next.nodes = nodes
+            }
         } else if segue.identifier == "info" {
             let nav = segue.destination as! UINavigationController
             let next = nav.topViewController as! SearchInfoController

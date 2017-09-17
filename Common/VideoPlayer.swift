@@ -29,16 +29,16 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     @IBOutlet weak var movieTime: UILabel!
 #endif
 
-    var node:Node?
+    var nodes:[Node] = []
     
     private var mediaPlayer:VLCMediaPlayer!
     private var buffering = false
     private var position:Int = 0
+    private var currentNode:Node?
+    private var nodeIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nodeTitle = node!.info != nil ? node!.info!.title! : node!.dislayName()
-        setupTitle(nodeTitle, color: UIColor.white)
         
     #if IOS
         setupBackButton()
@@ -58,34 +58,11 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         menuTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
         self.view.addGestureRecognizer(menuTap)
     #endif
-        
         mediaPlayer = VLCMediaPlayer()
         mediaPlayer.delegate = self
         mediaPlayer.drawable = movieView
-        
-        var user = self.node!.share!.user!
-        if user.isEmpty {
-            user = "guest"
-        }
-        var password = self.node!.share!.password!
-        if password.isEmpty {
-            password = "anonymous"
-        }
-        let urlStr = "smb://\(user):\(password)@\(self.node!.share!.ip!)\(self.node!.filePath)"
-        print(urlStr)
-        let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
-        if let url = URL(string: urlStrCode!) {
-            self.mediaPlayer.media = VLCMedia(url: url)
-            self.mediaPlayer.play()
-            self.position = 0
-            if self.node!.info != nil {
-                Model.shared.setViewed(self.node!.info!)
-            }
-        } else {
-            self.showMessage("Can not open file.", messageType: .error, messageHandler: {
-                self.dismiss(animated: true, completion: nil)
-            })
-        }
+        nodeIndex = 0
+        playNode(nodes[nodeIndex])
     }
     
     deinit {
@@ -93,6 +70,41 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         mediaPlayer.delegate = nil
         mediaPlayer.stop()
     #endif
+    }
+    
+    private func playNode(_ node:Node?) {
+        if node == nil {
+            return
+        }
+        
+        currentNode = node;
+        
+        let nodeTitle = node!.info != nil ? node!.info!.title! : node!.dislayName()
+        setupTitle(nodeTitle, color: UIColor.white)
+       
+        var user = node!.share!.user!
+        if user.isEmpty {
+            user = "guest"
+        }
+        var password = node!.share!.password!
+        if password.isEmpty {
+            password = "anonymous"
+        }
+        let urlStr = "smb://\(user):\(password)@\(node!.share!.ip!)\(node!.filePath)"
+        print(urlStr)
+        let urlStrCode = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        if let url = URL(string: urlStrCode!) {
+            self.mediaPlayer.media = VLCMedia(url: url)
+            self.mediaPlayer.play()
+            self.position = 0
+            if node!.info != nil {
+                Model.shared.setViewed(node!.info!)
+            }
+        } else {
+            self.showMessage("Can not open file.", messageType: .error, messageHandler: {
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -192,13 +204,13 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             buffering = false
             SVProgressHUD.dismiss()
             if !firstTap {
-                if self.node!.info != nil {
-                    if self.node!.info!.audioChannel >= 0 {
-                        self.mediaPlayer.currentAudioTrackIndex = self.node!.info!.audioChannel
-                        self.mediaPlayer.currentVideoSubTitleIndex = self.node!.info!.subtitleChannel
+                if let info = self.currentNode?.info {
+                    if info.audioChannel >= 0 {
+                        self.mediaPlayer.currentAudioTrackIndex = info.audioChannel
+                        self.mediaPlayer.currentVideoSubTitleIndex = info.subtitleChannel
                     } else {
-                        Model.shared.setAudioChannel(self.node!.info!, channel: Int(self.mediaPlayer.currentAudioTrackIndex))
-                        Model.shared.setSubtitleChannel(self.node!.info!, channel: Int(self.mediaPlayer.currentVideoSubTitleIndex))
+                        Model.shared.setAudioChannel(info, channel: Int(self.mediaPlayer.currentAudioTrackIndex))
+                        Model.shared.setSubtitleChannel(info, channel: Int(self.mediaPlayer.currentVideoSubTitleIndex))
                     }
                 }
                 tapScreen()
@@ -211,10 +223,15 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         case .buffering:
             startBuffering()
         case .stopped:
-            mediaPlayer.delegate = nil
+            nodeIndex += 1
             mediaPlayer.stop()
-            SVProgressHUD.dismiss()
-            dismiss(animated: true, completion: nil)
+            if nodeIndex < nodes.count - 1 {
+                playNode(nodes[nodeIndex])
+            } else {
+                mediaPlayer.delegate = nil
+                SVProgressHUD.dismiss()
+                dismiss(animated: true, completion: nil)
+            }
         default:
             break
         }
@@ -292,8 +309,8 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 
     func didSelectAudioTrack(_ track:Int32) {
         dismiss(animated: true, completion: {
-            if self.node!.info != nil {
-                Model.shared.setAudioChannel(self.node!.info!, channel: Int(track))
+            if let info = self.currentNode?.info {
+                Model.shared.setAudioChannel(info, channel: Int(track))
             }
             self.mediaPlayer.currentAudioTrackIndex = track
         })
@@ -301,8 +318,8 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 
     func didSelectSubtitleChannel(_ channel: Int32) {
         dismiss(animated: true, completion: {
-            if self.node!.info != nil {
-                Model.shared.setSubtitleChannel(self.node!.info!, channel: Int(channel))
+            if let info = self.currentNode?.info {
+                Model.shared.setSubtitleChannel(info, channel: Int(channel))
             }
             self.mediaPlayer.currentVideoSubTitleIndex = channel
         })
