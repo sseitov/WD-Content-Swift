@@ -225,7 +225,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         case .stopped:
             nodeIndex += 1
             mediaPlayer.stop()
-            if nodeIndex < nodes.count - 1 {
+            if nodeIndex < nodes.count {
                 playNode(nodes[nodeIndex])
             } else {
                 mediaPlayer.delegate = nil
