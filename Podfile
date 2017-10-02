@@ -1,5 +1,5 @@
 target 'WD Content' do
-    platform :ios, '9.0'
+    platform :ios, '11.0'
     use_frameworks!
     
     pod 'MobileVLCKit-unstable', '~> 3.0.0a24'
@@ -12,7 +12,7 @@ target 'WD Content' do
 end
 
 target 'WD Content TV' do
-    platform :tvos, '10.0'
+    platform :tvos, '11.0'
     use_frameworks!
     
     pod 'TVVLCKit-unstable', '~> 3.0.0a24'

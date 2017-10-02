@@ -12,11 +12,13 @@ enum MessageType {
     case error, success, information
 }
 
+#if IOS
 extension UINavigationController {
     override open var childViewControllerForStatusBarStyle: UIViewController? {
         return self.topViewController
     }
 }
+#endif
 
 extension UIViewController {
 

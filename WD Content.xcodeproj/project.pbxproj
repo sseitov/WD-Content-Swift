@@ -565,7 +565,7 @@
 					2C21335B1E5EDF13002F267D = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7TSVKXZ79P;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -914,7 +914,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -965,7 +965,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -999,8 +999,8 @@
 					"$(PROJECT_DIR)/Samba/libdsm",
 				);
 				INFOPLIST_FILE = "WD Content/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-DIOS";
@@ -1012,8 +1012,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 10.0;
-				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 10.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
 				VALID_ARCHS = arm64;
 			};
 			name = Debug;
@@ -1043,8 +1043,8 @@
 					"$(PROJECT_DIR)/Samba/libdsm",
 				);
 				INFOPLIST_FILE = "WD Content/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-DIOS";
@@ -1055,8 +1055,8 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 10.0;
-				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 10.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
 				VALID_ARCHS = arm64;
 			};
 			name = Release;
@@ -1096,7 +1096,8 @@
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content TV-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
@@ -1137,7 +1138,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "v-Cinema TV AppStore";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content TV-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};

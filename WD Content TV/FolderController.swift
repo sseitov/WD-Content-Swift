@@ -49,7 +49,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    func pressLongTap(tap:UILongPressGestureRecognizer) {
+    @objc func pressLongTap(tap:UILongPressGestureRecognizer) {
         if tap.state == .began {
             if focusedNode != nil {
                 if focusedNode!.directory {

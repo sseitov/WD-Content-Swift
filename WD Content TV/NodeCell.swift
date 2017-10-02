@@ -44,7 +44,7 @@ class NodeCell: UITableViewCell {
     
     // MARK: - Update Node Info
 
-    func refreshNode(notyfy:Notification) {
+    @objc func refreshNode(notyfy:Notification) {
         if let theNode = notyfy.object as? Node, theNode == node {
             node?.info = Model.shared.getInfoForNode(theNode)
             if self.isFocused {

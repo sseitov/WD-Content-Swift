@@ -12,33 +12,23 @@ import SVProgressHUD
 class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDelegate {
 
     @IBOutlet weak var movieView: UIView!
-    
-#if IOS
-    @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var positionSlider: UISlider!
-    @IBOutlet weak var timeIndicator: UILabel!
     @IBOutlet weak var toolbarConstraint: NSLayoutConstraint!
+    @IBOutlet weak var timeIndicator: UILabel!
+
+#if IOS
+    @IBOutlet weak var positionSlider: UISlider!
     
     override var prefersStatusBarHidden: Bool {
         get {
             return barHidden
         }
     }
-/*
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        get {
-            return .lightContent
-        }
-    }
-*/
 #else
-    @IBOutlet weak var controlConstraint: NSLayoutConstraint!
     @IBOutlet weak var audioButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var movieProgress: UIProgressView!
-    @IBOutlet weak var movieTime: UILabel!
 #endif
 
     var nodes:[Node] = []
@@ -130,7 +120,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         tapScreen()
     }
   
-    func menuTap() {
+    @objc func menuTap() {
         if barHidden {
             goBack()
         } else {
@@ -151,11 +141,11 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             self.view.layoutIfNeeded()
         })
     #else
+        toolbarConstraint.constant = barHidden ? 0 : 128
         audioButton.isEnabled = !barHidden
         pauseButton.isEnabled = !barHidden
         rewindButton.isEnabled = !barHidden
         forwardButton.isEnabled = !barHidden
-        controlConstraint.constant = barHidden ? -128 : 0
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
         })
@@ -246,11 +236,10 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         let sec = mediaPlayer.time.value.intValue / 1000
         if self.position < sec {
             self.position = sec
+            timeIndicator.text = mediaPlayer.remainingTime.stringValue
             #if IOS
-                timeIndicator.text = mediaPlayer.remainingTime.stringValue
                 positionSlider.value = mediaPlayer.position
             #else
-                movieTime.text = mediaPlayer.remainingTime.stringValue
                 movieProgress.progress = mediaPlayer.position
             #endif
         }

@@ -39,7 +39,7 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
         }
     }
     
-    func refresh() {
+    @objc func refresh() {
         SVProgressHUD.show(withStatus: "Refresh...")
         Model.shared.refreshShares({ error in
             SVProgressHUD.dismiss()
@@ -52,7 +52,7 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
         })
     }
     
-    func pressLongTap(tap:UILongPressGestureRecognizer) {
+    @objc func pressLongTap(tap:UILongPressGestureRecognizer) {
         if tap.state == .began {
             if focusedIndexPath != nil && focusedIndexPath!.row < shares.count {
                 let share = shares[focusedIndexPath!.row]
