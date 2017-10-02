@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias CompletionBlock = (Void) -> Void
+typealias CompletionBlock = () -> Void
 typealias CompletionTextBlock = (String, String) -> Void
 
 class PasswordInput: LGAlertView, TextFieldContainerDelegate {

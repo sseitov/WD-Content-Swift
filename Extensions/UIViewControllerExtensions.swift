@@ -12,8 +12,14 @@ enum MessageType {
     case error, success, information
 }
 
+extension UINavigationController {
+    override open var childViewControllerForStatusBarStyle: UIViewController? {
+        return self.topViewController
+    }
+}
+
 extension UIViewController {
-    
+
     func setupTitle(_ text:String, color:UIColor = UIColor.mainColor()) {
     #if TV
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 800, height: 132))
@@ -37,7 +43,7 @@ extension UIViewController {
         navigationItem.leftBarButtonItem?.action = #selector(UIViewController.goBack)
     }
     
-    func goBack() {
+    @objc func goBack() {
          _ = self.navigationController!.popViewController(animated: true)
     }
     

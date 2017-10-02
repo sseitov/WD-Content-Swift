@@ -17,10 +17,6 @@ class ContentController: UIViewController {
     var nodes:[Node] = []
     
     private var gradient:CAGradientLayer?
- 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     private func gradientSize() -> CGSize {
         let max = self.view.frame.size.width > self.view.frame.size.height ? self.view.frame.size.width : self.view.frame.size.height
@@ -29,7 +25,7 @@ class ContentController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.collectionView.backgroundView = UIView()
         gradient = self.collectionView.backgroundView?.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: gradientSize())
         
@@ -44,11 +40,11 @@ class ContentController: UIViewController {
         refresh()
     }
     
-    func refreshNotify() {
+    @objc func refreshNotify() {
         collectionView.reloadData()
     }
     
-    func refreshNode(notyfy:Notification) {
+    @objc func refreshNode(notyfy:Notification) {
         if let node = notyfy.object as? Node, node.parent == parentNode {
             if let index = nodes.index(of: node) {
                 collectionView?.reloadItems(at: [IndexPath(row: index, section: 0)])

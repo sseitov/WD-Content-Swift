@@ -126,7 +126,7 @@ NSString * const kMovieDBJobList = @"job/list";
 	
 	NSMutableDictionary *params = parameters ? [parameters mutableCopy] : [NSMutableDictionary new];
 	params[@"api_key"] = self.apiKey;
-	params[@"language"] = [[NSLocale autoupdatingCurrentLocale] objectForKey: NSLocaleLanguageCode];
+    params[@"language"] = [[NSLocale preferredLanguages] objectAtIndex:0];
 
 	if ([path rangeOfString:@":id"].location != NSNotFound) {
 		NSParameterAssert(parameters[@"id"]);

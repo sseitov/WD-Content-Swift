@@ -14,11 +14,23 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     @IBOutlet weak var movieView: UIView!
     
 #if IOS
-    @IBOutlet weak var toolbarConstraint: NSLayoutConstraint!
-    @IBOutlet weak var sliderItem: UIBarButtonItem!
-    @IBOutlet weak var timeItem: UIBarButtonItem!
+    @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var positionSlider: UISlider!
-    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var timeIndicator: UILabel!
+    @IBOutlet weak var toolbarConstraint: NSLayoutConstraint!
+    
+    override var prefersStatusBarHidden: Bool {
+        get {
+            return barHidden
+        }
+    }
+/*
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        get {
+            return .lightContent
+        }
+    }
+*/
 #else
     @IBOutlet weak var controlConstraint: NSLayoutConstraint!
     @IBOutlet weak var audioButton: UIButton!
@@ -47,7 +59,6 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         positionSlider.addTarget(self, action: #selector(self.sliderEndedTracking(_:)), for: events)
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
         movieView.addGestureRecognizer(tap)
-        toolbar.backgroundColor = UIColor.mainColor()
     #else
         audioButton.isEnabled = false
         pauseButton.isEnabled = false
@@ -107,13 +118,6 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-#if IOS
-        sliderItem.width = view.frame.width - 100
-#endif
-    }
-    
     override func goBack() {
         mediaPlayer.delegate = nil
         mediaPlayer.stop()
@@ -138,11 +142,10 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     private var barHidden = false
     private var firstTap = false
     
-    func tapScreen() {
+    @objc func tapScreen() {
         firstTap = true
         barHidden = !barHidden
     #if IOS
-        UIApplication.shared.setStatusBarHidden(barHidden, with: .slide)
         toolbarConstraint.constant = barHidden ? 0 : 44
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
@@ -219,6 +222,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
     
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        printPlayerState(mediaPlayer.state)
         switch mediaPlayer.state {
         case .buffering:
             startBuffering()
@@ -243,7 +247,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         if self.position < sec {
             self.position = sec
             #if IOS
-                timeItem.title = mediaPlayer.remainingTime.stringValue
+                timeIndicator.text = mediaPlayer.remainingTime.stringValue
                 positionSlider.value = mediaPlayer.position
             #else
                 movieTime.text = mediaPlayer.remainingTime.stringValue
@@ -253,26 +257,23 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
 
 #if IOS
-    func sliderBeganTracking(_ slider: UISlider!) {
+    @objc func sliderBeganTracking(_ slider: UISlider!) {
         mediaPlayer.pause()
     }
     
-    func sliderEndedTracking(_ slider: UISlider!) {
+    @objc func sliderEndedTracking(_ slider: UISlider!) {
         self.position = 0
         mediaPlayer.position = slider.value
         mediaPlayer.pause()
     }
     
-    @IBAction func playPause(_ sender: Any) {
+    @IBAction func playPause(_ sender: UIButton) {
         mediaPlayer.pause()
-        let btn = mediaPlayer.isPlaying ?
-            UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(self.playPause(_:))) :
-            UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(self.playPause(_:)))
-        btn.tintColor = UIColor.white
-        var items = toolbar.items!
-        items.remove(at: 0)
-        items.insert(btn, at: 0)
-        toolbar.setItems(items, animated: true)
+        if mediaPlayer.isPlaying {
+            sender.setImage(UIImage(named: "mediaPlay"), for: .normal)
+        } else {
+            sender.setImage(UIImage(named: "mediaPause"), for: .normal)
+        }
     }
 #else
     @IBAction func rewind(_ sender: UIButton) {

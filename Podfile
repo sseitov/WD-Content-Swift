@@ -2,6 +2,8 @@ target 'WD Content' do
     platform :ios, '9.0'
     use_frameworks!
     
+    pod 'MobileVLCKit-unstable', '~> 3.0.0a24'
+    
     pod 'SVProgressHUD'
     pod 'AFNetworking'
     pod 'SDWebImage'
@@ -13,6 +15,8 @@ target 'WD Content TV' do
     platform :tvos, '10.0'
     use_frameworks!
     
+    pod 'TVVLCKit-unstable', '~> 3.0.0a24'
+
     pod 'SVProgressHUD'
     pod 'AFNetworking'
     pod 'SDWebImage'

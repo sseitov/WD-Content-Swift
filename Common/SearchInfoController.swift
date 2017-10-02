@@ -14,7 +14,7 @@ protocol SearchInfoDelegate {
 }
 
 class SearchInfoController: UITableViewController {
-
+    
 	var node:Node?
     var delegate:SearchInfoDelegate?
     

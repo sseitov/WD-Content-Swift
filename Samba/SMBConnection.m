@@ -55,6 +55,9 @@
     
     TONetBIOSNameService *nameService = [[TONetBIOSNameService alloc] init];
     NSString* hostName = [nameService lookupNetworkNameForIPAddress:host];
+    if (hostName == nil) {
+        return false;
+    }
     
     struct sockaddr_in   sin;
     memset ((char *)&sin,0,sizeof(sin));
@@ -214,8 +217,9 @@ static NSString* relativePath(NSString* path)
     
     if (fileList.count == 0)
         return [NSArray array];
-    else
+    else {
         return [fileList sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+    }
 }
 
 - (NSArray *)foldersByRoot:(Node*)root

@@ -22,14 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         TMDB.sharedInstance().apiKey = TMDB_API_KEY;
         
-        UIApplication.shared.statusBarStyle = .lightContent
+//        UIApplication.shared.statusBarStyle = .lightContent
        
         SVProgressHUD.setDefaultStyle(.custom)
         SVProgressHUD.setBackgroundColor(UIColor.mainColor())
         SVProgressHUD.setForegroundColor(UIColor.white)
         SVProgressHUD.setFont(UIFont.condensedFont())
         
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : UIFont.condensedFont()], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font : UIFont.condensedFont()], for: .normal)
         
         return true
     }

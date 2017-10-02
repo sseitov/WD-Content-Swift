@@ -17,7 +17,7 @@ func generateUDID() -> String {
     return UUID().uuidString
 }
 
-@objc class Model: NSObject {
+class Model: NSObject {
     
     static let shared = Model()
 
@@ -26,6 +26,8 @@ func generateUDID() -> String {
         formatter.dateFormat = "yyyy-MM-dd"
         if let date = formatter.date(from: text) {
             let yearFormatter = DateFormatter()
+            let lang = Locale.preferredLanguages[0]
+            yearFormatter.locale = Locale(identifier: lang)
             yearFormatter.dateStyle = .long
             yearFormatter.timeStyle = .none
             return yearFormatter.string(from: date)
@@ -36,6 +38,8 @@ func generateUDID() -> String {
     
     class func year(_ text:String) -> String {
         let formatter = DateFormatter()
+        let lang = Locale.preferredLanguages[0]
+        formatter.locale = Locale(identifier: lang)
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         if let date = formatter.date(from: text) {
@@ -43,11 +47,13 @@ func generateUDID() -> String {
             yearFormatter.dateFormat = "yyyy"
             return yearFormatter.string(from: date)
         } else {
+            print(text)
+            print(formatter.string(from: Date()))
             return ""
         }
     }
     
-    class func isValidMediaType(name:String) -> Bool {
+    @objc class func isValidMediaType(name:String) -> Bool {
         let ext = (name as NSString).pathExtension
         let movieExtensions = ["mkv", "avi", "iso", "ts", "mov", "m4v", "mpg", "mpeg", "wmv", "mp4"]
         return movieExtensions.contains(ext)

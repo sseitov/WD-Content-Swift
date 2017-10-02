@@ -29,7 +29,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	private var movieInfo:[String:Any]?
 	private var credits:[String:Any]?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,7 +114,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 	}
 	
-	func clearInfo() {
+	@objc func clearInfo() {
         SVProgressHUD.show(withStatus: "Clear...")
         Model.shared.clearInfo(metainfo!, result: { error in
             SVProgressHUD.dismiss()
@@ -129,7 +129,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
 	}
 	
-	func saveInfo() {
+	@objc func saveInfo() {
         SVProgressHUD.show(withStatus: "Save...")
         Model.shared.setInfoForNode(node!,
                                     title: title(),
@@ -366,7 +366,7 @@ extension String {
 	
 	func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
 		let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-		let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+		let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
 		
 		return boundingBox.height
 	}

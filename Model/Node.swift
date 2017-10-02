@@ -8,17 +8,17 @@
 
 import UIKit
 
-@objc class Node: NSObject {
+class Node: NSObject {
 
-    var name:String = ""
-    var filePath:String = ""
-    var directory:Bool = true
-    var parent:Node?
-    var info:MetaInfo?
-    var share:Share?
-    var selectedIndexPath:IndexPath?
+    @objc var name:String = ""
+    @objc var filePath:String = ""
+    @objc var directory:Bool = true
+    @objc var parent:Node?
+    @objc var info:MetaInfo?
+    @objc var share:Share?
+    @objc var selectedIndexPath:IndexPath?
 
-    init(share: Share) {
+    @objc init(share: Share) {
         super.init()
         
         self.share = share
@@ -31,7 +31,7 @@ import UIKit
         self.directory = true;
     }
 
-    init(name: String) {
+    @objc init(name: String) {
         super.init()
         
         self.name = name
@@ -39,7 +39,7 @@ import UIKit
         self.directory = true;
     }
     
-    init(name:String, isDir:Bool, parent:Node) {
+    @objc init(name:String, isDir:Bool, parent:Node) {
         super.init()
 
         self.parent = parent
@@ -48,7 +48,7 @@ import UIKit
         self.directory = isDir
     }
     
-    func dislayName() -> String {
+    @objc func dislayName() -> String {
         if parent == nil {
             let path = self.filePath.replacingOccurrences(of: "//\(name)/", with: "")
             let comps = path.components(separatedBy: "/")
@@ -63,7 +63,7 @@ import UIKit
         }
     }
     
-    class func shareNameFromPath(_ path:String) -> String {
+    @objc class func shareNameFromPath(_ path:String) -> String {
         var share = path as NSString
 
         if share.substring(to: 2) == "//" {
@@ -80,7 +80,7 @@ import UIKit
         return share as String
     }
     
-    class func filePathExcludingSharePathFromPath(_ path:String) -> String {
+    @objc class func filePathExcludingSharePathFromPath(_ path:String) -> String {
         var filePath = path as NSString
         
         if filePath.substring(to: 2) == "//" || filePath.substring(to: 2) == "\\\\" {

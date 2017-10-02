@@ -36,7 +36,7 @@ class RightMenuVC: AMSlideMenuRightTableViewController {
 
     }
 
-    func refresh() {
+    @objc func refresh() {
         SVProgressHUD.show(withStatus: "Refresh...")
         Model.shared.refreshShares({ error in
             SVProgressHUD.dismiss()
