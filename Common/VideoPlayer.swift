@@ -35,6 +35,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     
     private var mediaPlayer:VLCMediaPlayer!
     private var buffering = false
+    private var changePosition = false
     private var position:Int = 0
     private var currentNode:Node?
     private var nodeIndex:Int = 0
@@ -233,6 +234,11 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
         stopBuffering()
+        #if IOS
+            if changePosition {
+                return
+            }
+        #endif
         let sec = mediaPlayer.time.value.intValue / 1000
         if self.position < sec {
             self.position = sec
@@ -247,13 +253,13 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 
 #if IOS
     @objc func sliderBeganTracking(_ slider: UISlider!) {
-        mediaPlayer.pause()
+        changePosition = true
     }
     
     @objc func sliderEndedTracking(_ slider: UISlider!) {
         self.position = 0
         mediaPlayer.position = slider.value
-        mediaPlayer.pause()
+        changePosition = false
     }
     
     @IBAction func playPause(_ sender: UIButton) {
