@@ -1,5 +1,5 @@
 target 'WD Content' do
-    platform :ios, '11.0'
+    platform :ios, '9.0'
     use_frameworks!
     
     pod 'MobileVLCKit-unstable', '~> 3.0.0a42'

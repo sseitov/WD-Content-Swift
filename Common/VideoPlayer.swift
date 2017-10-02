@@ -213,7 +213,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
     
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        printPlayerState(mediaPlayer.state)
+//        printPlayerState(mediaPlayer.state)
         switch mediaPlayer.state {
         case .buffering:
             startBuffering()
