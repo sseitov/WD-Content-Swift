@@ -357,6 +357,11 @@ static NSString* relativePath(NSString* path)
         NSString* oldName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
         NSString* _oldPath = [oldPath stringByAppendingPathComponent:oldName];
         if ([oldName hasPrefix:@"."]) {
+            if (![oldName isEqualToString:@"."] && ![oldName isEqualToString:@".."]) {
+                if (![self removeFile:treeID oldPath:_oldPath]) {
+                    NSLog(@"ERROR REMOVE %@", _oldPath);
+                }
+            }
             continue;
         }
         NSString* _newName = [oldName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
@@ -381,6 +386,15 @@ static NSString* relativePath(NSString* path)
         NSLog(@"ERROR REMOVE %@ = %d", oldDir, error);
     }
     return (error == 0);
+}
+
+- (bool)removeFile:(smb_tid)treeID oldPath:(NSString*)filePath
+{
+    NSString* path = [Node filePathExcludingSharePathFromPath:filePath];
+    path = [NSString stringWithFormat:@"\\%@", path];
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
+    int err = smb_file_rm(_session, treeID, path.UTF8String);
+    return (err == 0);
 }
 
 - (bool)moveFile:(smb_tid)treeID oldPath:(NSString*)oldPath newPath:(NSString*)newPath
