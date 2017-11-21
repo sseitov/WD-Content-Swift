@@ -352,17 +352,35 @@ static NSString* relativePath(NSString* path)
     size_t listCount = smb_stat_list_count(statList);
     for (NSInteger i = 0; i < listCount; i++) {
         smb_stat item = smb_stat_list_at(statList, i);
-        const char* name = smb_stat_name(item);
+        
+        const char* name = smb_stat_name(item);        
         NSString* oldName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
         NSString* _oldPath = [oldPath stringByAppendingPathComponent:oldName];
-        NSString* _newPath = [newPath stringByAppendingPathComponent:oldName];
-        if (![self moveFile:treeID oldPath:_oldPath newPath:_newPath])
-            return false;
+        if ([oldName hasPrefix:@"."]) {
+            continue;
+        }
+        NSString* _newName = [oldName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        NSString* _newPath = [newPath stringByAppendingPathComponent:_newName];
+        
+        bool isDir = (smb_stat_get(item, SMB_STAT_ISDIR) != 0);
+        if (isDir) {
+            if (![self moveDir:treeID oldPath:_oldPath newPath:_newPath]) {
+                NSLog(@"ERROR MOVE %@ TO %@", _oldPath, _newPath);
+            }
+        } else {
+            if (![self moveFile:treeID oldPath:_oldPath newPath:_newPath]) {
+                NSLog(@"ERROR MOVE %@ TO %@", _oldPath, _newPath);
+            }
+        }
     }
     
     NSString *oldDir = [Node filePathExcludingSharePathFromPath:oldPath];
     oldDir = [oldDir stringByReplacingOccurrencesOfString:@"/" withString:@"\\\\"];
-    return (smb_directory_rm(_session, treeID, oldDir.UTF8String) == 0);
+    int error = smb_directory_rm(_session, treeID, oldDir.UTF8String);
+    if (error != 0) {
+        NSLog(@"ERROR REMOVE %@ = %d", oldDir, error);
+    }
+    return (error == 0);
 }
 
 - (bool)moveFile:(smb_tid)treeID oldPath:(NSString*)oldPath newPath:(NSString*)newPath
