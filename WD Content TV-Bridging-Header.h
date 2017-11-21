@@ -6,3 +6,4 @@
 #import "TMDB.h"
 #import "ApiKeys.h"
 #import <TVVLCKit/TVVLCKit.h>
+#import "Reachability.h"

@@ -43,11 +43,15 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
         SVProgressHUD.show(withStatus: "Refresh...")
         Model.shared.refreshShares({ error in
             SVProgressHUD.dismiss()
-            self.shares = Model.shared.allShares()
-            if self.shares.count == 0 {
-                self.performSegue(withIdentifier: "addShare", sender: nil)
+            if error != nil {
+                self.showMessage(error!.localizedDescription, messageType: .error)
             } else {
-                self.collectionView?.reloadData()
+                self.shares = Model.shared.allShares()
+                if self.shares.count == 0 {
+                    self.performSegue(withIdentifier: "addShare", sender: nil)
+                } else {
+                    self.collectionView?.reloadData()
+                }
             }
         })
     }

@@ -17,6 +17,10 @@ func generateUDID() -> String {
     return UUID().uuidString
 }
 
+func appError(_ text:String) -> Error {
+    return NSError(domain: "com.vchannel.vCinema", code: -1, userInfo: [NSLocalizedDescriptionKey:text])
+}
+
 class Model: NSObject {
     
     static let shared = Model()
@@ -117,32 +121,40 @@ class Model: NSObject {
         }
     }
     
-    @objc func refreshShares(_ result: @escaping(Error?) -> ()) {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Connection", predicate: predicate)
-        
-        cloudDB!.perform(query, inZoneWith: nil) { [unowned self] results, error in
+    func refreshShares(_ result: @escaping(Error?) -> ()) {
+        if SyncManager.shared.syncAvailable() {
+            let predicate = NSPredicate(value: true)
+            let query = CKQuery(recordType: "Connection", predicate: predicate)
             
-            guard error == nil else {
+            cloudDB!.perform(query, inZoneWith: nil) { [unowned self] results, error in
+                
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        print("iCloud Query Error - Refresh: \(error!.localizedDescription)")
+                        result(appError("Synchronization is not available now. You must setup iCloud in device preferenses for synchronizing."))
+                    }
+                    return
+                }
+                
                 DispatchQueue.main.async {
-                    print("iCloud Query Error - Refresh: \(error!.localizedDescription)")
-                    result(error)
+                    for record in results! {
+                        self.addShare(record)
+                    }
+                    result(nil)
                 }
-                return
             }
-            
-            DispatchQueue.main.async {
-                for record in results! {
-                    self.addShare(record)
-                }
-                result(nil)
-            }
+        } else {
+            result(nil)
         }
     }
     
     // MARK: - Share table
     
     func addShare(_ record:CKRecord) {
+        if !SyncManager.shared.syncAvailable() {
+            return
+        }
+        
         if let ip = record["ip"] as? String, let name = record["name"] as? String {
             var path = record["path"] as? String
             if path == nil {
@@ -169,7 +181,7 @@ class Model: NSObject {
     }
 
     func createShare(name:String, path:String, ip:String, port:Int32, user:String, password:String, result: @escaping(Share?) -> ()) {
-        
+
         if let connection = getShare(ip:ip, name:name, path:path) {
             result(connection)
         }

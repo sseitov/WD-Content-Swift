@@ -111,6 +111,10 @@
 		2CF124AE1F247C57006ADAC7 /* NodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124AD1F247C57006ADAC7 /* NodeCell.swift */; };
 		2CF124B01F24A02C006ADAC7 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124AF1F24A02C006ADAC7 /* InfoView.swift */; };
 		2CF124B21F24A044006ADAC7 /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124B11F24A044006ADAC7 /* CoverView.swift */; };
+		2CFCEE1F1FC488490018EB3F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCEE1C1FC488490018EB3F /* Reachability.m */; };
+		2CFCEE201FC488490018EB3F /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCEE1E1FC488490018EB3F /* SyncManager.swift */; };
+		2CFCEE211FC4884F0018EB3F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCEE1C1FC488490018EB3F /* Reachability.m */; };
+		2CFCEE221FC4884F0018EB3F /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCEE1E1FC488490018EB3F /* SyncManager.swift */; };
 		9870035B8BC8F6DB3A4567B3 /* Pods_WD_Content.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA5B8E468A56E4DE476E2E5 /* Pods_WD_Content.framework */; };
 		A8386B9BA42DD67428C4A37A /* Pods_WD_Content_TV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FAD461845E075C781F99353 /* Pods_WD_Content_TV.framework */; };
 /* End PBXBuildFile section */
@@ -220,6 +224,9 @@
 		2CF124AD1F247C57006ADAC7 /* NodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeCell.swift; sourceTree = "<group>"; };
 		2CF124AF1F24A02C006ADAC7 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		2CF124B11F24A044006ADAC7 /* CoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverView.swift; sourceTree = "<group>"; };
+		2CFCEE1C1FC488490018EB3F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = SyncManager/Reachability.m; sourceTree = "<group>"; };
+		2CFCEE1D1FC488490018EB3F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = SyncManager/Reachability.h; sourceTree = "<group>"; };
+		2CFCEE1E1FC488490018EB3F /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncManager.swift; path = SyncManager/SyncManager.swift; sourceTree = "<group>"; };
 		4B8EB8BEFADF777982312C79 /* Pods-WD Content TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content TV/Pods-WD Content TV.debug.xcconfig"; sourceTree = "<group>"; };
 		4FAD461845E075C781F99353 /* Pods_WD_Content_TV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WD_Content_TV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		642B394539105F19E127FC3D /* Pods-WD Content.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WD Content.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WD Content/Pods-WD Content.debug.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +277,7 @@
 		2C2133121E5ED867002F267D = {
 			isa = PBXGroup;
 			children = (
+				2CFCEE1B1FC4880C0018EB3F /* SyncManager */,
 				2C954A031E5F65AA00A23CC5 /* Extensions */,
 				2C9549A31E5F2B0800A23CC5 /* TMDB */,
 				2CC0D9921E5F105900254181 /* Samba */,
@@ -474,6 +482,16 @@
 				2CC0D9961E5F107000254181 /* SMBConnection.m */,
 			);
 			name = Samba;
+			sourceTree = "<group>";
+		};
+		2CFCEE1B1FC4880C0018EB3F /* SyncManager */ = {
+			isa = PBXGroup;
+			children = (
+				2CFCEE1D1FC488490018EB3F /* Reachability.h */,
+				2CFCEE1C1FC488490018EB3F /* Reachability.m */,
+				2CFCEE1E1FC488490018EB3F /* SyncManager.swift */,
+			);
+			name = SyncManager;
 			sourceTree = "<group>";
 		};
 		37BE737A4CCEF1A81F1E6BFE /* Frameworks */ = {
@@ -768,6 +786,7 @@
 				2CA604111E60679500335545 /* TextFieldContainer.swift in Sources */,
 				2CA604041E60674400335545 /* LGAlertView.m in Sources */,
 				2CAF5C881E6460C6005EA70C /* Node.swift in Sources */,
+				2CFCEE1F1FC488490018EB3F /* Reachability.m in Sources */,
 				2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */,
 				2CAF5C8C1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,
 				2CA6040B1E60674400335545 /* NSPointerArray+AbstractionHelpers.m in Sources */,
@@ -779,6 +798,7 @@
 				2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */,
 				2CA6040E1E60675A00335545 /* PasswordInput.swift in Sources */,
 				2CC0D9A61E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
+				2CFCEE201FC488490018EB3F /* SyncManager.swift in Sources */,
 				2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2CC0D96F1E5F01A900254181 /* Model.swift in Sources */,
 				2C954A0D1E5F65D600A23CC5 /* UIFontExtensions.swift in Sources */,
@@ -809,6 +829,7 @@
 				2CA604201E60911700335545 /* SearchCell.swift in Sources */,
 				2C954A091E5F65CD00A23CC5 /* UIFontExtensions.swift in Sources */,
 				2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */,
+				2CFCEE221FC4884F0018EB3F /* SyncManager.swift in Sources */,
 				2C9D1D211E65614100E6B882 /* TrackController.swift in Sources */,
 				2CA604181E60907200335545 /* DeviceController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
@@ -816,6 +837,7 @@
 				2CF124B21F24A044006ADAC7 /* CoverView.swift in Sources */,
 				2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */,
 				2CC0D9A71E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
+				2CFCEE211FC4884F0018EB3F /* Reachability.m in Sources */,
 				2CC0D9701E5F01A900254181 /* Model.swift in Sources */,
 				2C9549AA1E5F33AF00A23CC5 /* TMDB.m in Sources */,
 				2CF124AE1F247C57006ADAC7 /* NodeCell.swift in Sources */,
