@@ -20,6 +20,7 @@ class ShareController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     #if TV
+        self.view.backgroundColor = UIColor.white
         let backTap = UITapGestureRecognizer(target: self, action: #selector(self.goBack))
         backTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
         self.view.addGestureRecognizer(backTap)

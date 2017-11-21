@@ -36,6 +36,8 @@ class NodeCell: UITableViewCell {
                                                selector: #selector(self.refreshNode(notyfy:)),
                                                name: refreshNodeNotification,
                                                object: nil)
+        nameView.textColor = UIColor.white
+        dateView.textColor = UIColor.white
     }
     
     deinit {
@@ -88,8 +90,6 @@ class NodeCell: UITableViewCell {
     func becomeFocusedUsingAnimationCoordinator(_ coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations({ () -> Void in
             self.selectionView.backgroundColor = UIColor.mainColor()
-            self.nameView.textColor = UIColor.white
-            self.dateView.textColor = UIColor.white
         }) { () -> Void in
             self.delegate?.didUpdateInfo(self.node!)
         }
@@ -98,8 +98,6 @@ class NodeCell: UITableViewCell {
     func resignFocusUsingAnimationCoordinator(_ coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations({ () -> Void in
             self.selectionView.backgroundColor = UIColor.clear
-            self.nameView.textColor = UIColor.black
-            self.dateView.textColor = UIColor.black
         }) { () -> Void in
         }
     }
@@ -119,8 +117,6 @@ class NodeCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         if !selected {
             self.selectionView.backgroundColor = UIColor.clear
-            self.nameView.textColor = UIColor.black
-            self.dateView.textColor = UIColor.black
         }
     }
 }

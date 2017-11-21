@@ -16,9 +16,10 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "MOVIES"
-        
-        _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
+        if let image = UIImage(named: "background.jpg") {
+            self.view.layer.contents = image.cgImage
+            self.view.layer.contentsGravity = "resizeAspectFill"
+        }
         
         let longTap = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongTap(tap:)))
         longTap.delegate = self
@@ -87,7 +88,7 @@ class StorageController: UICollectionViewController, UIGestureRecognizerDelegate
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "storage", for: indexPath) as! StorageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sphere", for: indexPath) as! StorageCell
         cell.name = shares[indexPath.row].displayName().uppercased()
         return cell
     }

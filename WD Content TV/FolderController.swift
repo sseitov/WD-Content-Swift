@@ -25,8 +25,11 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = self.view.setGradientBackground(top: UIColor.mainColor(), bottom: UIColor.gradientColor(), size: self.view.frame.size)
-        
+        if let image = UIImage(named: "background.jpg") {
+            self.view.layer.contents = image.cgImage
+            self.view.layer.contentsGravity = "resizeAspectFill"
+        }
+
         let backTap = UITapGestureRecognizer(target: self, action: #selector(self.goBack))
         backTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
         self.view.addGestureRecognizer(backTap)
@@ -74,8 +77,6 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func refresh() {
-        self.title = parentNode?.dislayName().uppercased()
-        
         SVProgressHUD.show(withStatus: "Refresh...")
         self.nodes = []
         self.infoView.node = nil

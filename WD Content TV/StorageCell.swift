@@ -11,10 +11,12 @@ import UIKit
 class StorageCell: UICollectionViewCell {
     
     @IBOutlet weak var nameView: UILabel!
-    
+
     var name:String? {
         didSet {
             nameView.text = name
+            nameView.font = UIFont.mainFont(27)
+            self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.bounds.size.width / 2.0).cgPath
         }
     }
     
@@ -24,7 +26,7 @@ class StorageCell: UICollectionViewCell {
     
     func becomeFocusedUsingAnimationCoordinator(_ coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations({ () -> Void in
-            self.nameView.textColor = UIColor.white
+            self.nameView.font = UIFont.mainFont(31)
             self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             self.layer.shadowColor = UIColor.black.cgColor
             self.layer.shadowOffset = CGSize(width: 10, height: 50)
@@ -36,10 +38,10 @@ class StorageCell: UICollectionViewCell {
     
     func resignFocusUsingAnimationCoordinator(_ coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations({ () -> Void in
-            self.nameView.textColor = UIColor.black
-            self.transform = CGAffineTransform.identity
             self.layer.shadowColor = nil
             self.layer.shadowOffset = CGSize.zero
+            self.transform = CGAffineTransform.identity
+            self.nameView.font = UIFont.mainFont(27)
         }) { () -> Void in
         }
     }

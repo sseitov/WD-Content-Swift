@@ -24,18 +24,10 @@ class CoverView: UIView {
             if node == nil {
                 coverView.image = nil
             } else {
-                if node!.directory {
-                    coverView.image = UIImage(named: "folder")
+                if !node!.directory, node!.info != nil, node!.info?.poster != nil, let url = URL(string: node!.info!.poster!) {
+                    coverView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
                 } else {
-                    if node!.info != nil {
-                        if node!.info?.poster != nil, let url = URL(string: node!.info!.poster!) {
-                            coverView.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
-                        } else {
-                            coverView.image = UIImage(named: "movie")
-                        }
-                    } else {
-                        coverView.image = UIImage(named: "movie")
-                    }
+                    coverView.image = nil
                 }
             }
         }
