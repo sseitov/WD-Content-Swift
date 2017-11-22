@@ -96,10 +96,4 @@ class NodeCell: UITableViewCell {
             self.resignFocusUsingAnimationCoordinator(coordinator)
         }
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        if !selected {
-            self.selectionView.backgroundColor = UIColor.clear
-        }
-    }
 }

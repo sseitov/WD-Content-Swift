@@ -184,7 +184,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                 cell.textLabel?.text = "RUNTIME"
                 cell.textLabel?.textColor = UIColor.white
                 cell.detailTextLabel?.text = focusedNode?.info?.runtime
-                cell.detailTextLabel?.textColor = UIColor.white
+                cell.detailTextLabel?.textColor = UIColor.black
                 return cell
             }
         } else {
