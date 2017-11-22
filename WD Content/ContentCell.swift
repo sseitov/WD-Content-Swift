@@ -23,25 +23,31 @@ class ContentCell: UICollectionViewCell {
         didSet {
             if !node!.directory {
                 cardView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-                node?.info = Model.shared.getInfoForNode(node!)
-                if node!.info == nil {
-                    nodeName.text = node!.dislayName()
-                    nodeImage.image = UIImage(named: "file")
-                } else {
-                    let dateText = "\n(\(Model.year(node!.info!.release_date!)))"
-                    nodeName.text = node!.info!.title! + dateText
-                    if node!.info!.poster != nil {
-                        let url = URL(string: node!.info!.poster!)
-                        nodeImage.sd_setImage(with: url, placeholderImage: UIImage(named: "file"))
-                    } else {
-                        nodeImage.image = UIImage(named: "file")
-                    }
-                }
-                Model.shared.updateInfoForNode(node!)
+                updateNode()
+                Model.shared.updateInfoForNode(node!, complete: {
+                    self.updateNode()
+                })
             } else {
                 cardView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
                 nodeImage.image = UIImage(named: "folder")
                 nodeName.text = node!.dislayName().uppercased()
+            }
+        }
+    }
+    
+    func updateNode() {
+        node?.info = Model.shared.getInfoForNode(node!)
+        if node!.info == nil {
+            nodeName.text = node!.dislayName()
+            nodeImage.image = UIImage(named: "file")
+        } else {
+            let dateText = "\n(\(Model.year(node!.info!.release_date!)))"
+            nodeName.text = node!.info!.title! + dateText
+            if node!.info!.poster != nil {
+                let url = URL(string: node!.info!.poster!)
+                nodeImage.sd_setImage(with: url, placeholderImage: UIImage(named: "file"))
+            } else {
+                nodeImage.image = UIImage(named: "file")
             }
         }
     }

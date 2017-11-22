@@ -51,8 +51,6 @@ class Model: NSObject {
             yearFormatter.dateFormat = "yyyy"
             return yearFormatter.string(from: date)
         } else {
-            print(text)
-            print(formatter.string(from: Date()))
             return ""
         }
     }
