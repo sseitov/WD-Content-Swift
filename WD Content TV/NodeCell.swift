@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NodeCellDelegate {
-    func didUpdateInfo(_ node:Node)
+    func reloadInfoFor(node:Node?)
 }
 
 class NodeCell: UITableViewCell {
@@ -17,10 +17,12 @@ class NodeCell: UITableViewCell {
     var node:Node? {
         didSet {
             updateInfo()
-            Model.shared.updateInfoForNode(node!)
+            Model.shared.updateInfoForNode(node!, complete: {
+                self.updateInfo()
+                self.delegate?.reloadInfoFor(node: self.node)
+            })
         }
     }
-    
     var delegate:NodeCellDelegate?
     
     @IBOutlet weak var selectionView: UIView!
@@ -31,29 +33,11 @@ class NodeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionView.backgroundColor = UIColor.clear
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.refreshNode(notyfy:)),
-                                               name: refreshNodeNotification,
-                                               object: nil)
         nameView.textColor = UIColor.white
         dateView.textColor = UIColor.white
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     // MARK: - Update Node Info
-
-    @objc func refreshNode(notyfy:Notification) {
-        if let theNode = notyfy.object as? Node, theNode == node {
-            node?.info = Model.shared.getInfoForNode(theNode)
-            if self.isFocused {
-                self.delegate?.didUpdateInfo(self.node!)
-            }
-        }
-    }
 
     func updateInfo() {
         if node!.directory {
@@ -91,7 +75,6 @@ class NodeCell: UITableViewCell {
         coordinator.addCoordinatedAnimations({ () -> Void in
             self.selectionView.backgroundColor = UIColor.mainColor()
         }) { () -> Void in
-            self.delegate?.didUpdateInfo(self.node!)
         }
     }
     

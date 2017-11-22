@@ -413,7 +413,7 @@ class Model: NSObject {
         })
     }
     
-    func updateInfoForNode(_ node:Node) {
+    func updateInfoForNode(_ node:Node, complete:@escaping()->()) {
         let predicate = NSPredicate(format: "path == %@", node.filePath)
         let query = CKQuery(recordType: "MetaInfo", predicate: predicate)
         
@@ -421,6 +421,7 @@ class Model: NSObject {
             DispatchQueue.main.async {
                 if error != nil {
                     print(error!)
+                    complete()
                 } else if records != nil, let record = records!.first {
                     if node.info != nil {
                         if let date = node.info!.modificationDate as Date?, let recordDate = record.modificationDate {
@@ -461,6 +462,7 @@ class Model: NSObject {
 
                     self.saveContext()
                     NotificationCenter.default.post(name: refreshNodeNotification, object: node)
+                    complete()
                 }
             }
         })

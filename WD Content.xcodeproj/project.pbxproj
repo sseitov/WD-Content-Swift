@@ -110,8 +110,6 @@
 		2CDB6EB41F402D2D00CD2DDF /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB6EB31F402D2D00CD2DDF /* ShareController.swift */; };
 		2CDB6EB51F402D2D00CD2DDF /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB6EB31F402D2D00CD2DDF /* ShareController.swift */; };
 		2CF124AE1F247C57006ADAC7 /* NodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124AD1F247C57006ADAC7 /* NodeCell.swift */; };
-		2CF124B01F24A02C006ADAC7 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124AF1F24A02C006ADAC7 /* InfoView.swift */; };
-		2CF124B21F24A044006ADAC7 /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF124B11F24A044006ADAC7 /* CoverView.swift */; };
 		2CFCEE1F1FC488490018EB3F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCEE1C1FC488490018EB3F /* Reachability.m */; };
 		2CFCEE201FC488490018EB3F /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCEE1E1FC488490018EB3F /* SyncManager.swift */; };
 		2CFCEE211FC4884F0018EB3F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCEE1C1FC488490018EB3F /* Reachability.m */; };
@@ -224,8 +222,6 @@
 		2CDB6EB31F402D2D00CD2DDF /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareController.swift; path = Common/ShareController.swift; sourceTree = "<group>"; };
 		2CDF06BE1F1F407C003583FF /* WDContent 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WDContent 3.xcdatamodel"; sourceTree = "<group>"; };
 		2CF124AD1F247C57006ADAC7 /* NodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeCell.swift; sourceTree = "<group>"; };
-		2CF124AF1F24A02C006ADAC7 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		2CF124B11F24A044006ADAC7 /* CoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverView.swift; sourceTree = "<group>"; };
 		2CFCEE1C1FC488490018EB3F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = SyncManager/Reachability.m; sourceTree = "<group>"; };
 		2CFCEE1D1FC488490018EB3F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = SyncManager/Reachability.h; sourceTree = "<group>"; };
 		2CFCEE1E1FC488490018EB3F /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncManager.swift; path = SyncManager/SyncManager.swift; sourceTree = "<group>"; };
@@ -342,8 +338,6 @@
 				2C3C266F1F233051000B82AF /* StorageCell.swift */,
 				2C3C26711F2348E4000B82AF /* FolderController.swift */,
 				2CF124AD1F247C57006ADAC7 /* NodeCell.swift */,
-				2CF124AF1F24A02C006ADAC7 /* InfoView.swift */,
-				2CF124B11F24A044006ADAC7 /* CoverView.swift */,
 				2C21336B1E5EDF38002F267D /* Resources */,
 			);
 			path = "WD Content TV";
@@ -838,7 +832,6 @@
 				2CA604181E60907200335545 /* DeviceController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
-				2CF124B21F24A044006ADAC7 /* CoverView.swift in Sources */,
 				2C954A081E5F65CD00A23CC5 /* UIColorExtensions.swift in Sources */,
 				2CC0D9A71E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
 				2CFCEE211FC4884F0018EB3F /* Reachability.m in Sources */,
@@ -852,7 +845,6 @@
 				2CA604211E60911700335545 /* SearchInfoController.swift in Sources */,
 				2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */,
 				2CAF5C8D1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,
-				2CF124B01F24A02C006ADAC7 /* InfoView.swift in Sources */,
 				2CAF5C891E6460C6005EA70C /* Node.swift in Sources */,
 				2C3C26701F233051000B82AF /* StorageCell.swift in Sources */,
 				2CAF5C8F1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */,
@@ -1038,8 +1030,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 9.0;
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
@@ -1081,8 +1073,8 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 9.0;
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
@@ -1125,7 +1117,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1160,14 +1152,14 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -DTV";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vchannel.wd-content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87e7706c-ef6f-4416-903b-249532031900";
+				PROVISIONING_PROFILE = "10a314ca-46f6-415c-a558-cef9a22127b2";
 				PROVISIONING_PROFILE_SPECIFIER = "v-Cinema TV AppStore";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "WD Content TV-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};

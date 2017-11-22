@@ -9,16 +9,30 @@
 import UIKit
 import SVProgressHUD
 
+class InfoCell: UITableViewCell {
+    @IBOutlet weak var infoTitle: UILabel!
+    @IBOutlet weak var infoText: UITextView!
+}
+
+class CoverCell: UITableViewCell {
+    @IBOutlet weak var cover: UIImageView!
+}
+
 class FolderController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, SearchInfoDelegate, NodeCellDelegate {
 
     var parentNode:Node?
     var nodes:[Node] = []
 
+    @IBOutlet weak var infoTable: UITableView!
     @IBOutlet weak var nodesTable: UITableView!
-    @IBOutlet weak var coverView: CoverView!
-    @IBOutlet weak var infoView: InfoView!
+    @IBOutlet weak var coverTable: UITableView!
     
     private var focusedNode:Node?
+    
+    @IBOutlet weak var nodesBottom: NSLayoutConstraint!
+    @IBOutlet weak var coverBottom: NSLayoutConstraint!
+    @IBOutlet weak var infoBottom: NSLayoutConstraint!
+    @IBOutlet weak var infoTop: NSLayoutConstraint!
     
     // MARK: -
 
@@ -38,12 +52,26 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         longTap.delegate = self
         nodesTable?.addGestureRecognizer(longTap)
         
-        nodesTable.remembersLastFocusedIndexPath = true
+        nodesTable.remembersLastFocusedIndexPath = false
+        
+        let systemVersion = Double(UIDevice.current.systemVersion)
+        if systemVersion! < 11 {
+            infoBottom.constant = 160
+            coverBottom.constant = 160
+            nodesBottom.constant = 160
+            infoTop.constant = -160
+        } else {
+            infoBottom.constant = 60
+            coverBottom.constant = 60
+            nodesBottom.constant = 60
+            infoTop.constant = -60
+        }
         
         refresh()
     }
     
     override func goBack() {
+        focusedNode = nil
         if parentNode?.parent != nil {
             parentNode = parentNode!.parent
             refresh()
@@ -78,11 +106,6 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func refresh() {
         SVProgressHUD.show(withStatus: "Refresh...")
-        self.nodes = []
-        self.infoView.node = nil
-        self.coverView.node = nil
-        self.nodesTable.reloadData()
-        
         DispatchQueue.global().async {
             let nodes = Model.shared.nodes(byRoot: self.parentNode!)
             DispatchQueue.main.async {
@@ -95,10 +118,17 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                         node.info = Model.shared.getInfoForNode(node)
                     }
                     self.nodesTable.reloadData()
-                    if self.parentNode?.selectedIndexPath  == nil && self.nodes.count > 0 {
-                        self.focusedNode = self.nodes[0]
+                    if self.focusedNode == nil {
+                        if self.parentNode?.selectedIndexPath == nil && self.nodes.count > 0 {
+                            self.focusedNode = self.nodes[0]
+                        } else {
+                            self.focusedNode = self.nodes[self.parentNode!.selectedIndexPath!.row]
+                        }
                     }
+                    self.infoTable.reloadData()
+                    self.coverTable.reloadData()
                 } else {
+                    self.nodes = []
                     self.showMessage("Folder not contains movies.".uppercased(), messageType: .information, messageHandler: {
                         self.goBack()
                     })
@@ -107,50 +137,150 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
+    func reloadInfoFor(node:Node?) {
+        if node == focusedNode {
+            infoTable.reloadData()
+            coverTable.reloadData()
+        }
+    }
+
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nodes.count
+        if tableView == nodesTable {
+            return nodes.count
+        } else {
+            if focusedNode != nil && !focusedNode!.directory && focusedNode!.info != nil {
+                return 3
+            } else {
+                return 0
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "node", for: indexPath) as! NodeCell
-        cell.node = nodes[indexPath.row]
-        cell.delegate = self
-        return cell
+        if tableView == nodesTable {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "node", for: indexPath) as! NodeCell
+            cell.node = nodes[indexPath.row]
+            return cell
+        } else if tableView == coverTable {
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "director", for: indexPath) as! InfoCell
+                cell.infoTitle.text = "DIRECTOR"
+                cell.infoText?.text = focusedNode?.info?.director
+                cell.infoText.contentOffset = CGPoint.zero
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cover", for: indexPath) as! CoverCell
+                if focusedNode!.info!.poster != nil, let url = URL(string: focusedNode!.info!.poster!) {
+                    cell.cover.sd_setImage(with: url, placeholderImage: UIImage(named: "movie"))
+                } else {
+                    cell.cover.image = nil
+                }
+                return cell
+            default:
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                cell.textLabel?.text = "RUNTIME"
+                cell.textLabel?.textColor = UIColor.white
+                cell.detailTextLabel?.text = focusedNode?.info?.runtime
+                cell.detailTextLabel?.textColor = UIColor.white
+                return cell
+            }
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "info", for: indexPath) as! InfoCell
+            switch indexPath.row {
+            case 0:
+                cell.infoTitle.text = "GENRES"
+                cell.infoText?.text = focusedNode?.info?.genre
+                cell.infoText.contentOffset = CGPoint.zero
+            case 1:
+                cell.infoTitle.text = "CAST"
+                cell.infoText?.text = focusedNode?.info?.cast
+                cell.infoText.contentOffset = CGPoint.zero
+            default:
+                cell.infoTitle.text = "OVERVIEW"
+                cell.infoText?.text = focusedNode?.info?.overview
+                cell.infoText.contentOffset = CGPoint.zero
+            }
+            return cell
+        }
     }
     
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let node = nodes[indexPath.row]
-        if node.directory {
-            parentNode = node
-            if parentNode?.parent != nil {
-                parentNode?.parent!.selectedIndexPath = indexPath
+        if tableView == nodesTable {
+            let node = nodes[indexPath.row]
+            if node.directory {
+                parentNode = node
+                if parentNode?.parent != nil {
+                    parentNode?.parent!.selectedIndexPath = indexPath
+                }
+                focusedNode = nil
+                refresh()
+            } else {
+                parentNode?.selectedIndexPath = indexPath
+                self.performSegue(withIdentifier: "play", sender: [node])
             }
-            refresh()
-        } else {
-            parentNode?.selectedIndexPath = indexPath
-            self.performSegue(withIdentifier: "play", sender: [node])
         }
     }
     
     func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
-        if let index = parentNode?.selectedIndexPath {
-            return index
+        if tableView == nodesTable {
+            if focusedNode != nil {
+                if let index = nodes.index(of: focusedNode!) {
+                    return IndexPath(row: index, section: 0)
+                } else {
+                    return IndexPath(row: 0, section: 0)
+                }
+            } else {
+                if let index = self.parentNode?.selectedIndexPath {
+                    return index
+                } else {
+                    return IndexPath(row: 0, section: 0)
+                }
+            }
         } else {
-            return nil
+            return IndexPath(row: 0, section: 0)
         }
     }
     
     func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
-        if let index = context.nextFocusedIndexPath {
-            focusedNode = nodes[index.row]
-        } else {
-            focusedNode = nil
+        if tableView == nodesTable {
+            if let index = context.nextFocusedIndexPath {
+                focusedNode = nodes[index.row]
+            } else {
+                focusedNode = nil
+            }
+            infoTable.reloadData()
+            coverTable.reloadData()
         }
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == infoTable {
+            switch indexPath.row {
+            case 0:
+                return 140
+            case 1:
+                return 180
+            default:
+                return infoTable.frame.size.height - 240
+            }
+        } else if tableView == coverTable {
+            switch indexPath.row {
+            case 0:
+                return 100
+            case 1:
+                return coverTable.frame.size.height - 260
+            default:
+                return 60
+            }
+        } else {
+            return 120
+        }
     }
 
     // MARK: - Navigation
@@ -168,13 +298,6 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             next.node = sender as? Node
             next.delegate = self
         }
-    }
-    
-    // MARK: - NodeCellDelegate
-    
-    func didUpdateInfo(_ node:Node) {
-        self.infoView.node = node
-        self.coverView.node = node
     }
 
     // MARK: - SearchDelegate
