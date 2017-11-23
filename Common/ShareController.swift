@@ -20,6 +20,10 @@ class ShareController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     #if TV
+        if let image = UIImage(named: "network.png") {
+            self.view.layer.contents = image.cgImage
+            self.view.layer.contentsGravity = "resizeAspectFill"
+        }
         self.view.backgroundColor = UIColor.white
         let backTap = UITapGestureRecognizer(target: self, action: #selector(self.goBack))
         backTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
@@ -44,7 +48,6 @@ class ShareController: UITableViewController {
             setupBackButton()
         #else
             self.title = currentNode!.name
-            self.view.backgroundColor = UIColor.white
         #endif
 
         SVProgressHUD.show()

@@ -20,9 +20,16 @@ class TrackController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupTitle("Audio channel and subtitles.")
-        setupBackButton()        
+        #if IOS
+            setupTitle("Audio channel and subtitles")
+            setupBackButton()
+        #else
+            self.title = "Audio channel and subtitles"
+            if let image = UIImage(named: "settings.png") {
+                self.view.layer.contents = image.cgImage
+                self.view.layer.contentsGravity = "resizeAspectFill"
+            }
+        #endif
     }
 
     override func goBack() {

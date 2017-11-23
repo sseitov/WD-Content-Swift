@@ -20,6 +20,9 @@
 		2C3C26701F233051000B82AF /* StorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C266F1F233051000B82AF /* StorageCell.swift */; };
 		2C3C26721F2348E4000B82AF /* FolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C26711F2348E4000B82AF /* FolderController.swift */; };
 		2C4527A61FC4A48C00ED17A1 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C4527A51FC4A48C00ED17A1 /* background.jpg */; };
+		2C5BAAAA1FC6F49C000AFDBF /* network.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BAAA91FC6F49C000AFDBF /* network.png */; };
+		2C5BAAAC1FC6F960000AFDBF /* search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BAAAB1FC6F960000AFDBF /* search.jpg */; };
+		2C5BAAB01FC6FD33000AFDBF /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BAAAF1FC6FD33000AFDBF /* settings.png */; };
 		2C630C811F82231C00E44C57 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C630C801F82231C00E44C57 /* CoreMedia.framework */; };
 		2C630C831F82233300E44C57 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C630C821F82233300E44C57 /* VideoToolbox.framework */; };
 		2C630C851F82234500E44C57 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C630C841F82234500E44C57 /* AVFoundation.framework */; };
@@ -138,6 +141,9 @@
 		2C3C266F1F233051000B82AF /* StorageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageCell.swift; sourceTree = "<group>"; };
 		2C3C26711F2348E4000B82AF /* FolderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderController.swift; sourceTree = "<group>"; };
 		2C4527A51FC4A48C00ED17A1 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		2C5BAAA91FC6F49C000AFDBF /* network.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = network.png; sourceTree = "<group>"; };
+		2C5BAAAB1FC6F960000AFDBF /* search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = search.jpg; sourceTree = "<group>"; };
+		2C5BAAAF1FC6FD33000AFDBF /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		2C630C801F82231C00E44C57 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		2C630C821F82233300E44C57 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.0.sdk/System/Library/Frameworks/VideoToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		2C630C841F82234500E44C57 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -350,6 +356,9 @@
 				2C2133651E5EDF13002F267D /* Assets.xcassets */,
 				2C2133671E5EDF13002F267D /* Info.plist */,
 				2C4527A51FC4A48C00ED17A1 /* background.jpg */,
+				2C5BAAA91FC6F49C000AFDBF /* network.png */,
+				2C5BAAAB1FC6F960000AFDBF /* search.jpg */,
+				2C5BAAAF1FC6FD33000AFDBF /* settings.png */,
 				2CC0D9531E5EFD5900254181 /* WD Content TV.entitlements */,
 			);
 			name = Resources;
@@ -650,6 +659,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5BAAB01FC6FD33000AFDBF /* settings.png in Resources */,
+				2C5BAAAC1FC6F960000AFDBF /* search.jpg in Resources */,
+				2C5BAAAA1FC6F49C000AFDBF /* network.png in Resources */,
 				2C4527A61FC4A48C00ED17A1 /* background.jpg in Resources */,
 				2C2133661E5EDF13002F267D /* Assets.xcassets in Resources */,
 				2C2133641E5EDF13002F267D /* Main.storyboard in Resources */,

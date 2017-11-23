@@ -29,6 +29,10 @@ class SearchInfoController: UITableViewController {
         setupBackButton()
     #else
         self.title = "Search movie metadata".uppercased()
+        if let image = UIImage(named: "search.jpg") {
+            self.view.layer.contents = image.cgImage
+            self.view.layer.contentsGravity = "resizeAspectFill"
+        }
     #endif
 		SVProgressHUD.show()
 		searchFile = node!.dislayName()

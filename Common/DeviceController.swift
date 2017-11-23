@@ -24,7 +24,10 @@ class DeviceController: UITableViewController {
         setupBackButton()
     #else
         self.title = target!.name
-        self.view.backgroundColor = UIColor.white
+        if let image = UIImage(named: "network.png") {
+            self.view.layer.contents = image.cgImage
+            self.view.layer.contentsGravity = "resizeAspectFill"
+        }
     #endif
     }
 

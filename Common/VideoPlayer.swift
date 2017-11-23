@@ -128,9 +128,10 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         if let btn = presses.first {
             if btn.type == .playPause {
                 pause(pauseButton)
+            } else {
+                tapScreen()
             }
         }
-        tapScreen()
     }
   
     @objc func menuTap() {
