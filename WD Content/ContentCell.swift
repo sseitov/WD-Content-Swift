@@ -24,7 +24,8 @@ class ContentCell: UICollectionViewCell {
             if !node!.directory {
                 cardView.backgroundColor = UIColor.white.withAlphaComponent(0.7)
                 updateNode()
-                Model.shared.updateInfoForNode(node!, complete: {
+                Model.shared.updateInfoForNode(node!, complete: { info in
+                    self.node?.info = info
                     self.updateNode()
                 })
             } else {

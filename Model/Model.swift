@@ -424,6 +424,7 @@ class Model: NSObject {
                     if node.info != nil {
                         if let date = node.info!.modificationDate as Date?, let recordDate = record.modificationDate {
                             if recordDate >= date { // actual date
+                                complete(node.info)
                                 return
                             }
                         }
@@ -461,6 +462,8 @@ class Model: NSObject {
                     self.saveContext()
                     NotificationCenter.default.post(name: refreshNodeNotification, object: node)
                     complete(info)
+                } else {
+                    complete(nil)
                 }
             }
         })

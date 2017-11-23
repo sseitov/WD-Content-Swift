@@ -312,6 +312,8 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                                     self.showMessage(saveError!.localizedDescription, messageType: .error)
                                 } else {
                                     self.nodesTable.reloadData()
+                                    self.infoTable.reloadData()
+                                    self.coverTable.reloadData()
                                 }
                             })
                         }
@@ -323,6 +325,8 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                             self.showMessage(saveError!.localizedDescription, messageType: .error)
                         } else {
                             self.nodesTable.reloadData()
+                            self.infoTable.reloadData()
+                            self.coverTable.reloadData()
                         }
                     })
                 }

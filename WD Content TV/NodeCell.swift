@@ -42,7 +42,7 @@ class NodeCell: UITableViewCell {
         Model.shared.updateInfoForNode(node!, complete: { info in
             if info != nil {
                 self.node?.info = info
-                self.updateInfo()
+                self.setupInfo()
                 self.delegate?.reloadInfoFor(node: self.node)
             }
         })
