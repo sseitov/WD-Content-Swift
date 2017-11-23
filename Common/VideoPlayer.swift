@@ -59,6 +59,9 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         let menuTap = UITapGestureRecognizer(target: self, action: #selector(self.menuTap))
         menuTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
         self.view.addGestureRecognizer(menuTap)
+        
+        setNeedsFocusUpdate()
+        updateFocusIfNeeded()
     #endif
         mediaPlayer = VLCMediaPlayer()
         mediaPlayer.delegate = self
@@ -117,7 +120,16 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
     
 #if TV
+    override var preferredFocusedView: UIView? {
+        return pauseButton
+    }
+    
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        if let btn = presses.first {
+            if btn.type == .playPause {
+                pause(pauseButton)
+            }
+        }
         tapScreen()
     }
   
@@ -149,6 +161,9 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         forwardButton.isEnabled = !barHidden
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.view.setNeedsFocusUpdate()
+            self.view.updateFocusIfNeeded()
         })
     #endif
         navigationController?.setNavigationBarHidden(barHidden, animated: true)
@@ -242,7 +257,20 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         let sec = mediaPlayer.time.value.intValue / 1000
         if self.position < sec {
             self.position = sec
-            timeIndicator.text = mediaPlayer.remainingTime.stringValue
+            #if IOS
+                timeIndicator.text = mediaPlayer.remainingTime.stringValue
+            #else
+                let length = mediaPlayer.time.intValue - mediaPlayer.remainingTime.intValue
+                var allTimeStr = ""
+                var currentTimeStr = ""
+                if let allTime = VLCTime(int: length) {
+                    allTimeStr = allTime.stringValue
+                }
+                if let current = mediaPlayer.time {
+                    currentTimeStr = current.stringValue
+                }
+                timeIndicator.text = "\(currentTimeStr) / \(allTimeStr)"
+            #endif
             #if IOS
                 positionSlider.value = mediaPlayer.position
             #else

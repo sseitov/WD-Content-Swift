@@ -54,18 +54,10 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         
         nodesTable.remembersLastFocusedIndexPath = false
         
-        let systemVersion = Double(UIDevice.current.systemVersion)
-        if systemVersion! < 11 {
-            infoBottom.constant = 160
-            coverBottom.constant = 160
-            nodesBottom.constant = 160
-            infoTop.constant = -160
-        } else {
-            infoBottom.constant = 60
-            coverBottom.constant = 60
-            nodesBottom.constant = 60
-            infoTop.constant = -60
-        }
+        infoBottom.constant = 60
+        coverBottom.constant = 60
+        nodesBottom.constant = 60
+        infoTop.constant = -60
         
         refresh()
     }
@@ -182,9 +174,11 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             default:
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                 cell.textLabel?.text = "RUNTIME"
-                cell.textLabel?.textColor = UIColor.white
+                cell.textLabel?.textColor = UIColor.black
+                cell.textLabel?.alpha = 0.5
                 cell.detailTextLabel?.text = focusedNode?.info?.runtime
                 cell.detailTextLabel?.textColor = UIColor.black
+                cell.detailTextLabel?.alpha = 0.7
                 return cell
             }
         } else {

@@ -16,11 +16,10 @@ class NodeCell: UITableViewCell {
 
     var node:Node? {
         didSet {
-            updateInfo()
-            Model.shared.updateInfoForNode(node!, complete: {
-                self.updateInfo()
-                self.delegate?.reloadInfoFor(node: self.node)
-            })
+            setupInfo()
+            if !node!.directory, node?.info == nil {
+                updateInfo()
+            }
         }
     }
     var delegate:NodeCellDelegate?
@@ -40,6 +39,16 @@ class NodeCell: UITableViewCell {
     // MARK: - Update Node Info
 
     func updateInfo() {
+        Model.shared.updateInfoForNode(node!, complete: { info in
+            if info != nil {
+                self.node?.info = info
+                self.updateInfo()
+                self.delegate?.reloadInfoFor(node: self.node)
+            }
+        })
+    }
+    
+    func setupInfo() {
         if node!.directory {
             typeView.image = UIImage(named: "folderIcon")
             nameView.text = node?.dislayName()
