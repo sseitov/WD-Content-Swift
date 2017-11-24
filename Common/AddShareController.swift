@@ -43,45 +43,37 @@ class AddShareController: UITableViewController {
 		serviceBrowser.delegate = self
 		serviceBrowser.searchForServices(ofType: "_smb._tcp.", inDomain: "local")
     }
-	
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let shares = Model.shared.allShares()
-        for share in shares {
-            if !hostInList(address: share.ip!) {
-                hosts.append(ServiceHost(name: share.ip!, host: share.ip!, port: share.port))
-            }
-        }
-        tableView.reloadData()
-    }
     
 	func updateInterface () {
 		for service in self.services {
-			if service.port == -1 {
-				service.delegate = self
-				service.resolve(withTimeout:10)
-			} else {
-				if let addresses = service.addresses {
-					var ips: String = ""
-					for address in addresses {
-						let ptr = (address as NSData).bytes.bindMemory(to: sockaddr_in.self, capacity: address.count)
-						var addr = ptr.pointee.sin_addr
-						let buf = UnsafeMutablePointer<Int8>.allocate(capacity: Int(INET6_ADDRSTRLEN))
-						let family = ptr.pointee.sin_family
-						if family == __uint8_t(AF_INET)
-						{
-							if let ipc:UnsafePointer<Int8> = inet_ntop(Int32(family), &addr, buf, __uint32_t(INET6_ADDRSTRLEN)) {
-								ips = String(cString: ipc)
-							}
-						}
-					}
-					if !hostInList(address: ips) {
-						hosts.append(ServiceHost(name: service.name, host: ips, port: Int32(service.port)))
-					}
-					tableView.reloadData()
-					service.stop()
-				}
-			}
+            if let addresses = service.addresses {
+                var ips: String = ""
+                for address in addresses {
+                    let ptr = (address as NSData).bytes.bindMemory(to: sockaddr_in.self, capacity: address.count)
+                    var addr = ptr.pointee.sin_addr
+                    let buf = UnsafeMutablePointer<Int8>.allocate(capacity: Int(INET6_ADDRSTRLEN))
+                    let family = ptr.pointee.sin_family
+                    if family == __uint8_t(AF_INET)
+                    {
+                        if let ipc:UnsafePointer<Int8> = inet_ntop(Int32(family), &addr, buf, __uint32_t(INET6_ADDRSTRLEN)) {
+                            ips = String(cString: ipc)
+                        }
+                    }
+                }
+                if !hostInList(address: ips) {
+                    hosts.append(ServiceHost(name: service.name, host: ips, port: Int32(service.port)))
+                }
+                if services.count == hosts.count {
+                    let shares = Model.shared.allShares()
+                    for share in shares {
+                        if !hostInList(address: share.ip!) {
+                            hosts.append(ServiceHost(name: share.ip!, host: share.ip!, port: share.port))
+                        }
+                    }
+                }
+                tableView.reloadData()
+                service.stop()
+            }
 		}
 	}
 	
@@ -187,7 +179,7 @@ extension AddShareController:NetServiceDelegate {
 	
 	func netServiceDidResolveAddress(_ sender: NetService) {
 		updateInterface()
-		sender.startMonitoring()
+        sender.startMonitoring()
 	}
 }
 
@@ -197,9 +189,8 @@ extension AddShareController:NetServiceBrowserDelegate {
 
 	func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
 		services.append(service)
-		if !moreComing {
-			updateInterface()
-		}
+        service.delegate = self
+        service.resolve(withTimeout:10)
 	}
 }
 
