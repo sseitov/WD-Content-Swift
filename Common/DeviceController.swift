@@ -109,16 +109,18 @@ class DeviceController: UITableViewController {
 		})
 		alert.addAction(UIAlertAction(title: "Ok".uppercased(), style: .default, handler: { _ in
             SVProgressHUD.show(withStatus: "Connect...")
+            let user = userField!.text!
+            let password = passwordField!.text!
             DispatchQueue.global().async {
                 let connected = self.connection.connect(to: self.target!.host,
                                                         port: self.target!.port,
-                                                        user: userField!.text!,
-                                                        password: passwordField!.text!)
+                                                        user: user,
+                                                        password: password)
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
                     if connected {
-                        self.target?.user = userField!.text!
-                        self.target?.password = passwordField!.text!
+                        self.target?.user = user
+                        self.target?.password = password
                         self.shares = self.connection.folderContents(byRoot: nil) as! [String]
                         self.tableView.reloadData()
                     } else {

@@ -44,6 +44,17 @@ class AddShareController: UITableViewController {
 		serviceBrowser.searchForServices(ofType: "_smb._tcp.", inDomain: "local")
     }
 	
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let shares = Model.shared.allShares()
+        for share in shares {
+            if !hostInList(address: share.ip!) {
+                hosts.append(ServiceHost(name: share.ip!, host: share.ip!, port: share.port))
+            }
+        }
+        tableView.reloadData()
+    }
+    
 	func updateInterface () {
 		for service in self.services {
 			if service.port == -1 {
@@ -147,7 +158,7 @@ class AddShareController: UITableViewController {
         })
         alert.addAction(UIAlertAction(title: "ADD".uppercased(), style: .default, handler: { _ in
             if let hosttext = hostField?.text, let porttext = portField?.text, let num = Int32(porttext) {
-                let info = ServiceHost(name: "", host: hosttext, port: num)
+                let info = ServiceHost(name: hosttext, host: hosttext, port: num)
                 self.performSegue(withIdentifier: "showDevice", sender: info)
             } else {
                 self.showMessage("Invalid port number.", messageType: .error)
