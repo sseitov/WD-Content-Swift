@@ -186,6 +186,8 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             print("!!!!! Player state: playing")
         case .paused:
             print("!!!!! Player state: paused")
+        case .esAdded:
+            print("!!!!! Player state: esAdded")
         }
     }
     
