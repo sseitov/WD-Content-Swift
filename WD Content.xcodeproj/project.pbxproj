@@ -20,6 +20,11 @@
 		2C3C26701F233051000B82AF /* StorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C266F1F233051000B82AF /* StorageCell.swift */; };
 		2C3C26721F2348E4000B82AF /* FolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C26711F2348E4000B82AF /* FolderController.swift */; };
 		2C4527A61FC4A48C00ED17A1 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C4527A51FC4A48C00ED17A1 /* background.jpg */; };
+		2C5A9734207A1D0F007AF1C9 /* MobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5A9733207A1D0F007AF1C9 /* MobileVLCKit.framework */; };
+		2C5A9736207A1D9B007AF1C9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5A9735207A1D9B007AF1C9 /* libz.tbd */; };
+		2C5A9738207A1DAC007AF1C9 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5A9737207A1DAC007AF1C9 /* libbz2.tbd */; };
+		2C5A973A207A1DCE007AF1C9 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5A9739207A1DCD007AF1C9 /* libstdc++.tbd */; };
+		2C5A973C207A1DEA007AF1C9 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5A973B207A1DEA007AF1C9 /* libiconv.tbd */; };
 		2C5BAAAA1FC6F49C000AFDBF /* network.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BAAA91FC6F49C000AFDBF /* network.png */; };
 		2C5BAAAC1FC6F960000AFDBF /* search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BAAAB1FC6F960000AFDBF /* search.jpg */; };
 		2C5BAAB01FC6FD33000AFDBF /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BAAAF1FC6FD33000AFDBF /* settings.png */; };
@@ -141,6 +146,11 @@
 		2C3C266F1F233051000B82AF /* StorageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageCell.swift; sourceTree = "<group>"; };
 		2C3C26711F2348E4000B82AF /* FolderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderController.swift; sourceTree = "<group>"; };
 		2C4527A51FC4A48C00ED17A1 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		2C5A9733207A1D0F007AF1C9 /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileVLCKit.framework; sourceTree = "<group>"; };
+		2C5A9735207A1D9B007AF1C9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2C5A9737207A1DAC007AF1C9 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		2C5A9739207A1DCD007AF1C9 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		2C5A973B207A1DEA007AF1C9 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2C5BAAA91FC6F49C000AFDBF /* network.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = network.png; sourceTree = "<group>"; };
 		2C5BAAAB1FC6F960000AFDBF /* search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = search.jpg; sourceTree = "<group>"; };
 		2C5BAAAF1FC6FD33000AFDBF /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
@@ -242,6 +252,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5A973C207A1DEA007AF1C9 /* libiconv.tbd in Frameworks */,
+				2C5A973A207A1DCE007AF1C9 /* libstdc++.tbd in Frameworks */,
+				2C5A9738207A1DAC007AF1C9 /* libbz2.tbd in Frameworks */,
+				2C5A9736207A1D9B007AF1C9 /* libz.tbd in Frameworks */,
+				2C5A9734207A1D0F007AF1C9 /* MobileVLCKit.framework in Frameworks */,
 				2CD9EF6D1E63223400E5F8DF /* CoreMedia.framework in Frameworks */,
 				2CD9EF691E6321FC00E5F8DF /* VideoToolbox.framework in Frameworks */,
 				2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */,
@@ -503,6 +518,11 @@
 		37BE737A4CCEF1A81F1E6BFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C5A973B207A1DEA007AF1C9 /* libiconv.tbd */,
+				2C5A9739207A1DCD007AF1C9 /* libstdc++.tbd */,
+				2C5A9737207A1DAC007AF1C9 /* libbz2.tbd */,
+				2C5A9735207A1D9B007AF1C9 /* libz.tbd */,
+				2C5A9733207A1D0F007AF1C9 /* MobileVLCKit.framework */,
 				2C630C881F82237000E44C57 /* CloudKit.framework */,
 				2C630C861F82236300E44C57 /* AudioToolbox.framework */,
 				2C630C841F82234500E44C57 /* AVFoundation.framework */,
@@ -986,7 +1006,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "WD Content/WD Content.entitlements";
 				DEVELOPMENT_TEAM = 7TSVKXZ79P;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1030,7 +1050,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WD Content/WD Content.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7TSVKXZ79P;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
