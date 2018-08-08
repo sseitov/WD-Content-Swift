@@ -23,6 +23,10 @@ class ContentController: UIViewController {
         return CGSize(width: max, height: max)
     }
     
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

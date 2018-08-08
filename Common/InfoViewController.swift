@@ -29,6 +29,10 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	private var movieInfo:[String:Any]?
 	private var credits:[String:Any]?
+    
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

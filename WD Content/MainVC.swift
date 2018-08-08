@@ -13,6 +13,10 @@ class MainVC: AMSlideMenuMainViewController, AMSlideMenuDelegate {
 
     private var rightMenuIsOpened = false
     
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isInitialStart = false

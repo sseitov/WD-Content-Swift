@@ -2,6 +2,8 @@ target 'WD Content' do
     platform :ios, '9.0'
     use_frameworks!
     
+    pod 'MobileVLCKit'
+
     pod 'SVProgressHUD'
     pod 'AFNetworking'
     pod 'SDWebImage'

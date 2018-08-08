@@ -22,6 +22,12 @@ class SearchInfoController: UITableViewController {
 	var searchFile:String!
     private var results:[Any] = []
 	
+#if IOS
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+#endif
+
     override func viewDidLoad() {
         super.viewDidLoad()
     #if IOS

@@ -188,6 +188,7 @@ static NSString* relativePath(NSString* path)
 		
         bool isDir = (smb_stat_get(item, SMB_STAT_ISDIR) != 0);
         NSString* fileName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
+/*
         if ([fileName containsString:@" "]) {
             NSString* newFileName = [fileName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
             NSString* oldPath = [root.filePath stringByAppendingPathComponent:fileName];
@@ -202,6 +203,7 @@ static NSString* relativePath(NSString* path)
                 }
             }
         }
+ */
         if (isDir) {
             Node* dir = [[Node alloc] initWithName:fileName isDir:isDir parent:root];
             [fileList addObject:dir];
@@ -279,6 +281,7 @@ static NSString* relativePath(NSString* path)
         
         bool isDir = (smb_stat_get(item, SMB_STAT_ISDIR) != 0);
         NSString* fileName = [[NSString alloc] initWithBytes:name length:strlen(name) encoding:NSUTF8StringEncoding];
+/*
         if ([fileName containsString:@" "]) {
             NSString* newFileName = [fileName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
             NSString* oldPath = [root.filePath stringByAppendingPathComponent:fileName];
@@ -293,6 +296,7 @@ static NSString* relativePath(NSString* path)
                 }
             }
         }
+ */
         if (isDir) {
             Node* file = [[Node alloc] initWithName:fileName isDir:isDir parent:root];
             [fileList addObject:file];
@@ -338,7 +342,7 @@ static NSString* relativePath(NSString* path)
 - (int)seekFile:(smb_fd)file offset:(off_t)offset whence:(int)whence {
 	return (int)smb_fseek(_session, file, offset, whence);
 }
-
+/*
 - (bool)moveDir:(smb_tid)treeID oldPath:(NSString*)oldPath newPath:(NSString*)newPath
 {
     NSString *newDir = [Node filePathExcludingSharePathFromPath:newPath];
@@ -410,5 +414,5 @@ static NSString* relativePath(NSString* path)
     int err = smb_file_mv(_session, treeID, old.UTF8String, new.UTF8String);
     return (err == 0);
 }
-
+*/
 @end

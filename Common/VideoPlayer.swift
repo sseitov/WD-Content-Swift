@@ -17,7 +17,11 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
 
 #if IOS
     @IBOutlet weak var positionSlider: UISlider!
-    
+        
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+
     override var prefersStatusBarHidden: Bool {
         get {
             return barHidden
@@ -50,6 +54,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         positionSlider.addTarget(self, action: #selector(self.sliderEndedTracking(_:)), for: events)
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
         movieView.addGestureRecognizer(tap)
+        positionSlider.setThumbImage(UIImage(named: "slider"), for: UIControlState())
     #else
         audioButton.isEnabled = false
         pauseButton.isEnabled = false

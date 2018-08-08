@@ -14,7 +14,12 @@ enum MessageType {
 
 #if IOS
 extension UINavigationController {
-    override open var childViewControllerForStatusBarStyle: UIViewController? {
+    
+    open override var childViewControllerForStatusBarStyle: UIViewController? {
+        return self.topViewController
+    }
+    
+    open override var childViewControllerForStatusBarHidden: UIViewController? {
         return self.topViewController
     }
 }

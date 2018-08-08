@@ -17,6 +17,12 @@ class DeviceController: UITableViewController {
 	private var cashedShare:Share?
 	private var shares:[String] = []
 	
+    #if IOS
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    #endif
+
     override func viewDidLoad() {
         super.viewDidLoad()
     #if IOS

@@ -18,6 +18,12 @@ class TrackController: UITableViewController {
     var player:VLCMediaPlayer?
     var delegate:TrackControllerDelegate?
     
+#if IOS
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+#endif
+
     override func viewDidLoad() {
         super.viewDidLoad()
         #if IOS
