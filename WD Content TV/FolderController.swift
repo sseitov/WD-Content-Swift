@@ -34,7 +34,9 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var infoBottom: NSLayoutConstraint!
     @IBOutlet weak var infoTop: NSLayoutConstraint!
     
-    // MARK: -
+    // MARK: - Life cycle
+
+    private var nodePage:NodePage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +111,9 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                         node.share = self.parentNode!.share
                         node.info = Model.shared.getInfoForNode(node)
                     }
+                    
+                    self.nodePage = NodePage(self.nodes)
+
                     self.nodesTable.reloadData()
                     if self.focusedNode == nil {
                         if self.parentNode?.selectedIndexPath == nil && self.nodes.count > 0 {
@@ -140,7 +145,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == nodesTable {
-            return nodes.count
+            return nodePage != nil ? 5 : 0
         } else {
             if focusedNode != nil && !focusedNode!.directory && focusedNode!.info != nil {
                 return 3
@@ -153,7 +158,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == nodesTable {
             let cell = tableView.dequeueReusableCell(withIdentifier: "node", for: indexPath) as! NodeCell
-            cell.node = nodes[indexPath.row]
+            cell.node = nodePage!.nodeForIndex(indexPath.row)
             return cell
         } else if tableView == coverTable {
             switch indexPath.row {
@@ -204,6 +209,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelectRowAt \(indexPath.row)")
         if tableView == nodesTable {
             let node = nodes[indexPath.row]
             if node.directory {
@@ -243,7 +249,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
         if tableView == nodesTable {
             if let index = context.nextFocusedIndexPath {
-                focusedNode = nodes[index.row]
+                focusedNode = nodePage!.nodeForIndex(index.row)
             } else {
                 focusedNode = nil
             }
@@ -251,6 +257,26 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             coverTable.reloadData()
         }
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if let nextIndex = context.nextFocusedIndexPath, let prevIndex = context.previouslyFocusedIndexPath {
+            if nextIndex.row > prevIndex.row, nextIndex.row == 4 {
+                nodesTable.performBatchUpdates({
+                    self.nodePage?.moveBottom(self.nodes)
+                    nodesTable.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                    nodesTable.insertRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
+                }, completion: { _ in
+                })
+            } else if prevIndex.row > nextIndex.row, nextIndex.row == 0 {
+                nodesTable.performBatchUpdates({
+                    self.nodePage?.moveTop(self.nodes)
+                    nodesTable.deleteRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
+                    nodesTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                }, completion: { _ in
+                })
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
