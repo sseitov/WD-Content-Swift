@@ -35,7 +35,7 @@ class NodePage {
         } else {
             offset = size - 1
         }
-        print("add to Top \(offset)")
+//        print("add to Top \(offset)")
         nodes.insert(fromNodes[offset], at: 0)
     }
     
@@ -46,7 +46,7 @@ class NodePage {
         } else {
             offset += 1
         }
-        print("add to Bottom \(offset + NODE_PAGE_SIZE)")
+//        print("add to Bottom \(offset + NODE_PAGE_SIZE)")
         nodes.append(fromNodes[offset + NODE_PAGE_SIZE])
     }
 }
