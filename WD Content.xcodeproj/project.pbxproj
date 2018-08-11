@@ -1036,7 +1036,7 @@
 				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
-				VALID_ARCHS = "arm64 armv7";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1050,7 +1050,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WD Content/WD Content.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 7TSVKXZ79P;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1079,7 +1079,7 @@
 				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 				"TVOS_DEPLOYMENT_TARGET[arch=*]" = 11.0;
-				VALID_ARCHS = "arm64 armv7";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
