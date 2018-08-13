@@ -513,6 +513,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="movieView" destination="keV-7o-zyS" id="dot-fi-UxZ"/>
+                        <outlet property="playPauseButton" destination="OOv-Yf-6DL" id="nzV-nF-O02"/>
                         <outlet property="positionSlider" destination="9wT-MD-Vcj" id="gAf-Fe-VXU"/>
                         <outlet property="timeIndicator" destination="rQ9-oP-Aeb" id="voz-Ce-vTR"/>
                         <outlet property="toolbarConstraint" destination="WAb-7v-pNi" id="RM6-aQ-L5V"/>
@@ -719,7 +720,7 @@
         <image name="add" width="27" height="27"/>
         <image name="audio" width="27" height="27"/>
         <image name="back" width="22" height="22"/>
-        <image name="mediaPause" width="50" height="50"/>
+        <image name="mediaPause" width="44" height="44"/>
         <image name="play" width="100" height="100"/>
     </resources>
 </document>

@@ -65,6 +65,8 @@
 		2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */; };
 		2C9D1D201E65614100E6B882 /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D1D1F1E65614100E6B882 /* TrackController.swift */; };
 		2C9D1D211E65614100E6B882 /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D1D1F1E65614100E6B882 /* TrackController.swift */; };
+		2C9E53D6212172C500259D6A /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E53D5212172C500259D6A /* VideoPlayer.swift */; };
+		2C9E53D8212172DE00259D6A /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E53D7212172DE00259D6A /* VideoPlayer.swift */; };
 		2CA603F41E604A4F00335545 /* ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F31E604A4F00335545 /* ContentController.swift */; };
 		2CA603F61E604D5700335545 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F51E604D5700335545 /* ContentCell.swift */; };
 		2CA604041E60674400335545 /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603FA1E60674400335545 /* LGAlertView.m */; };
@@ -110,8 +112,6 @@
 		2CC0D9A71E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99C1E5F107000254181 /* TONetBIOSNameServiceEntry.m */; };
 		2CC0D9A81E5F107000254181 /* TOSMBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99F1E5F107000254181 /* TOSMBConstants.m */; };
 		2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0D99F1E5F107000254181 /* TOSMBConstants.m */; };
-		2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
-		2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */; };
 		2CD9EF691E6321FC00E5F8DF /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */; };
 		2CD9EF6D1E63223400E5F8DF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */; };
 		2CD9EF711E63236B00E5F8DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9EF701E63236B00E5F8DF /* AudioToolbox.framework */; };
@@ -188,6 +188,8 @@
 		2C954A061E5F65CD00A23CC5 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtensions.swift; path = Extensions/UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extensions/UIViewExtensions.swift; sourceTree = "<group>"; };
 		2C9D1D1F1E65614100E6B882 /* TrackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackController.swift; path = Common/TrackController.swift; sourceTree = "<group>"; };
+		2C9E53D5212172C500259D6A /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		2C9E53D7212172DE00259D6A /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		2CA603F31E604A4F00335545 /* ContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentController.swift; sourceTree = "<group>"; };
 		2CA603F51E604D5700335545 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		2CA603F91E60674400335545 /* LGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGAlertView.h; path = LGAlertSheet/LGAlertView.h; sourceTree = "<group>"; };
@@ -231,7 +233,6 @@
 		2CC0D99D1E5F107000254181 /* TONetBIOSNameServiceEntryPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TONetBIOSNameServiceEntryPrivate.h; path = Samba/TONetBIOSNameServiceEntryPrivate.h; sourceTree = "<group>"; };
 		2CC0D99E1E5F107000254181 /* TOSMBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOSMBConstants.h; path = Samba/TOSMBConstants.h; sourceTree = "<group>"; };
 		2CC0D99F1E5F107000254181 /* TOSMBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TOSMBConstants.m; path = Samba/TOSMBConstants.m; sourceTree = "<group>"; };
-		2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayer.swift; path = Common/VideoPlayer.swift; sourceTree = "<group>"; };
 		2CD9EF681E6321FC00E5F8DF /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		2CD9EF6C1E63223400E5F8DF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2CD9EF701E63236B00E5F8DF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -330,6 +331,7 @@
 				2CA604191E60911200335545 /* InfoViewController.swift */,
 				2CA603F31E604A4F00335545 /* ContentController.swift */,
 				2CA603F51E604D5700335545 /* ContentCell.swift */,
+				2C9E53D5212172C500259D6A /* VideoPlayer.swift */,
 				2C2133561E5EDE09002F267D /* Resources */,
 			);
 			path = "WD Content";
@@ -359,6 +361,7 @@
 				2C3C26711F2348E4000B82AF /* FolderController.swift */,
 				2C1556E8211CB269000E8F33 /* NodePage.swift */,
 				2CF124AD1F247C57006ADAC7 /* NodeCell.swift */,
+				2C9E53D7212172DE00259D6A /* VideoPlayer.swift */,
 				2C21336B1E5EDF38002F267D /* Resources */,
 			);
 			path = "WD Content TV";
@@ -461,7 +464,6 @@
 				2CA604131E60906B00335545 /* AddShareController.swift */,
 				2CA604141E60906B00335545 /* DeviceController.swift */,
 				2CDB6EB31F402D2D00CD2DDF /* ShareController.swift */,
-				2CCC86EA1E62D163000CC894 /* VideoPlayer.swift */,
 				2C9D1D1F1E65614100E6B882 /* TrackController.swift */,
 			);
 			name = Common;
@@ -777,6 +779,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9E53D6212172C500259D6A /* VideoPlayer.swift in Sources */,
 				2CA604081E60674400335545 /* LGProgressView.m in Sources */,
 				2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */,
 				2CA6041D1E60911200335545 /* SearchCell.swift in Sources */,
@@ -802,7 +805,6 @@
 				2CA604151E60906B00335545 /* AddShareController.swift in Sources */,
 				2C954A0C1E5F65D600A23CC5 /* UIColorExtensions.swift in Sources */,
 				2C9549A71E5F2B1800A23CC5 /* TMDB.m in Sources */,
-				2CCC86EB1E62D163000CC894 /* VideoPlayer.swift in Sources */,
 				2CDB6EB41F402D2D00CD2DDF /* ShareController.swift in Sources */,
 				2C9D1D201E65614100E6B882 /* TrackController.swift in Sources */,
 				2CA6041E1E60911200335545 /* SearchInfoController.swift in Sources */,
@@ -828,6 +830,7 @@
 				2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */,
 				2CFCEE221FC4884F0018EB3F /* SyncManager.swift in Sources */,
 				2C9D1D211E65614100E6B882 /* TrackController.swift in Sources */,
+				2C9E53D8212172DE00259D6A /* VideoPlayer.swift in Sources */,
 				2CA604181E60907200335545 /* DeviceController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
@@ -840,7 +843,6 @@
 				2C954A0A1E5F65CD00A23CC5 /* UIViewControllerExtensions.swift in Sources */,
 				2CA604171E60907200335545 /* AddShareController.swift in Sources */,
 				2CC0D9A11E5F107000254181 /* SMBConnection.m in Sources */,
-				2CCC86EC1E62D168000CC894 /* VideoPlayer.swift in Sources */,
 				2CA604211E60911700335545 /* SearchInfoController.swift in Sources */,
 				2C954A0B1E5F65CD00A23CC5 /* UIViewExtensions.swift in Sources */,
 				2CAF5C8D1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,
