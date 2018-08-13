@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ozB-Tu-RaD">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14113" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ozB-Tu-RaD">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeueExtras.ttc">
-            <string>HelveticaNeue-CondensedBlack</string>
-            <string>HelveticaNeue-CondensedBold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="unq-3g-TMI">
@@ -121,9 +114,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="KBd-Vq-w06" kind="show" identifier="showDevice" id="Oia-Mw-F4L">
-                            <nil key="action"/>
-                        </segue>
+                        <segue destination="KBd-Vq-w06" kind="show" identifier="showDevice" id="Oia-Mw-F4L"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3On-gB-UOa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,7 +140,7 @@
         <!--Video Player-->
         <scene sceneID="F4a-vm-IDt">
             <objects>
-                <viewController id="Zpw-qe-yUD" customClass="VideoPlayer" customModule="WD_Content_TV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zpw-qe-yUD" customClass="TVideoPlayer" customModule="WD_Content_TV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CJz-5D-Da7"/>
                         <viewControllerLayoutGuide type="bottom" id="t5e-mL-lHU"/>
@@ -392,7 +383,7 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="info" id="qaz-Rf-QL9" customClass="InfoCell" customModule="WD_Content_TV" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="66" width="380" height="200"/>
+                                        <rect key="frame" x="50" y="66" width="380" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qaz-Rf-QL9" id="lh8-zY-Pv8">
                                             <rect key="frame" x="0.0" y="0.0" width="380" height="200"/>
@@ -614,7 +605,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" id="sq4-35-VoD" customClass="SearchResultCell" customModule="WD_Content_TV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="80" width="1700" height="240"/>
+                                <rect key="frame" x="110" y="80" width="1700" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sq4-35-VoD" id="efH-dT-O8v">
                                     <rect key="frame" x="0.0" y="0.0" width="1640" height="240"/>
@@ -662,7 +653,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchField" id="rbd-wv-zLa" customClass="SearchCell" customModule="WD_Content_TV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="334" width="1700" height="240"/>
+                                <rect key="frame" x="110" y="334" width="1700" height="240"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rbd-wv-zLa" id="fek-BM-I6P">
                                     <rect key="frame" x="0.0" y="0.0" width="1700" height="240"/>

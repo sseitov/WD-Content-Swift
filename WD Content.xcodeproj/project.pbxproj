@@ -66,7 +66,7 @@
 		2C9D1D201E65614100E6B882 /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D1D1F1E65614100E6B882 /* TrackController.swift */; };
 		2C9D1D211E65614100E6B882 /* TrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D1D1F1E65614100E6B882 /* TrackController.swift */; };
 		2C9E53D6212172C500259D6A /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E53D5212172C500259D6A /* VideoPlayer.swift */; };
-		2C9E53D8212172DE00259D6A /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E53D7212172DE00259D6A /* VideoPlayer.swift */; };
+		2C9E53D8212172DE00259D6A /* TVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E53D7212172DE00259D6A /* TVideoPlayer.swift */; };
 		2CA603F41E604A4F00335545 /* ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F31E604A4F00335545 /* ContentController.swift */; };
 		2CA603F61E604D5700335545 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F51E604D5700335545 /* ContentCell.swift */; };
 		2CA604041E60674400335545 /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603FA1E60674400335545 /* LGAlertView.m */; };
@@ -189,7 +189,7 @@
 		2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extensions/UIViewExtensions.swift; sourceTree = "<group>"; };
 		2C9D1D1F1E65614100E6B882 /* TrackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackController.swift; path = Common/TrackController.swift; sourceTree = "<group>"; };
 		2C9E53D5212172C500259D6A /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
-		2C9E53D7212172DE00259D6A /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		2C9E53D7212172DE00259D6A /* TVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVideoPlayer.swift; sourceTree = "<group>"; };
 		2CA603F31E604A4F00335545 /* ContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentController.swift; sourceTree = "<group>"; };
 		2CA603F51E604D5700335545 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		2CA603F91E60674400335545 /* LGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGAlertView.h; path = LGAlertSheet/LGAlertView.h; sourceTree = "<group>"; };
@@ -361,7 +361,7 @@
 				2C3C26711F2348E4000B82AF /* FolderController.swift */,
 				2C1556E8211CB269000E8F33 /* NodePage.swift */,
 				2CF124AD1F247C57006ADAC7 /* NodeCell.swift */,
-				2C9E53D7212172DE00259D6A /* VideoPlayer.swift */,
+				2C9E53D7212172DE00259D6A /* TVideoPlayer.swift */,
 				2C21336B1E5EDF38002F267D /* Resources */,
 			);
 			path = "WD Content TV";
@@ -830,7 +830,7 @@
 				2CC0D9A91E5F107000254181 /* TOSMBConstants.m in Sources */,
 				2CFCEE221FC4884F0018EB3F /* SyncManager.swift in Sources */,
 				2C9D1D211E65614100E6B882 /* TrackController.swift in Sources */,
-				2C9E53D8212172DE00259D6A /* VideoPlayer.swift in Sources */,
+				2C9E53D8212172DE00259D6A /* TVideoPlayer.swift in Sources */,
 				2CA604181E60907200335545 /* DeviceController.swift in Sources */,
 				2CC0D9631E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9651E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,

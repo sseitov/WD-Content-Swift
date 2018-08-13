@@ -1,5 +1,5 @@
 //
-//  VideoPlayer.swift
+//  TVideoPlayer.swift
 //  WD Content
 //
 //  Created by Сергей Сейтов on 26.02.17.
@@ -9,31 +9,16 @@
 import UIKit
 import SVProgressHUD
 
-class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDelegate {
+class TVideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDelegate {
 
     @IBOutlet weak var movieView: UIView!
     @IBOutlet weak var toolbarConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeIndicator: UILabel!
-
-#if IOS
-    @IBOutlet weak var positionSlider: UISlider!
-        
-    open override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return barHidden
-        }
-    }
-#else
     @IBOutlet weak var audioButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var movieProgress: UIProgressView!
-#endif
 
     var nodes:[Node] = []
     
@@ -44,30 +29,23 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     private var currentNode:Node?
     private var nodeIndex:Int = 0
     
+    // MARK: - Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    #if IOS
-        setupBackButton()
-        positionSlider.addTarget(self, action: #selector(self.sliderBeganTracking(_:)), for: .touchDown)
-        let events = UIControlEvents.touchUpInside.union(UIControlEvents.touchUpOutside)
-        positionSlider.addTarget(self, action: #selector(self.sliderEndedTracking(_:)), for: events)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapScreen))
-        movieView.addGestureRecognizer(tap)
-        positionSlider.setThumbImage(UIImage(named: "slider"), for: UIControlState())
-    #else
         audioButton.isEnabled = false
         pauseButton.isEnabled = false
         rewindButton.isEnabled = false
         forwardButton.isEnabled = false
-
+        
         let menuTap = UITapGestureRecognizer(target: self, action: #selector(self.menuTap))
         menuTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
         self.view.addGestureRecognizer(menuTap)
         
         setNeedsFocusUpdate()
         updateFocusIfNeeded()
-    #endif
+        
         mediaPlayer = VLCMediaPlayer()
         mediaPlayer.delegate = self
         mediaPlayer.drawable = movieView
@@ -76,10 +54,8 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     }
     
     deinit {
-    #if TV
         mediaPlayer.delegate = nil
         mediaPlayer.stop()
-    #endif
     }
     
     private func playNode(_ node:Node?) {
@@ -124,7 +100,6 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
         dismiss(animated: true, completion: nil)
     }
     
-#if TV
     override var preferredFocusedView: UIView? {
         return pauseButton
     }
@@ -138,7 +113,7 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             }
         }
     }
-  
+    
     @objc func menuTap() {
         if barHidden {
             goBack()
@@ -146,20 +121,14 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             tapScreen()
         }
     }
-#endif
-    
+
     private var barHidden = false
     private var firstTap = false
     
     @objc func tapScreen() {
         firstTap = true
         barHidden = !barHidden
-    #if IOS
-        toolbarConstraint.constant = barHidden ? 0 : 44
-        UIView.animate(withDuration: 0.4, animations: {
-            self.view.layoutIfNeeded()
-        })
-    #else
+        
         toolbarConstraint.constant = barHidden ? 0 : 128
         audioButton.isEnabled = !barHidden
         pauseButton.isEnabled = !barHidden
@@ -171,10 +140,12 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
             self.view.setNeedsFocusUpdate()
             self.view.updateFocusIfNeeded()
         })
-    #endif
+        
         navigationController?.setNavigationBarHidden(barHidden, animated: true)
     }
     
+    // MARK: - Player states
+
     private func printPlayerState(_ state:VLCMediaPlayerState) {
         switch state {
         case .stopped:
@@ -257,56 +228,23 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
         stopBuffering()
-        #if IOS
-            if changePosition {
-                return
-            }
-        #endif
         let sec = mediaPlayer.time.value.intValue / 1000
         if self.position < sec {
             self.position = sec
-            #if IOS
-                timeIndicator.text = mediaPlayer.remainingTime.stringValue
-            #else
-                let length = mediaPlayer.time.intValue - mediaPlayer.remainingTime.intValue
-                var allTimeStr = ""
-                var currentTimeStr = ""
-                if let allTime = VLCTime(int: length) {
-                    allTimeStr = allTime.stringValue
-                }
-                if let current = mediaPlayer.time {
-                    currentTimeStr = current.stringValue
-                }
-                timeIndicator.text = "\(currentTimeStr) / \(allTimeStr)"
-            #endif
-            #if IOS
-                positionSlider.value = mediaPlayer.position
-            #else
-                movieProgress.progress = mediaPlayer.position
-            #endif
+            let length = mediaPlayer.time.intValue - mediaPlayer.remainingTime.intValue
+            var allTimeStr = ""
+            var currentTimeStr = ""
+            if let allTime = VLCTime(int: length) {
+                allTimeStr = allTime.stringValue
+            }
+            if let current = mediaPlayer.time {
+                currentTimeStr = current.stringValue
+            }
+            timeIndicator.text = "\(currentTimeStr) / \(allTimeStr)"
+            movieProgress.progress = mediaPlayer.position
         }
     }
 
-#if IOS
-    @objc func sliderBeganTracking(_ slider: UISlider!) {
-        changePosition = true
-    }
-    
-    @objc func sliderEndedTracking(_ slider: UISlider!) {
-        self.position = 0
-        mediaPlayer.position = slider.value
-        changePosition = false
-    }
-    
-    @IBAction func playPause(_ sender: UIButton) {
-        mediaPlayer.pause()
-        if mediaPlayer.isPlaying {
-            sender.setImage(UIImage(named: "mediaPlay"), for: .normal)
-        } else {
-            sender.setImage(UIImage(named: "mediaPause"), for: .normal)
-        }
-    }
-#else
     @IBAction func rewind(_ sender: UIButton) {
         if mediaPlayer.position > 0.05 {
             mediaPlayer.position -= 0.05
@@ -327,15 +265,18 @@ class VideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDele
     
     @IBAction func pause(_ sender: UIButton) {
         mediaPlayer.pause()
+        
         let isPlaying = mediaPlayer.isPlaying
+        
         let normal = isPlaying ? UIImage(named: "playControlOff") : UIImage(named: "pauseControlOff")
         sender.setImage(normal, for: .normal)
+        
         let active = isPlaying ? UIImage(named: "playControl") : UIImage(named: "pauseControl")
         sender.setImage(active, for: .focused)
+        
         rewindButton.isEnabled = !isPlaying
         forwardButton.isEnabled = !isPlaying
     }
-#endif
 
     // MARK: - Navigation
 

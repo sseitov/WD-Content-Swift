@@ -308,7 +308,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "play" {
             let nav = segue.destination as! UINavigationController
-            let next = nav.topViewController as! VideoPlayer
+            let next = nav.topViewController as! TVideoPlayer
             if let nodes = sender as? [Node] {
                 next.nodes = nodes
             }
