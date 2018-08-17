@@ -123,7 +123,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         Model.shared.clearInfo(metainfo!, result: { error in
             SVProgressHUD.dismiss()
             if error != nil {
-                self.showMessage("Cloud clear error: \(error!)", messageType: .information, messageHandler: {
+                self.showMessage("Cloud clear error: \(error!.localizedDescription)", messageType: .information, messageHandler: {
                     self.dismiss(animated: true, completion: nil)
                 })
             } else {

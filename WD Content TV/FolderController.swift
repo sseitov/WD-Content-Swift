@@ -50,6 +50,10 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         backTap.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
         self.view.addGestureRecognizer(backTap)
         
+        let clearTap = UITapGestureRecognizer(target: self, action: #selector(self.clearInfo))
+        clearTap.allowedPressTypes = [NSNumber(value: UIPressType.playPause.rawValue)]
+        self.view.addGestureRecognizer(clearTap)
+
         let longTap = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongTap(tap:)))
         longTap.delegate = self
         nodesTable?.addGestureRecognizer(longTap)
@@ -74,7 +78,26 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    @objc func pressLongTap(tap:UILongPressGestureRecognizer) {
+    @objc
+    func clearInfo() {
+        if let info = focusedNode?.info {
+            SVProgressHUD.show(withStatus: "Clear...")
+            Model.shared.clearInfo(info, result: { error in
+                SVProgressHUD.dismiss()
+                if error != nil {
+                    self.showMessage("Cloud clear error: \(error!.localizedDescription)", messageType: .information)
+                } else {
+                    self.focusedNode?.info = nil
+                    self.nodesTable.reloadData()
+                    self.infoTable.reloadData()
+                    self.coverTable.reloadData()
+                }
+            })
+        }
+    }
+    
+    @objc
+    func pressLongTap(tap:UILongPressGestureRecognizer) {
         if tap.state == .began {
             if focusedNode != nil {
                 if focusedNode!.directory {
