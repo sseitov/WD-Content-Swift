@@ -111,8 +111,9 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                         node.share = self.parentNode!.share
                         node.info = Model.shared.getInfoForNode(node)
                     }
-                    
-                    self.nodePage = NodePage(self.nodes)
+                    if self.nodes.count > NODE_PAGE_SIZE {
+                        self.nodePage = NodePage(self.nodes)
+                    }
 
                     self.nodesTable.reloadData()
                     if self.focusedNode == nil {
@@ -145,7 +146,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == nodesTable {
-            return nodePage != nil ? 5 : 0
+            return nodePage != nil ? NODE_PAGE_SIZE : self.nodes.count
         } else {
             if focusedNode != nil && !focusedNode!.directory && focusedNode!.info != nil {
                 return 3
@@ -158,7 +159,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == nodesTable {
             let cell = tableView.dequeueReusableCell(withIdentifier: "node", for: indexPath) as! NodeCell
-            cell.node = nodePage!.nodeForIndex(indexPath.row)
+            cell.node = nodePage != nil ? nodePage!.nodeForIndex(indexPath.row) : self.nodes[indexPath.row]
             return cell
         } else if tableView == coverTable {
             switch indexPath.row {
@@ -249,7 +250,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
         if tableView == nodesTable {
             if let index = context.nextFocusedIndexPath {
-                focusedNode = nodePage!.nodeForIndex(index.row)
+                focusedNode = nodePage != nil ? nodePage!.nodeForIndex(index.row) : nodes[index.row]
             } else {
                 focusedNode = nil
             }
@@ -259,7 +260,11 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
         return true
     }
     
-    func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator)
+    {
+        if nodePage == nil {
+            return
+        }
         if let nextIndex = context.nextFocusedIndexPath, let prevIndex = context.previouslyFocusedIndexPath {
             if nextIndex.row > prevIndex.row, nextIndex.row == 4 {
                 nodesTable.performBatchUpdates({

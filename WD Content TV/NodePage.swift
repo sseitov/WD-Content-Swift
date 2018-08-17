@@ -8,9 +8,9 @@
 
 import Foundation
 
+let NODE_PAGE_SIZE = 5
+
 class NodePage {
-    
-    let NODE_PAGE_SIZE = 5
     
     let size:Int
     var offset:Int

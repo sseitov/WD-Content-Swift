@@ -264,9 +264,13 @@ class TVideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDel
     }
     
     @IBAction func pause(_ sender: UIButton) {
-        mediaPlayer.pause()
-        
         let isPlaying = mediaPlayer.isPlaying
+        
+        if isPlaying {
+            mediaPlayer.pause()
+        } else {
+            mediaPlayer.play()
+        }
         
         let normal = isPlaying ? UIImage(named: "playControlOff") : UIImage(named: "pauseControlOff")
         sender.setImage(normal, for: .normal)
