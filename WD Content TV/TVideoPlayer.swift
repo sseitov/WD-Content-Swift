@@ -28,6 +28,7 @@ class TVideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDel
     private var position:Int = 0
     private var currentNode:Node?
     private var nodeIndex:Int = 0
+    private var currentRate:Double = 1
     
     // MARK: - Life cycle
 
@@ -245,22 +246,38 @@ class TVideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDel
         }
     }
 
+    let ONE_MINUTE:Int32 = 60 * 1000
+    
     @IBAction func rewind(_ sender: UIButton) {
+        var time = mediaPlayer.time.intValue
+        if time > ONE_MINUTE {
+            time -= ONE_MINUTE
+        } else {
+            time = 0
+        }
+        mediaPlayer.time = VLCTime(int: time)
+/*
         if mediaPlayer.position > 0.05 {
             mediaPlayer.position -= 0.05
         } else {
             mediaPlayer.position = 0
         }
         self.position = 0
+ */
     }
     
     @IBAction func forward(_ sender: UIButton) {
+        var time = mediaPlayer.time.intValue
+        time += ONE_MINUTE
+        mediaPlayer.time = VLCTime(int: time)
+/*
         if mediaPlayer.position < 0.95 {
             mediaPlayer.position += 0.05
         } else {
             mediaPlayer.position = 1
         }
         self.position = 0
+ */
     }
     
     @IBAction func pause(_ sender: UIButton) {
