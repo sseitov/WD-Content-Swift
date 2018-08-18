@@ -166,6 +166,7 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func reloadInfoFor(node:Node?) {
         if node == focusedNode {
+            nodesTable.reloadData()
             infoTable.reloadData()
             coverTable.reloadData()
         }
