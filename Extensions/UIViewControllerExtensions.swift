@@ -56,8 +56,6 @@ extension UIViewController {
     
     // MARK: - alerts
     
-#if TV
-    
     func showMessage(_ error:String, messageType:MessageType, messageHandler: (() -> ())? = nil) {
         var title:String = ""
         switch messageType {
@@ -76,26 +74,5 @@ extension UIViewController {
         }))
         present(alert, animated: true, completion: nil)
     }
-#else
-
-    func showMessage(_ error:String, messageType:MessageType, messageHandler: (() -> ())? = nil) {
-        var title:String = ""
-        switch messageType {
-        case .success:
-            title = "Success"
-        case .information:
-            title = "Information"
-        default:
-            title = "Error"
-        }
-        let alert = LGAlertView.decoratedAlert(withTitle:title.uppercased(), message: error, cancelButtonTitle: "OK", cancelButtonBlock: { alert in
-            if messageHandler != nil {
-                messageHandler!()
-            }
-        })
-        alert!.okButton.backgroundColor = messageType == .error ? UIColor.red : UIColor.mainColor()
-        alert!.titleLabel.textColor = messageType == .error ? UIColor.red : UIColor.mainColor()
-        alert?.show()
-    }
-#endif
+    
 }

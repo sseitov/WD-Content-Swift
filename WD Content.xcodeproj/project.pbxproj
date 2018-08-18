@@ -33,10 +33,6 @@
 		2C630C851F82234500E44C57 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C630C841F82234500E44C57 /* AVFoundation.framework */; };
 		2C630C871F82236300E44C57 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C630C861F82236300E44C57 /* AudioToolbox.framework */; };
 		2C630C891F82237000E44C57 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C630C881F82237000E44C57 /* CloudKit.framework */; };
-		2C7DE8FE1F654E0F001AEB5B /* HostInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DE8FC1F654E0F001AEB5B /* HostInput.swift */; };
-		2C7DE8FF1F654E0F001AEB5B /* HostInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7DE8FD1F654E0F001AEB5B /* HostInput.xib */; };
-		2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80B9471E60D2A300F44E56 /* ActionSheet.swift */; };
-		2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C80B9481E60D2A300F44E56 /* ActionSheet.xib */; };
 		2C80B96F1E60D9E300F44E56 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */; };
 		2C9347FA1F21FE1200593EF2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9347F91F21FE1200593EF2 /* logo.png */; };
 		2C93480A1F224EA400593EF2 /* CalibreWeb-Black.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 2C9347FC1F224EA400593EF2 /* CalibreWeb-Black.TTF */; };
@@ -69,17 +65,6 @@
 		2C9E53D8212172DE00259D6A /* TVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E53D7212172DE00259D6A /* TVideoPlayer.swift */; };
 		2CA603F41E604A4F00335545 /* ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F31E604A4F00335545 /* ContentController.swift */; };
 		2CA603F61E604D5700335545 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603F51E604D5700335545 /* ContentCell.swift */; };
-		2CA604041E60674400335545 /* LGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603FA1E60674400335545 /* LGAlertView.m */; };
-		2CA604051E60674400335545 /* LGAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA603FB1E60674400335545 /* LGAlertView.xib */; };
-		2CA604061E60674400335545 /* LGDecoratedAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA603FC1E60674400335545 /* LGDecoratedAlertView.xib */; };
-		2CA604071E60674400335545 /* LGProgressAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA603FD1E60674400335545 /* LGProgressAlertView.xib */; };
-		2CA604081E60674400335545 /* LGProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603FF1E60674400335545 /* LGProgressView.m */; };
-		2CA604091E60674400335545 /* LGTextFieldAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA604001E60674400335545 /* LGTextFieldAlertView.xib */; };
-		2CA6040A1E60674400335545 /* LGVAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA604011E60674400335545 /* LGVAlertView.xib */; };
-		2CA6040B1E60674400335545 /* NSPointerArray+AbstractionHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA604031E60674400335545 /* NSPointerArray+AbstractionHelpers.m */; };
-		2CA6040E1E60675A00335545 /* PasswordInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6040C1E60675A00335545 /* PasswordInput.swift */; };
-		2CA6040F1E60675A00335545 /* PasswordInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CA6040D1E60675A00335545 /* PasswordInput.xib */; };
-		2CA604111E60679500335545 /* TextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA604101E60679500335545 /* TextFieldContainer.swift */; };
 		2CA604151E60906B00335545 /* AddShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA604131E60906B00335545 /* AddShareController.swift */; };
 		2CA604161E60906B00335545 /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA604141E60906B00335545 /* DeviceController.swift */; };
 		2CA604171E60907200335545 /* AddShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA604131E60906B00335545 /* AddShareController.swift */; };
@@ -159,10 +144,6 @@
 		2C630C841F82234500E44C57 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		2C630C861F82236300E44C57 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.0.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		2C630C881F82237000E44C57 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
-		2C7DE8FC1F654E0F001AEB5B /* HostInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostInput.swift; path = CustomViews/HostInput.swift; sourceTree = "<group>"; };
-		2C7DE8FD1F654E0F001AEB5B /* HostInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HostInput.xib; path = CustomViews/HostInput.xib; sourceTree = "<group>"; };
-		2C80B9471E60D2A300F44E56 /* ActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionSheet.swift; path = CustomViews/ActionSheet.swift; sourceTree = "<group>"; };
-		2C80B9481E60D2A300F44E56 /* ActionSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActionSheet.xib; path = CustomViews/ActionSheet.xib; sourceTree = "<group>"; };
 		2C80B96B1E60D99A00F44E56 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2C8E710F1F434EBE005EB8D2 /* WDContent 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WDContent 4.xcdatamodel"; sourceTree = "<group>"; };
 		2C9347F91F21FE1200593EF2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = SOURCE_ROOT; };
@@ -192,20 +173,6 @@
 		2C9E53D7212172DE00259D6A /* TVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVideoPlayer.swift; sourceTree = "<group>"; };
 		2CA603F31E604A4F00335545 /* ContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentController.swift; sourceTree = "<group>"; };
 		2CA603F51E604D5700335545 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
-		2CA603F91E60674400335545 /* LGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGAlertView.h; path = LGAlertSheet/LGAlertView.h; sourceTree = "<group>"; };
-		2CA603FA1E60674400335545 /* LGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGAlertView.m; path = LGAlertSheet/LGAlertView.m; sourceTree = "<group>"; };
-		2CA603FB1E60674400335545 /* LGAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LGAlertView.xib; path = LGAlertSheet/LGAlertView.xib; sourceTree = "<group>"; };
-		2CA603FC1E60674400335545 /* LGDecoratedAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LGDecoratedAlertView.xib; path = LGAlertSheet/LGDecoratedAlertView.xib; sourceTree = "<group>"; };
-		2CA603FD1E60674400335545 /* LGProgressAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LGProgressAlertView.xib; path = LGAlertSheet/LGProgressAlertView.xib; sourceTree = "<group>"; };
-		2CA603FE1E60674400335545 /* LGProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LGProgressView.h; path = LGAlertSheet/LGProgressView.h; sourceTree = "<group>"; };
-		2CA603FF1E60674400335545 /* LGProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LGProgressView.m; path = LGAlertSheet/LGProgressView.m; sourceTree = "<group>"; };
-		2CA604001E60674400335545 /* LGTextFieldAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LGTextFieldAlertView.xib; path = LGAlertSheet/LGTextFieldAlertView.xib; sourceTree = "<group>"; };
-		2CA604011E60674400335545 /* LGVAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LGVAlertView.xib; path = LGAlertSheet/LGVAlertView.xib; sourceTree = "<group>"; };
-		2CA604021E60674400335545 /* NSPointerArray+AbstractionHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPointerArray+AbstractionHelpers.h"; path = "LGAlertSheet/NSPointerArray+AbstractionHelpers.h"; sourceTree = "<group>"; };
-		2CA604031E60674400335545 /* NSPointerArray+AbstractionHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPointerArray+AbstractionHelpers.m"; path = "LGAlertSheet/NSPointerArray+AbstractionHelpers.m"; sourceTree = "<group>"; };
-		2CA6040C1E60675A00335545 /* PasswordInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordInput.swift; path = CustomViews/PasswordInput.swift; sourceTree = "<group>"; };
-		2CA6040D1E60675A00335545 /* PasswordInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PasswordInput.xib; path = CustomViews/PasswordInput.xib; sourceTree = "<group>"; };
-		2CA604101E60679500335545 /* TextFieldContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFieldContainer.swift; path = CustomViews/TextFieldContainer.swift; sourceTree = "<group>"; };
 		2CA604131E60906B00335545 /* AddShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddShareController.swift; path = Common/AddShareController.swift; sourceTree = "<group>"; };
 		2CA604141E60906B00335545 /* DeviceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceController.swift; path = Common/DeviceController.swift; sourceTree = "<group>"; };
 		2CA604191E60911200335545 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoViewController.swift; path = ../Common/InfoViewController.swift; sourceTree = "<group>"; };
@@ -323,8 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				2CC0D9931E5F106F00254181 /* WD Content-Bridging-Header.h */,
-				2CA603F71E60671E00335545 /* LGAlertView */,
-				2CA603F81E60672A00335545 /* CustomViews */,
 				2C21331E1E5ED869002F267D /* AppDelegate.swift */,
 				2C11BD511E5F9C5A004A786F /* RightMenuVC.swift */,
 				2C11BD531E5F9C96004A786F /* MainVC.swift */,
@@ -422,38 +387,6 @@
 				2C954A071E5F65CD00A23CC5 /* UIViewExtensions.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		2CA603F71E60671E00335545 /* LGAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				2CA603F91E60674400335545 /* LGAlertView.h */,
-				2CA603FA1E60674400335545 /* LGAlertView.m */,
-				2CA603FB1E60674400335545 /* LGAlertView.xib */,
-				2CA603FC1E60674400335545 /* LGDecoratedAlertView.xib */,
-				2CA603FD1E60674400335545 /* LGProgressAlertView.xib */,
-				2CA603FE1E60674400335545 /* LGProgressView.h */,
-				2CA603FF1E60674400335545 /* LGProgressView.m */,
-				2CA604001E60674400335545 /* LGTextFieldAlertView.xib */,
-				2CA604011E60674400335545 /* LGVAlertView.xib */,
-				2CA604021E60674400335545 /* NSPointerArray+AbstractionHelpers.h */,
-				2CA604031E60674400335545 /* NSPointerArray+AbstractionHelpers.m */,
-			);
-			name = LGAlertView;
-			sourceTree = "<group>";
-		};
-		2CA603F81E60672A00335545 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				2C80B9471E60D2A300F44E56 /* ActionSheet.swift */,
-				2C80B9481E60D2A300F44E56 /* ActionSheet.xib */,
-				2CA604101E60679500335545 /* TextFieldContainer.swift */,
-				2CA6040C1E60675A00335545 /* PasswordInput.swift */,
-				2CA6040D1E60675A00335545 /* PasswordInput.xib */,
-				2C7DE8FC1F654E0F001AEB5B /* HostInput.swift */,
-				2C7DE8FD1F654E0F001AEB5B /* HostInput.xib */,
-			);
-			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		2CA604121E60900F00335545 /* Common */ = {
@@ -647,8 +580,6 @@
 			files = (
 				2C9348171F224EA400593EF2 /* CalibreWeb-ThinItalic.TTF in Resources */,
 				2C9348131F224EA400593EF2 /* CalibreWeb-Regular.TTF in Resources */,
-				2CA604091E60674400335545 /* LGTextFieldAlertView.xib in Resources */,
-				2CA6040F1E60675A00335545 /* PasswordInput.xib in Resources */,
 				2C93480B1F224EA400593EF2 /* CalibreWeb-BlackItalic.TTF in Resources */,
 				2C9348101F224EA400593EF2 /* CalibreWeb-LightItalic.TTF in Resources */,
 				2C93480C1F224EA400593EF2 /* CalibreWeb-Bold.TTF in Resources */,
@@ -657,17 +588,11 @@
 				2C9348151F224EA400593EF2 /* CalibreWeb-SemiboldItalic.TTF in Resources */,
 				2C9347FA1F21FE1200593EF2 /* logo.png in Resources */,
 				2C9348141F224EA400593EF2 /* CalibreWeb-Semibold.TTF in Resources */,
-				2C7DE8FF1F654E0F001AEB5B /* HostInput.xib in Resources */,
 				2C2133291E5ED869002F267D /* LaunchScreen.storyboard in Resources */,
-				2C80B94A1E60D2A300F44E56 /* ActionSheet.xib in Resources */,
-				2CA604071E60674400335545 /* LGProgressAlertView.xib in Resources */,
 				2C93480F1F224EA400593EF2 /* CalibreWeb-Light.TTF in Resources */,
 				2C9348161F224EA400593EF2 /* CalibreWeb-Thin.TTF in Resources */,
-				2CA604061E60674400335545 /* LGDecoratedAlertView.xib in Resources */,
 				2C93480D1F224EA400593EF2 /* CalibreWeb-BoldItalic.TTF in Resources */,
-				2CA6040A1E60674400335545 /* LGVAlertView.xib in Resources */,
 				2C2133261E5ED869002F267D /* Assets.xcassets in Resources */,
-				2CA604051E60674400335545 /* LGAlertView.xib in Resources */,
 				2C9348111F224EA400593EF2 /* CalibreWeb-Medium.TTF in Resources */,
 				2C2133241E5ED869002F267D /* Main.storyboard in Resources */,
 				2C9348121F224EA400593EF2 /* CalibreWeb-MediumItalic.TTF in Resources */,
@@ -780,23 +705,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C9E53D6212172C500259D6A /* VideoPlayer.swift in Sources */,
-				2CA604081E60674400335545 /* LGProgressView.m in Sources */,
-				2C80B9491E60D2A300F44E56 /* ActionSheet.swift in Sources */,
 				2CA6041D1E60911200335545 /* SearchCell.swift in Sources */,
-				2CA604111E60679500335545 /* TextFieldContainer.swift in Sources */,
-				2CA604041E60674400335545 /* LGAlertView.m in Sources */,
 				2CAF5C881E6460C6005EA70C /* Node.swift in Sources */,
 				2CFCEE1F1FC488490018EB3F /* Reachability.m in Sources */,
 				2C21331F1E5ED869002F267D /* AppDelegate.swift in Sources */,
 				2CAF5C8C1E649BAD005EA70C /* Share+CoreDataClass.swift in Sources */,
-				2CA6040B1E60674400335545 /* NSPointerArray+AbstractionHelpers.m in Sources */,
 				2CA6041C1E60911200335545 /* InfoViewController.swift in Sources */,
 				2CA603F41E604A4F00335545 /* ContentController.swift in Sources */,
 				2CC0D9A81E5F107000254181 /* TOSMBConstants.m in Sources */,
 				2CC0D9621E5F013A00254181 /* MetaInfo+CoreDataClass.swift in Sources */,
 				2CC0D9641E5F013A00254181 /* MetaInfo+CoreDataProperties.swift in Sources */,
 				2C954A0F1E5F65D600A23CC5 /* UIViewExtensions.swift in Sources */,
-				2CA6040E1E60675A00335545 /* PasswordInput.swift in Sources */,
 				2CC0D9A61E5F107000254181 /* TONetBIOSNameServiceEntry.m in Sources */,
 				2CFCEE201FC488490018EB3F /* SyncManager.swift in Sources */,
 				2C954A0E1E5F65D600A23CC5 /* UIViewControllerExtensions.swift in Sources */,
@@ -813,7 +732,6 @@
 				2CC0D95A1E5EFDD500254181 /* WDContent.xcdatamodeld in Sources */,
 				2C11BD521E5F9C5A004A786F /* RightMenuVC.swift in Sources */,
 				2CA603F61E604D5700335545 /* ContentCell.swift in Sources */,
-				2C7DE8FE1F654E0F001AEB5B /* HostInput.swift in Sources */,
 				2CA604161E60906B00335545 /* DeviceController.swift in Sources */,
 				2CC0D9A41E5F107000254181 /* TONetBIOSNameService.m in Sources */,
 				2CAF5C8E1E649BAD005EA70C /* Share+CoreDataProperties.swift in Sources */,

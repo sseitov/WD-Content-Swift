@@ -256,28 +256,14 @@ class TVideoPlayer: UIViewController, VLCMediaPlayerDelegate, TrackControllerDel
             time = 0
         }
         mediaPlayer.time = VLCTime(int: time)
-/*
-        if mediaPlayer.position > 0.05 {
-            mediaPlayer.position -= 0.05
-        } else {
-            mediaPlayer.position = 0
-        }
         self.position = 0
- */
     }
     
     @IBAction func forward(_ sender: UIButton) {
         var time = mediaPlayer.time.intValue
         time += ONE_MINUTE
         mediaPlayer.time = VLCTime(int: time)
-/*
-        if mediaPlayer.position < 0.95 {
-            mediaPlayer.position += 0.05
-        } else {
-            mediaPlayer.position = 1
-        }
         self.position = 0
- */
     }
     
     @IBAction func pause(_ sender: UIButton) {

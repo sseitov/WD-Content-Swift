@@ -120,18 +120,6 @@ class AddShareController: UITableViewController {
 	}
 	
     @IBAction func addManual(_ sender: Any) {
-    #if IOS
-        let ask = HostInput.hostDialog(cancelHandler: {
-        }, acceptHandler: { host, port in
-            if let num = Int32(port) {
-                let info = ServiceHost(name: "", host: host, port: num)
-                self.performSegue(withIdentifier: "showDevice", sender: info)
-            } else {
-                self.showMessage("Invalid port number.", messageType: .error)
-            }
-        })
-        ask?.show()
-    #else
         let alert = UIAlertController(title: "Add host manually".uppercased(), message: "Enter IP address / Port".uppercased(), preferredStyle: .alert)
         var hostField:UITextField?
         var portField:UITextField?
@@ -160,7 +148,6 @@ class AddShareController: UITableViewController {
             self.goBack()
         }))
         present(alert, animated: true, completion: nil)
-    #endif
     }
 	
     // MARK: - Navigation

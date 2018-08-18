@@ -70,50 +70,23 @@ class DeviceController: UITableViewController {
     
 	func requestAuth() {
         let msg = "Input credentials.\nLeave fields empty if used anonymous connection."
-    #if IOS
-        let alert = PasswordInput.authDialog(title: target!.name, message: msg.uppercased(), cancelHandler: {
-            self.goBack()
-        }, acceptHandler: { (user, password) in
-            SVProgressHUD.show(withStatus: "Connect...")
-            DispatchQueue.global().async {
-                let connected = self.connection.connect(to: self.target!.host,
-                                                        port: self.target!.port,
-                                                        user: user,
-                                                        password: password)
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    if connected {
-                        self.target?.user = user
-                        self.target?.password = password
-                        self.shares = self.connection.folderContents(byRoot: nil) as! [String]
-                        self.tableView.reloadData()
-                    } else {
-                        self.showMessage("Can not connect.", messageType: .error, messageHandler: {
-                            self.goBack()
-                        })
-                    }
-                }
-            }
+        let alert = UIAlertController(title: target?.name, message: msg.uppercased(), preferredStyle: .alert)
+        var userField:UITextField?
+        var passwordField:UITextField?
+        alert.addTextField(configurationHandler: { textField in
+            textField.keyboardType = .emailAddress
+            textField.textAlignment = .center
+            textField.placeholder = "user name".uppercased()
+            userField = textField
         })
-        alert?.show()
-    #else
-		let alert = UIAlertController(title: target?.name, message: msg.uppercased(), preferredStyle: .alert)
-		var userField:UITextField?
-		var passwordField:UITextField?
-		alert.addTextField(configurationHandler: { textField in
-			textField.keyboardType = .emailAddress
-			textField.textAlignment = .center
-			textField.placeholder = "user name".uppercased()
-			userField = textField
-		})
-		alert.addTextField(configurationHandler: { textField in
-			textField.keyboardType = .default
-			textField.textAlignment = .center
-			textField.placeholder = "password".uppercased()
-			textField.isSecureTextEntry = true
-			passwordField = textField
-		})
-		alert.addAction(UIAlertAction(title: "Ok".uppercased(), style: .default, handler: { _ in
+        alert.addTextField(configurationHandler: { textField in
+            textField.keyboardType = .default
+            textField.textAlignment = .center
+            textField.placeholder = "password".uppercased()
+            textField.isSecureTextEntry = true
+            passwordField = textField
+        })
+        alert.addAction(UIAlertAction(title: "Ok".uppercased(), style: .default, handler: { _ in
             SVProgressHUD.show(withStatus: "Connect...")
             let user = userField!.text!
             let password = passwordField!.text!
@@ -136,12 +109,11 @@ class DeviceController: UITableViewController {
                     }
                 }
             }
-		}))
+        }))
         alert.addAction(UIAlertAction(title: "Cancel".uppercased(), style: .destructive, handler: { _ in
             self.goBack()
         }))
-		present(alert, animated: true, completion: nil)
-    #endif
+        present(alert, animated: true, completion: nil)
 	}
 	
     // MARK: - Table view data source
