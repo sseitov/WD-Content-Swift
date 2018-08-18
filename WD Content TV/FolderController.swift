@@ -81,18 +81,24 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     @objc
     func clearInfo() {
         if let info = focusedNode?.info {
-            SVProgressHUD.show(withStatus: "Clear...")
-            Model.shared.clearInfo(info, result: { error in
-                SVProgressHUD.dismiss()
-                if error != nil {
-                    self.showMessage("Cloud clear error: \(error!.localizedDescription)", messageType: .information)
-                } else {
-                    self.focusedNode?.info = nil
-                    self.nodesTable.reloadData()
-                    self.infoTable.reloadData()
-                    self.coverTable.reloadData()
-                }
+            let alert = UIAlertController(title: "DELETE METADATA", message: "Do you want to delete metadata of this movie?", preferredStyle: .alert)
+            let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+                SVProgressHUD.show(withStatus: "Clear...")
+                Model.shared.clearInfo(info, result: { error in
+                    SVProgressHUD.dismiss()
+                    if error != nil {
+                        self.showMessage("Cloud clear error: \(error!.localizedDescription)", messageType: .information)
+                    } else {
+                        self.focusedNode?.info = nil
+                        self.nodesTable.reloadData()
+                        self.infoTable.reloadData()
+                        self.coverTable.reloadData()
+                    }
+                })
             })
+            alert.addAction(delete)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -233,9 +239,9 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt \(indexPath.row)")
+//        print("didSelectRowAt \(indexPath.row)")
         if tableView == nodesTable {
-            let node = nodes[indexPath.row]
+            let node = nodePage != nil ? nodePage!.nodeForIndex(indexPath.row) : nodes[indexPath.row]
             if node.directory {
                 parentNode = node
                 if parentNode?.parent != nil {
