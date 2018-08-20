@@ -17,7 +17,8 @@ class Node: NSObject {
     @objc var info:MetaInfo?
     @objc var share:Share?
     @objc var selectedIndexPath:IndexPath?
-
+    var selectedOffset:Int = 0
+    
     @objc init(share: Share) {
         super.init()
         

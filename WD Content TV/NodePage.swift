@@ -28,6 +28,22 @@ class NodePage {
         return nodes[index]
     }
     
+    func moveTo(_ index:Int, offset:Int, fromNodes:[Node]) {
+        nodes.removeAll()
+        
+        self.offset = offset
+//        print("move to \(index), offset \(offset) from \(fromNodes.count)")
+        var nodeIndex = offset
+
+        for _ in 0..<NODE_PAGE_SIZE {
+            self.nodes.append(fromNodes[nodeIndex])
+            nodeIndex += 1
+            if nodeIndex >= fromNodes.count {
+                nodeIndex = 0
+            }
+        }
+    }
+    
     func moveTop(_ fromNodes:[Node]) {
         nodes.removeLast()
         if offset > 0 {

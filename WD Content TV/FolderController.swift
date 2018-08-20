@@ -140,20 +140,25 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                         node.share = self.parentNode!.share
                         node.info = Model.shared.getInfoForNode(node)
                     }
+                    
                     if self.nodes.count > NODE_PAGE_SIZE {
                         self.nodePage = NodePage(self.nodes)
                     } else {
                         self.nodePage = nil
                     }
 
-                    self.nodesTable.reloadData()
                     if self.focusedNode == nil {
-                        if self.parentNode?.selectedIndexPath == nil && self.nodes.count > 0 {
-                            self.focusedNode = self.nodes[0]
-                        } else {
-                            self.focusedNode = self.nodes[self.parentNode!.selectedIndexPath!.row]
+                        if let index = self.parentNode?.selectedIndexPath?.row {
+                            if let offset = self.parentNode?.selectedOffset {
+                                self.nodePage?.offset = offset
+                                if offset > 0 {
+                                    self.nodePage?.moveTo(index, offset: offset, fromNodes: self.nodes)
+                                    print(self.nodePage!.nodes[index].name)
+                                }
+                            }
                         }
                     }
+                    self.nodesTable.reloadData()
                     self.infoTable.reloadData()
                     self.coverTable.reloadData()
                 } else {
@@ -248,12 +253,14 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
             if node.directory {
                 parentNode = node
                 if parentNode?.parent != nil {
-                    parentNode?.parent!.selectedIndexPath = indexPath
+                    parentNode?.parent?.selectedIndexPath = indexPath
+                    parentNode?.parent?.selectedOffset = nodePage != nil ? nodePage!.offset : 0
                 }
                 focusedNode = nil
                 refresh()
             } else {
                 parentNode?.selectedIndexPath = indexPath
+                parentNode?.parent?.selectedOffset = nodePage != nil ? nodePage!.offset : 0
                 self.performSegue(withIdentifier: "play", sender: [node])
             }
         }
