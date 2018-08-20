@@ -142,6 +142,8 @@ class FolderController: UIViewController, UITableViewDataSource, UITableViewDele
                     }
                     if self.nodes.count > NODE_PAGE_SIZE {
                         self.nodePage = NodePage(self.nodes)
+                    } else {
+                        self.nodePage = nil
                     }
 
                     self.nodesTable.reloadData()
